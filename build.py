@@ -266,9 +266,17 @@ class StableNote(genanki.Note):
         return genanki.guid_for("psp", self.fields[0], self.fields[6] != "")
 
 
-def build_deck(pack, out_path):
+def deck_files(pack):
+    """Pack 00 = one bonus deck. Story packs = one deck per episode, imported the day you do it."""
+    if pack["pack"] == 0:
+        return [("pack-00.apkg", pack["episodes"], 2044100000, "Projeto SP::Pack 00")]
+    return [(f"ep-{e['ep']:02d}.apkg", [e], 2044200000 + e["ep"], f"Projeto SP::Ep {e['ep']:02d} · {e['title']}")
+            for e in pack["episodes"]]
+
+
+def build_deck(pack, out_path, episodes, did, name):
     p = pack["pack"]
-    deck = genanki.Deck(2044100000 + p, f"Projeto SP::Pack {p:02d}")
+    deck = genanki.Deck(did, name)
     MEDIA.mkdir(exist_ok=True)
     media, seen = [], set()
 
@@ -286,7 +294,7 @@ def build_deck(pack, out_path):
         deck.add_note(StableNote(model=MODEL, tags=[f"pack{p:02d}"], fields=[
             pt, heard or "", en_, note or "", f"[sound:{a.name}]", f"[sound:{s.name}]", en_ if production else ""]))
 
-    for e in pack["episodes"]:
+    for e in episodes:
         pct = speed(e["ep"])
         for c in e.get("chunks", []):
             add(c["pt"], c.get("heard"), c["en"], c.get("note"), "george", True, pct)
@@ -341,7 +349,9 @@ def write_transcript(pack):
          f'<h1>Pack {pack["pack"]:02d}</h1><p class="en">Purple = how it actually sounds. Tap "English" to check.</p>']
     for e in pack["episodes"]:
         b.append(f'<h2 id="ep{e["ep"]}">Ep {e["ep"]}: {esc(e["title"])}</h2>'
-                 f'<p><a href="../audio/{ep_file(e)}">▶ Play episode</a> · speed {speed(e["ep"]):+d}%</p>')
+                 f'<p><a href="../audio/{ep_file(e)}">▶ Play episode</a> · speed {speed(e["ep"]):+d}%'
+                 + (f' · <a href="../decks/ep-{e["ep"]:02d}.apkg">🃏 Anki deck (import after the episode)</a>' if e["ep"] > 0 else "")
+                 + '</p>')
         for l in e["lines"]:
             if l["speaker"].lower() == "narrador":
                 b.append(f'<div class="nar">{esc(l["pt"])}<details><summary>English</summary>{esc(l["en"])}</details></div>')
@@ -429,9 +439,10 @@ def write_feed_and_index(packs):
             fe.enclosure(url + "audio/" + fname, str(f.stat().st_size), "audio/mpeg")
             fe.pubDate(when)
             eps_html.append(f'<li><a href="audio/{fname}">{esc(title)}</a></li>')
-        d = DECKS / f"pack-{pack['pack']:02d}.apkg"
         packs_html.append(f'<tr><td>Pack {pack["pack"]:02d}</td><td>Ep {pack["episodes"][0]["ep"]}–{pack["episodes"][-1]["ep"]}</td>'
-                          f'<td><a href="{t}">📖 Transcript</a></td><td>' + (f'<a href="decks/{d.name}">🃏 Deck</a>' if d.exists() else "") + "</td></tr>")
+                          f'<td><a href="{t}">📖 Transcript</a></td><td>' + " ".join(
+                              f'<a href="decks/{f}">🃏 {"Deck" if pack["pack"] == 0 else "Ep " + f[3:5]}</a>'
+                              for f, *_ in deck_files(pack) if (DECKS / f).exists()) + "</td></tr>")
     fg.rss_file(str(DOCS / "feed.xml"), pretty=True)
     (DOCS / "index.html").write_text(f"""<!doctype html><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Projeto SP</title><style>{TCSS}
@@ -456,10 +467,10 @@ def main():
         packs.append(pack)
     packs.sort(key=lambda x: x["pack"])
     for pack in packs:
-        deck = DECKS / f"pack-{pack['pack']:02d}.apkg"
         files = [ep_file(e) for e in pack["episodes"]] + ([drill_file(pack)] if pack.get("drills") else []) \
             + ([gym_file(pack)] if pack.get("talk") else [])
-        if not FORCE and deck.exists() and all((AUDIO / f).exists() for f in files):
+        decks = deck_files(pack)
+        if not FORCE and all((DECKS / d[0]).exists() for d in decks) and all((AUDIO / f).exists() for f in files):
             print(f"✓ Pack {pack['pack']:02d} already built — skipping")
             continue
         print(f"▶ Building pack {pack['pack']:02d}")
@@ -472,7 +483,8 @@ def main():
         if pack.get("talk"):
             export(speaking_gym_audio(pack), AUDIO / gym_file(pack), f"Pack {pack['pack']:02d} · Speaking gym")
             print(f"   🎧 {gym_file(pack)}")
-        print(f"   🃏 {deck.name} ({build_deck(pack, deck)} notes)")
+        for fname, eps_, did, name in decks:
+            print(f"   🃏 {fname} ({build_deck(pack, DECKS / fname, eps_, did, name)} notes)")
     write_feed_and_index(packs)
     print(f"\n✅ Done. Home: {base_url()}")
 
