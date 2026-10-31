@@ -1,0 +1,58 @@
+name: Build Projeto SP
+
+on:
+  push:
+    paths: ["packs/**", "build.py"]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild every week from scratch? (1 = yes, 0 = no)"
+        default: "0"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Build audio, decks and feed
+        run: python build.py
+        env:
+          FORCE: ${{ github.event.inputs.force || '0' }}
+
+      - name: Save built files to the repo
+        run: |
+          git config user.name "pt-bot"
+          git config user.email "pt-bot@users.noreply.github.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "Build packs [skip ci]"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v4
