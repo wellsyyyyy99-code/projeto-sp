@@ -1,0 +1,5 @@
+edge-tts
+pydub
+genanki
+feedgen
+audioop-lts; python_version >= "3.13"

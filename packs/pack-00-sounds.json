@@ -1,0 +1,291 @@
+{
+ "pack": 0,
+ "episodes": [
+  {
+   "ep": 0,
+   "title": "Sound rules 1: spoken shortcuts",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Tô chegando.",
+     "heard": "Tô chegano.",
+     "en": "I'm on my way. (estou → tô, -ndo → -no)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Cê tá onde?",
+     "heard": "Cê tá ondji?",
+     "en": "Where are you? (você → cê, está → tá)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Vou pra academia.",
+     "heard": "Vô pra academia.",
+     "en": "I'm going to the gym. (para → pra)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Não sei.",
+     "heard": "Num sei.",
+     "en": "I don't know. (não → num)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Péra aí!",
+     "heard": "Péra aí!",
+     "en": "Hang on! (espera → péra)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Bora?",
+     "heard": "Bora?",
+     "en": "Shall we go? (vamos embora → bora)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "É bom, né?",
+     "heard": "É bom, né?",
+     "en": "It's good, right? (não é → né)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Eu tava cansado.",
+     "heard": "Eu tava cansadu.",
+     "en": "I was tired. (estava → tava)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Deixa eu ver.",
+     "heard": "Deixa eu vê.",
+     "en": "Let me see. (final r dropped)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Cê tá ligado?",
+     "heard": "Cêtáligadu?",
+     "en": "You know? / You get me?"
+    }
+   ],
+   "chunks": []
+  },
+  {
+   "ep": 0,
+   "title": "Sound rules 2: how letters change",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Leite quente.",
+     "heard": "Leitchi kentchi.",
+     "en": "Hot milk. (te → tchi)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Bom dia, tia!",
+     "heard": "Bom djia, tchia!",
+     "en": "Good morning, auntie! (di → dji, ti → tchi)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "A cidade é grande.",
+     "heard": "A cidadji é grandji.",
+     "en": "The city is big. (de → dji)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Muito obrigado.",
+     "heard": "Muitu obrigadu.",
+     "en": "Thank you very much. (final o → u)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Que legal!",
+     "heard": "Ki legau!",
+     "en": "How cool! (que → ki, final l → u)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Brasil.",
+     "heard": "Brasiu.",
+     "en": "Brazil. (final l → u)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Quer pão?",
+     "heard": "Ké pão?",
+     "en": "Want some bread? (nasal ão: air through the nose)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Minha mãe.",
+     "heard": "Minha mãinh.",
+     "en": "My mum. (nasal ãe)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Também tem.",
+     "heard": "Tambeim teim.",
+     "en": "There's that too. (nasal -em)"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Minha avó e meu avô.",
+     "heard": "Minha avÓ i meu avÔ.",
+     "en": "My grandma (open aw) and my grandad (closed oh)."
+    }
+   ],
+   "chunks": []
+  },
+  {
+   "ep": 0,
+   "title": "As 20 perguntas da Mãe",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Vinte perguntas que a mãe da Gabi vai fazer. Responda em voz alta!",
+     "heard": "Vintchi perguntas ki a mãinh da Gabi vai fazê. Responda in voiz auta!",
+     "en": "Twenty questions Gabi's mum will ask. Answer out loud!"
+    }
+   ],
+   "chunks": [],
+   "speak": [
+    {
+     "speaker": "Mãe",
+     "q": "Fez boa viagem?",
+     "q_en": "Did you have a good trip?",
+     "model": "Fiz sim! Foi longa, mas tranquila.",
+     "model_en": "Yes! It was long, but easy."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Tá cansado?",
+     "q_en": "Are you tired?",
+     "model": "Um pouco, mas tô muito feliz de estar aqui.",
+     "model_en": "A bit, but I'm really happy to be here."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "O que você faz da vida?",
+     "q_en": "What do you do for a living?",
+     "model": "Trabalho com câmbio. Eu conecto bancos e clientes.",
+     "model_en": "I work in FX. I connect banks and clients."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Você gosta do seu trabalho?",
+     "q_en": "Do you like your job?",
+     "model": "Gosto muito. É corrido, mas é legal.",
+     "model_en": "I really like it. It's hectic, but good."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Onde você mora?",
+     "q_en": "Where do you live?",
+     "model": "Moro perto de Londres. Pego o trem todo dia.",
+     "model_en": "I live near London. I get the train every day."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Como vocês se conheceram?",
+     "q_en": "How did you two meet?",
+     "hint": "A gente se conheceu em... (where) ... em (year). Add one funny detail!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Você tem irmãos?",
+     "q_en": "Do you have brothers or sisters?",
+     "hint": "Tenho um irmão / uma irmã / dois irmãos... or: Sou filho único."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "E a sua família, mora onde?",
+     "q_en": "And where does your family live?",
+     "hint": "Meus pais moram em... É perto de / longe de Londres."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "É a sua primeira vez no Brasil?",
+     "q_en": "Is this your first time in Brazil?",
+     "hint": "É a minha primeira vez! / Não, já vim uma vez, em..."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Tá gostando de São Paulo?",
+     "q_en": "Are you enjoying São Paulo?",
+     "model": "Tô adorando! Mas que trânsito, hein!",
+     "model_en": "I'm loving it! But what traffic!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Você gosta de comida brasileira?",
+     "q_en": "Do you like Brazilian food?",
+     "model": "Adoro! Quero provar tudo.",
+     "model_en": "I love it! I want to try everything."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Tem alguma coisa que você não come?",
+     "q_en": "Is there anything you don't eat?",
+     "model": "Não como ovo, peixe nem queijo. O resto eu como tudo!",
+     "model_en": "I don't eat eggs, fish or cheese. Everything else I'll eat!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Quer mais um pouquinho?",
+     "q_en": "Want a little more?",
+     "model": "Obrigado, tô satisfeito. Tava uma delícia!",
+     "model_en": "Thanks, I'm full. It was delicious!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Onde você aprendeu português?",
+     "q_en": "Where did you learn Portuguese?",
+     "model": "Tô estudando sozinho faz dois meses. Queria fazer uma surpresa!",
+     "model_en": "I've been studying on my own for two months. I wanted to surprise you!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Por que você quis aprender?",
+     "q_en": "Why did you want to learn?",
+     "model": "Porque a Gabi e a senhora são muito importantes pra mim.",
+     "model_en": "Because Gabi and you are really important to me."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Você torce pra qual time?",
+     "q_en": "Which team do you support?",
+     "model": "Torço pro Tottenham. Sou sofredor!",
+     "model_en": "I support Tottenham. I'm a long-suffering fan!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "O que você gosta de fazer no tempo livre?",
+     "q_en": "What do you like doing in your free time?",
+     "model": "Gosto de academia, boxe e Fórmula 1.",
+     "model_en": "I like the gym, boxing and F1."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "O que você tá achando do Brasil?",
+     "q_en": "What do you think of Brazil so far?",
+     "model": "Tô achando incrível. As pessoas são muito calorosas.",
+     "model_en": "I think it's amazing. People are really warm."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "E aí, quando vocês vão casar?",
+     "q_en": "So, when are you two getting married?",
+     "hint": "Laugh first! 'Calma, calma!' then: 'Um dia, quem sabe!' (One day, who knows!)"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Vai voltar logo?",
+     "q_en": "Will you come back soon?",
+     "model": "Com certeza! Espero voltar logo.",
+     "model_en": "Definitely! I hope to come back soon."
+    }
+   ],
+   "task": "Answer all 20 out loud without looking. For the ones with 💡 hints, write YOUR real answer in the mistake log and ask the Claude Project to make it a model answer."
+  }
+ ],
+ "drills": []
+}
