@@ -37,6 +37,18 @@ VOICES = {
     "seu zé":   ("pt-BR-AntonioNeural",   "-16Hz"),
     "seu ze":   ("pt-BR-AntonioNeural",   "-16Hz"),
     "narrador": ("pt-BR-ThalitaNeural",   "+10Hz"),
+    "ana":      ("pt-BR-FranciscaNeural", "-10Hz"),
+    "rafa":     ("pt-BR-AntonioNeural",   "-8Hz"),
+    "garçom":   ("pt-BR-AntonioNeural",   "-14Hz"),
+    "garcom":   ("pt-BR-AntonioNeural",   "-14Hz"),
+    "torcedor": ("pt-BR-AntonioNeural",   "+8Hz"),
+    "barista":  ("pt-BR-ThalitaNeural",   "+18Hz"),
+    "atendente": ("pt-BR-ThalitaNeural",  "+4Hz"),
+    "vendedor": ("pt-BR-AntonioNeural",   "-4Hz"),
+    "motorista": ("pt-BR-AntonioNeural",  "-20Hz"),
+    "passageiro": ("pt-BR-AntonioNeural", "+14Hz"),
+    "farmacêutico": ("pt-BR-FranciscaNeural", "-16Hz"),
+    "estranho": ("pt-BR-AntonioNeural",   "+4Hz"),
 }
 EXTRA = [("pt-BR-AntonioNeural", "-8Hz"), ("pt-BR-FranciscaNeural", "-10Hz"), ("pt-BR-ThalitaNeural", "+16Hz")]
 EN_VOICE = ("en-GB-RyanNeural", "+0Hz")
@@ -160,7 +172,9 @@ def episode_audio(e):
     pct = speed(e["ep"])
     lines = e["lines"]
     full = sum((say(l, pct) + sil(420) for l in lines), sil(0))
-    out = en(f"Episode {e['ep']}. {e['title']}.") + sil(900)
+    out = en(f"Episode {e['ep']}. {e['title']}.") + sil(700)
+    if e.get("intro"):
+        out += en(e["intro"]) + sil(1000)
     out += en("Listen.") + sil(400) + full + sil(1300)
     out += en("Again, with the transcript.") + sil(400) + full + sil(1500)
     out += en("Shadow each line. Slow, then story speed.") + sil(900)
@@ -349,7 +363,8 @@ def write_transcript(pack):
          f'<h1>Pack {pack["pack"]:02d}</h1><p class="en">Purple = how it actually sounds. Tap "English" to check.</p>']
     for e in pack["episodes"]:
         b.append(f'<h2 id="ep{e["ep"]}">Ep {e["ep"]}: {esc(e["title"])}</h2>'
-                 f'<p><a href="../audio/{ep_file(e)}">▶ Play episode</a> · speed {speed(e["ep"]):+d}%'
+                 + (f'<p><b>🎯 Goal:</b> {esc(e["intro"])}</p>' if e.get("intro") else "")
+                 + f'<p><a href="../audio/{ep_file(e)}">▶ Play episode</a> · speed {speed(e["ep"]):+d}%'
                  + (f' · <a href="../decks/ep-{e["ep"]:02d}.apkg">🃏 Anki deck (import after the episode)</a>' if e["ep"] > 0 else "")
                  + '</p>')
         for l in e["lines"]:
