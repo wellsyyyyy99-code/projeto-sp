@@ -3,211 +3,231 @@
  "episodes": [
   {
    "ep": 5,
-   "title": "O que você come?",
+   "title": "No restaurante brasileiro",
+   "intro": "George orders at a Brazilian restaurant in London. Your goal: order food and a drink, say what you don't eat, and ask for the bill.",
    "lines": [
     {
      "speaker": "Narrador",
-     "pt": "Quinta-feira. A mãe da Gabi quer saber o que o George come.",
-     "heard": "Kinta-fera. A mãinh da Gabi ké sabê u ki u George comi.",
-     "en": "Thursday. Gabi's mum wants to know what George eats."
+     "pt": "Quinta à noite. O George vai num restaurante brasileiro em Londres.",
+     "heard": "Kinta à noitchi. U George vai num restauranchi brasilêru in Londris.",
+     "en": "Thursday night. George goes to a Brazilian restaurant in London."
     },
     {
-     "speaker": "Mãe",
-     "pt": "George, quero fazer comidas gostosas pra você. Do que você gosta?",
-     "heard": "George, kéru fazê comidas gostozas pra você. Du ki você gosta?",
-     "en": "George, I want to make you nice food. What do you like?"
-    },
-    {
-     "speaker": "George",
-     "pt": "Gosto de quase tudo! Carne, frango, arroz e feijão...",
-     "heard": "Gostu dji kuazi tudu! Carni, frangu, arrôis i feijãu...",
-     "en": "I like almost everything! Meat, chicken, rice and beans..."
-    },
-    {
-     "speaker": "Mãe",
-     "pt": "Ótimo! E tem alguma coisa que você não come?",
-     "heard": "Ótchimu! I teim auguma coisa ki você num comi?",
-     "en": "Great! And is there anything you don't eat?"
+     "speaker": "Garçom",
+     "pt": "Boa noite! Mesa pra quantas pessoas?",
+     "heard": "Boa noitchi! Meza pra kuantas pessoas?",
+     "en": "Good evening! Table for how many?"
     },
     {
      "speaker": "George",
-     "pt": "Não como ovo, peixe nem queijo.",
-     "heard": "Num comu ovu, peixi nein keiju.",
-     "en": "I don't eat eggs, fish or cheese."
+     "pt": "Boa noite! Só pra mim.",
+     "heard": "Boa noitchi! Só pra mim.",
+     "en": "Good evening! Just me."
     },
     {
-     "speaker": "Mãe",
-     "pt": "Nem queijo? Nossa! E pão de queijo?",
-     "heard": "Nein keiju? Nóssa! I pãu dji keiju?",
-     "en": "Not even cheese? Wow! What about pão de queijo?"
-    },
-    {
-     "speaker": "George",
-     "pt": "Desculpa... nem pão de queijo!",
-     "heard": "Discurpa... nein pãu dji keiju!",
-     "en": "Sorry... not even pão de queijo!"
-    },
-    {
-     "speaker": "Gabi",
-     "pt": "Mãe, ele é chato pra comer, mas é um amor.",
-     "heard": "Mãinh, eli é chatu pra comê, mas é um amor.",
-     "en": "Mum, he's a fussy eater, but he's lovely."
-    },
-    {
-     "speaker": "Mãe",
-     "pt": "Imagina! Então eu faço uma picanha pra você.",
-     "heard": "Imagina! Entãu eu faço uma picanha pra você.",
-     "en": "Don't be silly! I'll make you picanha, then."
+     "speaker": "Garçom",
+     "pt": "Fica à vontade. O que você vai querer?",
+     "heard": "Fica à vontadji. U ki você vai kerê?",
+     "en": "Make yourself comfortable. What would you like?"
     },
     {
      "speaker": "George",
-     "pt": "Picanha? Adoro! Tô tentando comer bem, mas picanha eu não recuso.",
-     "heard": "Picanha? Adóru! Tô tentanu comê bein, mas picanha eu num recuzu.",
-     "en": "Picanha? I love it! I'm trying to eat well, but I never say no to picanha."
+     "pt": "Quero uma picanha, por favor.",
+     "heard": "Kéru uma picanha, pur favor.",
+     "en": "I'd like the picanha, please."
     },
     {
-     "speaker": "Mãe",
-     "pt": "E de sobremesa? Você gosta de doce?",
-     "heard": "I dji sobremesa? Você gosta dji doci?",
-     "en": "And for dessert? Do you like sweet things?"
+     "speaker": "Garçom",
+     "pt": "Ótima escolha! Com arroz, feijão e farofa?",
+     "heard": "Ótchima escolha! Cum arrôis, feijãu i farofa?",
+     "en": "Great choice! With rice, beans and farofa?"
     },
     {
      "speaker": "George",
-     "pt": "Gosto! Brigadeiro é o meu favorito.",
-     "heard": "Gostu! Brigadêru é u meu favoritu.",
-     "en": "I do! Brigadeiro is my favourite."
+     "pt": "Pode ser! Mas sem ovo, por favor. Não como ovo.",
+     "heard": "Pódi sê! Mas sein ovu, pur favor. Num comu ovu.",
+     "en": "Sure! But no egg, please. I don't eat eggs."
     },
     {
-     "speaker": "Mãe",
-     "pt": "Então combinado: picanha e brigadeiro!",
-     "heard": "Entãu combinadu: picanha i brigadêru!",
-     "en": "Deal then: picanha and brigadeiro!"
+     "speaker": "Garçom",
+     "pt": "Sem problema. E pra beber?",
+     "heard": "Sein problema. I pra bebê?",
+     "en": "No problem. And to drink?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Uma água com gás, por favor.",
+     "heard": "Uma água cum gás, pur favor.",
+     "en": "A sparkling water, please."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Você fala português! Você é de onde?",
+     "heard": "Você fala portuguêis! Você é dji ondji?",
+     "en": "You speak Portuguese! Where are you from?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Sou inglês, mas tô aprendendo.",
+     "heard": "Sô inglêis, mas tô aprendenu.",
+     "en": "I'm English, but I'm learning."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "E aí, tá gostando da comida?",
+     "heard": "Iaí, tá gostanu da comida?",
+     "en": "So, are you enjoying the food?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Tá uma delícia! Picanha eu não recuso.",
+     "heard": "Tá uma delícia! Picanha eu num recuzu.",
+     "en": "It's delicious! I never say no to picanha."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Quer sobremesa? Tem pudim e brigadeiro.",
+     "heard": "Ké sobremesa? Teim pudim i brigadêru.",
+     "en": "Want dessert? There's pudim and brigadeiro."
+    },
+    {
+     "speaker": "George",
+     "pt": "Brigadeiro, por favor! E a conta, por favor.",
+     "heard": "Brigadêru, pur favor! I a conta, pur favor.",
+     "en": "Brigadeiro, please! And the bill, please."
     }
    ],
    "chunks": [
     {
-     "pt": "Gosto de quase tudo.",
-     "heard": "Gostu dji kuazi tudu.",
-     "en": "I like almost everything.",
-     "note": "quase = almost"
+     "pt": "Mesa pra quantas pessoas?",
+     "heard": "Meza pra kuantas pessoas?",
+     "en": "Table for how many?",
+     "note": "Answer: pra duas pessoas"
     },
     {
-     "pt": "Não como ovo, peixe nem queijo.",
-     "heard": "Num comu ovu, peixi nein keiju.",
-     "en": "I don't eat eggs, fish or cheese.",
-     "note": "nem = nor / not even"
+     "pt": "Quero uma picanha, por favor.",
+     "heard": "Kéru uma picanha, pur favor.",
+     "en": "I'd like the picanha, please.",
+     "note": "Quero = I want / I'd like"
     },
     {
-     "pt": "Sou chato pra comer.",
-     "heard": "Sô chatu pra comê.",
-     "en": "I'm a fussy eater.",
-     "note": "Self-deprecating, mums find it funny"
+     "pt": "Sem ovo, por favor.",
+     "heard": "Sein ovu, pur favor.",
+     "en": "No egg, please.",
+     "note": "sem = without"
     },
     {
-     "pt": "Isso eu não recuso!",
-     "heard": "Issu eu num recuzu!",
-     "en": "I never say no to that!",
-     "note": "Great compliment for food"
+     "pt": "Tá uma delícia!",
+     "heard": "Tá uma delícia!",
+     "en": "It's delicious!",
+     "note": "The #1 food compliment"
     },
     {
-     "pt": "Brigadeiro é o meu favorito.",
-     "heard": "Brigadêru é u meu favoritu.",
-     "en": "Brigadeiro is my favourite.",
-     "note": "o meu favorito / a minha favorita"
+     "pt": "A conta, por favor.",
+     "heard": "A conta, pur favor.",
+     "en": "The bill, please.",
+     "note": "Also: pode trazer a conta?"
     }
    ],
    "speak": [
     {
-     "speaker": "Mãe",
-     "q": "Do que você gosta de comer?",
-     "q_en": "What do you like to eat?",
-     "model": "Gosto de quase tudo! Carne, frango, arroz e feijão.",
-     "model_en": "I like almost everything! Meat, chicken, rice and beans."
+     "speaker": "Garçom",
+     "q": "Mesa pra quantas pessoas?",
+     "q_en": "Table for how many?",
+     "model": "Pra duas pessoas, por favor.",
+     "model_en": "For two, please."
     },
     {
-     "speaker": "Mãe",
+     "speaker": "Garçom",
+     "q": "O que você vai querer?",
+     "q_en": "What would you like?",
+     "model": "Quero uma picanha, por favor.",
+     "model_en": "I'd like the picanha, please."
+    },
+    {
+     "speaker": "Garçom",
      "q": "Tem alguma coisa que você não come?",
      "q_en": "Is there anything you don't eat?",
      "model": "Não como ovo, peixe nem queijo.",
      "model_en": "I don't eat eggs, fish or cheese."
     },
     {
-     "speaker": "Mãe",
-     "q": "Quer que eu faça picanha?",
-     "q_en": "Shall I make picanha?",
-     "model": "Quero! Adoro picanha.",
-     "model_en": "Yes please! I love picanha."
-    },
-    {
-     "speaker": "Mãe",
-     "q": "Você gosta de doce?",
-     "q_en": "Do you like sweet things?",
-     "model": "Gosto! Brigadeiro é o meu favorito.",
-     "model_en": "I do! Brigadeiro is my favourite."
+     "speaker": "Garçom",
+     "q": "Vai querer sobremesa?",
+     "q_en": "Would you like dessert?",
+     "model": "Vou! Um brigadeiro, por favor.",
+     "model_en": "Yes! A brigadeiro, please."
     }
    ],
-   "task": "Say out loud everything you ate today (Hoje eu comi...), then what you want to try in São Paulo (Quero provar...)."
+   "task": "Act out ordering your favourite meal at a Brazilian restaurant, out loud: greet, order food and a drink, say what you don't eat, ask for the bill."
   },
   {
    "ep": 6,
-   "title": "Sofredor",
+   "title": "Futebol no pub",
+   "intro": "George watches Spurs in a pub and meets a Brazilian fan. Your goal: talk about your team, react to a goal, and talk about the sports you do.",
    "lines": [
     {
      "speaker": "Narrador",
-     "pt": "Sexta à noite. O Tottenham jogou e o George tá numa chamada com a Gabi e a mãe.",
-     "heard": "Sexta à noitchi. U Tottenham jogô i u George tá numa chamada cum a Gabi i a mãinh.",
-     "en": "Friday night. Tottenham played and George is on a call with Gabi and her mum."
+     "pt": "Sábado. O George assiste o jogo do Tottenham num pub. Do lado dele tem um brasileiro.",
+     "heard": "Sábadu. U George assistchi u jogu du Tottenham num pub. Du ladu deli teim um brasilêru.",
+     "en": "Saturday. George watches the Spurs game in a pub. There's a Brazilian next to him."
     },
     {
-     "speaker": "Mãe",
-     "pt": "E aí, George, você torce pra qual time?",
-     "heard": "Iaí, George, você torci pra kuau tchimi?",
-     "en": "So George, which team do you support?"
-    },
-    {
-     "speaker": "George",
-     "pt": "Torço pro Tottenham.",
-     "heard": "Torsu pru Tottenham.",
-     "en": "I support Tottenham."
-    },
-    {
-     "speaker": "Mãe",
-     "pt": "E hoje? Ganhou ou perdeu?",
-     "heard": "I hoji? Ganhô ô perdeu?",
-     "en": "And today? Did they win or lose?"
+     "speaker": "Torcedor",
+     "pt": "E aí, cara! Você torce pra quem?",
+     "heard": "Iaí, cara! Você torci pra kein?",
+     "en": "Hey mate! Who do you support?"
     },
     {
      "speaker": "George",
-     "pt": "Perdeu de dois a um. No último minuto!",
-     "heard": "Perdeu dji dois a um. Nu úrtchimu minutu!",
-     "en": "Lost two-one. In the last minute!"
+     "pt": "Torço pro Tottenham. Sou sofredor!",
+     "heard": "Torsu pru Tottenham. Sô sofredô!",
+     "en": "I support Tottenham. Long-suffering fan!"
     },
     {
-     "speaker": "Mãe",
-     "pt": "Ai, coitado! Tá triste?",
-     "heard": "Ai, coitadu! Tá trischi?",
-     "en": "Oh, poor thing! Are you sad?"
-    },
-    {
-     "speaker": "George",
-     "pt": "Tô acostumado. Sou sofredor!",
-     "heard": "Tô acostumadu. Sô sofredô!",
-     "en": "I'm used to it. I'm a long-suffering fan!"
-    },
-    {
-     "speaker": "Gabi",
-     "pt": "Ele fica bravo, mas na semana que vem tá assistindo de novo.",
-     "heard": "Eli fica bravu, mas na semana ki vein tá assistchinu dji novu.",
-     "en": "He gets angry, but next week he's watching again."
+     "speaker": "Torcedor",
+     "pt": "Eu também! Sou brasileiro, mas sou Spurs.",
+     "heard": "Eu tambein! Sô brasilêru, mas sô Spurs.",
+     "en": "Me too! I'm Brazilian, but I'm Spurs."
     },
     {
      "speaker": "George",
-     "pt": "Claro! Amor é amor.",
-     "heard": "Claru! Amor é amor.",
-     "en": "Of course! Love is love."
+     "pt": "Sério? Que legal! Você é de onde?",
+     "heard": "Sériu? Ki legau! Você é dji ondji?",
+     "en": "Really? Cool! Where are you from?"
     },
     {
-     "speaker": "Mãe",
+     "speaker": "Torcedor",
+     "pt": "Sou de São Paulo. E você fala português?",
+     "heard": "Sô dji São Paulu. I você fala portuguêis?",
+     "en": "I'm from São Paulo. And you speak Portuguese?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Um pouco. Tô aprendendo.",
+     "heard": "Um poucu. Tô aprendenu.",
+     "en": "A bit. I'm learning."
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "Gol do Tottenham!",
+     "heard": "Gou du Tottenham!",
+     "en": "Goal for Tottenham!"
+    },
+    {
+     "speaker": "Torcedor",
+     "pt": "Gol! Que golaço!",
+     "heard": "Gou! Ki golaçu!",
+     "en": "Goal! What a goal!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Que golaço! Finalmente!",
+     "heard": "Ki golaçu! Finalmentchi!",
+     "en": "What a goal! Finally!"
+    },
+    {
+     "speaker": "Torcedor",
      "pt": "Você gosta de outros esportes?",
      "heard": "Você gosta dji ôtrus esportchis?",
      "en": "Do you like other sports?"
@@ -219,16 +239,16 @@
      "en": "I like F1 and boxing. I do boxing."
     },
     {
-     "speaker": "Mãe",
-     "pt": "Boxe? Nossa, cuidado com esse rosto bonito!",
-     "heard": "Boxi? Nóssa, cuidadu cum essi rostu bunitu!",
-     "en": "Boxing? Goodness, careful with that handsome face!"
+     "speaker": "Torcedor",
+     "pt": "Boxe? Nossa! Bora assistir o próximo jogo junto?",
+     "heard": "Boxi? Nóssa! Bora assistchí u próssimu jogu juntu?",
+     "en": "Boxing? Wow! Shall we watch the next game together?"
     },
     {
      "speaker": "George",
-     "pt": "Pode deixar! Eu sou rápido.",
-     "heard": "Pódi deixá! Eu sô rápidu.",
-     "en": "Don't worry! I'm quick."
+     "pt": "Bora! Me passa seu número.",
+     "heard": "Bora! Mi passa seu númeru.",
+     "en": "Let's! Give me your number."
     }
    ],
    "chunks": [
@@ -245,54 +265,54 @@
      "note": "Brazilians LOVE this one"
     },
     {
-     "pt": "Perdeu de dois a um.",
-     "heard": "Perdeu dji dois a um.",
-     "en": "They lost two-one.",
-     "note": "ganhou = won, empatou = drew"
+     "pt": "Que golaço!",
+     "heard": "Ki golaçu!",
+     "en": "What a goal!",
+     "note": "-aço = big/great"
     },
     {
-     "pt": "Tô acostumado.",
-     "heard": "Tô acostumadu.",
-     "en": "I'm used to it.",
-     "note": "acostumado com = used to"
+     "pt": "Eu treino boxe.",
+     "heard": "Eu treinu boxi.",
+     "en": "I do boxing.",
+     "note": "treinar = to train"
     },
     {
-     "pt": "Pode deixar!",
-     "heard": "Pódi deixá!",
-     "en": "Don't worry! / Leave it to me!",
-     "note": "Super common reassurance"
+     "pt": "Me passa seu número.",
+     "heard": "Mi passa seu númeru.",
+     "en": "Give me your number.",
+     "note": "How Brazilians swap numbers"
     }
    ],
    "speak": [
     {
-     "speaker": "Mãe",
-     "q": "Você torce pra qual time?",
-     "q_en": "Which team do you support?",
+     "speaker": "Torcedor",
+     "q": "Você torce pra quem?",
+     "q_en": "Who do you support?",
      "model": "Torço pro Tottenham. Sou sofredor!",
      "model_en": "I support Tottenham. Long-suffering fan!"
     },
     {
-     "speaker": "Mãe",
+     "speaker": "Torcedor",
      "q": "E no último jogo, ganhou?",
      "q_en": "And the last game, did they win?",
      "hint": "Ganhou! / Perdeu de... a... / Empatou. (say the real result)"
     },
     {
-     "speaker": "Mãe",
+     "speaker": "Torcedor",
      "q": "Você gosta de outros esportes?",
      "q_en": "Do you like other sports?",
      "model": "Gosto de Fórmula 1 e boxe.",
      "model_en": "I like F1 and boxing."
     },
     {
-     "speaker": "Mãe",
-     "q": "Você treina?",
-     "q_en": "Do you train?",
-     "model": "Treino! Academia e boxe quase todo dia.",
-     "model_en": "Yes! Gym and boxing almost every day."
+     "speaker": "Torcedor",
+     "q": "Bora assistir o próximo jogo junto?",
+     "q_en": "Shall we watch the next game together?",
+     "model": "Bora! Me passa seu número.",
+     "model_en": "Let's! Give me your number."
     }
    ],
-   "task": "Put on a Spurs highlights video with the sound off and commentate it in Portuguese: passa, chuta, gol!, quase!, que defesa!"
+   "task": "Put on Spurs highlights with the sound off and commentate them out loud in Portuguese: passa, chuta, gol!, quase!, que defesa!"
   },
   {
    "ep": 7,
@@ -300,12 +320,12 @@
    "lines": [
     {
      "speaker": "Narrador",
-     "pt": "Sábado de manhã. A Gabi manda um áudio pro George.",
-     "heard": "Sábadu dji manhã. A Gabi manda um áudiu pru George.",
-     "en": "Saturday morning. Gabi sends George a voice note."
+     "pt": "Domingo de manhã. A Ana manda um áudio pro George.",
+     "heard": "Dumingu dji manhã. A Ana manda um áudiu pru George.",
+     "en": "Sunday morning. Ana sends George a voice note."
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "E aí, o que cê vai fazer no fim de semana?",
      "heard": "Iaí, u ki cê vai fazê nu fim dji semana?",
      "en": "So, what are you doing this weekend?"
@@ -317,7 +337,7 @@
      "en": "This morning I'm going to the gym. This afternoon, no idea."
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "Bora fazer uma chamada de vídeo hoje à noite?",
      "heard": "Bora fazê uma chamada dji vídjiu hoji à noitchi?",
      "en": "Shall we do a video call tonight?"
@@ -329,7 +349,7 @@
      "en": "Let's! What time?"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "Umas oito da noite aqui. Que horas são aí?",
      "heard": "Umas oitu da noitchi aki. Ki oras sãu aí?",
      "en": "Around eight at night here. What time is that there?"
@@ -341,7 +361,7 @@
      "en": "Here it's eleven. It's late, but OK!"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "Ou amanhã às três da tarde? Aí são seis.",
      "heard": "Ô amanhã às treis da tardji? Aí sãu seis.",
      "en": "Or tomorrow at three in the afternoon? That's six there."
@@ -353,7 +373,7 @@
      "en": "Tomorrow's better. Deal!"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "E amanhã de manhã, cê faz o quê?",
      "heard": "I amanhã dji manhã, cê faz u kê?",
      "en": "And tomorrow morning, what are you doing?"
@@ -365,7 +385,7 @@
      "en": "On Sundays I sleep in and then study Portuguese."
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "pt": "Cê tá ficando bom, hein!",
      "heard": "Cê tá ficanu bom, hein!",
      "en": "You're getting good, you know!"
@@ -411,49 +431,51 @@
    ],
    "speak": [
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "q": "O que cê vai fazer no fim de semana?",
      "q_en": "What are you doing this weekend?",
      "hint": "Sábado vou pra... Domingo vou... (your real plans)"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "q": "Bora fazer uma chamada?",
      "q_en": "Shall we do a call?",
      "model": "Bora! Que horas?",
      "model_en": "Let's! What time?"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "q": "Que horas são aí agora?",
      "q_en": "What time is it there now?",
      "hint": "Aqui são... (say the real time)"
     },
     {
-     "speaker": "Gabi",
+     "speaker": "Ana",
      "q": "Cê prefere sábado ou domingo?",
      "q_en": "Do you prefer Saturday or Sunday?",
      "model": "Domingo é melhor pra mim.",
      "model_en": "Sunday's better for me."
     }
    ],
-   "task": "Say your real plan for this weekend out loud, with times: Sábado às dez vou pra..., à tarde..., domingo..."
+   "task": "Say your real plan for this weekend out loud, with times: Sábado às dez vou pra..., à tarde..., domingo...",
+   "intro": "George and Ana plan a call across time zones. Your goal: make plans, say days and times, and agree with bora and pode ser."
   },
   {
    "ep": 8,
    "title": "Não entendi!",
+   "intro": "A Brazilian barista in London talks fast and George has to keep up. Your goal: use the rescue phrases so you never freeze, and order to take away.",
    "lines": [
     {
      "speaker": "Narrador",
-     "pt": "Domingo. A mãe da Gabi liga animada. Ela fala muito rápido.",
-     "heard": "Dumingu. A mãinh da Gabi liga animada. Ela fala muitu rápidu.",
-     "en": "Sunday. Gabi's mum calls, excited. She talks really fast."
+     "pt": "Segunda de manhã. O George entra numa cafeteria brasileira perto do trabalho.",
+     "heard": "Segunda dji manhã. U George entra numa cafeteria brasilêra pertu du trabalhu.",
+     "en": "Monday morning. George walks into a Brazilian café near work."
     },
     {
-     "speaker": "Mãe",
-     "pt": "George, quando você chegar a gente vai na padaria cedinho e depois dá um rolê no Ibirapuera, que tal?",
-     "heard": "George, kuandu você chegá a gentchi vai na padaria cedinhu i dispois dá um rolê nu Ibirapuera, ki tau?",
-     "en": "George, when you arrive we'll go to the bakery nice and early and then have a wander round Ibirapuera, how about it?"
+     "speaker": "Barista",
+     "pt": "Bom dia! O que vai ser hoje? Tem pão de queijo quentinho, coxinha, e o café tá saindo agora!",
+     "heard": "Bom djia! U ki vai sê hoji? Teim pãu dji keiju kentchinhu, coxinha, i u café tá saínu agora!",
+     "en": "Morning! What'll it be today? There's warm pão de queijo, coxinha, and the coffee's coming out now!"
     },
     {
      "speaker": "George",
@@ -462,64 +484,76 @@
      "en": "Sorry, can you speak more slowly?"
     },
     {
-     "speaker": "Mãe",
-     "pt": "Claro! Quando você chegar... padaria... depois, parque.",
-     "heard": "Claru! Kuandu você chegá... padaria... dispois, parki.",
-     "en": "Of course! When you arrive... bakery... then, park."
+     "speaker": "Barista",
+     "pt": "Claro! O que... você... quer?",
+     "heard": "Claru! U ki... você... ké?",
+     "en": "Of course! What... do you... want?"
     },
     {
      "speaker": "George",
-     "pt": "Ah, entendi! O que significa rolê?",
-     "heard": "Ah, entendji! U ki significa rolê?",
-     "en": "Ah, got it! What does 'rolê' mean?"
+     "pt": "Ah, entendi! Um café, por favor.",
+     "heard": "Ah, entendji! Um café, pur favor.",
+     "en": "Ah, got it! A coffee, please."
     },
     {
-     "speaker": "Gabi",
-     "pt": "É dar uma volta, passear.",
-     "heard": "É dá uma vorta, passiá.",
-     "en": "It means going for a wander."
-    },
-    {
-     "speaker": "George",
-     "pt": "E como assim, cedinho?",
-     "heard": "I cumu assim, cedinhu?",
-     "en": "And what do you mean, 'cedinho'?"
-    },
-    {
-     "speaker": "Mãe",
-     "pt": "Bem cedo. Umas oito horas.",
-     "heard": "Bein cedu. Umas oitu oras.",
-     "en": "Nice and early. About eight."
+     "speaker": "Barista",
+     "pt": "Coado ou expresso?",
+     "heard": "Coadu ô espressu?",
+     "en": "Filter or espresso?"
     },
     {
      "speaker": "George",
-     "pt": "Oito horas? Nas férias?",
-     "heard": "Oitu oras? Nas férias?",
-     "en": "Eight o'clock? On holiday?"
+     "pt": "Como assim, coado?",
+     "heard": "Cumu assim, coadu?",
+     "en": "What do you mean, coado?"
     },
     {
-     "speaker": "Mãe",
-     "pt": "Brincadeira! Pode ser às dez.",
-     "heard": "Brincadera! Pódi sê às déis.",
-     "en": "Just kidding! Ten's fine."
-    },
-    {
-     "speaker": "George",
-     "pt": "Repete, por favor? Brinca... o quê?",
-     "heard": "Repetchi, pur favor? Brinca... u kê?",
-     "en": "Say that again, please? Brinca... what?"
-    },
-    {
-     "speaker": "Gabi",
-     "pt": "Brincadeira! Quer dizer que ela tava brincando.",
-     "heard": "Brincadera! Ké dizê ki ela tava brincanu.",
-     "en": "'Brincadeira'! It means she was joking."
+     "speaker": "Barista",
+     "pt": "É o café de filtro, tradicional.",
+     "heard": "É u café dji fiutru, tradicionau.",
+     "en": "It's filter coffee, the traditional kind."
     },
     {
      "speaker": "George",
-     "pt": "Ah, brincadeira! Gostei dessa palavra.",
-     "heard": "Ah, brincadera! Gostei dessa palavra.",
-     "en": "Ah, 'brincadeira'! I like that word."
+     "pt": "Ah, tá! Um coado, então. E o que significa coxinha?",
+     "heard": "Ah, tá! Um coadu, entãu. I u ki significa coxinha?",
+     "en": "Ah, OK! A filter one, then. And what does coxinha mean?"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "É um salgado de frango. É uma delícia!",
+     "heard": "É um saugadu dji frangu. É uma delícia!",
+     "en": "It's a chicken savoury snack. It's delicious!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Frango? Então quero uma coxinha!",
+     "heard": "Frangu? Entãu kéru uma coxinha!",
+     "en": "Chicken? Then I'll have a coxinha!"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Pra comer aqui ou pra viagem?",
+     "heard": "Pra comê aki ô pra viagein?",
+     "en": "To eat in or to take away?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Repete, por favor? Pra... o quê?",
+     "heard": "Repetchi, pur favor? Pra... u kê?",
+     "en": "Say that again, please? For... what?"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Pra viagem: pra levar.",
+     "heard": "Pra viagein: pra levá.",
+     "en": "Pra viagem: to take away."
+    },
+    {
+     "speaker": "George",
+     "pt": "Ah! Pra viagem, por favor. Obrigado!",
+     "heard": "Ah! Pra viagein, pur favor. Obrigadu!",
+     "en": "Ah! To take away, please. Thanks!"
     }
    ],
    "chunks": [
@@ -530,16 +564,16 @@
      "note": "Your lifeline"
     },
     {
-     "pt": "O que significa...?",
-     "heard": "U ki significa...?",
-     "en": "What does ... mean?",
-     "note": "Keeps it in Portuguese"
-    },
-    {
      "pt": "Como assim?",
      "heard": "Cumu assim?",
      "en": "What do you mean?",
      "note": "Use it constantly"
+    },
+    {
+     "pt": "O que significa...?",
+     "heard": "U ki significa...?",
+     "en": "What does ... mean?",
+     "note": "Keeps it in Portuguese"
     },
     {
      "pt": "Repete, por favor?",
@@ -548,38 +582,38 @@
      "note": "Friendly and informal"
     },
     {
-     "pt": "Brincadeira!",
-     "heard": "Brincadera!",
-     "en": "Just kidding!",
-     "note": "Mums use this a lot"
+     "pt": "Pra viagem, por favor.",
+     "heard": "Pra viagein, pur favor.",
+     "en": "To take away, please.",
+     "note": "pra comer aqui = to eat in"
     }
    ],
    "speak": [
     {
-     "speaker": "Mãe",
-     "q": "Você entendeu o que eu falei?",
-     "q_en": "Did you understand what I said?",
-     "model": "Mais ou menos! Pode falar mais devagar?",
-     "model_en": "Sort of! Can you speak more slowly?"
+     "speaker": "Barista",
+     "q": "O que vai ser hoje?",
+     "q_en": "What'll it be today?",
+     "model": "Um café, por favor.",
+     "model_en": "A coffee, please."
     },
     {
-     "speaker": "Mãe",
-     "q": "Vamos na padaria cedinho?",
-     "q_en": "Shall we go to the bakery early?",
-     "model": "Bora! Mas o que significa cedinho?",
-     "model_en": "Let's! But what does 'cedinho' mean?"
+     "speaker": "Barista",
+     "q": "Coado ou expresso?",
+     "q_en": "Filter or espresso?",
+     "model": "Expresso, por favor.",
+     "model_en": "Espresso, please."
     },
     {
-     "speaker": "Mãe",
-     "q": "Às seis tá bom pra você?",
-     "q_en": "Is six OK for you?",
-     "model": "Às seis? Brincadeira, né?",
-     "model_en": "Six?! You're joking, right?"
+     "speaker": "Barista",
+     "q": "Pra comer aqui ou pra viagem?",
+     "q_en": "To eat in or take away?",
+     "model": "Pra viagem, por favor.",
+     "model_en": "To take away, please."
     },
     {
-     "speaker": "Mãe",
-     "q": "Depois do almoço a gente pode passar no shopping pra comprar umas coisinhas pro Natal, tá bom?",
-     "q_en": "After lunch we could pop to the shopping centre for a few bits for Christmas, OK?",
+     "speaker": "Barista",
+     "q": "Vai querer mais alguma coisinha, um pão de queijo, um suco, alguma coisa?",
+     "q_en": "Anything else, a pão de queijo, a juice, anything?",
      "model": "Desculpa, não entendi tudo. Pode repetir mais devagar?",
      "model_en": "Sorry, I didn't catch it all. Can you repeat it more slowly?"
     }
@@ -589,24 +623,36 @@
  ],
  "drills": [
   {
-   "en": "I like almost everything.",
-   "pt": "Gosto de quase tudo."
+   "en": "Table for how many?",
+   "pt": "Mesa pra quantas pessoas?"
+  },
+  {
+   "en": "Just me.",
+   "pt": "Só pra mim."
+  },
+  {
+   "en": "I'd like the picanha, please.",
+   "pt": "Quero uma picanha, por favor."
+  },
+  {
+   "en": "No egg, please.",
+   "pt": "Sem ovo, por favor."
   },
   {
    "en": "I don't eat eggs, fish or cheese.",
    "pt": "Não como ovo, peixe nem queijo."
   },
   {
-   "en": "I'm a fussy eater.",
-   "pt": "Sou chato pra comer."
+   "en": "A sparkling water, please.",
+   "pt": "Uma água com gás, por favor."
   },
   {
-   "en": "I never say no to that!",
-   "pt": "Isso eu não recuso!"
+   "en": "It's delicious!",
+   "pt": "Tá uma delícia!"
   },
   {
-   "en": "Brigadeiro is my favourite.",
-   "pt": "Brigadeiro é o meu favorito."
+   "en": "The bill, please.",
+   "pt": "A conta, por favor."
   },
   {
    "en": "I support Tottenham.",
@@ -617,20 +663,16 @@
    "pt": "Sou sofredor."
   },
   {
-   "en": "They lost two-one.",
-   "pt": "Perdeu de dois a um."
-  },
-  {
-   "en": "I'm used to it.",
-   "pt": "Tô acostumado."
-  },
-  {
-   "en": "Don't worry, leave it to me!",
-   "pt": "Pode deixar!"
+   "en": "What a goal!",
+   "pt": "Que golaço!"
   },
   {
    "en": "I do boxing.",
    "pt": "Eu treino boxe."
+  },
+  {
+   "en": "Give me your number.",
+   "pt": "Me passa seu número."
   },
   {
    "en": "Shall we?",
@@ -657,32 +699,28 @@
    "pt": "Pode falar mais devagar?"
   },
   {
-   "en": "What does 'rolê' mean?",
-   "pt": "O que significa rolê?"
-  },
-  {
    "en": "What do you mean?",
    "pt": "Como assim?"
+  },
+  {
+   "en": "What does coxinha mean?",
+   "pt": "O que significa coxinha?"
   },
   {
    "en": "Say that again, please?",
    "pt": "Repete, por favor?"
   },
   {
-   "en": "Just kidding!",
-   "pt": "Brincadeira!"
+   "en": "To take away, please.",
+   "pt": "Pra viagem, por favor."
   },
   {
-   "en": "I'm good, and you? (to Gabi's mum)",
-   "pt": "Tudo bem, e a senhora?"
+   "en": "I'm from England.",
+   "pt": "Sou da Inglaterra."
   },
   {
    "en": "I work in FX.",
    "pt": "Trabalho com câmbio."
-  },
-  {
-   "en": "I live near London.",
-   "pt": "Moro perto de Londres."
   },
   {
    "en": "I've just woken up.",
@@ -691,20 +729,12 @@
   {
    "en": "I'm knackered!",
    "pt": "Tô morto!"
-  },
-  {
-   "en": "I'm going to the gym.",
-   "pt": "Vou pra academia."
-  },
-  {
-   "en": "I'm really excited to meet you.",
-   "pt": "Tô muito animado pra conhecer a senhora."
   }
  ],
  "talk": [
   {
-   "en": "Food: what you eat and what you don't",
-   "pt": "O que você gosta de comer?"
+   "en": "Ordering your favourite meal",
+   "pt": "O que você vai querer comer hoje?"
   },
   {
    "en": "Your sports: Spurs, F1, boxing",
