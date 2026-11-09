@@ -7,88 +7,165 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>pt-BR</language>
-    <lastBuildDate>Sun, 01 Nov 2026 19:50:18 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 17:01:34 +0000</lastBuildDate>
     <itunes:block>yes</itunes:block>
     <itunes:category text="Education">
       <itunes:category text="Language Learning"/>
     </itunes:category>
     <itunes:explicit>no</itunes:explicit>
     <item>
+      <title>Pack 04 · Speaking gym 🗣️</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack04-speaking-gym.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack04-speaking-gym.mp3" length="4175722" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:06:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Pack 04 · Drills (ep 12–15)</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack04-drills.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack04-drills.mp3" length="3012576" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:05:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 15 · Quando eu era pequeno</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep15-quando-eu-era-pequeno.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep15-quando-eu-era-pequeno.mp3" length="6420589" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:04:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 14 · Na academia</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep14-na-academia.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep14-na-academia.mp3" length="6738723" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:03:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 13 · Uma história engraçada</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep13-uma-historia-engracada.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep13-uma-historia-engracada.mp3" length="6149296" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:02:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 12 · Um dia corrido</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-04.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep12-um-dia-corrido.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep12-um-dia-corrido.mp3" length="7010982" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:01:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Pack 03 · Speaking gym 🗣️</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-03.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack03-speaking-gym.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack03-speaking-gym.mp3" length="4183036" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:05:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Pack 03 · Drills (ep 9–11)</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-03.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack03-drills.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack03-drills.mp3" length="3567840" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:04:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 11 · Na cafeteria</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-03.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep11-na-cafeteria.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep11-na-cafeteria.mp3" length="6249700" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:03:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 10 · Meu fim de semana</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-03.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep10-meu-fim-de-semana.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep10-meu-fim-de-semana.mp3" length="6892137" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 16:02:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ep 09 · Conhecendo alguém novo</title>
+      <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-03.html</description>
+      <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep09-conhecendo-alguem-novo.mp3</guid>
+      <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep09-conhecendo-alguem-novo.mp3" length="6931503" type="audio/mpeg"/>
+      <pubDate>Mon, 09 Nov 2026 06:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>Pack 02 · Speaking gym 🗣️</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack02-speaking-gym.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack02-speaking-gym.mp3" length="4108221" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:55:18 +0000</pubDate>
+      <pubDate>Sun, 08 Nov 2026 06:05:00 +0000</pubDate>
     </item>
     <item>
       <title>Pack 02 · Drills (ep 5–8)</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack02-drills.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack02-drills.mp3" length="2846880" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:54:18 +0000</pubDate>
+      <pubDate>Sun, 08 Nov 2026 06:04:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 08 · Não entendi!</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep08-nao-entendi.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep08-nao-entendi.mp3" length="7213157" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:53:18 +0000</pubDate>
+      <pubDate>Sun, 08 Nov 2026 06:03:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 07 · Bora?</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep07-bora.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep07-bora.mp3" length="6209373" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:52:18 +0000</pubDate>
+      <pubDate>Sat, 07 Nov 2026 06:02:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 06 · Futebol no pub</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep06-futebol-no-pub.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep06-futebol-no-pub.mp3" length="7096998" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:51:18 +0000</pubDate>
+      <pubDate>Fri, 06 Nov 2026 06:01:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 05 · No restaurante brasileiro</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-02.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep05-no-restaurante-brasileiro.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep05-no-restaurante-brasileiro.mp3" length="7471601" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:50:18 +0000</pubDate>
+      <pubDate>Thu, 05 Nov 2026 06:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Pack 01 · Speaking gym 🗣️</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-01.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack01-speaking-gym.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack01-speaking-gym.mp3" length="4111147" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:55:18 +0000</pubDate>
+      <pubDate>Wed, 04 Nov 2026 06:05:00 +0000</pubDate>
     </item>
     <item>
       <title>Pack 01 · Drills (ep 1–4)</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-01.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack01-drills.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/pack01-drills.mp3" length="2760864" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:54:18 +0000</pubDate>
+      <pubDate>Wed, 04 Nov 2026 06:04:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 04 · Falando como paulistano</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-01.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep04-falando-como-paulistano.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep04-falando-como-paulistano.mp3" length="5995119" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:53:18 +0000</pubDate>
+      <pubDate>Wed, 04 Nov 2026 06:03:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 03 · Um dia normal</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-01.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep03-um-dia-normal.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep03-um-dia-normal.mp3" length="6245285" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:52:18 +0000</pubDate>
+      <pubDate>Tue, 03 Nov 2026 06:02:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 02 · Prazer, eu sou o George</title>
       <description>Transcript: https://wellsyyyyy99-code.github.io/projeto-sp/transcripts/pack-01.html</description>
       <guid isPermaLink="false">https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep02-prazer-eu-sou-o-george.mp3</guid>
       <enclosure url="https://wellsyyyyy99-code.github.io/projeto-sp/audio/ep02-prazer-eu-sou-o-george.mp3" length="7711983" type="audio/mpeg"/>
-      <pubDate>Sun, 01 Nov 2026 18:51:18 +0000</pubDate>
+      <pubDate>Mon, 02 Nov 2026 06:01:00 +0000</pubDate>
     </item>
     <item>
       <title>Ep 01 · Oi, mãe da Gabi!</title>
