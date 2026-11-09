@@ -1,0 +1,600 @@
+{
+ "pack": 3,
+ "episodes": [
+  {
+   "ep": 9,
+   "title": "Conhecendo alguém novo",
+   "intro": "At a party in London, George bumps into Rafa, a Brazilian from São Paulo. Your goal: introduce yourself to a new Brazilian and ask how long they've lived here.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Sábado à noite. O George tá numa festa na casa de um colega.",
+     "heard": "Sábadu à noitchi. U George tá numa féssta na caza dji um colega.",
+     "en": "Saturday night. George is at a party at a colleague's house."
+    },
+    {
+     "speaker": "George",
+     "pt": "Opa, desculpa!",
+     "heard": "Ópa, djiscupa!",
+     "en": "Oops, sorry!"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Peraí... cê fala português?",
+     "heard": "Peraí... cê fala portuguêis?",
+     "en": "Hang on... you speak Portuguese?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Um pouquinho! Tô aprendendo.",
+     "heard": "Um pokinhu! Tô aprendenu.",
+     "en": "A little bit! I'm learning."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Que demais! Eu sou o Rafa, sou de São Paulo.",
+     "heard": "Ki dimais! Eu sô u Rafa, sô dji Sãu Paulu.",
+     "en": "That's brilliant! I'm Rafa, I'm from São Paulo."
+    },
+    {
+     "speaker": "George",
+     "pt": "Prazer, Rafa! Eu sou o George. Minha namorada também é de São Paulo.",
+     "heard": "Prazê, Rafa! Eu sô u George. Minha namorada tambein é dji Sãu Paulu.",
+     "en": "Nice to meet you, Rafa! I'm George. My girlfriend's from São Paulo too."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Olha só! E cê mora aqui em Londres?",
+     "heard": "Ólha só! I cê mora akí ein Londris?",
+     "en": "Look at that! And do you live here in London?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Moro em Brentwood, perto de Londres. E você, tá aqui há quanto tempo?",
+     "heard": "Moru ein Brentwood, pertu dji Londris. I você, tá akí á kuantu tempu?",
+     "en": "I live in Brentwood, near London. And you, how long have you been here?"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Me mudei faz dois anos. Vim pra estudar inglês... e fiquei!",
+     "heard": "Mi mudei faiz dois anus. Vim pra estudá inglêis... i fikei!",
+     "en": "I moved two years ago. I came to study English... and stayed!"
+    },
+    {
+     "speaker": "George",
+     "pt": "E gosta daqui?",
+     "heard": "I gosta dakí?",
+     "en": "And do you like it here?"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Gosto, mas sinto falta do sol. E a sua namorada sabe que cê tá aprendendo?",
+     "heard": "Gostu, mas sintu falta du sóu. I a sua namorada sabi ki cê tá aprendenu?",
+     "en": "I do, but I miss the sun. And does your girlfriend know you're learning?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Não! É surpresa. Não conta pra ninguém!",
+     "heard": "Num! É surpreza. Num conta pra ningéin!",
+     "en": "No! It's a surprise. Don't tell anyone!"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Fica tranquilo. Eu nem conheço ela!",
+     "heard": "Fika trankilu. Eu nein conheçu ela!",
+     "en": "Don't worry. I don't even know her!"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "O George fez um amigo novo. E o Rafa já quer marcar um rolê.",
+     "heard": "U George féis um amigu novu. I u Rafa já ké marcá um rolê.",
+     "en": "George has made a new friend. And Rafa already wants to arrange a night out."
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Cê fala português?",
+     "heard": "Cê fala portuguêis?",
+     "en": "Do you speak Portuguese?",
+     "note": "cê = você in everyday speech"
+    },
+    {
+     "pt": "Um pouquinho! Tô aprendendo.",
+     "heard": "Um pokinhu! Tô aprendenu.",
+     "en": "A little bit! I'm learning.",
+     "note": "-inho makes words small and friendly"
+    },
+    {
+     "pt": "Tá aqui há quanto tempo?",
+     "heard": "Tá akí á kuantu tempu?",
+     "en": "How long have you been here?",
+     "note": "há quanto tempo = for how long"
+    },
+    {
+     "pt": "Me mudei pra cá faz dois anos.",
+     "heard": "Mi mudei pra cá faiz dois anus.",
+     "en": "I moved here two years ago.",
+     "note": "me mudei = I moved (house or country)"
+    },
+    {
+     "pt": "Não conta pra ninguém!",
+     "heard": "Num conta pra ningéin!",
+     "en": "Don't tell anyone!",
+     "note": "your secret-surprise phrase"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Rafa",
+     "q": "Cê fala português?",
+     "q_en": "Do you speak Portuguese?",
+     "model": "Um pouquinho! Tô aprendendo.",
+     "model_en": "A little bit! I'm learning."
+    },
+    {
+     "speaker": "Rafa",
+     "q": "Cê mora onde?",
+     "q_en": "Where do you live?",
+     "model": "Moro em Brentwood, perto de Londres. Pego o trem todo dia.",
+     "model_en": "I live in Brentwood, near London. I get the train every day."
+    },
+    {
+     "speaker": "Rafa",
+     "q": "Por que cê tá aprendendo português?",
+     "q_en": "Why are you learning Portuguese?",
+     "model": "Porque minha namorada é de São Paulo. Mas é surpresa, não conta pra ninguém!",
+     "model_en": "Because my girlfriend's from São Paulo. But it's a surprise, don't tell anyone!"
+    },
+    {
+     "speaker": "Rafa",
+     "q": "Cê já foi pro Brasil?",
+     "q_en": "Have you been to Brazil?",
+     "hint": "Já fui pra... (São Paulo / o Rio) em... / Ainda não, mas vou em dezembro!"
+    }
+   ],
+   "task": "Party practice: introduce yourself out loud to three imaginary Brazilians at a party (name, where you live, your job, why you're learning). Make each version a bit different, and ask each one 'Tá aqui há quanto tempo?' About 2 minutes."
+  },
+  {
+   "ep": 10,
+   "title": "Meu fim de semana",
+   "intro": "On Monday, Rafa sends George a voice note asking about his weekend. Your goal: say what you did at the weekend with fui, fiz, comi and vi.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Segunda de manhã. O Rafa manda um áudio pro George.",
+     "heard": "Segunda dji manhã. U Rafa manda um áudiu pru George.",
+     "en": "Monday morning. Rafa sends George a voice note."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "E aí, George! Como foi o fim de semana?",
+     "heard": "I aí, George! Comu foi u fin dji semana?",
+     "en": "Hey, George! How was your weekend?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Foi bom! Sábado eu fui numa festa, né? Conheci você!",
+     "heard": "Foi bom! Sábadu eu fui numa féssta, né? Conhecí você!",
+     "en": "It was good! On Saturday I went to a party, right? I met you!"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Verdade! E domingo, cê fez o quê?",
+     "heard": "Verdadji! I dumingu, cê féis u kê?",
+     "en": "True! And on Sunday, what did you do?"
+    },
+    {
+     "speaker": "George",
+     "pt": "De manhã eu fui pra academia. Depois vi o jogo do Tottenham.",
+     "heard": "Dji manhã eu fui pra academia. Dipois vi u jogu du Tottenham.",
+     "en": "In the morning I went to the gym. Then I watched the Spurs game."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "E aí? Ganhou?",
+     "heard": "I aí? Ganhô?",
+     "en": "And? Did they win?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Empatou. Pra gente, isso é quase uma vitória!",
+     "heard": "Empatô. Pra genchi, issu é kuazi uma vitória!",
+     "en": "It was a draw. For us, that's almost a win!"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Sofredor, hein! E comeu o quê?",
+     "heard": "Sofredô, hein! I comeu u kê?",
+     "en": "Long-suffering, eh! And what did you eat?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Comi um hambúrguer. Sem queijo, claro.",
+     "heard": "Comí um hambúrgué. Sein keiju, cláru.",
+     "en": "I had a burger. No cheese, obviously."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Sem queijo? Cê é doido, meu!",
+     "heard": "Sein keiju? Cê é doidu, meu!",
+     "en": "No cheese? You're mad, mate!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Eu sei! E você, fez o quê?",
+     "heard": "Eu sei! I você, féis u kê?",
+     "en": "I know! And you, what did you do?"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Nada! Dormi o dia inteiro. Bora tomar um café essa semana? Minha amiga trabalha numa cafeteria brasileira.",
+     "heard": "Nada! Durmí u djia intêru. Bóra tomá um café éssa semana? Minha amiga trabalha numa cafeteria brazilera.",
+     "en": "Nothing! I slept all day. Fancy a coffee this week? My friend works at a Brazilian café."
+    },
+    {
+     "speaker": "George",
+     "pt": "Bora! Quarta à tarde?",
+     "heard": "Bóra! Kuarta à tardji?",
+     "en": "Let's do it! Wednesday afternoon?"
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Fechou!",
+     "heard": "Fechô!",
+     "en": "Done!"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Como foi o fim de semana?",
+     "heard": "Comu foi u fin dji semana?",
+     "en": "How was your weekend?",
+     "note": "the Monday question, ask it back too"
+    },
+    {
+     "pt": "Sábado eu fui numa festa.",
+     "heard": "Sábadu eu fui numa féssta.",
+     "en": "On Saturday I went to a party.",
+     "note": "fui = I went (also I was)"
+    },
+    {
+     "pt": "Domingo eu vi o jogo.",
+     "heard": "Dumingu eu vi u jogu.",
+     "en": "On Sunday I watched the game.",
+     "note": "vi = I saw / watched"
+    },
+    {
+     "pt": "Comi um hambúrguer sem queijo.",
+     "heard": "Comí um hambúrgué sein keiju.",
+     "en": "I had a burger without cheese.",
+     "note": "comi = I ate; sem = without"
+    },
+    {
+     "pt": "Fechou!",
+     "heard": "Fechô!",
+     "en": "Done! / Deal!",
+     "note": "São Paulo way to agree to a plan"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Rafa",
+     "q": "Como foi o fim de semana?",
+     "q_en": "How was your weekend?",
+     "model": "Foi bom! Fui pra academia e vi o jogo do Tottenham.",
+     "model_en": "It was good! I went to the gym and watched the Spurs game."
+    },
+    {
+     "speaker": "Rafa",
+     "q": "O que cê comeu de bom?",
+     "q_en": "What did you eat that was good?",
+     "hint": "Comi... (uma pizza / um churrasco / um hambúrguer sem queijo) em..."
+    },
+    {
+     "speaker": "Rafa",
+     "q": "Cê fez alguma coisa diferente?",
+     "q_en": "Did you do anything different?",
+     "hint": "Fiz... (uma caminhada / um jantar com amigos) / Não fiz nada de diferente, só..."
+    },
+    {
+     "speaker": "Rafa",
+     "q": "Bora tomar um café essa semana?",
+     "q_en": "Fancy a coffee this week?",
+     "model": "Bora! Quarta à tarde? Fechou!",
+     "model_en": "Let's do it! Wednesday afternoon? Done!"
+    }
+   ],
+   "task": "Send Rafa a voice memo (record it, don't send it) about YOUR real weekend: Sábado eu fui..., fiz..., comi..., vi... Then ask him 'E você, fez o quê?'. 1–2 minutes."
+  },
+  {
+   "ep": 11,
+   "title": "Na cafeteria",
+   "intro": "Rafa takes George to his friend's café, and it's the same café from episode 8. Your goal: order a coffee your way and answer quick small talk.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Quarta à tarde. O Rafa leva o George na cafeteria da amiga dele. É a cafeteria perto do trabalho do George!",
+     "heard": "Kuarta à tardji. U Rafa léva u George na cafeteria da amiga deli. É a cafeteria pertu du trabalhu du George!",
+     "en": "Wednesday afternoon. Rafa takes George to his friend's café. It's the café near George's work!"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Oi, gente! O que vocês vão querer?",
+     "heard": "Oi, genchi! U ki vocêis vãu kerê?",
+     "en": "Hi, guys! What are you having?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Oi! Me vê um café com leite, por favor.",
+     "heard": "Oi! Mi vê um café cun leitchi, pur favô.",
+     "en": "Hi! Can I have a white coffee, please?"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Com leite normal ou de aveia?",
+     "heard": "Cun leitchi normau ou dji aveia?",
+     "en": "With normal milk or oat?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Pode ser de aveia. Sem açúcar.",
+     "heard": "Pódji sê dji aveia. Sein açúca.",
+     "en": "Oat's fine. No sugar."
+    },
+    {
+     "speaker": "Barista",
+     "pt": "E pra comer? O pão de queijo acabou de sair, tá quentinho!",
+     "heard": "I pra comê? U pãu dji keiju acabô dji saí, tá kentchinhu!",
+     "en": "And to eat? The pão de queijo's just come out, it's nice and warm!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Ai, não posso. Não como queijo.",
+     "heard": "Ai, num póssu. Num comu keiju.",
+     "en": "Oh, I can't. I don't eat cheese."
+    },
+    {
+     "speaker": "Rafa",
+     "pt": "Ele é assim mesmo. Pode trazer dois pra mim!",
+     "heard": "Eli é assin mezmu. Pódji trazê dois pra min!",
+     "en": "He's just like that. Bring me two!"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Pra tomar aqui ou pra viagem?",
+     "heard": "Pra tomá akí ou pra viajein?",
+     "en": "To have here or to take away?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Pra tomar aqui. Quanto fica?",
+     "heard": "Pra tomá akí. Kuantu fika?",
+     "en": "To have here. How much is it?"
+    },
+    {
+     "speaker": "Barista",
+     "pt": "Fica oito libras. Peraí... cê é o inglês da coxinha?",
+     "heard": "Fika oitu libras. Peraí... cê é u inglêis da coxinha?",
+     "en": "That's eight pounds. Hang on... are you the English guy with the coxinha?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Sou eu! Hoje eu falei mais devagar que você.",
+     "heard": "Sô eu! Oji eu falei mais devagá ki você.",
+     "en": "That's me! Today I spoke slower than you."
+    },
+    {
+     "speaker": "Barista",
+     "pt": "E falou bem, viu! O Rafa me contou tudo.",
+     "heard": "I falô bein, viu! U Rafa mi contô tudu.",
+     "en": "And you spoke well! Rafa told me everything."
+    },
+    {
+     "speaker": "George",
+     "pt": "Rafa! Não conta pra ninguém, lembra?",
+     "heard": "Rafa! Num conta pra ningéin, lembra?",
+     "en": "Rafa! Don't tell anyone, remember?"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Me vê um café com leite, por favor.",
+     "heard": "Mi vê um café cun leitchi, pur favô.",
+     "en": "Can I have a white coffee, please?",
+     "note": "me vê = can I have, very Paulistano"
+    },
+    {
+     "pt": "Pode ser.",
+     "heard": "Pódji sê.",
+     "en": "That's fine. / That works.",
+     "note": "the easy yes when offered options"
+    },
+    {
+     "pt": "Sem açúcar.",
+     "heard": "Sein açúca.",
+     "en": "No sugar.",
+     "note": "sem + anything: sem queijo, sem gelo"
+    },
+    {
+     "pt": "Pra tomar aqui ou pra viagem?",
+     "heard": "Pra tomá akí ou pra viajein?",
+     "en": "To have here or take away?",
+     "note": "pra viagem = takeaway"
+    },
+    {
+     "pt": "Quanto fica?",
+     "heard": "Kuantu fika?",
+     "en": "How much is it?",
+     "note": "asking for the total"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Barista",
+     "q": "O que cê vai querer?",
+     "q_en": "What are you having?",
+     "model": "Me vê um café com leite, por favor. Sem açúcar.",
+     "model_en": "Can I have a white coffee, please? No sugar."
+    },
+    {
+     "speaker": "Barista",
+     "q": "Quer alguma coisa pra comer?",
+     "q_en": "Do you want something to eat?",
+     "model": "Tem alguma coisa sem queijo?",
+     "model_en": "Is there anything without cheese?"
+    },
+    {
+     "speaker": "Barista",
+     "q": "Pra tomar aqui ou pra viagem?",
+     "q_en": "To have here or take away?",
+     "model": "Pra viagem, por favor. Tô atrasado!",
+     "model_en": "Takeaway, please. I'm running late!"
+    },
+    {
+     "speaker": "Barista",
+     "q": "Cê trabalha aqui perto?",
+     "q_en": "Do you work near here?",
+     "model": "Trabalho em Londres, com câmbio. Pego o trem todo dia.",
+     "model_en": "I work in London, in FX. I get the train every day."
+    }
+   ],
+   "task": "Act the café scene three times out loud, as George, with a twist each time: 1) they've run out of oat milk, 2) you're in a real hurry, 3) the barista talks super fast (use Como assim? / Pode repetir?). 3 minutes."
+  }
+ ],
+ "drills": [
+  {
+   "en": "Do you speak Portuguese?",
+   "pt": "Cê fala português?"
+  },
+  {
+   "en": "A little bit! I'm learning.",
+   "pt": "Um pouquinho! Tô aprendendo."
+  },
+  {
+   "en": "How long have you been here?",
+   "pt": "Tá aqui há quanto tempo?"
+  },
+  {
+   "en": "I moved here two years ago.",
+   "pt": "Me mudei pra cá faz dois anos."
+  },
+  {
+   "en": "Don't tell anyone!",
+   "pt": "Não conta pra ninguém!"
+  },
+  {
+   "en": "How was your weekend?",
+   "pt": "Como foi o fim de semana?"
+  },
+  {
+   "en": "On Saturday I went to a party.",
+   "pt": "Sábado eu fui numa festa."
+  },
+  {
+   "en": "On Sunday I watched the game.",
+   "pt": "Domingo eu vi o jogo."
+  },
+  {
+   "en": "I had a burger without cheese.",
+   "pt": "Comi um hambúrguer sem queijo."
+  },
+  {
+   "en": "Done! / Deal!",
+   "pt": "Fechou!"
+  },
+  {
+   "en": "Can I have a white coffee, please?",
+   "pt": "Me vê um café com leite, por favor."
+  },
+  {
+   "en": "That's fine. / That works.",
+   "pt": "Pode ser."
+  },
+  {
+   "en": "No sugar.",
+   "pt": "Sem açúcar."
+  },
+  {
+   "en": "To have here or take away?",
+   "pt": "Pra tomar aqui ou pra viagem?"
+  },
+  {
+   "en": "How much is it?",
+   "pt": "Quanto fica?"
+  },
+  {
+   "en": "I'm learning!",
+   "pt": "Tô aprendendo!"
+  },
+  {
+   "en": "I still don't speak much, but I'm trying.",
+   "pt": "Ainda falo pouco, mas tô tentando."
+  },
+  {
+   "en": "Can you speak more slowly?",
+   "pt": "Pode falar mais devagar?"
+  },
+  {
+   "en": "What do you mean?",
+   "pt": "Como assim?"
+  },
+  {
+   "en": "Agreed! / Deal!",
+   "pt": "Combinado!"
+  },
+  {
+   "en": "I'm a fussy eater.",
+   "pt": "Sou chato pra comer."
+  },
+  {
+   "en": "I support Tottenham.",
+   "pt": "Torço pro Tottenham."
+  },
+  {
+   "en": "Not long till December.",
+   "pt": "Falta pouco pra dezembro."
+  },
+  {
+   "en": "It was long, but it all went fine.",
+   "pt": "Foi longa, mas deu tudo certo."
+  },
+  {
+   "en": "I'm really excited to be here.",
+   "pt": "Tô muito animado de estar aqui."
+  },
+  {
+   "en": "I work in FX, at a fintech in London.",
+   "pt": "Trabalho com câmbio, numa fintech em Londres."
+  },
+  {
+   "en": "Do you like your job? Yes, I do!",
+   "pt": "Gosta do seu trabalho? Gosto, sim!"
+  },
+  {
+   "en": "I live in Brentwood. I get the train to London every day.",
+   "pt": "Moro em Brentwood. Pego o trem pra Londres todo dia."
+  },
+  {
+   "en": "We met online, and then we saw each other in person in London.",
+   "pt": "A gente se conheceu pela internet, e depois a gente se viu pessoalmente em Londres."
+  },
+  {
+   "en": "I've got a brother and two sisters.",
+   "pt": "Tenho um irmão e duas irmãs."
+  }
+ ],
+ "talk": [
+  {
+   "en": "Your Brazilian friends in London: who they are, how you met",
+   "pt": "E aí, George, cê tem amigos brasileiros em Londres? Me conta deles!"
+  },
+  {
+   "en": "Your weekend, from Saturday morning to Sunday night",
+   "pt": "Me conta tudo: o que cê fez no fim de semana?"
+  },
+  {
+   "en": "Coffee and cafés in London: your order, your favourite place",
+   "pt": "Cê toma muito café? Como é o café aí em Londres?"
+  }
+ ]
+}
