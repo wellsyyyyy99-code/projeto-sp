@@ -38,6 +38,10 @@ For each pack:
 2. Import the new deck into Anki and **Sync**.
 3. Upload the JSON file to the Project.
 
+## ⭐ Extras
+
+Claude can add bonus audio as `packs/extras-*.json` (your corrected answers, Rafa's messages). The robot turns each one into an MP3 in the podcast feed and a ⭐ Extras list on the home page.
+
 ## If something goes wrong
 
 - **Red ❌:** usually an incomplete paste. Regenerate the pack and paste again.

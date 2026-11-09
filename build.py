@@ -409,6 +409,47 @@ def write_transcript(pack):
         f'<title>Pack {pack["pack"]:02d}</title><style>{TCSS}</style>' + "".join(b), encoding="utf-8")
 
 
+# ---- Extras (Claude-made bonus audio: packs/extras-*.json) ---------------------------
+# {"id": "2026-11-09", "date": "2026-11-09", "title": "...", "intro": "English intro",
+#  "items": [{"speaker": "Rafa", "pt": "...", "en": "..."},            -> listen + shadow
+#            {"speaker": "Mãe", "pt": "question", "answer": "..."}]}   -> answer drill
+def extra_file(x):
+    return f"extra-{slug(x['id'])}.mp3"
+
+
+def extra_audio(x):
+    pct = int(x.get("speed", -10))
+    out = en(x["title"] + ".") + sil(600)
+    if x.get("intro"):
+        out += en(x["intro"]) + sil(900)
+    for it in x["items"]:
+        v, p = voice_for(it.get("speaker", "narrador"))
+        line = tts(it["pt"], v, p, rate(pct))
+        if it.get("answer"):
+            g = say({"speaker": "george", "pt": it["answer"]}, pct)
+            out += line + sil(6000) + g + sil(len(g) * 1.2 + 800) + g + sil(1500)
+        else:
+            out += line + sil(len(line) * 1.2 + 700) + line + sil(1200)
+    return out
+
+
+def build_extras():
+    extras = []
+    for p in sorted(PACKS.glob("extras-*.json")):
+        try:
+            x = json.loads(p.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            sys.exit(f"\n❌ {p.name} isn't valid JSON: {e}")
+        if not x.get("id") or not x.get("title") or not x.get("items"):
+            sys.exit(f"\n❌ {p.name} needs 'id', 'title' and 'items'")
+        f = AUDIO / extra_file(x)
+        if FORCE or not f.exists():
+            export(extra_audio(x), f, x["title"])
+            print(f"   🎧 {f.name}")
+        extras.append(x)
+    return extras
+
+
 # ---- Feed + index ---------------------------------------------------------------------
 def base_url():
     if os.getenv("PAGES_URL"):
@@ -420,7 +461,7 @@ def base_url():
     return "http://localhost:8000/"
 
 
-def write_feed_and_index(packs):
+def write_feed_and_index(packs, extras=()):
     url, now = base_url(), datetime.now(timezone.utc)
     fg = FeedGenerator()
     fg.load_extension("podcast")
@@ -458,12 +499,30 @@ def write_feed_and_index(packs):
                           f'<td><a href="{t}">📖 Transcript</a></td><td>' + " ".join(
                               f'<a href="decks/{f}">🃏 {"Deck" if pack["pack"] == 0 else "Ep " + f[3:5]}</a>'
                               for f, *_ in deck_files(pack) if (DECKS / f).exists()) + "</td></tr>")
+    extras_html = []
+    for k, x in enumerate(extras):
+        f = AUDIO / extra_file(x)
+        if not f.exists():
+            continue
+        try:
+            when = datetime.fromisoformat(x.get("date", "")).replace(hour=7, tzinfo=timezone.utc)
+        except ValueError:
+            when = now - timedelta(hours=1)
+        when = min(when, now - timedelta(hours=1)) + timedelta(minutes=k)
+        fe = fg.add_entry()
+        fe.id(url + "audio/" + f.name)
+        fe.title("⭐ " + x["title"])
+        fe.description(x.get("intro", "Bonus audio"))
+        fe.enclosure(url + "audio/" + f.name, str(f.stat().st_size), "audio/mpeg")
+        fe.pubDate(when)
+        extras_html.append(f'<li><a href="audio/{f.name}">⭐ {esc(x["title"])}</a></li>')
     fg.rss_file(str(DOCS / "feed.xml"), pretty=True)
     (DOCS / "index.html").write_text(f"""<!doctype html><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Projeto SP</title><style>{TCSS}
 table{{border-collapse:collapse;width:100%}}td{{padding:.4em;border-bottom:1px solid var(--line)}}code{{background:var(--card);padding:2px 6px;border-radius:4px;word-break:break-all}}</style>
 <h1>Projeto SP 🇧🇷</h1><p>Podcast feed:<br><code>{url}feed.xml</code></p>
 <h2>Packs</h2><table>{''.join(reversed(packs_html))}</table>
+<h2>⭐ Extras</h2><ul>{''.join(reversed(extras_html)) or '<li>None yet</li>'}</ul>
 <h2>Episodes</h2><ul>{''.join(reversed(eps_html))}</ul>""", encoding="utf-8")
     (DOCS / ".nojekyll").write_text("")
 
@@ -474,6 +533,8 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
     packs = []
     for p in sorted(PACKS.glob("*.json")):
+        if p.name.startswith("extras-"):
+            continue
         try:
             pack = json.loads(p.read_text(encoding="utf-8"))
         except json.JSONDecodeError as e:
@@ -500,7 +561,8 @@ def main():
             print(f"   🎧 {gym_file(pack)}")
         for fname, eps_, did, name in decks:
             print(f"   🃏 {fname} ({build_deck(pack, DECKS / fname, eps_, did, name)} notes)")
-    write_feed_and_index(packs)
+    extras = build_extras()
+    write_feed_and_index(packs, extras)
     print(f"\n✅ Done. Home: {base_url()}")
 
 

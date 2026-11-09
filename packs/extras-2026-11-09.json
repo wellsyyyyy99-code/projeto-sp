@@ -1,0 +1,19 @@
+{
+ "id": "2026-11-09-semana-2",
+ "date": "2026-11-09",
+ "title": "Semana 2 · Your answers + Rafa's recap",
+ "intro": "Part one: the Mãe asks your questions. Answer out loud, then hear your corrected answer twice. Part two: shadow Rafa's weekend recap.",
+ "items": [
+  {"speaker": "Mãe", "pt": "Fez boa viagem?", "answer": "Fiz, sim! Foi longa, mas deu tudo certo."},
+  {"speaker": "Mãe", "pt": "Tá cansado?", "answer": "Um pouco, mas tô muito animado de estar aqui!"},
+  {"speaker": "Mãe", "pt": "O que você faz da vida?", "answer": "Trabalho com câmbio, numa fintech em Londres."},
+  {"speaker": "Mãe", "pt": "Você gosta do seu trabalho?", "answer": "Gosto, sim! É corrido, mas é legal."},
+  {"speaker": "Mãe", "pt": "Onde você mora?", "answer": "Moro em Brentwood, perto de Londres. Pego o trem todo dia."},
+  {"speaker": "Mãe", "pt": "Como vocês se conheceram?", "answer": "A gente se conheceu pela internet, e depois a gente se viu pessoalmente em Londres."},
+  {"speaker": "Mãe", "pt": "Você tem irmãos?", "answer": "Tenho um irmão e duas irmãs."},
+  {"speaker": "Rafa", "pt": "E aí, sofredor! No sábado o Tottenham perdeu pro Leeds, um a zero.", "en": "Hey, long-sufferer! On Saturday Spurs lost 1–0 to Leeds."},
+  {"speaker": "Rafa", "pt": "Mas no domingo teve Fórmula 1 aqui em São Paulo, em Interlagos!", "en": "But on Sunday there was F1 here in São Paulo, at Interlagos!"},
+  {"speaker": "Rafa", "pt": "Choveu muito. O Lando Norris ganhou, e o Verstappen chegou em segundo.", "en": "It rained a lot. Norris won and Verstappen came second."},
+  {"speaker": "Rafa", "pt": "Em dezembro cê vai tá aqui. Ano que vem, bora pra Interlagos junto?", "en": "In December you'll be here. Next year, shall we go to Interlagos together?"}
+ ]
+}
