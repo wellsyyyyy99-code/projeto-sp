@@ -28,15 +28,29 @@
 4. **Actions → Build Projeto SP → Run workflow**. Wait for the ✅. The first run takes about 10 minutes.
 5. Your site will be at `https://<username>.github.io/projeto-sp/`, and your podcast feed at `…/projeto-sp/feed.xml`.
 
-## Every Sunday
+## 🥊 Treino: the speaking half
 
-Generate two packs in the Claude Project, in separate chats. The tracker's **Sundays** tab shows which numbers.
+**Treino** is the phone app for speaking: https://claude.ai/artifact/4eS5Vh7pkT5wanWQAeNbB5
 
-For each pack:
+One session a day, about 20 minutes, three rounds:
 
-1. On GitHub, create `packs/pack-NN.json`, paste the reply, and commit.
-2. Import the new deck into Anki and **Sync**.
-3. Upload the JSON file to the Project.
+1. **Drills.** Your own mistakes and the phrases from the episodes, spoken. Each one comes back after 1, 2, 4, 7 and 12 days. Three correct days beats a mistake.
+2. **Conversa.** A role-play of one of the 15 situations you have to win in Brazil (`curriculum/situations.json`). A win is every goal done in Portuguese and 7/10 or more. Then win it again with a twist.
+3. **Ouvido.** Ten lines from the episodes, no text, at rising speed.
+
+On Sundays there is a five-question oral exam, scored the same way every week.
+
+Voice: every line has recorded audio. To answer, speak into your phone keyboard's mic (add the Portuguese (Brasil) keyboard) or type; accents don't matter. In Chrome on a computer or Android the app also has its own tap-to-talk mic.
+
+## Every day and every Sunday: nothing to do
+
+Three scheduled agents run the machine (`agents/README.md` explains all of it):
+
+- **Coach** (daily, 05:40): reads yesterday's results, updates the tracker sheet, writes new drills for the rule you keep breaking, sets today's scene.
+- **Producer** (Sunday, 06:10): writes the week's two packs around your mistakes and pushes them here. The robot builds the audio, decks and transcripts.
+- **Examiner** (Sunday, 07:20): sets the Sunday exam and sends the weekly numbers.
+
+The only manual step left is optional: import the week's Anki deck from the home page.
 
 ## ⭐ Extras
 

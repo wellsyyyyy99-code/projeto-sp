@@ -6,8 +6,10 @@ Reads packs/*.json and curriculum/situations.json and writes into docs/treino/:
   data/cards.json   every drill card (speaking core, episode chunks, drills, "your turn" answers)
   data/eps.json     every episode's lines and questions (fast-listening round)
   data/sits.json    the 15 must-win situations
-  a/<id>.mp3        one short clip per Portuguese line (id = FNV-1a of the text)
-  a/index.json      list of clip ids that exist
+  a/<id>.mp3        one short clip per Portuguese line (id = FNV-1a of the text); the build's cache
+  b/<group>-<n>.mp3 the same clips joined into bundles of about 400 KB (an artifact holds at most
+                    512 files, so the app loads bundles, not single clips)
+  b/index.json      {"bundles": [names], "clips": {id: [bundle number, byte offset, byte length]}}
 
 `python treino_build.py` writes the data files only (no voices needed).
 build.py calls build(tts_path, voice_for) to add the clips.
@@ -37,10 +39,11 @@ def _load(p):
 def collect():
     """Returns (cards, eps, clips). clips = {id: (text, speaker)}."""
     cards, seen, eps, clips = [], set(), [], {}
+    grp = ["core"]          # bundle group of whatever is being collected right now
 
     def clip(text, speaker):
         if text and text.strip():
-            clips.setdefault(fnv(text), (text.strip(), speaker))
+            clips.setdefault(fnv(text), (text.strip(), speaker, grp[0]))
 
     def card(c):
         cid = "c" + fnv(c["pt"])
@@ -66,6 +69,7 @@ def collect():
             continue
     packs.sort(key=lambda x: x.get("pack", 0))
     for pack in packs:
+        grp[0] = f"p{int(pack.get('pack', 0)):02d}"
         first = min([e["ep"] for e in pack.get("episodes", []) if isinstance(e.get("ep"), int)] or [0])
         for e in pack.get("episodes", []):
             ep = e.get("ep", 0)
@@ -89,6 +93,13 @@ def collect():
             for d in pack.get("drills", []):
                 card({"k": "drill", "ep": first, "en": d["en"], "pt": d["pt"]})
 
+    grp[0] = "x"
+    if SITS.exists():
+        for st in _load(SITS).get("situations", []):
+            clip(st.get("open", {}).get("pt"), st.get("char", "rafa"))
+            for m in st.get("must", []):
+                clip(m.get("pt"), "george")
+
     # cards the Coach adds (mistakes and pattern drills live in the app's database;
     # this file only exists so their audio gets built)
     extra = PACKS / "treino-cards.json"
@@ -96,12 +107,6 @@ def collect():
         for c in _load(extra).get("cards", []):
             clip(c.get("pt"), "george")
             clip(c.get("q"), c.get("qs") or "rafa")
-
-    if SITS.exists():
-        for s in _load(SITS).get("situations", []):
-            clip(s.get("open", {}).get("pt"), s.get("char", "rafa"))
-            for m in s.get("must", []):
-                clip(m.get("pt"), "george")
 
     eps.sort(key=lambda x: x["ep"])
     return cards, eps, clips
@@ -124,7 +129,7 @@ def build(tts_path, voice_for):
     cards, eps, clips = write_data()
     a = OUT / "a"
     a.mkdir(parents=True, exist_ok=True)
-    todo = [(cid, t, sp) for cid, (t, sp) in sorted(clips.items())
+    todo = [(cid, t, sp) for cid, (t, sp, _g) in sorted(clips.items())
             if not ((a / f"{cid}.mp3").exists() and (a / f"{cid}.mp3").stat().st_size > 0)]
 
     def one(job):
@@ -142,11 +147,51 @@ def build(tts_path, voice_for):
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as ex:
         made = sum(ex.map(one, todo[1:])) + (1 if todo else 0)
-    have = sorted(p.stem for p in a.glob("*.mp3") if p.stat().st_size > 0)
-    (a / "index.json").write_text(json.dumps(have), encoding="utf-8")
-    print(f"🥊 Treino: {len(cards)} cards, {len(eps)} episodes, {made} new clips ({len(have)} total)")
+    n = bundle(clips)
+    print(f"🥊 Treino: {len(cards)} cards, {len(eps)} episodes, {made} new clips, {n} bundles")
 
+
+BUNDLE_BYTES = 400_000
+
+
+def bundle(clips):
+    """Join the clips of each group, in the order they were collected, into ~400 KB bundles."""
+    a, b = OUT / "a", OUT / "b"
+    b.mkdir(parents=True, exist_ok=True)
+    groups = {}
+    for cid, (_t, _sp, g) in clips.items():
+        f = a / f"{cid}.mp3"
+        if f.exists() and f.stat().st_size > 0:
+            groups.setdefault(g, []).append(cid)
+    names, index, keep = [], {}, set()
+    for g, ids in groups.items():
+        k, buf = 0, bytearray()
+
+        def flush():
+            nonlocal k, buf
+            if buf:
+                (b / f"{g}-{k}.mp3").write_bytes(bytes(buf))
+                keep.add(f"{g}-{k}.mp3")
+                k, buf = k + 1, bytearray()
+
+        for cid in ids:
+            data = (a / f"{cid}.mp3").read_bytes()
+            if buf and len(buf) + len(data) > BUNDLE_BYTES:
+                flush()
+            if not buf:
+                names.append(f"{g}-{k}")
+            index[cid] = [len(names) - 1, len(buf), len(data)]
+            buf += data
+        flush()
+    for old in b.glob("*.mp3"):
+        if old.name not in keep:
+            old.unlink()
+    (b / "index.json").write_text(json.dumps({"bundles": names, "clips": index}, separators=(",", ":")), encoding="utf-8")
+    old_index = a / "index.json"
+    if old_index.exists():
+        old_index.unlink()
+    return len(names)
 
 if __name__ == "__main__":
     c, e, k = write_data()
-    print(f"{len(c)} cards, {len(e)} episodes, {len(k)} clip texts")
+    print(f"{len(c)} cards, {len(e)} episodes, {len(k)} clip texts, {bundle(k)} bundles")

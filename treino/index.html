@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: a fight card. One phone column, three numbered rounds, big condensed numerals. */
+  --bg:#eef2ef; --surface:#ffffff; --ink:#0f2422; --muted:#56696a; --line:#d5deda;
+  --brand:#0d5c63; --accent:#f2b705; --on-accent:#1b1a04;
+  --good:#1c7f47; --warn:#b06a00; --bad:#c23b2a; --soft:#e3eae6;
+  --display:"Anton","Arial Narrow",Impact,sans-serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0b1819; --surface:#132527; --ink:#edf3ef; --muted:#93a7a4; --line:#25393b;
+  --brand:#62c6cd; --accent:#f6c21c; --on-accent:#1b1a04;
+  --good:#52c48c; --warn:#f0a843; --bad:#f17762; --soft:#1a3033; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0b1819; --surface:#132527; --ink:#edf3ef; --muted:#93a7a4; --line:#25393b;
+  --brand:#62c6cd; --accent:#f6c21c; --on-accent:#1b1a04;
+  --good:#52c48c; --warn:#f0a843; --bad:#f17762; --soft:#1a3033; color-scheme:dark; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.45 var(--body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 96px;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3{margin:0;text-wrap:balance}
+.disp{font-family:var(--display);font-weight:400;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.top h1{font-size:44px}
+.top .meta{text-align:right;color:var(--muted);font-size:13px;line-height:1.3}
+.top .meta b{display:block;color:var(--ink);font:400 26px/1 var(--display);letter-spacing:.02em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.row{display:flex;gap:12px;align-items:center}
+.grow{flex:1;min-width:0}
+.muted{color:var(--muted)} .small{font-size:13px} .tiny{font-size:12px}
+.num{font-variant-numeric:tabular-nums}
+.meter{height:12px;border-radius:99px;background:var(--soft);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.meter.done i{background:var(--good)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 16px;font-weight:600;min-height:46px}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.brand{background:var(--brand);border-color:var(--brand);color:var(--bg)}
+.btn.ghost{background:transparent}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.5}
+.round{display:flex;gap:14px;align-items:center}
+.round .n{font:400 40px/1 var(--display);color:var(--brand);width:34px;text-align:center}
+.round h3{font-size:17px}
+.round.done .n{color:var(--good)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--soft);border-radius:99px;padding:4px 10px;font-size:13px}
+.pill{display:inline-block;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.pill.good{background:var(--good);color:var(--bg)} .pill.warn{background:var(--warn);color:var(--bg)} .pill.bad{background:var(--bad);color:var(--bg)} .pill.off{background:var(--soft);color:var(--muted)}
+.note{border-left:4px solid var(--accent);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}
+nav.tabs div{display:flex;width:100%;max-width:560px}
+nav.tabs button{flex:1;border:0;background:none;padding:14px 4px 16px;font-weight:600;color:var(--muted);border-top:3px solid transparent}
+nav.tabs button[aria-current="page"]{color:var(--ink);border-top-color:var(--accent)}
+/* full-screen round */
+#mode{position:fixed;inset:0;background:var(--bg);z-index:10;display:flex;flex-direction:column}
+#mode[hidden]{display:none}
+.mhead{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.mhead .x{border:0;background:var(--soft);width:40px;height:40px;border-radius:50%;font-size:18px;line-height:1}
+.mhead h2{font:400 22px/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.mbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.mbody .in{max-width:560px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.mfoot{border-top:1px solid var(--line);background:var(--surface);padding:10px 12px}
+.mfoot .in{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:none;min-height:56px}
+.prompt{font-size:24px;font-weight:600;line-height:1.25;text-wrap:balance}
+.pt{font-size:22px;font-weight:600;line-height:1.3}
+.play{border:1px solid var(--line);background:var(--surface);border-radius:50%;width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center}
+.play svg,.mic svg{width:20px;height:20px;fill:currentColor}
+.mic{flex:none;width:56px;border-radius:12px;border:1px solid var(--brand);background:var(--surface);color:var(--brand);min-height:46px;display:inline-flex;align-items:center;justify-content:center}
+.mic.on{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+.verdict{border-radius:12px;padding:10px 14px;font:400 26px/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.verdict.right{background:var(--good);color:var(--bg)} .verdict.almost{background:var(--warn);color:var(--bg)} .verdict.wrong{background:var(--bad);color:var(--bg)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.link{background:none;border:0;padding:6px 0;color:var(--brand);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.bub{max-width:88%;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface)}
+.bub.me{align-self:flex-end;background:var(--brand);border-color:var(--brand);color:var(--bg)}
+.bub .en{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+.bub.blur .txt{filter:blur(6px)}
+.fix{align-self:flex-end;max-width:88%;font-size:13px;border:1px dashed var(--warn);border-radius:10px;padding:6px 10px}
+.fix s{color:var(--bad)} .fix b{color:var(--good)}
+.goals{font-size:13px;display:flex;flex-direction:column;gap:2px}
+.goals span{display:flex;gap:8px} .goals .ok{color:var(--good);font-weight:600}
+.opt{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;min-height:52px}
+.opt.right{border-color:var(--good);background:var(--good);color:var(--bg)} .opt.wrong{border-color:var(--bad);background:var(--bad);color:var(--bg)}
+.big{font:400 64px/1 var(--display)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:110px;position:relative;border-bottom:1px solid var(--line)}
+.bars .b{flex:1;background:var(--brand);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}
+.bars .b.hit{background:var(--good);opacity:1}
+.bars .t{position:absolute;left:0;right:0;border-top:1px dashed var(--muted)}
+.barx{display:flex;gap:4px;font-size:10px;color:var(--muted)} .barx span{flex:1;text-align:center}
+.sit{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px}
+.sit .n{font:400 26px/1 var(--display);color:var(--muted);width:30px;text-align:center}
+.dots{display:inline-flex;gap:3px;vertical-align:middle} .dots i{width:8px;height:8px;border-radius:50%;background:var(--soft);border:1px solid var(--line)} .dots i.on{background:var(--good);border-color:var(--good)}
+.toast{position:fixed;left:16px;right:16px;bottom:84px;z-index:30;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:14px;max-width:528px;margin:0 auto}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--brand);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}.meter i{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<nav class="tabs" aria-label="Sections"><div>
+  <button id="tab-hoje" data-a="tab" data-v="hoje">Hoje</button>
+  <button id="tab-sits" data-a="tab" data-v="sits">Situações</button>
+  <button id="tab-prog" data-a="tab" data-v="prog">Progresso</button>
+</div></nav>
+<div id="mode" hidden></div>
+<script>
+(function(){
+'use strict';
+/* ---------- helpers ---------- */
+var $=function(s){return document.querySelector(s);};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function today(){return fmtD(new Date());}
+function addDays(s,n){var d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return fmtD(d);}
+function diffDays(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5);}
+function fnv(s){var b=new TextEncoder().encode(String(s).trim()),h=0x811c9dc5;for(var i=0;i<b.length;i++){h^=b[i];h=Math.imul(h,0x01000193)>>>0;}return h.toString(16).padStart(8,'0');}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var ICON={play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',mic:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V22h2v-3.1A7 7 0 0 0 19 12z"/></svg>'};
+
+/* ---------- answer matching (accent-free, spoken forms = written forms) ---------- */
+var NUMS=['zero','um','dois','tres','quatro','cinco','seis','sete','oito','nove','dez','onze','doze'];
+var EQ=[[/\bvoce\b/g,'ce'],[/\bvoces\b/g,'ces'],[/\bestou\b/g,'to'],[/\besta\b/g,'ta'],[/\bestao\b/g,'tao'],[/\bestava\b/g,'tava'],
+ [/\bpara o\b/g,'pro'],[/\bpara a\b/g,'pra'],[/\bpara\b/g,'pra'],[/\bnos\b/g,'a gente'],[/\beu \b/g,''],[/\bok\b/g,'ta bom']];
+function norm(s){
+  s=String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\([^)]*\)/g,' ').replace(/[^a-z0-9 ]+/g,' ');
+  s=s.replace(/\b(\d{1,2})\b/g,function(m,d){return NUMS[+d]||m;});
+  s=' '+s.replace(/\s+/g,' ').trim()+' ';
+  for(var i=0;i<EQ.length;i++)s=s.replace(EQ[i][0],EQ[i][1]);
+  return s.replace(/\s+/g,' ').trim();
+}
+function sim(a,b){
+  var x=norm(a).split(' ').filter(Boolean),y=norm(b).split(' ').filter(Boolean);
+  if(!x.length||!y.length)return 0;
+  var p=[],i,j;for(j=0;j<=y.length;j++)p[j]=j;
+  for(i=1;i<=x.length;i++){var c=[i];for(j=1;j<=y.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(x[i-1]===y[j-1]?0:1));p=c;}
+  return 1-p[y.length]/Math.max(x.length,y.length);
+}
+
+/* ---------- spaced schedule: 1, 2, 4, 7, 12 days; beaten after 3 correct days ---------- */
+var LADDER=[1,2,4,7,12];
+function gradeCard(st,res,day){
+  st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},st||{});st.ok=(st.ok||[]).slice();
+  if(!st.f)st.f=day;st.n++;st.t=day;
+  if(res==='right'){
+    if(st.m===day){st.d=addDays(day,1);}
+    else{st.i=LADDER[Math.min(st.r,LADDER.length-1)];st.r++;st.d=addDays(day,st.i);if(st.ok.indexOf(day)<0)st.ok.push(day);}
+  }else{st.m=day;st.r=0;st.i=0;st.d=day;if(res==='wrong')st.l++;}
+  st.s=st.ok.length>=3?'beaten':'open';
+  return st;
+}
+
+/* ---------- state ---------- */
+var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,newPerDay:10},
+  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9},
+  db:null,ai:null,tts:null,dict:null,view:'hoje',chain:false,ready:false,dbState:'wait',mode:null};
+var LS={get:function(k){try{return JSON.parse(localStorage.getItem('treino:'+k));}catch(e){return null;}},
+        set:function(k,v){try{localStorage.setItem('treino:'+k,JSON.stringify(v));}catch(e){}}};
+function dayNum(){return clamp(diffDays(S.cfg.start,today())+1,1,60);}
+function daysLeft(){return Math.max(0,diffDays(today(),S.cfg.flight));}
+function level(){var d=dayNum();return d<=15?'A1–A2: short sentences, common words, max 12 words per sentence':d<=30?'A2: everyday sentences, some slang (mó, meu, rolê), max 16 words per sentence':'A2+/B1: natural speed and length, São Paulo slang, occasional longer turns';}
+function baseRate(){var d=dayNum();return d<=15?0.9:d<=30?1:1.1;}
+function freshDay(){return {date:today(),speakSecs:0,listenSecs:0,drills:0,drillOk:0,chats:0,listens:0,listenOk:0,exam:0};}
+function theDay(){if(!S.day||S.day.date!==today()){S.day=S.days[today()]||freshDay();}return S.day;}
+function bump(o){var d=theDay();for(var k in o)d[k]=(d[k]||0)+o[k];S.days[d.date]=d;save('days/'+d.date,d);}
+
+/* ---------- saving: local copy first, then the database, one write at a time per document ---------- */
+var pend={};
+function save(path,data){
+  LS.set(path,data);
+  if(!S.db)return;
+  var p=pend[path]||(pend[path]={});p.data=data;
+  if(p.busy)return;p.busy=true;
+  (function run(){
+    if(!p.data){p.busy=false;return;}
+    var d=p.data;p.data=null;
+    S.db.doc(path).set(JSON.parse(JSON.stringify(d))).then(function(){S.dbState='ok';run();},function(){S.dbState='err';p.busy=false;});
+  })();
+}
+function saveSrs(){save('me/srs',{c:S.srs,t:Date.now()});}
+
+/* ---------- voice out: recorded clip, else Claude voice, else the phone's voice ---------- */
+var player=new Audio();
+function stopAudio(){sayTok++;try{player.pause();}catch(e){}try{if(S.tts)S.tts.stop();}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}}
+var bcache={},curUrl=null,sayTok=0,unlocked=false;
+function getBundle(i){
+  var n=S.bundles[i];
+  if(!bcache[n])bcache[n]=fetch('b/'+n+'.mp3').then(function(r){if(!r.ok)throw new Error('bundle');return r.arrayBuffer();}).catch(function(e){delete bcache[n];throw e;});
+  return bcache[n];
+}
+function warm(pt){var c=pt&&S.clips[fnv(pt)];if(c)getBundle(c[0]).catch(function(){});}
+function playClip(id,rate,tok){var c=S.clips[id];return getBundle(c[0]).then(function(buf){return new Promise(function(res,rej){
+  if(tok!==sayTok){res(null);return;}
+  if(curUrl)URL.revokeObjectURL(curUrl);
+  curUrl=URL.createObjectURL(new Blob([buf.slice(c[1],c[1]+c[2])],{type:'audio/mpeg'}));
+  player.onended=function(){res('clip');};player.onerror=function(){rej(new Error('clip'));};
+  player.src=curUrl;player.defaultPlaybackRate=rate;player.playbackRate=rate;
+  var p=player.play();if(p&&p.catch)p.catch(rej);});});}
+/* the first tap unlocks the audio element, so clips fetched a moment later may still play */
+document.addEventListener('pointerdown',function(){
+  if(unlocked)return;unlocked=true;
+  try{player.src='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=';var p=player.play();if(p&&p.catch)p.catch(function(){});}catch(e){}
+},true);
+function synth(pt,rate){return new Promise(function(res,rej){try{
+  var u=new SpeechSynthesisUtterance(pt);u.lang='pt-BR';
+  var v=speechSynthesis.getVoices().filter(function(v){return /^pt[-_]BR/i.test(v.lang);})[0];if(v)u.voice=v;
+  u.rate=rate;u.onend=function(){res('synth');};u.onerror=function(){rej(new Error('synth'));};speechSynthesis.speak(u);}catch(e){rej(e);}});}
+function hasVoice(){return Object.keys(S.clips).length>0||!!S.tts||('speechSynthesis' in window);}
+function say(pt,rate){
+  rate=clamp(rate||baseRate(),0.7,1.5);stopAudio();
+  var id=fnv(pt),tok=++sayTok,chain=S.clips[id]?playClip(id,rate,tok):Promise.reject(0);
+  return chain.catch(function(){if(!S.tts)throw 0;return S.tts.speak(pt,{language:'pt-BR',rate:rate}).then(function(){return 'tts';});})
+    .catch(function(){if(!('speechSynthesis' in window))throw 0;return synth(pt,rate);})
+    .catch(function(){return null;});
+}
+
+/* ---------- voice in: Claude dictation where offered, else the keyboard's own mic ---------- */
+var dictBox=null,dictDone=null,dictOn=false;
+function initDict(){
+  var d=S.dict;if(!d)return;
+  d.onFinal(function(e){if(dictBox){dictBox.value=dictBox.value?dictBox.value+e.text:e.text.replace(/^\s+/,'');}var p=$('#partial');if(p)p.textContent='';});
+  d.onPartial(function(e){var p=$('#partial');if(p)p.textContent=e.text;});
+  d.onState(function(e){
+    dictOn=e.state!=='idle';var b=$('#mic');if(b)b.classList.toggle('on',dictOn);
+    if(e.state==='idle'){
+      if(e.reason==='unavailable'||e.reason==='not_granted'){S.dict=null;if(b)b.remove();toast('The mic is not offered here. Use the mic on your keyboard instead.');}
+      else if(dictDone&&dictBox&&dictBox.value.trim()){var f=dictDone;f();}
+    }});
+}
+function micHtml(){return S.dict?'<button class="mic" id="mic" data-a="mic" aria-label="Speak">'+ICON.mic+'</button>':'';}
+function micTip(){return S.dict?'Tap the mic, say it, tap again.':'Say it aloud, then dictate with the mic on your Portuguese keyboard, or type. Accents don\'t matter.';}
+
+/* ---------- asking Claude ---------- */
+function unwrap(r){
+  if(r&&typeof r==='object'&&typeof r.text==='string'&&Object.keys(r).length<=3)r=r.text;
+  if(typeof r==='string'){var a=r.indexOf('{'),b=r.lastIndexOf('}');if(a<0||b<0)throw new Error('bad reply');r=JSON.parse(r.slice(a,b+1));}
+  return r;
+}
+function ask(input,tier){
+  if(!S.ai)return Promise.reject({code:'none'});
+  var o={modelTier:tier||'quick',cache:false};
+  var p=typeof S.ai.json==='function'?S.ai.json(input,o):S.ai(input,o);
+  return p.then(unwrap).catch(function(e){if(e&&e.code==='not_granted'){S.ai=null;}throw e;});
+}
+var ME='GEORGE: British, 26, relationship manager in FX at a fintech in London ("trabalha com câmbio"); lives in Brentwood near London and takes the train; goes to the gym every day and does boxing; Tottenham and F1 fan; does not eat eggs, fish or cheese; has one brother and two sisters; his girlfriend Gabi is from São Paulo and lives there with her mum (he calls her "a senhora"); he flies to São Paulo on 17 December and spends Réveillon in Copacabana; next year he and Gabi backpack around South America.';
+function judgePrompt(c,mode,said){
+  return 'You grade one spoken answer from George, an English speaker learning Brazilian Portuguese. His words came through speech-to-text or were typed without accents, so ignore punctuation, capitals, missing accents and obvious transcription slips.\n'+
+  (mode==='q'?'He was asked (Portuguese): "'+c.q+'"\nAn example of a good answer: "'+c.pt+'"\nAny relevant answer that fits him counts; the example is only an example.\n':'He saw this English and had to say it in Portuguese: "'+c.en+'"\nTarget: "'+c.pt+'"\n')+
+  'What he said: "'+said+'"\n'+ME+'\n'+
+  'Mark "right" if a Paulistano would accept it as correct, natural spoken Portuguese with the right meaning. Different wording is fine. Spoken forms (tô, tá, cê, pra, a gente) equal written ones. Mark "almost" if the meaning lands but there is one small error. Mark "wrong" if the meaning is off, a key word is missing or in English, or there are two or more errors.\n'+
+  'Reply with JSON only: {"v":"right|almost|wrong","fix":"his sentence corrected, in Portuguese, or empty if right","why":"the one rule in 12 English words or fewer, or empty"}';
+}
+function scenePrompt(sit,twist,focus,maxTurns){
+  return 'You are '+sit.char+', a character in a Portuguese speaking drill for George. Stay in character for the whole scene. Speak only Brazilian Portuguese as spoken in São Paulo (tá, tô, cê, pra, a gente, né). Never European Portuguese. Never English.\n\n'+ME+'\nHis level now: '+level()+'.\n\n'+
+  'SCENE ('+sit.place+'): '+sit.brief+'\n\nGEORGE\'S GOALS. He must do each of these in Portuguese. Make each one come up naturally, one at a time, in this order:\n'+
+  sit.goals.map(function(g,i){return (i+1)+'. '+g;}).join('\n')+'\n'+
+  (twist?'\nCOMPLICATION FOR THIS RUN: '+twist+'\n':'')+
+  (focus.length?'\nPHRASES HE IS TRAINING. Ask questions whose natural answer needs them. Never say them for him first:\n'+focus.map(function(c,i){return (i+1)+'. '+c.pt;}).join('\n')+'\n':'')+
+  '\nHOW TO SPEAK\n- One or two short sentences, then exactly one question or prompt that moves the scene on.\n- If he makes a mistake, do not lecture. Use the correct form naturally in your own reply and carry on.\n- If he uses an English word, give him the Portuguese word inside your reply and carry on.\n- If he says "não entendi", "mais devagar" or "como se diz", help him in Portuguese, in character, more simply.\n- If his message is empty or makes no sense, say you did not catch it and ask again more simply.\n- When every goal is done, close the scene warmly in one line and set "end" to true. Also end after about '+maxTurns+' of his turns.\n\n'+
+  'OUTPUT: JSON only, nothing else:\n{"pt":"your line","en":"natural British English translation of your line","fix":null,"goals":[],"used":[],"end":false}\n'+
+  '- "fix": null, or the single most important error in HIS last message: {"said":"the wrong part, as he said it","ok":"the whole sentence as a Paulistano would say it","en":"what that sentence means in English","why":"the rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}. No fix for accents, punctuation, capitals or speech-to-text slips.\n- "goals": the numbers of the goals he has achieved so far in the scene.\n- "used": the numbers of the training phrases he has used correctly in his last message.';
+}
+function debriefPrompt(sit,log){
+  return 'You are the coach reviewing George\'s Portuguese role-play. Scene: '+sit.en+' with '+sit.char+'. Goals: '+sit.goals.join('; ')+'.\nTRANSCRIPT:\n'+log+'\n\n'+
+  'Score his Portuguese from 1 to 10 on this fixed scale: 9–10 handled everything in Portuguese with only slips; 7–8 achieved every goal with some errors and at most one English word; 5–6 achieved most goals with frequent errors or several English words; 3–4 struggled to get meaning across; 1–2 mostly English or silence. Be strict and consistent.\n'+
+  'JSON only: {"score":n,"summary":"two short sentences in English: what went well, what to fix first","words":[up to 6 of {"pt":"a word or phrase '+sit.char+' used that George probably did not know","en":"meaning"}],"better":[up to 3 of {"en":"something George wanted to say but could not","pt":"how to say it simply"}]}';
+}
+function examPrompt(items){
+  return 'You are the Examiner for George\'s weekly Portuguese oral exam. The rubric is the same every week so scores can be compared. Be strict and consistent. Do not inflate.\nHis answers were spoken and transcribed by speech-to-text: ignore punctuation, capitals, accents and obvious transcription slips.\nTarget: conversational Brazilian Portuguese as spoken in São Paulo.\n'+ME+'\n\nTASKS AND ANSWERS\n'+
+  items.map(function(t,i){return (i+1)+'. Q: '+t.pt+'\n   A ('+t.secs+' seconds, '+t.words+' words): '+(t.ans||'[no answer]');}).join('\n')+'\n\n'+
+  'SCORE each dimension 0 to 5, whole numbers:\n- comunicacao: did he get the message across and complete each task? 0 nothing; 3 most tasks, with gaps; 5 every task fully.\n- fluidez: length and flow, from the word and second counts. 0 isolated words; 3 short connected sentences, about 40 words per task; 5 long connected turns with aí, então, porque, mas, 80+ words per task.\n- precisao: verb tense and person, gender agreement, prepositions. 0 almost every sentence wrong; 3 errors in about half the sentences; 5 only slips.\n- vocabulario: range, and falling back on English. 0 mostly English; 3 enough words with two or three English fallbacks; 5 varied and no English.\n- registro: sounds like spoken São Paulo Portuguese (tô, tá, a gente, pra, né; a senhora with elders), not textbook, Spanish or European forms. 0 never; 3 sometimes; 5 consistently.\n'+
+  'JSON only: {"dims":{"comunicacao":n,"fluidez":n,"precisao":n,"vocabulario":n,"registro":n},"level":"A1|A1+|A2|A2+|B1","english":n,"strengths":["up to 3 short English phrases"],"fixes":[up to 6 of {"said":"what he said","ok":"the whole sentence corrected","en":"its meaning in English","why":"rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}],"focus":"one English sentence: the single thing to train this week"}';
+}
+
+/* ---------- cards ---------- */
+function indexCards(){S.byId={};S.cards.forEach(function(c){S.byId[c.id]=c;});}
+function isMistake(c){return c.k==='mistake'||c.k==='pattern';}
+function okCount(c){var st=S.srs[c.id];return st&&st.ok?st.ok.length:0;}
+function addMistake(f,src){
+  if(!f||!f.ok)return null;
+  var id='m'+fnv(norm(f.ok)),c=S.byId[id]||S.cards.filter(function(x){return isMistake(x)&&norm(x.pt)===norm(f.ok);})[0],t=today();
+  if(c){var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.l++;st.r=0;st.d=t;st.m=t;st.t=t;S.srs[c.id]=st;return c;}
+  c={id:id,k:'mistake',pt:f.ok,en:f.en||'',said:f.said||'',why:f.why||'',type:f.type||'grammar',added:t,src:src};
+  S.cards.unshift(c);S.byId[id]=c;S.srs[id]={r:0,i:0,l:1,n:0,ok:[],d:t,f:t,t:t,s:'open'};
+  save('cards/'+id,c);return c;
+}
+function focusCards(){
+  if(S.plan&&S.plan.date===today()&&S.plan.focus){var f=S.plan.focus.map(function(id){return S.byId[id];}).filter(Boolean);if(f.length)return f;}
+  return S.cards.filter(function(c){return isMistake(c)&&okCount(c)<3;}).sort(function(a,b){return ((S.srs[b.id]||{}).l||0)-((S.srs[a.id]||{}).l||0);}).slice(0,5);
+}
+function buildQueue(){
+  var t=today(),dn=dayNum(),foc={};focusCards().forEach(function(c){foc[c.id]=1;});
+  var avail=S.cards.filter(function(c){return c.pt&&c.en&&(!c.ep||c.ep<=dn);});
+  var due=avail.filter(function(c){var st=S.srs[c.id];return st&&st.n>0&&st.d<=t;});
+  due.sort(function(a,b){var x=S.srs[a.id],y=S.srs[b.id];return (foc[b.id]||0)-(foc[a.id]||0)||(y.l||0)-(x.l||0)||(x.d<y.d?-1:x.d>y.d?1:0);});
+  var fresh=avail.filter(function(c){var st=S.srs[c.id];return !st||!st.n;});
+  var newToday=avail.filter(function(c){var st=S.srs[c.id];return st&&st.n>0&&st.f===t&&!isMistake(c);}).length;
+  var room=Math.max(0,S.cfg.newPerDay-newToday);
+  var mist=fresh.filter(isMistake),rest=fresh.filter(function(c){return !isMistake(c);});
+  var sit=todaySit(),must={};if(sit)(sit.must||[]).forEach(function(m){must[norm(m.pt)]=1;});
+  rest.sort(function(a,b){return (must[norm(b.pt)]||0)-(must[norm(a.pt)]||0)||rank(a)-rank(b);});
+  function rank(c){return c.k==='core'?0:c.k==='speak'?1:c.k==='chunk'?2:3;}
+  return due.concat(mist.slice(0,12),rest.slice(0,room)).slice(0,24);
+}
+function dueCount(){return buildQueue().length;}
+
+/* ---------- situations ---------- */
+function sitById(id){return S.sits.filter(function(s){return s.id===id;})[0];}
+function sitLevel(id){var s=S.sitState[id];return !s?0:s.pass2?3:s.pass?2:1;}
+function todaySit(){
+  if(S.plan&&S.plan.date===today()&&S.plan.sit&&sitById(S.plan.sit))return sitById(S.plan.sit);
+  var dn=dayNum(),open=S.sits.filter(function(s){return s.from<=dn+1;});
+  return open.filter(function(s){return sitLevel(s.id)<2;})[0]||open.filter(function(s){return sitLevel(s.id)<3;})[0]||S.sits[0];
+}
+
+/* ---------- loading ---------- */
+function getJSON(u){return fetch(u).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
+function use(n){try{return window.claude&&window.claude.use?window.claude.use(n).catch(function(){return null;}):Promise.resolve(null);}catch(e){return Promise.resolve(null);}}
+function mergeSrs(remote){
+  var ahead=false,id;
+  for(id in remote){var a=S.srs[id],b=remote[id];if(!a||(b.n||0)>(a.n||0)||((b.n||0)===(a.n||0)&&(b.t||'')>(a.t||'')))S.srs[id]=b;else if((a.n||0)>(b.n||0))ahead=true;}
+  for(id in S.srs)if(!remote[id])ahead=true;
+  return ahead;
+}
+function foldExternal(){ /* credit and misses the Coach logged from chats outside the app */
+  var t=today(),ch=false;
+  S.cards.forEach(function(c){
+    if(!c.xok&&!c.xl)return;
+    var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.ok=(st.ok||[]).slice();
+    (c.xok||[]).forEach(function(d){if(st.ok.indexOf(d)<0){st.ok.push(d);ch=true;}});
+    if((c.xl||0)>(st.xl||0)){st.l+=(c.xl-(st.xl||0));st.xl=c.xl;st.d=t;ch=true;}
+    st.s=st.ok.length>=3?'beaten':'open';if(!st.d)st.d=t;S.srs[c.id]=st;
+  });
+  if(ch)saveSrs();
+}
+function loadDb(){
+  var db=S.db,t=today(),timer=setTimeout(function(){if(S.dbState==='wait'){S.dbState='slow';render();}},10000);
+  return Promise.all([db.doc('me/srs').get(),db.doc('me/sits').get(),db.doc('sys/plan').get(),db.doc('sys/config').get(),
+    db.collection('cards').get(),db.collection('days').orderBy('date','desc').limit(30).get(),db.collection('exams').orderBy('date','desc').limit(8).get(),db.doc('me/prefs').get()])
+  .then(function(r){
+    clearTimeout(timer);S.dbState='ok';
+    var ahead=mergeSrs(r[0].exists?((r[0].data()||{}).c||{}):{});
+    if(r[1].exists){var rs=(r[1].data()||{}).s||{};for(var k in rs){var a=S.sitState[k];if(!a||(rs[k].tries||0)>=(a.tries||0))S.sitState[k]=rs[k];}}
+    if(r[2].exists)S.plan=r[2].data();
+    if(r[3].exists)S.cfg=Object.assign(S.cfg,r[3].data());
+    var have={};S.cards.forEach(function(c){have[c.id]=1;});
+    r[4].docs.forEach(function(d){var c=Object.assign({},d.data(),{id:d.id});if(have[c.id]){Object.assign(S.byId[c.id],c);}else{S.cards.unshift(c);}});
+    indexCards();
+    r[5].docs.forEach(function(d){var x=d.data(),loc=S.days[x.date];if(!loc){S.days[x.date]=Object.assign({},x);}else{for(var f in x)if(typeof x[f]==='number')loc[f]=Math.max(loc[f]||0,x[f]);else if(loc[f]==null)loc[f]=x[f];}});
+    r[6].docs.forEach(function(d){S.exams[d.id]=d.data();});
+    if(r[7].exists)S.prefs=Object.assign(S.prefs,r[7].data());
+    S.day=null;theDay();foldExternal();if(ahead)saveSrs();var td=S.days[t];if(td&&LS.get('days/'+t))save('days/'+t,td);
+  },function(){clearTimeout(timer);S.dbState='err';});
+}
+function boot(){
+  S.srs=(LS.get('me/srs')||{}).c||{};S.sitState=(LS.get('me/sits')||{}).s||{};S.prefs=Object.assign(S.prefs,LS.get('me/prefs')||{});
+  var ld=LS.get('days/'+today());if(ld)S.days[ld.date]=ld;
+  render();
+  Promise.all(['data/cards.json','data/eps.json','data/sits.json','b/index.json'].map(getJSON)).then(function(r){
+    S.cards=r[0]||[];S.eps=r[1]||[];S.sits=(r[2]&&r[2].situations)||[];if(r[3]&&r[3].clips){S.clips=r[3].clips;S.bundles=r[3].bundles||[];}
+    indexCards();S.ready=true;render();
+    return Promise.all(['db','sample','tts','dictation'].map(use));
+  }).then(function(c){
+    S.db=c[0];S.ai=c[1];S.tts=c[2];S.dict=c[3];initDict();
+    if(!S.db){S.dbState='none';render();return;}
+    return loadDb().then(render);
+  });
+}
+
+/* ---------- screens ---------- */
+function toast(msg){var o=$('.toast');if(o)o.remove();var d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=msg;document.body.appendChild(d);setTimeout(function(){d.remove();},4200);}
+function mins(s){return Math.round((s||0)/60);}
+function streak(){var n=0,d=today();if(mins((S.days[d]||{}).speakSecs)<10)d=addDays(d,-1);while(mins((S.days[d]||{}).speakSecs)>=10){n++;d=addDays(d,-1);}return n;}
+function syncLine(){
+  var m={wait:'Loading your saved progress…',slow:'Still trying to reach your saved progress. What you do now is kept on this phone.',ok:'',err:'Could not save to your account just now. Progress is kept on this phone and will sync next time.',none:'Not signed in here, so progress stays on this phone only.'}[S.dbState];
+  return m?'<p class="tiny muted">'+esc(m)+'</p>':'';
+}
+function render(){
+  ['hoje','sits','prog'].forEach(function(v){var b=$('#tab-'+v);if(b){if(S.view===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');}});
+  $('#app').innerHTML=S.view==='sits'?viewSits():S.view==='prog'?viewProg():viewHoje();
+}
+function viewHoje(){
+  var d=theDay(),m=mins(d.speakSecs),goal=S.cfg.dailyMin,sit=todaySit(),q=S.ready?dueCount():0,foc=S.ready?focusCards():[];
+  var isSun=new Date().getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result;
+  var note=S.plan&&S.plan.date===today()&&S.plan.note;
+  var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dayNum()+' of 44</div></header>';
+  h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div></section>';
+  if(note)h+='<p class="note"><span class="eyebrow">Coach</span><br>'+esc(note)+'</p>';
+  if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today\'s session…</p>';
+  h+='<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">Start today\'s session</button>';
+  h+='<section class="card round'+(d.drills>=10?' done':'')+'"><div class="n">1</div><div class="grow"><h3>Drills</h3><div class="small muted">'+q+' cards ready · about '+Math.max(2,Math.round(q*0.35))+' min</div></div><button class="btn" data-a="drill">Start</button></section>';
+  h+='<section class="card round'+(d.chats>0?' done':'')+'"><div class="n">2</div><div class="grow"><h3>Conversa</h3><div class="small muted">'+(sit?esc(sit.title)+' · with '+esc(sit.char):'')+' · about 8 min</div></div><button class="btn" data-a="chat" data-id="'+(sit?sit.id:'')+'">Start</button></section>';
+  h+='<section class="card round'+(d.listens>=10?' done':'')+'"><div class="n">3</div><div class="grow"><h3>Ouvido</h3><div class="small muted">10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min</div></div><button class="btn" data-a="listen">Start</button></section>';
+  if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
+  if(foc.length)h+='<section><div class="eyebrow" style="margin-bottom:6px">Focus now</div><div class="chips">'+foc.map(function(c){return '<span class="chip">'+esc(c.pt)+'</span>';}).join('')+'</div></section>';
+  h+='<p class="tiny muted">Voice out: '+(Object.keys(S.clips).length?Object.keys(S.clips).length+' recorded lines':S.tts?'Claude voice':('speechSynthesis' in window)?'phone voice':'not available here')+'. Voice in: '+(S.dict?'tap-to-talk mic':'your keyboard\'s mic (add the Portuguese keyboard)')+'. '+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off.')+'</p>';
+  return h+syncLine();
+}
+function viewSits(){
+  var passed=S.sits.filter(function(s){return sitLevel(s.id)>=2;}).length;
+  var h='<header class="top"><h1 class="disp">Situações</h1><div class="meta"><b class="num">'+passed+' / '+S.sits.length+'</b>won</div></header><p class="muted small">Win each one twice: once straight, once with a twist. A win is every goal done in Portuguese and a score of 7 or more.</p>';
+  S.sits.forEach(function(s){
+    var lv=sitLevel(s.id),st=S.sitState[s.id]||{};
+    var pill=lv===3?'<span class="pill good">Won twice</span>':lv===2?'<span class="pill good">Won</span>':lv===1?'<span class="pill warn">Best '+(st.best||0)+'/10</span>':'<span class="pill off">Not tried</span>';
+    h+='<button class="sit" data-a="sit" data-id="'+s.id+'"><span class="n">'+s.n+'</span><span class="grow"><b>'+esc(s.title)+'</b><br><span class="small muted">'+esc(s.en)+' · by '+esc(s.gate.slice(8)+'/'+s.gate.slice(5,7))+'</span></span>'+pill+'</button>';
+  });
+  return h;
+}
+function viewProg(){
+  var t=today(),goal=S.cfg.dailyMin,bars='',xs='',tot=0,i;
+  for(i=13;i>=0;i--){var d=addDays(t,-i),m=mins((S.days[d]||{}).speakSecs);tot+=m;bars+='<div class="b'+(m>=goal?' hit':'')+'" style="height:'+Math.min(100,m/(goal*1.5)*100)+'%" title="'+d+': '+m+' min"></div>';xs+='<span>'+d.slice(8)+'</span>';}
+  var ms=S.cards.filter(isMistake),beaten=ms.filter(function(c){return okCount(c)>=3;}).length;
+  var learned=S.cards.filter(function(c){var st=S.srs[c.id];return st&&st.r>=2;}).length;
+  var h='<header class="top"><h1 class="disp">Progresso</h1><div class="meta"><b class="num">'+tot+' min</b>spoken in 14 days</div></header>';
+  h+='<section class="card"><div class="eyebrow" style="margin-bottom:8px">Minutes spoken per day (dashed line = '+goal+')</div><div class="bars"><div class="t" style="bottom:'+(100/1.5)+'%"></div>'+bars+'</div><div class="barx">'+xs+'</div></section>';
+  h+='<section class="card row"><div class="grow"><div class="eyebrow">Mistakes beaten</div><div class="disp num" style="font-size:32px">'+beaten+' / '+ms.length+'</div></div><div class="grow"><div class="eyebrow">Phrases that stick</div><div class="disp num" style="font-size:32px">'+learned+' / '+S.cards.length+'</div></div></section>';
+  var ex=Object.keys(S.exams).sort().filter(function(k){return S.exams[k].result;});
+  if(ex.length)h+='<section class="card"><div class="eyebrow" style="margin-bottom:6px">Sunday exams</div>'+ex.map(function(k){var r=S.exams[k].result;return '<div class="row small"><span class="grow">'+k+'</span><span class="num"><b>'+r.total+'</b> / 25 · '+esc(r.level||'')+'</span></div>';}).join('')+'</section>';
+  h+='<section><div class="eyebrow" style="margin-bottom:6px">Your mistakes (three correct days beats one)</div><div style="display:flex;flex-direction:column;gap:8px">';
+  ms.sort(function(a,b){return okCount(a)-okCount(b)||((S.srs[b.id]||{}).l||0)-((S.srs[a.id]||{}).l||0);}).forEach(function(c){
+    var n=Math.min(3,okCount(c));
+    h+='<div class="card" style="padding:10px 12px"><div class="row"><b class="grow">'+esc(c.pt)+'</b><span class="dots" aria-label="'+n+' of 3 correct days"><i class="'+(n>0?'on':'')+'"></i><i class="'+(n>1?'on':'')+'"></i><i class="'+(n>2?'on':'')+'"></i></span></div><div class="small muted">'+(c.said?'You said: '+esc(c.said)+'. ':'')+esc(c.why||'')+'</div></div>';
+  });
+  return h+'</div></section>'+syncLine();
+}
+
+/* ---------- round shell ---------- */
+function openMode(title,body,foot,right){
+  var m=$('#mode');m.hidden=false;
+  m.innerHTML='<div class="mhead"><button class="x" data-a="close" aria-label="Close">✕</button><h2 class="grow">'+esc(title)+'</h2><span class="small muted num" id="mright">'+(right||'')+'</span></div><div class="mbody"><div class="in" id="mbody">'+body+'</div></div>'+(foot!=null?'<div class="mfoot"><div class="in" id="mfoot">'+foot+'</div></div>':'');
+}
+function setBody(h){$('#mbody').innerHTML=h;$('.mbody').scrollTop=0;}
+function setFoot(h){var f=$('#mfoot');if(f)f.innerHTML=h;}
+function closeMode(){stopAudio();if(S.dict&&dictOn){dictDone=null;S.dict.stop().catch(function(){});}S.mode=null;dictBox=null;dictDone=null;$('#mode').hidden=true;$('#mode').innerHTML='';render();}
+function answerFoot(btn,extra){
+  return '<div id="partial" class="small muted" aria-live="polite"></div><div class="row" style="gap:8px;align-items:stretch"><textarea id="ans" rows="2" lang="pt-BR" autocapitalize="sentences" placeholder="Fala em português…"></textarea>'+micHtml()+'</div><div class="row" style="gap:8px"><button class="btn pri grow" data-a="'+btn+'">'+(btn==='send'?'Send':'Check')+'</button>'+(extra||'')+'</div><div class="tiny muted">'+esc(micTip())+'</div>';
+}
+
+/* ---------- round 1: drills ---------- */
+function startDrill(){
+  var q=buildQueue();
+  if(!q.length){openMode('Round 1 · Drills','<p class="prompt">Nothing due right now.</p><p class="muted">Everything is scheduled for later. Go to Conversa.</p><button class="btn pri" data-a="next">Continue</button>',null);S.mode={k:'drill',q:[],done:true};return;}
+  S.mode={k:'drill',q:q,total:q.length,seen:0,right:0,missed:{}};
+  openMode('Round 1 · Drills','','');showCard();
+}
+function showCard(){
+  var M=S.mode,c=M.q[0];if(!c){return drillEnd();}
+  var st=S.srs[c.id]||{},mode=(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
+  M.cur={c:c,mode:mode,t0:Date.now()};
+  $('#mright').textContent=(M.seen+1)+' / '+Math.max(M.total,M.seen+M.q.length);
+  var h;
+  if(mode==='q'){
+    h='<div class="eyebrow">'+esc(c.qs||'Rafa')+' asks. Answer in Portuguese.</div><div class="row"><button class="play" data-a="say" data-t="'+esc(c.q)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(c.q)+'</div></div>'+(c.qen?'<button class="link" data-a="reveal" data-t="'+esc(c.qen)+'">Show English</button>':'');
+    say(c.q);
+  }else{
+    h='<div class="eyebrow">Say it in Portuguese</div><div class="prompt">'+esc(c.en)+'</div>'+(isMistake(c)?'<span class="pill warn" style="align-self:flex-start">Your mistake</span>':'');
+  }
+  setBody(h);setFoot(answerFoot('check','<button class="btn ghost" data-a="dunno">Don\'t know</button>'));warm(c.pt);
+  dictBox=$('#ans');dictDone=function(){checkCard();};
+}
+function checkCard(giveUp){
+  var M=S.mode,cur=M.cur;if(!cur||cur.busy)return;
+  var said=giveUp?'':($('#ans').value||'').trim();
+  if(!giveUp&&!said){toast('Say or type your answer first.');return;}
+  cur.busy=true;cur.said=said;cur.secs=clamp((Date.now()-cur.t0)/1000,2,25);
+  var c=cur.c,s=said?sim(said,c.pt):0;
+  if(giveUp)return showResult('wrong',null);
+  if(s>=0.92)return showResult('right',null);
+  if(!S.ai)return showResult(null,null);
+  setFoot('<p class="muted"><span class="spin"></span> Checking…</p>');
+  ask(judgePrompt(c,cur.mode,said),'quick').then(function(r){
+    var v=r&&(r.v==='right'||r.v==='almost'||r.v==='wrong')?r.v:null;showResult(v,r);
+  },function(){showResult(null,null);});
+}
+function showResult(v,r){
+  var M=S.mode,cur=M.cur,c=cur.c;cur.v=v;
+  var h='';
+  if(v)h+='<div class="verdict '+v+'">'+(v==='right'?'Certo!':v==='almost'?'Quase':'Ainda não')+'</div>';
+  else h+='<div class="eyebrow">Compare, then mark it yourself</div>';
+  h+='<div class="row"><button class="play" data-a="say" data-t="'+esc(c.pt)+'" aria-label="Play the answer">'+ICON.play+'</button><div class="pt grow">'+esc(c.pt)+'</div></div><dl class="kv">';
+  if(cur.said)h+='<dt>You said</dt><dd>'+esc(cur.said)+'</dd>';
+  if(r&&r.fix&&v!=='right')h+='<dt>Fixed</dt><dd>'+esc(r.fix)+'</dd>';
+  if(r&&r.why&&v!=='right')h+='<dt>Why</dt><dd>'+esc(r.why)+'</dd>';
+  else if(c.why&&v!=='right')h+='<dt>Why</dt><dd>'+esc(c.why)+'</dd>';
+  if(cur.mode==='q')h+='<dt>Means</dt><dd>'+esc(c.en)+'</dd>';
+  if(c.lit)h+='<dt>Word for word</dt><dd>'+esc(c.lit)+'</dd>';
+  if(c.heard)h+='<dt>Sounds like</dt><dd>'+esc(c.heard)+'</dd>';
+  if(c.note)h+='<dt>Note</dt><dd>'+esc(c.note)+'</dd>';
+  h+='</dl>';
+  if(v&&v!=='right')h+='<p class="small muted">Say the right version aloud once before you go on. It comes back in a minute.</p>';
+  setBody(h);
+  if(v)setFoot('<button class="btn pri wide" data-a="rate" data-v="'+v+'">Next</button><button class="link" data-a="rate" data-v="'+(v==='right'?'wrong':'right')+'">'+(v==='right'?'Actually, I got it wrong':'Actually, I was right')+'</button>');
+  else setFoot('<div class="row" style="gap:8px"><button class="btn grow" data-a="rate" data-v="wrong">I missed it</button><button class="btn pri grow" data-a="rate" data-v="right">I got it</button></div>');
+  say(c.pt);
+}
+function rateCard(v){
+  var M=S.mode,cur=M.cur;if(!cur)return;var c=cur.c;M.cur=null;
+  S.srs[c.id]=gradeCard(S.srs[c.id],v,today());saveSrs();
+  if(!M.missed[c.id]){M.seen++;if(v==='right')M.right++;}
+  bump({speakSecs:cur.said?Math.round(cur.secs):0,drills:1,drillOk:v==='right'?1:0});
+  M.q.shift();
+  if(v!=='right'){M.missed[c.id]=1;M.q.splice(Math.min(3,M.q.length),0,c);}
+  showCard();
+}
+function drillEnd(){
+  var M=S.mode;M.done=true;$('#mright').textContent='';
+  setBody('<div class="eyebrow">Round 1 done</div><div class="big num">'+M.right+' / '+M.seen+'</div><p class="muted">right first time. The ones you missed come back tomorrow.</p>');
+  setFoot('<button class="btn pri wide" data-a="next">'+(S.chain?'Round 2: Conversa':'Done')+'</button>');
+}
+
+/* ---------- round 2: conversa ---------- */
+function sitSheet(id){
+  var s=sitById(id);if(!s)return;var lv=sitLevel(id);
+  S.mode={k:'sheet',sit:s};warm(s.open.pt);s.must.forEach(function(m){warm(m.pt);});
+  var h='<div class="eyebrow">'+esc(s.place)+' · with '+esc(s.char)+'</div><p class="prompt">'+esc(s.title)+'</p><div><div class="eyebrow" style="margin-bottom:4px">What you have to do</div><div class="goals">'+s.goals.map(function(g){return '<span><span>○</span><span>'+esc(g)+'</span></span>';}).join('')+'</div></div><div><div class="eyebrow" style="margin-bottom:6px">Phrases to have ready (tap to hear, say each aloud)</div><div style="display:flex;flex-direction:column;gap:8px">'+
+    s.must.map(function(m){return '<div class="row"><button class="play" data-a="say" data-t="'+esc(m.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><b>'+esc(m.pt)+'</b><br><span class="small muted">'+esc(m.en)+'</span></div></div>';}).join('')+'</div></div>';
+  openMode('Round 2 · Conversa',h,'<button class="btn pri wide" data-a="chatgo" data-id="'+s.id+'">'+(lv>=2?'Start, with a twist':'Start the scene')+'</button>'+(S.ai?'':'<p class="tiny muted">Claude isn\'t reachable in this view. Open this page from your Claude account to run the scene.</p>'));
+}
+function startChat(id){
+  var s=sitById(id);if(!s)return;
+  if(!S.ai){toast('Conversa needs Claude, which isn\'t reachable in this view.');return;}
+  var lv=sitLevel(id),twist=lv>=2?s.twists[(S.sitState[id].tries||0)%s.twists.length]:null,foc=focusCards().slice(0,5);
+  var sys=scenePrompt(s,twist,foc,12);
+  S.mode={k:'chat',sit:s,twist:twist,foc:foc,msgs:[{role:'user',content:sys+'\n\nStart the scene now.'},{role:'assistant',content:JSON.stringify({pt:s.open.pt,en:s.open.en,fix:null,goals:[],used:[],end:false})}],
+    log:[{who:s.char,pt:s.open.pt,en:s.open.en}],goals:[],fixes:[],used:{},turns:0,secs:0,t0:Date.now(),tTurn:Date.now(),blur:false};
+  openMode(s.title,'',answerFoot('send','<button class="btn ghost" data-a="finish">Finish</button>'),'0:00');
+  dictBox=$('#ans');dictDone=function(){sendChat();};
+  drawChat();say(s.open.pt);
+  S.mode.tick=setInterval(function(){var e=$('#mright');if(!S.mode||S.mode.k!=='chat'||!e)return;var t=Math.floor((Date.now()-S.mode.t0)/1000);e.textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0');},1000);
+}
+function drawChat(wait){
+  var M=S.mode,s=M.sit;
+  var h='<div class="goals card" style="padding:10px 12px">'+s.goals.map(function(g,i){var ok=M.goals.indexOf(i+1)>=0;return '<span class="'+(ok?'ok':'')+'"><span>'+(ok?'✓':'○')+'</span><span>'+esc(g)+'</span></span>';}).join('')+'</div>';
+  h+='<button class="link" data-a="blur" style="align-self:flex-start">'+(M.blur?'Show the words':'Ears only: hide the words')+'</button>';
+  M.log.forEach(function(m,i){
+    if(m.who==='me'){h+='<div class="bub me">'+esc(m.pt)+'</div>';if(m.fix)h+='<div class="fix"><s>'+esc(m.fix.said)+'</s> → <b>'+esc(m.fix.ok)+'</b><br>'+esc(m.fix.why||'')+'</div>';}
+    else h+='<div class="bub'+(M.blur&&!m.show?' blur':'')+'" data-a="unblur" data-i="'+i+'"><div class="row"><button class="play" data-a="say" data-t="'+esc(m.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="txt grow">'+esc(m.pt)+'</span></div>'+(m.showEn?'<span class="en">'+esc(m.en)+'</span>':'<button class="link tiny" data-a="en" data-i="'+i+'">English</button>')+'</div>';
+  });
+  if(wait)h+='<div class="bub"><span class="spin"></span></div>';
+  $('#mbody').innerHTML=h;var b=$('.mbody');b.scrollTop=b.scrollHeight;
+}
+function sendChat(){
+  var M=S.mode;if(!M||M.k!=='chat'||M.busy)return;
+  var box=$('#ans'),said=(box.value||'').trim();if(!said){toast('Say or type something first.');return;}
+  var secs=clamp((Date.now()-M.tTurn)/1000,3,60);M.secs+=secs;bump({speakSecs:Math.round(secs)});
+  box.value='';M.busy=true;M.turns++;
+  var mine={who:'me',pt:said};M.log.push(mine);M.msgs.push({role:'user',content:'GEORGE SAID: "'+said.replace(/"/g,"'")+'"\n(Reply with the JSON object only.)'});
+  drawChat(true);
+  ask(M.msgs,'default').then(function(r){
+    if(!S.mode||S.mode!==M)return;
+    if(!r||!r.pt)throw new Error('empty');
+    M.msgs.push({role:'assistant',content:JSON.stringify(r)});
+    if(r.fix&&r.fix.ok){mine.fix=r.fix;M.fixes.push(r.fix);}
+    if(Array.isArray(r.goals))r.goals.forEach(function(g){g=+g;if(g>=1&&g<=M.sit.goals.length&&M.goals.indexOf(g)<0)M.goals.push(g);});
+    if(Array.isArray(r.used))r.used.forEach(function(u){var c=M.foc[+u-1];if(c)M.used[c.id]=1;});
+    M.log.push({who:M.sit.char,pt:r.pt,en:r.en||''});M.busy=false;M.tTurn=Date.now();drawChat();
+    say(r.pt).then(function(){if(S.mode===M)M.tTurn=Date.now();});
+    if(r.end||M.turns>=14)setTimeout(function(){if(S.mode===M)finishChat();},1200);
+  },function(e){
+    if(!S.mode||S.mode!==M)return;
+    M.busy=false;M.log.pop();M.msgs.pop();M.turns--;box.value=said;drawChat();
+    toast(e&&e.code==='rate_limited'?'Claude is busy. Wait a moment and send again.':'That didn\'t go through. Send again.');
+  });
+}
+function finishChat(){
+  var M=S.mode;if(!M||M.k!=='chat'||M.ending)return;M.ending=true;clearInterval(M.tick);stopAudio();
+  if(M.turns<2){closeMode();return;}
+  setBody('<p class="muted"><span class="spin"></span> Scoring the scene…</p>');setFoot('');
+  var log=M.log.map(function(m){return (m.who==='me'?'George':m.who)+': '+m.pt;}).join('\n');
+  ask(debriefPrompt(M.sit,log),'default').then(function(r){chatDone(r||{});},function(){chatDone({});});
+}
+function chatDone(r){
+  var M=S.mode,s=M.sit,t=today(),score=clamp(Math.round(+r.score||0),0,10),all=M.goals.length>=s.goals.length,pass=all&&score>=7;
+  var st=Object.assign({tries:0,best:0},S.sitState[s.id]);st.tries++;st.best=Math.max(st.best||0,score);st.last=t;
+  if(pass){if(M.twist)st.pass2=t;else st.pass=st.pass||t;}
+  S.sitState[s.id]=st;save('me/sits',{s:S.sitState});
+  var added=M.fixes.map(function(f){return addMistake(f,'chat:'+s.id);}).filter(Boolean);
+  Object.keys(M.used).forEach(function(id){var x=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[id]);x.ok=(x.ok||[]).slice();if(x.ok.indexOf(t)<0)x.ok.push(t);x.s=x.ok.length>=3?'beaten':'open';if(!x.d)x.d=addDays(t,1);S.srs[id]=x;});
+  saveSrs();bump({chats:1});
+  var id=t+'-'+Date.now().toString(36),doc={date:t,ts:Date.now(),kind:'chat',sit:s.id,char:s.char,twist:M.twist||'',mins:Math.round((Date.now()-M.t0)/60000),speakSecs:Math.round(M.secs),turns:M.turns,
+    score:score,pass:pass,goalsDone:M.goals.length,goalsAll:s.goals.length,fixes:M.fixes,used:Object.keys(M.used),words:r.words||[],better:r.better||[],summary:r.summary||'',log:M.log.map(function(m){return {w:m.who,pt:m.pt};}).slice(0,40),synced:false};
+  save('sessions/'+id,doc);
+  M.done=true;
+  var h='<div class="row"><div class="grow"><div class="eyebrow">'+esc(s.title)+'</div><div class="big num">'+(score||'–')+'<span class="muted" style="font-size:24px"> / 10</span></div></div>'+(pass?'<span class="pill good">Won'+(M.twist?' with a twist':'')+'</span>':'<span class="pill warn">'+M.goals.length+' of '+s.goals.length+' goals</span>')+'</div>';
+  if(r.summary)h+='<p>'+esc(r.summary)+'</p>';
+  if(!pass)h+='<p class="small muted">To win it: every goal in Portuguese and 7 or more.</p>';
+  if(added.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">Added to your drills</div>'+M.fixes.map(function(f){return '<div class="card" style="padding:8px 12px;margin-bottom:6px"><s class="muted">'+esc(f.said)+'</s><br><b>'+esc(f.ok)+'</b><br><span class="small muted">'+esc(f.why||'')+'</span></div>';}).join('')+'</div>';
+  if(r.better&&r.better.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">What you were reaching for</div>'+r.better.map(function(b){return '<div class="row" style="margin-bottom:6px"><button class="play" data-a="say" data-t="'+esc(b.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><b>'+esc(b.pt)+'</b><br><span class="small muted">'+esc(b.en)+'</span></div></div>';}).join('')+'</div>';
+  if(r.words&&r.words.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">New words you heard</div><div class="chips">'+r.words.map(function(w){return '<span class="chip"><b>'+esc(w.pt)+'</b> '+esc(w.en)+'</span>';}).join('')+'</div></div>';
+  (r.better||[]).forEach(function(b){if(b&&b.pt&&b.en)addMistake({ok:b.pt,en:b.en,said:'(couldn\'t say it)',why:'you reached for this in '+s.en.toLowerCase(),type:'vocab'},'chat:'+s.id);});saveSrs();
+  setBody(h);setFoot('<button class="btn pri wide" data-a="next">'+(S.chain?'Round 3: Ouvido':'Done')+'</button><button class="link" data-a="chatgo" data-id="'+s.id+'">Run it again</button>');
+}
+
+/* ---------- round 3: ouvido ---------- */
+function startListen(){
+  if(!hasVoice()){openMode('Round 3 · Ouvido','<p class="prompt">No sound in this view.</p><p class="muted">Open this page in Chrome to do the listening round.</p><button class="btn pri" data-a="next">Continue</button>',null);S.mode={k:'listen',done:true};return;}
+  var dn=dayNum(),pool=[];
+  S.eps.filter(function(e){return e.ep<=dn;}).forEach(function(e){e.lines.forEach(function(l){if(l.s!=='George'&&l.s!=='Narrador'&&l.pt.split(' ').length>=4&&(!Object.keys(S.clips).length||S.clips[fnv(l.pt)]))pool.push({l:l,ep:e});});});
+  var recent=pool.filter(function(p){return p.ep.ep>dn-7;}),pick=shuffle(recent).slice(0,6).concat(shuffle(pool).slice(0,10));
+  var seen={},items=[];pick.forEach(function(p){if(!seen[p.l.pt]&&items.length<10){seen[p.l.pt]=1;items.push(p);}});
+  if(items.length<3){openMode('Round 3 · Ouvido','<p class="prompt">No lines to play yet.</p><button class="btn pri" data-a="next">Continue</button>',null);S.mode={k:'listen',done:true};return;}
+  S.mode={k:'listen',items:items,i:0,right:0,rate:S.prefs.listenRate,runOk:0,runBad:0};items.forEach(function(p){warm(p.l.pt);});
+  openMode('Round 3 · Ouvido','',null);showLine();
+}
+function showLine(){
+  var M=S.mode,it=M.items[M.i];if(!it)return listenEnd();
+  var others=shuffle(it.ep.lines.filter(function(l){return l.en!==it.l.en&&l.s!=='Narrador';})).slice(0,2).map(function(l){return l.en;});
+  M.opts=shuffle([it.l.en].concat(others));M.t0=Date.now();M.answered=false;
+  $('#mright').textContent=(M.i+1)+' / '+M.items.length+' · ×'+M.rate.toFixed(2);
+  setBody('<div class="eyebrow">'+esc(it.l.s)+' says something. What does it mean?</div><div class="row"><button class="play" data-a="replay" aria-label="Play again" style="width:64px;height:64px">'+ICON.play+'</button><span class="muted small">Tap to hear it again</span></div><div style="display:flex;flex-direction:column;gap:8px">'+M.opts.map(function(o,i){return '<button class="opt" data-a="pick" data-i="'+i+'">'+esc(o)+'</button>';}).join('')+'</div><div id="reveal"></div>');
+  say(it.l.pt,M.rate);
+}
+function pickLine(i){
+  var M=S.mode,it=M.items[M.i];if(M.answered)return;M.answered=true;
+  var ok=M.opts[i]===it.l.en;if(ok){M.right++;M.runOk++;M.runBad=0;}else{M.runBad++;M.runOk=0;}
+  if(M.runOk>=3){M.rate=clamp(+(M.rate+0.05).toFixed(2),0.7,1.4);M.runOk=0;}
+  if(M.runBad>=2){M.rate=clamp(+(M.rate-0.05).toFixed(2),0.7,1.4);M.runBad=0;}
+  document.querySelectorAll('.opt').forEach(function(b,j){b.disabled=true;if(M.opts[j]===it.l.en)b.classList.add('right');else if(j===i)b.classList.add('wrong');});
+  bump({listens:1,listenOk:ok?1:0,listenSecs:Math.round(clamp((Date.now()-M.t0)/1000,2,30))});
+  $('#reveal').innerHTML='<div class="card"><div class="pt">'+esc(it.l.pt)+'</div>'+(it.l.heard?'<div class="small muted">Sounds like: '+esc(it.l.heard)+'</div>':'')+'<p class="small muted" style="margin:6px 0 0">Shadow it: play it and say it along with '+esc(it.l.s)+'.</p></div><button class="btn pri wide" data-a="nextline" style="margin-top:10px">Next</button>';
+}
+function listenEnd(){
+  var M=S.mode;M.done=true;S.prefs.listenRate=M.rate;save('me/prefs',S.prefs);
+  setBody('<div class="eyebrow">Round 3 done</div><div class="big num">'+M.right+' / '+M.items.length+'</div><p class="muted">understood first time. Next time starts at ×'+M.rate.toFixed(2)+' speed.</p><button class="btn pri wide" data-a="next">Done</button>');
+}
+
+/* ---------- sunday exam ---------- */
+function defaultPaper(){
+  return [{pt:'Se apresenta pra mim: quem é você, onde cê mora e com o que cê trabalha?',en:'Introduce yourself: who you are, where you live and what you do.',secs:45},
+   {pt:'Me conta como foi a sua semana. O que cê fez?',en:'Tell me about your week. What did you do?',secs:60},
+   {pt:'Como você e a Gabi se conheceram?',en:'How did you and Gabi meet?',secs:60},
+   {pt:'Quais são os seus planos pra viagem pro Brasil?',en:'What are your plans for the trip to Brazil?',secs:60},
+   {pt:'O que cê acha mais difícil no português, e por quê?',en:'What do you find hardest about Portuguese, and why?',secs:45}];
+}
+function startExam(){
+  if(!S.ai){toast('The exam needs Claude to score it, and Claude isn\'t reachable in this view.');return;}
+  var ex=S.exams[today()],tasks=(ex&&ex.tasks&&ex.tasks.length?ex.tasks:null)||(S.plan&&S.plan.exam&&S.plan.exam.tasks)||defaultPaper();
+  S.mode={k:'exam',tasks:tasks,i:0,ans:[],theme:(ex&&ex.theme)||''};
+  openMode('Exame de domingo','',answerFoot('examnext'));showTask();
+}
+function showTask(){
+  var M=S.mode,t=M.tasks[M.i];M.t0=Date.now();
+  $('#mright').textContent=(M.i+1)+' / '+M.tasks.length;
+  setBody((M.i===0?'<p class="small muted">No notes, no looking things up. Talk for as long as you can on each one. Aim for the time shown.</p>':'')+'<div class="eyebrow">Question '+(M.i+1)+' · aim for '+t.secs+' seconds</div><div class="row"><button class="play" data-a="say" data-t="'+esc(t.pt)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(t.pt)+'</div></div><button class="link" data-a="reveal" data-t="'+esc(t.en||'')+'">Show English</button>');
+  setFoot(answerFoot('examnext'));var b=$('#ans');b.rows=4;dictBox=b;dictDone=null;
+  $('[data-a="examnext"]').textContent=M.i===M.tasks.length-1?'Finish and score':'Next question';
+  say(t.pt);
+}
+function examNext(){
+  var M=S.mode,t=M.tasks[M.i],a=($('#ans').value||'').trim(),secs=Math.round(clamp((Date.now()-M.t0)/1000,1,240));
+  M.ans.push({pt:t.pt,ans:a,secs:secs,words:a?a.split(/\s+/).length:0});
+  if(a)bump({speakSecs:Math.min(secs,180)});
+  M.i++;if(M.i<M.tasks.length)return showTask();
+  scoreExam();
+}
+function scoreExam(){
+  var M=S.mode;
+  setBody('<p class="muted"><span class="spin"></span> The Examiner is scoring…</p>');setFoot('');
+  ask(examPrompt(M.ans),'complex').then(function(r){
+    if(S.mode!==M)return;
+    var d=r.dims||{},tot=['comunicacao','fluidez','precisao','vocabulario','registro'].reduce(function(s,k){return s+clamp(Math.round(+d[k]||0),0,5);},0);
+    r.total=tot;var t0=today(),doc=Object.assign({},S.exams[t0]||{},{date:t0,tasks:M.tasks,answers:M.ans,result:r,ts:Date.now(),synced:false});
+    S.exams[t0]=doc;save('exams/'+t0,doc);bump({exam:1});
+    (r.fixes||[]).forEach(function(f){addMistake(f,'exam');});saveSrs();
+    M.done=true;
+    var names={comunicacao:'Getting the message across',fluidez:'Flow and length',precisao:'Grammar',vocabulario:'Vocabulary',registro:'Sounding Paulistano'};
+    var h='<div class="row"><div class="grow"><div class="eyebrow">Exam score</div><div class="big num">'+tot+'<span class="muted" style="font-size:24px"> / 25</span></div></div><span class="pill off">'+esc(r.level||'')+'</span></div>';
+    h+='<div class="card">'+Object.keys(names).map(function(k){var n=clamp(Math.round(+d[k]||0),0,5);return '<div class="row small" style="margin:4px 0"><span class="grow">'+names[k]+'</span><span class="meter" style="width:110px"><i style="width:'+n*20+'%"></i></span><b class="num">'+n+'</b></div>';}).join('')+'</div>';
+    if(r.focus)h+='<p class="note"><span class="eyebrow">This week</span><br>'+esc(r.focus)+'</p>';
+    if(r.strengths&&r.strengths.length)h+='<div class="chips">'+r.strengths.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div>';
+    if(r.fixes&&r.fixes.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">Added to your drills</div>'+r.fixes.map(function(f){return '<div class="card" style="padding:8px 12px;margin-bottom:6px"><s class="muted">'+esc(f.said)+'</s><br><b>'+esc(f.ok)+'</b><br><span class="small muted">'+esc(f.why||'')+'</span></div>';}).join('')+'</div>';
+    setBody(h);setFoot('<button class="btn pri wide" data-a="close">Done</button>');
+  },function(){
+    if(S.mode!==M)return;
+    setBody('<p>The Examiner couldn\'t be reached. Your answers are still here.</p>');setFoot('<button class="btn pri wide" data-a="examscore">Try scoring again</button>');
+  });
+}
+
+/* ---------- actions ---------- */
+function next(){
+  var M=S.mode||{},k=M.k;
+  $('#mode').hidden=true;$('#mode').innerHTML='';S.mode=null;stopAudio();
+  if(S.chain&&k==='drill'){var s=todaySit();if(s&&S.ai)return sitSheet(s.id);k='chat';}
+  if(S.chain&&(k==='chat'||k==='sheet'))return startListen();
+  S.chain=false;render();
+}
+var A={
+  tab:function(d){S.view=d.v;render();window.scrollTo(0,0);},
+  session:function(){S.chain=true;startDrill();},
+  drill:function(){S.chain=false;startDrill();},
+  chat:function(d){S.chain=false;if(d.id)sitSheet(d.id);},
+  sit:function(d){S.chain=false;sitSheet(d.id);},
+  chatgo:function(d){startChat(d.id);},
+  listen:function(){S.chain=false;startListen();},
+  exam:function(){S.chain=false;startExam();},
+  close:function(){if(S.mode&&S.mode.k==='chat'&&!S.mode.done&&S.mode.turns>=2){finishChat();return;}if(S.mode&&S.mode.tick)clearInterval(S.mode.tick);S.chain=false;closeMode();},
+  next:function(){next();},
+  say:function(d){say(d.t);},
+  reveal:function(d,el){el.outerHTML='<span class="small muted">'+esc(d.t)+'</span>';},
+  mic:function(){
+    if(!S.dict)return;
+    if(dictOn){S.dict.stop().catch(function(){});return;}
+    stopAudio();dictBox=$('#ans');
+    S.dict.start({language:'pt-BR'}).catch(function(e){if(e&&(e.code==='unavailable'||e.code==='not_granted')){S.dict=null;var b=$('#mic');if(b)b.remove();toast('The mic is not offered here. Use the mic on your keyboard instead.');}});
+  },
+  check:function(){checkCard(false);},
+  dunno:function(){checkCard(true);},
+  rate:function(d){rateCard(d.v);},
+  send:function(){sendChat();},
+  finish:function(){finishChat();},
+  blur:function(){S.mode.blur=!S.mode.blur;drawChat();},
+  unblur:function(d){var m=S.mode.log[+d.i];if(m&&S.mode.blur&&!m.show){m.show=true;drawChat();}},
+  en:function(d){var m=S.mode.log[+d.i];if(m){m.showEn=true;m.show=true;drawChat();}},
+  replay:function(){var M=S.mode;say(M.items[M.i].l.pt,M.rate);},
+  pick:function(d){pickLine(+d.i);},
+  nextline:function(){S.mode.i++;showLine();},
+  examnext:function(){examNext();},
+  examscore:function(){scoreExam();}
+};
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-a]');if(!el)return;
+  var f=A[el.dataset.a];if(f){if(el.dataset.a==='say'||el.dataset.a==='en')e.stopPropagation();f(el.dataset,el);}
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&!e.shiftKey&&e.target&&e.target.id==='ans'&&S.mode){
+    if(S.mode.k==='drill'&&S.mode.cur&&!S.mode.cur.busy){e.preventDefault();checkCard(false);}
+    else if(S.mode.k==='chat'){e.preventDefault();sendChat();}
+  }
+});
+window.__treino={S:S,say:say,norm:norm,sim:sim,gradeCard:gradeCard,fnv:fnv,buildQueue:buildQueue};
+boot();
+})();
+</script>
+</body>
+</html>

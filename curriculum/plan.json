@@ -1,0 +1,33 @@
+{
+ "about": "The route to 17 December 2026, worked backward from the situations George must win. Episodes keep the outline in prompts/master_prompt.txt; this file says which situation each one rehearses, what must be won by each Sunday, and how the last ten days run.",
+ "daily": {
+  "target_spoken_minutes": 20,
+  "session": ["Round 1 Drills (about 6 min): due cards and his own mistakes, spoken", "Round 2 Conversa (about 8 min): today's situation as a role-play", "Round 3 Ouvido (3 min): 10 episode lines at rising speed"],
+  "where": {"Mon-Thu": "episode on the morning train; Treino on the evening train or after the gym", "Fri (works from home)": "two scenes instead of one", "Sat": "one scene with a twist", "Sun": "the exam, then a light session"}
+ },
+ "episode_to_situation": {
+  "15": "historia", "16": "aviao", "17": "aeroporto", "18": "aviao", "19": "aeroporto", "20": "uber", "21": "chegada", "22": "rua",
+  "23": "cafe", "24": "restaurante", "25": "amigos", "26": "compras", "27": "compras", "28": "rua", "29": "amigos", "30": "amigos",
+  "31": "ceia", "32": "compras", "33": "ceia", "34": "ceia", "35": "ceia", "36": "amigos", "37": "reveillon", "38": "reveillon",
+  "39": "amigos", "40": "ceia", "41": "amigos", "42": "reveillon", "43": "reveillon", "44": "reveillon"
+ },
+ "gates": [
+  {"sunday": "2026-11-15", "boss": "Our story", "win_by_then": ["apresentar", "cafe", "restaurante", "dia", "academia", "historia"], "note": "He starts Treino on 14 Nov, so this gate slides: win these six by Wednesday 18 Nov."},
+  {"sunday": "2026-11-22", "boss": "Arrival", "win_by_then": ["aeroporto", "aviao", "uber", "chegada"]},
+  {"sunday": "2026-11-29", "boss": "Full speed", "win_by_then": ["rua", "amigos", "compras"]},
+  {"sunday": "2026-12-06", "boss": "Christmas", "win_by_then": ["ceia"], "also": "every earlier situation won a second time, with a twist"},
+  {"sunday": "2026-12-13", "boss": "Final boss", "win_by_then": ["reveillon"], "also": "the toast, from memory, under a minute"}
+ ],
+ "dress_rehearsal": {
+  "about": "Days 35 to 44 and the three days after. Every scene runs with a twist, at natural speed, with the words hidden (Ears only). The Coach sets these as sys/plan.sit.",
+  "days": {
+   "35": "chegada", "36": "amigos", "37": "aeroporto", "38": "uber", "39": "ceia", "40": "restaurante", "41": "compras", "42": "reveillon", "43": "historia", "44": "chegada",
+   "45": "ceia", "46": "aeroporto", "47": "chegada"
+  }
+ },
+ "pace_check": {
+  "spoken_minutes_per_week": 140,
+  "mistakes": "no mistake older than 10 days still open",
+  "exam_total_of_25": {"2026-11-15": 10, "2026-11-22": 12, "2026-11-29": 14, "2026-12-06": 16, "2026-12-13": 18}
+ }
+}
