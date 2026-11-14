@@ -1,0 +1,748 @@
+{
+ "pack": 6,
+ "episodes": [
+  {
+   "ep": 19,
+   "title": "Chegando em Guarulhos",
+   "intro": "George lands at Guarulhos: immigration first, then money and the way out. Your goal: answer the immigration questions, and ask where to change money and where to get an Uber.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Nove da noite, aeroporto de Guarulhos. O George chega na imigração.",
+     "heard": "Nóvi da noitchi, aeropórtu dji Guarulhus. U George chéga na imigrassãu.",
+     "en": "Nine at night, Guarulhos airport. George reaches immigration."
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "Boa noite. Passaporte, por favor. Qual é o motivo da viagem?",
+     "heard": "Boa noitchi. Passapórtchi, pur favô. Kuau é u motchivu da viajein?",
+     "en": "Good evening. Passport, please. What's the purpose of your trip?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Boa noite! Vim visitar a minha namorada.",
+     "heard": "Boa noitchi! Vin vizitá a minha namorada.",
+     "en": "Good evening! I've come to visit my girlfriend."
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "Quanto tempo o senhor vai ficar? E vai ficar onde?",
+     "heard": "Kuantu tempu u sinhô vai fiká? I vai fiká ondji?",
+     "en": "How long are you staying? And where will you be staying?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Vou ficar três semanas, na casa da mãe dela, aqui em São Paulo.",
+     "heard": "Vô fiká trêis semanas, na caza da mãinh déla, akí ein Sãu Paulu.",
+     "en": "I'm staying three weeks, at her mum's house, here in São Paulo."
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "Tudo certo. Bem-vindo ao Brasil!",
+     "heard": "Tudu certu. Bein-vindu au Braziu!",
+     "en": "All in order. Welcome to Brazil!"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "O George pega a mala. Agora ele precisa de dinheiro e de um Uber.",
+     "heard": "U George péga a mala. Agóra eli preciza dji dinhêru i dji um Úber.",
+     "en": "George collects his bag. Now he needs money and an Uber."
+    },
+    {
+     "speaker": "George",
+     "pt": "Com licença, onde eu posso trocar dinheiro?",
+     "heard": "Cun licença, ondji eu póssu trocá dinhêru?",
+     "en": "Excuse me, where can I change money?"
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "Tem uma casa de câmbio ali na frente.",
+     "heard": "Tein uma caza dji câmbiu alí na frentchi.",
+     "en": "There's a bureau de change just over there."
+    },
+    {
+     "speaker": "George",
+     "pt": "Câmbio? Que engraçado, eu trabalho com câmbio!",
+     "heard": "Câmbiu? Ki engrassadu, eu trabalhu cun câmbiu!",
+     "en": "Câmbio? That's funny, I work in FX!"
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "Então o senhor já sabe: no aeroporto é mais caro!",
+     "heard": "Entãu u sinhô já sabi: nu aeropórtu é mais caru!",
+     "en": "Then you already know: it's more expensive at the airport!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Verdade! Vou trocar só um pouco. Onde fica a saída? E onde eu pego o Uber?",
+     "heard": "Verdadji! Vô trocá só um poucu. Ondji fika a saída? I ondji eu pégu u Úber?",
+     "en": "True! I'll just change a little. Where's the exit? And where do I get the Uber?"
+    },
+    {
+     "speaker": "Atendente",
+     "pt": "A saída é por ali. O Uber o senhor pega lá fora.",
+     "heard": "A saída é pur alí. U Úber u sinhô péga lá fóra.",
+     "en": "The exit's that way. You get the Uber outside."
+    },
+    {
+     "speaker": "George",
+     "pt": "Entendi. Muito obrigado, boa noite!",
+     "heard": "Entendí. Muintu obrigadu, boa noitchi!",
+     "en": "Got it. Thanks very much, good night!"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Vim visitar a minha namorada.",
+     "heard": "Vin vizitá a minha namorada.",
+     "en": "I've come to visit my girlfriend.",
+     "note": "lit: came to-visit the my girlfriend"
+    },
+    {
+     "pt": "Onde eu posso trocar dinheiro?",
+     "heard": "Ondji eu póssu trocá dinhêru?",
+     "en": "Where can I change money?",
+     "note": "lit: where I can to-change money? trocar = swap"
+    },
+    {
+     "pt": "Onde fica a saída?",
+     "heard": "Ondji fika a saída?",
+     "en": "Where's the exit?",
+     "note": "lit: where stays the exit? Onde fica + any place"
+    },
+    {
+     "pt": "Onde eu pego o Uber?",
+     "heard": "Ondji eu pégu u Úber?",
+     "en": "Where do I get the Uber?",
+     "note": "lit: where I catch the Uber?"
+    },
+    {
+     "pt": "No aeroporto é mais caro.",
+     "heard": "Nu aeropórtu é mais caru.",
+     "en": "It's more expensive at the airport.",
+     "note": "mais caro = dearer; mais barato = cheaper"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Atendente",
+     "q": "Qual é o motivo da viagem?",
+     "q_en": "What's the purpose of your trip?",
+     "model": "Vim visitar a minha namorada. Vou passar o Natal aqui.",
+     "model_en": "I've come to visit my girlfriend. I'm spending Christmas here."
+    },
+    {
+     "speaker": "Atendente",
+     "q": "Quanto tempo o senhor vai ficar? E vai ficar onde?",
+     "q_en": "How long are you staying? And where will you be staying?",
+     "model": "Vou ficar três semanas. Vou ficar na casa da mãe dela, aqui em São Paulo.",
+     "model_en": "I'm staying three weeks. I'm staying at her mum's house, here in São Paulo."
+    },
+    {
+     "speaker": "Atendente",
+     "q": "O senhor precisa de ajuda?",
+     "q_en": "Do you need any help?",
+     "model": "Preciso, sim. Onde eu posso trocar dinheiro? E onde eu pego o Uber?",
+     "model_en": "Yes, I do. Where can I change money? And where do I get the Uber?"
+    },
+    {
+     "speaker": "Atendente",
+     "q": "A sua mala não chegou. Como ela é?",
+     "q_en": "Your bag hasn't arrived. What does it look like?",
+     "hint": "É uma mala... (grande / pequena) e... (preta / azul / cinza). Tem..."
+    }
+   ],
+   "task": "Play the arrivals hall out loud for 3 minutes: answer the immigration officer (why you've come, how long, where you're staying), then ask three different people where the exit, the bureau de change and the Uber are, with Onde fica...? and Onde eu pego...? Then run the scene in Treino."
+  },
+  {
+   "ep": 20,
+   "title": "O Uber e a Marginal",
+   "intro": "George's Uber is stuck in traffic on the Marginal, and the driver wants to talk football. Your goal: confirm your ride, ask how long it takes, defend Spurs, and ask him to stop.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "O George entra no Uber. Na Marginal Tietê, tá tudo parado.",
+     "heard": "U George entra nu Úber. Na Marjinau Tchietê, tá tudu paradu.",
+     "en": "George gets into the Uber. On the Marginal Tietê, nothing is moving."
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Boa noite! George, né? Vai pra onde mesmo?",
+     "heard": "Boa noitchi! George, né? Vai pra ondji mezmu?",
+     "en": "Evening! George, right? Where are you headed again?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Isso, sou eu. Vou pra casa da mãe da minha namorada.",
+     "heard": "Issu, sô eu. Vô pra caza da mãinh da minha namorada.",
+     "en": "That's right, it's me. I'm going to my girlfriend's mum's house."
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Beleza! Mas ó, meu, tá mó trânsito na Marginal hoje.",
+     "heard": "Beleza! Mas ó, meu, tá mó trânzitu na Marjinau oji.",
+     "en": "Sweet! But look, mate, the traffic on the Marginal is terrible today."
+    },
+    {
+     "speaker": "George",
+     "pt": "Nossa! Quanto tempo demora?",
+     "heard": "Nóssa! Kuantu tempu demóra?",
+     "en": "Wow! How long does it take?"
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Uns cinquenta minutos. Cê não é daqui, né? Cê é de onde?",
+     "heard": "Uns sinkuenta minutus. Cê num é dakí, né? Cê é dji ondji?",
+     "en": "About fifty minutes. You're not from round here, are you? Where are you from?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Sou inglês. Acabei de chegar de Londres. A viagem foi longa!",
+     "heard": "Sô inglêis. Acabei dji chegá dji Londris. A viajein foi longa!",
+     "en": "I'm English. I've just arrived from London. The journey was long!"
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Inglês! Então cê gosta de futebol. Torce pra que time?",
+     "heard": "Inglêis! Entãu cê gósta dji futchibóu. Tórci pra ki tchimi?",
+     "en": "English! So you like football. Which team do you support?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Eu torço pro Tottenham. Sou sofredor!",
+     "heard": "Eu tórsu pru Tottenham. Sô sofredô!",
+     "en": "I support Tottenham. I'm long-suffering!"
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Tottenham? Esse time não ganha nada, meu! Eu sou corintiano.",
+     "heard": "Tottenham? Êssi tchimi num ganha nada, meu! Eu sô corintchianu.",
+     "en": "Tottenham? That team never wins anything, mate! I'm a Corinthians fan."
+    },
+    {
+     "speaker": "George",
+     "pt": "O Spurs perde muito, é verdade. Mas a gente não perde sempre!",
+     "heard": "U Spurs pérdji muintu, é verdadji. Mas a genchi num pérdji sempri!",
+     "en": "Spurs lose a lot, it's true. But we don't always lose!"
+    },
+    {
+     "speaker": "Motorista",
+     "pt": "Gostei de você, inglês! Ó, chegamos. É aquele prédio ali?",
+     "heard": "Gostei dji você, inglêis! Ó, chegamus. É akêli prédjiu alí?",
+     "en": "I like you, Englishman! Look, we're here. Is it that building there?"
+    },
+    {
+     "speaker": "George",
+     "pt": "É, sim. Pode parar aqui, por favor. Valeu, boa noite!",
+     "heard": "É, sin. Pódji pará akí, pur favô. Valeu, boa noitchi!",
+     "en": "Yes, it is. You can stop here, please. Cheers, good night!"
+    },
+    {
+     "speaker": "Narrador",
+     "pt": "O George chegou. Agora é a hora da surpresa!",
+     "heard": "U George chegô. Agóra é a óra da surpreza!",
+     "en": "George has arrived. Now it's time for the surprise!"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Isso, sou eu.",
+     "heard": "Issu, sô eu.",
+     "en": "That's right, it's me.",
+     "note": "lit: that, am I"
+    },
+    {
+     "pt": "Tá mó trânsito!",
+     "heard": "Tá mó trânzitu!",
+     "en": "The traffic's terrible!",
+     "note": "mó = loads of, really; pure São Paulo slang"
+    },
+    {
+     "pt": "Quanto tempo demora?",
+     "heard": "Kuantu tempu demóra?",
+     "en": "How long does it take?",
+     "note": "lit: how-much time it-takes?"
+    },
+    {
+     "pt": "Pode parar aqui, por favor.",
+     "heard": "Pódji pará akí, pur favô.",
+     "en": "You can stop here, please.",
+     "note": "lit: can to-stop here, please"
+    },
+    {
+     "pt": "Valeu, boa noite!",
+     "heard": "Valeu, boa noitchi!",
+     "en": "Cheers, good night!",
+     "note": "valeu = casual thanks, perfect with drivers"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Motorista",
+     "q": "Boa noite! George, né? Vai pra onde mesmo?",
+     "q_en": "Evening! George, right? Where are you headed again?",
+     "model": "Isso, sou eu. Vou pra casa da mãe da minha namorada.",
+     "model_en": "That's right, it's me. I'm going to my girlfriend's mum's house."
+    },
+    {
+     "speaker": "Motorista",
+     "q": "Cê é de onde? E tá fazendo o quê em São Paulo?",
+     "q_en": "Where are you from? And what are you doing in São Paulo?",
+     "model": "Sou inglês, moro perto de Londres. Vim visitar a minha namorada e passar o Natal aqui.",
+     "model_en": "I'm English, I live near London. I've come to visit my girlfriend and spend Christmas here."
+    },
+    {
+     "speaker": "Motorista",
+     "q": "E o Tottenham, tá ganhando?",
+     "q_en": "And Tottenham, are they winning?",
+     "model": "O Spurs perde muito! Mas a gente não perde sempre.",
+     "model_en": "Spurs lose a lot! But we don't always lose."
+    },
+    {
+     "speaker": "Motorista",
+     "q": "Cê prefere ir pela Marginal ou por dentro?",
+     "q_en": "Would you rather go along the Marginal or through the city?",
+     "hint": "Tanto faz! / Pode ser... (pela Marginal / por dentro). Qual é mais rápido? Quanto tempo demora?"
+    }
+   ],
+   "task": "On your next train or car journey, do 3 minutes of driver small talk under your breath: confirm your name, react to the traffic (Nossa, tá mó trânsito!), ask how long it takes, say where you're from and defend Spurs. Finish with 'Pode parar aqui, por favor. Valeu!' Then run the scene in Treino."
+  },
+  {
+   "ep": 21,
+   "title": "Chegando em casa",
+   "intro": "George arrives at Gabi's mum's place, and the surprise finally comes out. This is the big one, but you already know almost every phrase in it. Your goal: greet her warmly, describe the journey, turn down the egg politely, and compliment the food.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Dez e meia da noite. O George chega na casa da mãe da Gabi.",
+     "heard": "Déis i meia da noitchi. U George chéga na caza da mãinh da Gabi.",
+     "en": "Half past ten at night. George arrives at Gabi's mum's place."
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "George! Que bom te ver! Entra, entra! Como foi a viagem?",
+     "heard": "George! Ki bom tchi vê! Entra, entra! Comu foi a viajein?",
+     "en": "George! So good to see you! Come in, come in! How was the journey?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Que bom ver a senhora! Com licença. A viagem foi longa, mas tô muito animado de estar aqui.",
+     "heard": "Ki bom vê a sinhora! Cun licença. A viajein foi longa, mas tô muintu animadu dji istá akí.",
+     "en": "So good to see you! Excuse me. The journey was long, but I'm really excited to be here."
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "Nossa, George! Você tá falando português tão bem!",
+     "heard": "Nóssa, George! Você tá falanu portuguêis tãu bein!",
+     "en": "Goodness, George! You're speaking Portuguese so well!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Tô aprendendo há quatro meses. Era surpresa!",
+     "heard": "Tô aprendenu á kuatru mezis. Éra surpreza!",
+     "en": "I've been learning for four months. It was a surprise!"
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "Que lindo! Gabi, vem cá! Vem ouvir isso!",
+     "heard": "Ki lindu! Gabi, vein cá! Vein ouví issu!",
+     "en": "How lovely! Gabi, come here! Come and hear this!"
+    },
+    {
+     "speaker": "Gabi",
+     "pt": "Amor! Peraí... desde quando cê fala português tão bem?",
+     "heard": "Amô! Peraí... dezdji kuanu cê fala portuguêis tãu bein?",
+     "en": "Babe! Hang on... since when do you speak Portuguese so well?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Surpresa! Eu tava com muita saudade, amor.",
+     "heard": "Surpreza! Eu tava cun muinta saudadji, amô.",
+     "en": "Surprise! I really missed you, babe."
+    },
+    {
+     "speaker": "Gabi",
+     "pt": "Eu também! Não acredito, cê não me contou nada!",
+     "heard": "Eu tambein! Num acreditu, cê num mi contô nada!",
+     "en": "Me too! I can't believe it, you didn't tell me anything!"
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "Senta, George, fica à vontade. Cê tá com fome? Tem arroz, feijão e bife. Quer um ovo frito também?",
+     "heard": "Senta, George, fika à vontadji. Cê tá cun fomi? Tein arrôis, feijãu i bifi. Ké um ôvu fritu tambein?",
+     "en": "Sit down, George, make yourself at home. Are you hungry? There's rice, beans and steak. Would you like a fried egg too?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Tô com muita fome! Obrigado, mas eu não como ovo. O resto eu quero, sim!",
+     "heard": "Tô cun muinta fomi! Obrigadu, mas eu num comu ôvu. U réstu eu kéru, sin!",
+     "en": "I'm starving! Thank you, but I don't eat eggs. I'd love the rest, though!"
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "Ai, é verdade, a Gabi me falou! Sem ovo, então. Come, come!",
+     "heard": "Ai, é verdadji, a Gabi mi falô! Sein ôvu, entãu. Comi, comi!",
+     "en": "Oh, that's right, Gabi told me! No egg, then. Eat, eat!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Nossa, tá uma delícia! A senhora cozinha muito bem.",
+     "heard": "Nóssa, tá uma delícia! A sinhora cozinha muintu bein.",
+     "en": "Wow, it's delicious! You cook really well."
+    },
+    {
+     "speaker": "Mãe",
+     "pt": "Obrigada, meu filho! A casa é sua.",
+     "heard": "Obrigada, meu filhu! A caza é sua.",
+     "en": "Thank you, my dear! Our home is your home."
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Que bom ver a senhora!",
+     "heard": "Ki bom vê a sinhora!",
+     "en": "So good to see you!",
+     "note": "lit: how good to-see the lady (polite 'you')"
+    },
+    {
+     "pt": "A viagem foi longa, mas tô muito animado de estar aqui.",
+     "heard": "A viajein foi longa, mas tô muintu animadu dji istá akí.",
+     "en": "The journey was long, but I'm really excited to be here.",
+     "note": "longa, not longe; lit: excited of to-be here"
+    },
+    {
+     "pt": "Eu tava com muita saudade.",
+     "heard": "Eu tava cun muinta saudadji.",
+     "en": "I really missed you.",
+     "note": "lit: I was with much longing"
+    },
+    {
+     "pt": "Obrigado, mas eu não como ovo.",
+     "heard": "Obrigadu, mas eu num comu ôvu.",
+     "en": "Thank you, but I don't eat eggs.",
+     "note": "lit: thanks, but I not eat egg"
+    },
+    {
+     "pt": "A senhora cozinha muito bem.",
+     "heard": "A sinhora cozinha muintu bein.",
+     "en": "You cook really well.",
+     "note": "lit: the lady cooks very well; bem with verbs"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Mãe",
+     "q": "Como foi a viagem?",
+     "q_en": "How was the journey?",
+     "model": "A viagem foi longa, mas tô muito animado de estar aqui.",
+     "model_en": "The journey was long, but I'm really excited to be here."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Cê tá com fome? Quer um ovo frito?",
+     "q_en": "Are you hungry? Would you like a fried egg?",
+     "model": "Tô com muita fome! Obrigado, mas eu não como ovo.",
+     "model_en": "I'm starving! Thank you, but I don't eat eggs."
+    },
+    {
+     "speaker": "Mãe",
+     "q": "Quem te ensinou português? E por que você não contou nada?",
+     "q_en": "Who taught you Portuguese? And why didn't you say anything?",
+     "model": "Aprendi com amigos brasileiros em Londres. Não contei nada porque era surpresa!",
+     "model_en": "I learnt with Brazilian friends in London. I didn't say anything because it was a surprise!"
+    },
+    {
+     "speaker": "Mãe",
+     "q": "E a sua família, tá bem? Você tem irmãos, né?",
+     "q_en": "And is your family well? You've got brothers and sisters, haven't you?",
+     "model": "Tá todo mundo bem, obrigado! Tenho um irmão e duas irmãs.",
+     "model_en": "Everyone's well, thank you! I have one brother and two sisters."
+    }
+   ],
+   "task": "Walk in through your own front door and play the arrival out loud for 3 minutes: Que bom ver a senhora!, Com licença, the journey, what you don't eat, a compliment on the food. Do it twice; the second time, answer every question in two sentences. Then run the scene in Treino."
+  },
+  {
+   "ep": 22,
+   "title": "Pedindo informação",
+   "intro": "Next morning, George is on Avenida Paulista looking for the metro. There are a few new direction words here, and you'll hear each one twice. Your goal: ask where something is, repeat the directions back, and ask which line and which station.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Sexta de manhã. O George tá na Avenida Paulista. Ele quer ir pra Vila Madalena, mas não sabe onde fica o metrô.",
+     "heard": "Sesta dji manhã. U George tá na Avenida Paulista. Eli ké í pra Vila Madaléna, mas num sabi ondji fika u metrô.",
+     "en": "Friday morning. George is on Avenida Paulista. He wants to go to Vila Madalena, but he doesn't know where the metro is."
+    },
+    {
+     "speaker": "George",
+     "pt": "Com licença, onde fica o metrô?",
+     "heard": "Cun licença, ondji fika u metrô?",
+     "en": "Excuse me, where's the metro?"
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "O metrô? É fácil: vira à direita ali, segue reto uns cinco minutos e a estação fica do lado esquerdo!",
+     "heard": "U metrô? É fáciu: vira à djirêita alí, ségui rétu uns sinku minutus i a istassãu fika du ladu iskerdu!",
+     "en": "The metro? Easy: turn right there, go straight on for about five minutes and the station's on the left!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Desculpa, não entendi. Pode repetir? Mais devagar, por favor.",
+     "heard": "Djiscupa, num entendí. Pódji repetí? Mais devagá, pur favô.",
+     "en": "Sorry, I didn't understand. Can you say that again? More slowly, please."
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "Claro! Primeiro, vira à direita ali. Depois, segue reto.",
+     "heard": "Cláru! Primêru, vira à djirêita alí. Dipois, ségui rétu.",
+     "en": "Sure! First, turn right there. Then go straight on."
+    },
+    {
+     "speaker": "George",
+     "pt": "Então eu viro à direita e sigo reto?",
+     "heard": "Entãu eu viru à djirêita i sigu rétu?",
+     "en": "So I turn right and go straight on?"
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "Isso! A estação fica do lado esquerdo.",
+     "heard": "Issu! A istassãu fika du ladu iskerdu.",
+     "en": "That's it! The station's on the left-hand side."
+    },
+    {
+     "speaker": "George",
+     "pt": "É perto ou longe?",
+     "heard": "É pértu ou lonji?",
+     "en": "Is it near or far?"
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "É pertinho! Cê vai pra onde?",
+     "heard": "É pertchinhu! Cê vai pra ondji?",
+     "en": "It's really close! Where are you going?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Vou pra Vila Madalena. Qual linha eu pego? E em qual estação eu desço?",
+     "heard": "Vô pra Vila Madaléna. Kuau linha eu pégu? I ein kuau istassãu eu déssu?",
+     "en": "I'm going to Vila Madalena. Which line do I take? And which station do I get off at?"
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "Pega a linha verde e desce na Vila Madalena mesmo. Cê não tem mapa no celular?",
+     "heard": "Péga a linha verdji i déci na Vila Madaléna mezmu. Cê num tein mapa nu celulá?",
+     "en": "Take the green line and get off at Vila Madalena itself. Haven't you got a map on your phone?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Tenho, mas eu não sou muito bom nisso. E quero treinar o meu português!",
+     "heard": "Tenhu, mas eu num sô muintu bom nissu. I kéru treiná u meu portuguêis!",
+     "en": "I have, but I'm not very good at it. And I want to practise my Portuguese!"
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "E tá falando bem, viu! Boa sorte!",
+     "heard": "I tá falanu bein, viu! Boa sórtchi!",
+     "en": "And you're speaking well, you know! Good luck!"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Com licença, onde fica o metrô?",
+     "heard": "Cun licença, ondji fika u metrô?",
+     "en": "Excuse me, where's the metro?",
+     "note": "lit: with permission, where stays the metro?"
+    },
+    {
+     "pt": "É perto ou longe?",
+     "heard": "É pértu ou lonji?",
+     "en": "Is it near or far?",
+     "note": "perto = near; longe = far"
+    },
+    {
+     "pt": "Então eu viro à direita e sigo reto?",
+     "heard": "Entãu eu viru à djirêita i sigu rétu?",
+     "en": "So I turn right and go straight on?",
+     "note": "lit: so I turn to-the right and follow straight?"
+    },
+    {
+     "pt": "Qual linha eu pego?",
+     "heard": "Kuau linha eu pégu?",
+     "en": "Which line do I take?",
+     "note": "lit: which line I catch?"
+    },
+    {
+     "pt": "Em qual estação eu desço?",
+     "heard": "Ein kuau istassãu eu déssu?",
+     "en": "Which station do I get off at?",
+     "note": "lit: in which station I go-down?"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Estranho",
+     "q": "Oi! Tá perdido? Posso ajudar?",
+     "q_en": "Hi! Are you lost? Can I help?",
+     "model": "Tô, sim! Onde fica o metrô? É perto ou longe?",
+     "model_en": "Yes, I am! Where's the metro? Is it near or far?"
+    },
+    {
+     "speaker": "Estranho",
+     "q": "Vira à direita e segue reto. Entendeu?",
+     "q_en": "Turn right and go straight on. Got that?",
+     "model": "Então eu viro à direita e sigo reto? Entendi, valeu!",
+     "model_en": "So I turn right and go straight on? Got it, cheers!"
+    },
+    {
+     "speaker": "Estranho",
+     "q": "Cê vai pra onde?",
+     "q_en": "Where are you going?",
+     "model": "Vou pra Vila Madalena. Qual linha eu pego, e em qual estação eu desço?",
+     "model_en": "I'm going to Vila Madalena. Which line do I take, and which station do I get off at?"
+    },
+    {
+     "speaker": "Estranho",
+     "q": "E na sua cidade, como eu chego da estação até a sua casa?",
+     "q_en": "And in your town, how do I get from the station to your house?",
+     "hint": "Sai da estação, vira à... (direita / esquerda) e segue reto. É... (perto / longe), uns... minutos."
+    }
+   ],
+   "task": "On your next walk to the station or the gym, give yourself directions out loud for 3 minutes: Viro à direita, sigo reto, a academia fica do lado esquerdo, é perto. Then stop an imaginary stranger: ask for the metro, repeat the directions back, and ask which line and which station. Then run the scene in Treino."
+  }
+ ],
+ "drills": [
+  {
+   "en": "I've come to visit my girlfriend.",
+   "pt": "Vim visitar a minha namorada."
+  },
+  {
+   "en": "Where can I change money?",
+   "pt": "Onde eu posso trocar dinheiro?"
+  },
+  {
+   "en": "Where's the exit? And where do I get the Uber?",
+   "pt": "Onde fica a saída? E onde eu pego o Uber?"
+  },
+  {
+   "en": "It's more expensive at the airport.",
+   "pt": "No aeroporto é mais caro."
+  },
+  {
+   "en": "That's right, it's me.",
+   "pt": "Isso, sou eu."
+  },
+  {
+   "en": "The traffic's terrible!",
+   "pt": "Tá mó trânsito!"
+  },
+  {
+   "en": "How long does it take?",
+   "pt": "Quanto tempo demora?"
+  },
+  {
+   "en": "You can stop here, please.",
+   "pt": "Pode parar aqui, por favor."
+  },
+  {
+   "en": "Cheers, good night!",
+   "pt": "Valeu, boa noite!"
+  },
+  {
+   "en": "So good to see you! (to Gabi's mum)",
+   "pt": "Que bom ver a senhora!"
+  },
+  {
+   "en": "The journey was long, but I'm really excited to be here.",
+   "pt": "A viagem foi longa, mas tô muito animado de estar aqui."
+  },
+  {
+   "en": "I really missed you.",
+   "pt": "Eu tava com muita saudade."
+  },
+  {
+   "en": "Thank you, but I don't eat eggs.",
+   "pt": "Obrigado, mas eu não como ovo."
+  },
+  {
+   "en": "You cook really well. (to Gabi's mum)",
+   "pt": "A senhora cozinha muito bem."
+  },
+  {
+   "en": "Excuse me, where's the metro? Is it near or far?",
+   "pt": "Com licença, onde fica o metrô? É perto ou longe?"
+  },
+  {
+   "en": "So I turn right and go straight on?",
+   "pt": "Então eu viro à direita e sigo reto?"
+  },
+  {
+   "en": "Which line do I take? And which station do I get off at?",
+   "pt": "Qual linha eu pego? E em qual estação eu desço?"
+  },
+  {
+   "en": "It's delicious!",
+   "pt": "Tá uma delícia!"
+  },
+  {
+   "en": "I support Tottenham.",
+   "pt": "Eu torço pro Tottenham."
+  },
+  {
+   "en": "Can you speak more slowly?",
+   "pt": "Pode falar mais devagar?"
+  },
+  {
+   "en": "How long have you been here?",
+   "pt": "Tá aqui há quanto tempo?"
+  },
+  {
+   "en": "How much is it?",
+   "pt": "Quanto fica?"
+  },
+  {
+   "en": "Today was really hectic.",
+   "pt": "Hoje foi muito corrido."
+  },
+  {
+   "en": "It's a small world!",
+   "pt": "O mundo é pequeno!"
+  },
+  {
+   "en": "I work in FX.",
+   "pt": "Trabalho com câmbio."
+  },
+  {
+   "en": "Spurs lose a lot.",
+   "pt": "O Spurs perde muito."
+  },
+  {
+   "en": "We don't always lose!",
+   "pt": "A gente não perde sempre!"
+  },
+  {
+   "en": "I'm not very good at it.",
+   "pt": "Eu não sou muito bom nisso."
+  },
+  {
+   "en": "Gabi isn't very good at it.",
+   "pt": "A Gabi não é muito boa nisso."
+  },
+  {
+   "en": "I have one brother and two sisters.",
+   "pt": "Tenho um irmão e duas irmãs."
+  }
+ ],
+ "talk": [
+  {
+   "en": "Your journey from London: the flight, the airport, the Uber",
+   "pt": "George, me conta tudo: como foi a viagem de Londres até aqui?"
+  },
+  {
+   "en": "Being in Brazil at last: how you feel and what you missed",
+   "pt": "E aí, como é estar aqui no Brasil? Do que você tava com saudade?"
+  },
+  {
+   "en": "Directions: how to get from your house to your work in London",
+   "pt": "Me explica: como eu chego da sua casa até o seu trabalho, lá em Londres?"
+  }
+ ]
+}
