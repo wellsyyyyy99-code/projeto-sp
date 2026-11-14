@@ -1,0 +1,776 @@
+{
+ "id": "speaking-core",
+ "title": "Speaking core",
+ "intro": "Speaking core. You'll hear the English, then you've got a few seconds to say it in Portuguese, out loud. Then you'll hear it twice: repeat it both times.",
+ "topics": {
+  "eu": "About me",
+  "trabalho": "Work",
+  "rotina": "Routine",
+  "viagem": "The trip",
+  "esporte": "Sport",
+  "comida": "Food",
+  "pedido": "Ordering",
+  "sobreviver": "Survival",
+  "social": "Making plans",
+  "historia": "Stories",
+  "reacao": "Reactions"
+ },
+ "tracks": [
+  [
+   "A",
+   "eu",
+   "trabalho",
+   "rotina",
+   "viagem"
+  ],
+  [
+   "B",
+   "esporte",
+   "comida",
+   "pedido",
+   "social"
+  ],
+  [
+   "C",
+   "sobreviver",
+   "historia",
+   "reacao"
+  ]
+ ],
+ "cards": [
+  {
+   "topic": "eu",
+   "en": "Nice to meet you! I'm George.",
+   "pt": "Prazer! Eu sou o George.",
+   "q": "Prazer! Como cê chama?",
+   "q_speaker": "Rafa",
+   "frame": "Prazer! Eu sou o ___.",
+   "swaps": [
+    "George",
+    "(your name, then ask:) E você?"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "I'm from England. I live near London.",
+   "pt": "Sou da Inglaterra. Moro perto de Londres.",
+   "q": "Cê é de onde?",
+   "q_speaker": "Rafa",
+   "heard": "sô da inglatéra. móro pértu dji londris",
+   "frame": "Sou da/do ___. Moro perto de ___.",
+   "swaps": [
+    "Inglaterra / Reino Unido",
+    "Londres / Brentwood"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "I live in Brentwood. I get the train to London every day.",
+   "pt": "Moro em Brentwood. Pego o trem pra Londres todo dia.",
+   "q": "Cê mora onde?",
+   "q_speaker": "Rafa",
+   "frame": "Moro em ___. Pego o ___ pra ___ todo dia.",
+   "swaps": [
+    "Brentwood / Londres",
+    "trem / ônibus / metrô",
+    "Londres / o trabalho / a academia"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "I'm twenty-six.",
+   "pt": "Tenho vinte e seis anos.",
+   "q": "Quantos anos cê tem?",
+   "q_speaker": "Rafa",
+   "heard": "tênhu vínchi i seis ânus",
+   "frame": "Tenho ___ anos.",
+   "swaps": [
+    "vinte e seis",
+    "vinte e cinco",
+    "trinta"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "Yes, I've got a brother and two sisters.",
+   "pt": "Tenho, sim! Um irmão e duas irmãs.",
+   "q": "Cê tem irmãos?",
+   "q_speaker": "Rafa",
+   "heard": "tênhu sĩ! ũ irmãu i dúas irmãs",
+   "frame": "Tenho, sim! ___ e ___.",
+   "swaps": [
+    "um irmão / dois irmãos",
+    "uma irmã / duas irmãs",
+    "Não tenho. Sou filho único."
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "A little bit! I'm learning.",
+   "pt": "Um pouquinho! Tô aprendendo.",
+   "q": "Cê fala português?",
+   "q_speaker": "Rafa",
+   "heard": "ũ pokínhu! tô aprendẽndu",
+   "frame": "___! Tô ___.",
+   "swaps": [
+    "Um pouquinho / Mais ou menos / Tô tentando",
+    "aprendendo / estudando / melhorando"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "Because my girlfriend is from São Paulo.",
+   "pt": "Porque minha namorada é de São Paulo.",
+   "q": "Por que cê tá aprendendo português?",
+   "q_speaker": "Rafa",
+   "frame": "Porque ___.",
+   "swaps": [
+    "minha namorada é de São Paulo",
+    "vou pra São Paulo em dezembro",
+    "quero falar com a família dela",
+    "adoro o Brasil"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "We met online, and then we met in person in London.",
+   "pt": "A gente se conheceu na internet, e depois a gente se viu pessoalmente em Londres.",
+   "q": "Como vocês se conheceram?",
+   "q_speaker": "Rafa",
+   "heard": "a jẽnchi si conhessêu na interneti, i dipôis a jẽnchi si viu...",
+   "frame": "A gente se conheceu ___, e depois ___.",
+   "swaps": [
+    "na internet / numa festa / no trabalho",
+    "a gente se viu pessoalmente em Londres / começou a namorar"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "Not yet! I'm going in December.",
+   "pt": "Ainda não! Vou em dezembro.",
+   "q": "Cê já foi pro Brasil?",
+   "q_speaker": "Rafa",
+   "frame": "Ainda não! Vou ___.",
+   "swaps": [
+    "em dezembro / dia dezessete",
+    "(or) Já! Fui em ___ (year)"
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "I work in FX at a fintech.",
+   "pt": "Trabalho com câmbio numa fintech.",
+   "q": "O que cê faz da vida?",
+   "q_speaker": "Rafa",
+   "heard": "trabálhu cũ câmbiu numa fintéqui",
+   "frame": "Trabalho com ___ numa/num ___.",
+   "swaps": [
+    "câmbio / finanças / tecnologia",
+    "fintech / banco / empresa"
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "I connect banks and clients.",
+   "pt": "Eu conecto bancos e clientes.",
+   "q": "Como assim, câmbio?",
+   "q_speaker": "Rafa",
+   "frame": "Eu ___ ___ e ___.",
+   "swaps": [
+    "conecto / ajudo",
+    "bancos / clientes / empresas"
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "Yes, I do! But it's busy.",
+   "pt": "Gosto, sim! Mas é corrido.",
+   "q": "Cê gosta do seu trabalho?",
+   "q_speaker": "Rafa",
+   "heard": "góstu sĩ! mas é korídu",
+   "frame": "Gosto, sim! Mas é ___.",
+   "swaps": [
+    "corrido / estressante / puxado",
+    "(or) Gosto muito! / Mais ou menos..."
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "It was really hectic. I had five meetings.",
+   "pt": "Foi muito corrido. Tive cinco reuniões.",
+   "q": "Como foi o trabalho hoje?",
+   "q_speaker": "Rafa",
+   "heard": "tchívi sĩku hiuniõis",
+   "frame": "Foi ___. Tive ___.",
+   "swaps": [
+    "muito corrido / tranquilo / longo",
+    "cinco reuniões / muito trabalho / um cliente bravo"
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "There wasn't time. I ate at my desk.",
+   "pt": "Não deu tempo. Comi na mesa.",
+   "q": "Cê almoçou?",
+   "q_speaker": "Rafa",
+   "heard": "nãu dêu tẽmpu",
+   "frame": "___. Comi ___.",
+   "swaps": [
+    "Não deu tempo / Almocei, sim",
+    "na mesa / um sanduíche / no restaurante"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I wake up early, around half six.",
+   "pt": "Acordo cedo, umas seis e meia.",
+   "q": "Que horas cê acorda?",
+   "q_speaker": "Rafa",
+   "heard": "akórdu sêdu, umas seis i mêia",
+   "frame": "Acordo ___, umas ___.",
+   "swaps": [
+    "cedo / tarde",
+    "seis / seis e meia / sete"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I get the train every day.",
+   "pt": "Pego o trem todo dia.",
+   "q": "Como cê vai pro trabalho?",
+   "q_speaker": "Rafa",
+   "heard": "pégu u trẽĩ tôdu djía",
+   "frame": "Pego ___ todo dia.",
+   "swaps": [
+    "o trem / o ônibus / o metrô",
+    "(or) Vou de carro / Vou a pé"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "It was long! The train was late.",
+   "pt": "Foi longa! O trem atrasou.",
+   "q": "Como foi a viagem hoje?",
+   "q_speaker": "Rafa",
+   "heard": "fôi lõnga! u trẽĩ atrazôu",
+   "frame": "Foi ___! ___.",
+   "swaps": [
+    "longa / rápida / tranquila",
+    "O trem atrasou / Dormi no trem / Tava lotado"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "Every day! And I do boxing too.",
+   "pt": "Todo dia! E faço boxe também.",
+   "q": "Cê vai pra academia todo dia?",
+   "q_speaker": "Rafa",
+   "heard": "tôdu djía! i fássu bóksi tãmbẽĩ",
+   "frame": "___! E faço ___ também.",
+   "swaps": [
+    "Todo dia / Quase todo dia / Cinco vezes por semana",
+    "boxe / corrida"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I have dinner, study Portuguese and sleep.",
+   "pt": "Janto, estudo português e durmo.",
+   "q": "O que cê faz à noite?",
+   "q_speaker": "Rafa",
+   "frame": "___, ___ e ___.",
+   "swaps": [
+    "Janto / Vejo TV / Saio com os amigos",
+    "estudo português / treino",
+    "durmo / ligo pra Gabi"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I'm knackered! I worked all day.",
+   "pt": "Tô morto! Trabalhei o dia inteiro.",
+   "q": "Cê tá cansado?",
+   "q_speaker": "Rafa",
+   "heard": "tô mórtu! trabalhêi u djía intêiru",
+   "frame": "Tô ___! ___ o dia inteiro.",
+   "swaps": [
+    "morto / cansado / de boa",
+    "Trabalhei / Treinei / Andei"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I'm going home.",
+   "pt": "Tô indo pra casa.",
+   "q": "Cê vai pra onde agora?",
+   "q_speaker": "Rafa",
+   "heard": "tô ĩndu pra káza",
+   "frame": "Tô indo pra ___.",
+   "swaps": [
+    "casa / academia / o trabalho / o pub"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "I'm going on the 17th of December.",
+   "pt": "Vou dia dezessete de dezembro.",
+   "q": "Quando cê vai pra São Paulo?",
+   "q_speaker": "Rafa",
+   "frame": "Vou dia ___ de ___.",
+   "swaps": [
+    "dezessete / vinte",
+    "dezembro"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "I'm really excited!",
+   "pt": "Tô muito animado!",
+   "q": "Cê tá animado?",
+   "q_speaker": "Rafa",
+   "frame": "Tô ___!",
+   "swaps": [
+    "muito animado / um pouco nervoso / ansioso"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "I'm really excited to be here!",
+   "pt": "Tô muito animado de estar aqui!",
+   "q": "E aí, chegou! Tá animado?",
+   "q_speaker": "Rafa",
+   "heard": "tô mũĩtu animádu dji istár akí",
+   "frame": "Tô muito animado de ___!",
+   "swaps": [
+    "estar aqui / te ver / conhecer São Paulo"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "I want to eat a lot and go to a football match.",
+   "pt": "Quero comer muito e ver um jogo de futebol.",
+   "q": "O que cê quer fazer em São Paulo?",
+   "q_speaker": "Rafa",
+   "frame": "Quero ___ e ___.",
+   "swaps": [
+    "comer muito / conhecer a cidade / ir na praia",
+    "ver um jogo de futebol / sair com os amigos da Gabi"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "At Gabi's mum's house.",
+   "pt": "Na casa da mãe da Gabi.",
+   "q": "Onde cê vai ficar?",
+   "q_speaker": "Rafa",
+   "heard": "na káza da mãi da gábi",
+   "frame": "Na casa ___.",
+   "swaps": [
+    "da mãe da Gabi / da Gabi / de um amigo",
+    "(or) Num hotel"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "It was long, but it was good!",
+   "pt": "Foi longa, mas foi tranquila!",
+   "q": "Como foi a viagem?",
+   "q_speaker": "Rafa",
+   "frame": "Foi ___, mas ___!",
+   "swaps": [
+    "longa / cansativa",
+    "foi tranquila / deu tudo certo"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "I'm going to train and watch the game.",
+   "pt": "Vou treinar e ver o jogo.",
+   "q": "O que cê vai fazer no fim de semana?",
+   "q_speaker": "Rafa",
+   "frame": "Vou ___ e ___.",
+   "swaps": [
+    "treinar / descansar / sair",
+    "ver o jogo / encontrar o Rafa / ligar pra Gabi"
+   ]
+  },
+  {
+   "topic": "viagem",
+   "en": "It's not long till December!",
+   "pt": "Falta pouco pra dezembro!",
+   "heard": "fáuta pôku pra dezẽmbru"
+  },
+  {
+   "topic": "esporte",
+   "en": "I support Tottenham. I'm a long-suffering fan!",
+   "pt": "Torço pro Tottenham. Sou sofredor!",
+   "q": "Cê torce pra quem?",
+   "q_speaker": "Rafa",
+   "heard": "tórsu pru tótenham. sô sofredôr",
+   "frame": "Torço pro ___. Sou ___!",
+   "swaps": [
+    "Tottenham",
+    "sofredor / torcedor fanático"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "No, we lost again…",
+   "pt": "Não, perdeu de novo…",
+   "q": "O Tottenham ganhou?",
+   "q_speaker": "Rafa",
+   "frame": "Não, ___ de novo…",
+   "swaps": [
+    "perdeu / empatou",
+    "(or) Ganhou! Finalmente!"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "It was a draw. Almost a win!",
+   "pt": "Empatou. Quase uma vitória!",
+   "q": "O Tottenham ganhou?",
+   "q_speaker": "Rafa",
+   "frame": "Empatou. ___!",
+   "swaps": [
+    "Quase uma vitória / Podia ser pior / Que sofrimento"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "I like Formula 1 and boxing.",
+   "pt": "Gosto de Fórmula 1 e de boxe.",
+   "q": "Cê gosta de outros esportes?",
+   "q_speaker": "Rafa",
+   "frame": "Gosto de ___ e de ___.",
+   "swaps": [
+    "Fórmula 1 / boxe / academia",
+    "boxe / tênis / corrida"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "I've been training for a few years.",
+   "pt": "Treino faz uns anos.",
+   "q": "Há quanto tempo cê treina boxe?",
+   "q_speaker": "Rafa",
+   "frame": "Treino faz ___.",
+   "swaps": [
+    "uns anos / dois anos / pouco tempo"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "Let's do it! Give me your number.",
+   "pt": "Bora! Me passa seu número.",
+   "q": "Bora ver o próximo jogo junto?",
+   "q_speaker": "Rafa",
+   "frame": "___! Me passa ___.",
+   "swaps": [
+    "Bora / Pode ser / Fechou",
+    "seu número / seu Instagram"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "I don't eat eggs, fish or cheese.",
+   "pt": "Não como ovo, peixe nem queijo.",
+   "q": "Tem alguma coisa que cê não come?",
+   "q_speaker": "Rafa",
+   "heard": "nãu kômu ôvu, pêixi nẽĩ kêiju",
+   "frame": "Não como ___, ___ nem ___.",
+   "swaps": [
+    "ovo",
+    "peixe",
+    "queijo"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "Not even pão de queijo!",
+   "pt": "Nem pão de queijo!",
+   "q": "Nem pão de queijo?!",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "comida",
+   "en": "I'd like the picanha, please.",
+   "pt": "Quero uma picanha, por favor.",
+   "q": "O que cê vai querer?",
+   "q_speaker": "Rafa",
+   "frame": "Quero ___, por favor.",
+   "swaps": [
+    "uma picanha / um suco / uma água com gás / um guaraná"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "It's delicious!",
+   "pt": "Tá uma delícia!",
+   "q": "Tá bom?",
+   "q_speaker": "Rafa",
+   "frame": "Tá ___!",
+   "swaps": [
+    "uma delícia / muito bom / ótimo"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "No, thanks. The bill, please.",
+   "pt": "Não, obrigado. A conta, por favor.",
+   "q": "Vai querer mais alguma coisa?",
+   "q_speaker": "Rafa",
+   "frame": "Não, obrigado. ___, por favor.",
+   "swaps": [
+    "A conta / Só a conta"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "Does this have cheese in it?",
+   "pt": "Isso tem queijo?"
+  },
+  {
+   "topic": "comida",
+   "en": "Can I pay by card?",
+   "pt": "Posso pagar no cartão?",
+   "q": "Pode pagar no Pix?",
+   "q_speaker": "Rafa",
+   "frame": "Posso pagar ___?",
+   "swaps": [
+    "no cartão / em dinheiro / no débito"
+   ]
+  },
+  {
+   "topic": "pedido",
+   "en": "Can I have a white coffee, please? No sugar.",
+   "pt": "Me vê um café com leite, por favor. Sem açúcar.",
+   "q": "O que vai ser hoje?",
+   "q_speaker": "Rafa",
+   "heard": "mi vê ũ kafé kũ lêitchi",
+   "frame": "Me vê ___, por favor. ___.",
+   "swaps": [
+    "um café com leite / um coado / um expresso",
+    "Sem açúcar / Com leite de aveia"
+   ]
+  },
+  {
+   "topic": "pedido",
+   "en": "To take away, please.",
+   "pt": "Pra viagem, por favor.",
+   "q": "Pra tomar aqui ou pra viagem?",
+   "q_speaker": "Rafa",
+   "frame": "Pra ___, por favor.",
+   "swaps": [
+    "viagem / tomar aqui"
+   ]
+  },
+  {
+   "topic": "pedido",
+   "en": "How much is it?",
+   "pt": "Quanto fica?"
+  },
+  {
+   "topic": "pedido",
+   "en": "For two, please.",
+   "pt": "Pra duas pessoas, por favor.",
+   "q": "Mesa pra quantas pessoas?",
+   "q_speaker": "Rafa",
+   "frame": "Pra ___ pessoas, por favor.",
+   "swaps": [
+    "duas / três / quatro"
+   ]
+  },
+  {
+   "topic": "pedido",
+   "en": "Do you have anything without cheese?",
+   "pt": "Tem alguma coisa sem queijo?"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "Sorry, I didn't understand.",
+   "pt": "Desculpa, não entendi.",
+   "heard": "djiskúupa, nãu ẽntẽndjí"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "Can you speak more slowly?",
+   "pt": "Pode falar mais devagar?",
+   "heard": "pódji falár mais djivagár"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "Say that again, please?",
+   "pt": "Repete, por favor?"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "What do you mean?",
+   "pt": "Como assim?"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "What does 'rolê' mean?",
+   "pt": "O que significa 'rolê'?"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "How do you say 'knackered' in Portuguese?",
+   "pt": "Como fala 'knackered' em português?"
+  },
+  {
+   "topic": "sobreviver",
+   "en": "Hang on, I'm thinking…",
+   "pt": "Pera, tô pensando…"
+  },
+  {
+   "topic": "social",
+   "en": "Sure! Wednesday afternoon? Deal!",
+   "pt": "Bora! Quarta à tarde? Fechou!",
+   "q": "Bora tomar um café?",
+   "q_speaker": "Rafa",
+   "frame": "Bora! ___ à/de ___? Fechou!",
+   "swaps": [
+    "Quarta / Sábado / Amanhã",
+    "tarde / manhã / noite"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "Sure! What time?",
+   "pt": "Pode ser! Que horas?",
+   "q": "Bora fazer uma chamada?",
+   "q_speaker": "Rafa",
+   "frame": "Pode ser! ___?",
+   "swaps": [
+    "Que horas / Que dia / Agora"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "What time is it there?",
+   "pt": "Que horas são aí?"
+  },
+  {
+   "topic": "social",
+   "en": "Tomorrow's better for me.",
+   "pt": "Amanhã é melhor pra mim."
+  },
+  {
+   "topic": "social",
+   "en": "Yes, I do! But I miss the sun.",
+   "pt": "Gosto, sim! Mas sinto falta do sol.",
+   "q": "Cê gosta de morar em Londres?",
+   "q_speaker": "Rafa",
+   "frame": "Gosto, sim! Mas ___.",
+   "swaps": [
+    "sinto falta do sol / é caro / chove muito"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "I've got to go. Thanks! Speak later!",
+   "pt": "Tenho que ir. Valeu! Falou!",
+   "heard": "tênhu ki ír. valêu! falôu"
+  },
+  {
+   "topic": "social",
+   "en": "All good! And you?",
+   "pt": "Tudo bem! E você?",
+   "q": "Tudo bem?",
+   "q_speaker": "Rafa",
+   "frame": "Tudo ___! E você?",
+   "swaps": [
+    "bem / ótimo / tranquilo"
+   ]
+  },
+  {
+   "topic": "historia",
+   "en": "It was good! I went to the gym and watched the Spurs game.",
+   "pt": "Foi bom! Fui pra academia e vi o jogo do Tottenham.",
+   "q": "Como foi o fim de semana?",
+   "q_speaker": "Rafa",
+   "frame": "Foi bom! Fui ___ e ___.",
+   "swaps": [
+    "pra academia / numa festa / pro pub",
+    "vi o jogo do Tottenham / encontrei o Rafa / descansei"
+   ]
+  },
+  {
+   "topic": "historia",
+   "en": "It was busy, but it all worked out.",
+   "pt": "Foi corrido, mas deu tudo certo.",
+   "q": "Como foi seu dia?",
+   "q_speaker": "Rafa",
+   "heard": "mas dêu tudu sértu",
+   "frame": "Foi ___, mas ___.",
+   "swaps": [
+    "corrido / longo / puxado",
+    "deu tudo certo / foi bom"
+   ]
+  },
+  {
+   "topic": "historia",
+   "en": "You won't believe it!",
+   "pt": "Cê não vai acreditar!"
+  },
+  {
+   "topic": "historia",
+   "en": "Yes! And suddenly I woke up in Southend. How embarrassing!",
+   "pt": "Já! E de repente acordei em Southend. Que mico!",
+   "q": "Cê já dormiu no trem?",
+   "q_speaker": "Rafa",
+   "frame": "Já! E de repente ___. Que mico!",
+   "swaps": [
+    "acordei em Southend / perdi minha estação"
+   ]
+  },
+  {
+   "topic": "historia",
+   "en": "Yes, I used to play with my brother.",
+   "pt": "Jogava, sim! Com o meu irmão.",
+   "q": "Quando cê era pequeno, cê jogava futebol?",
+   "q_speaker": "Rafa",
+   "frame": "Jogava, sim! Com ___.",
+   "swaps": [
+    "o meu irmão / os meus amigos / as minhas irmãs"
+   ]
+  },
+  {
+   "topic": "historia",
+   "en": "I was really messy!",
+   "pt": "Eu era muito bagunceiro!",
+   "q": "Cê era bagunceiro?",
+   "q_speaker": "Rafa",
+   "frame": "Eu era muito ___!",
+   "swaps": [
+    "bagunceiro / tímido / tranquilo"
+   ]
+  },
+  {
+   "topic": "reacao",
+   "en": "Seriously?!",
+   "pt": "Sério?!"
+  },
+  {
+   "topic": "reacao",
+   "en": "Easy! Calm down!",
+   "pt": "Calma!"
+  },
+  {
+   "topic": "reacao",
+   "en": "What a goal!",
+   "pt": "Que golaço!"
+  },
+  {
+   "topic": "reacao",
+   "en": "It's a small world!",
+   "pt": "O mundo é pequeno!"
+  },
+  {
+   "topic": "reacao",
+   "en": "Just kidding!",
+   "pt": "Brincadeira!"
+  }
+ ]
+}

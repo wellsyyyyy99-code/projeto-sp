@@ -450,6 +450,84 @@ def build_extras():
     return extras
 
 
+# ---- Speaking core (packs/speaking-*.json): audio drill tracks + printable answer sheet --
+# {"id","title","intro","topics":{key:name},"tracks":[["A",topic,...],...],
+#  "cards":[{"topic","en","pt","heard"?,"q"?,"q_speaker"?,"frame"?,"swaps"?:[...]}]}
+def speaking_track_file(d, t):
+    return f"{slug(d['id'])}-{t.lower()}.mp3"
+
+
+def speaking_audio(d, track):
+    label, topics = track[0], track[1:]
+    g = voice_for("george")
+    out = en(f"{d['title']}, part {label}.") + sil(500) + en(d.get("intro", "")) + sil(1200)
+    for t in topics:
+        out += en(f"{d['topics'].get(t, t)}.") + sil(900)
+        for c in [c for c in d["cards"] if c["topic"] == t]:
+            if c.get("q"):
+                v, p = voice_for(c.get("q_speaker", "rafa"))
+                out += tts(c["q"], v, p, rate(-5)) + sil(500)
+            ans = tts(c["pt"], *g)
+            out += en(c["en"]) + sil(3500 + 35 * len(c["pt"])) + ans + sil(len(ans) * 1.1 + 700) + ans + sil(1300)
+    out += en("Boa! That's the end. Do it again tomorrow, and try to beat the voice.")
+    return out
+
+
+def write_speaking_sheet(d, tracks_html):
+    rows = []
+    for t, name in d["topics"].items():
+        cards = [c for c in d["cards"] if c["topic"] == t]
+        if not cards:
+            continue
+        rows.append(f"<h2>{esc(name)}</h2>")
+        for c in cards:
+            q = f'<div class="q">🗨️ {esc(c["q"])}</div>' if c.get("q") else ""
+            fr = ""
+            if c.get("frame"):
+                fr = (f'<div class="frame">🧱 {esc(c["frame"])}</div><ul class="sw">'
+                      + "".join(f"<li>{esc(x)}</li>" for x in c.get("swaps", [])) + "</ul>")
+            h = f'<div class="heard">{esc(c["heard"])}</div>' if c.get("heard") else ""
+            rows.append(f'<div class="ln">{q}<div class="en">Say: {esc(c["en"])}</div>'
+                        f'<details><summary>Model answer</summary><div class="pt">{esc(c["pt"])}</div>{h}</details>{fr}</div>')
+    css = TCSS + (".q{font-weight:bold;font-size:1.1em}.frame{margin-top:.4em;font-family:monospace;font-size:1.05em}"
+                  ".sw{margin:.2em 0 0 1.2em;color:var(--muted)}@media print{details{display:block}details>summary{display:none}"
+                  ".ln{break-inside:avoid}.noprint{display:none}}")
+    (DOCS / f"{slug(d['id'])}.html").write_text(f"""<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(d['title'])}</title><style>{css}</style>
+<p class="noprint"><a href="index.html">← Home</a></p><h1>🗣️ {esc(d['title'])}</h1>
+<p><b>How to use:</b> read the 🗨️ question, answer out loud <i>before</i> opening the model answer.
+Then use the 🧱 structure to say it 2–3 different ways with the swap-ins (and your own real news).
+The goal is speed: say it without thinking.</p>
+<p class="noprint">🎧 Audio drill: {tracks_html}</p>
+{''.join(rows)}""", encoding="utf-8")
+
+
+def build_speaking():
+    out = []
+    for p in sorted(PACKS.glob("speaking-*.json")):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            sys.exit(f"\n❌ {p.name} isn't valid JSON: {e}")
+        for k in ("id", "title", "topics", "tracks", "cards"):
+            if k not in d:
+                sys.exit(f"\n❌ {p.name} needs '{k}'")
+        digest = hashlib.sha1(p.read_bytes()).hexdigest()[:12]
+        stamp = AUDIO / f"{slug(d['id'])}.hash"
+        stale = FORCE or not stamp.exists() or stamp.read_text().strip() != digest
+        for tr in d["tracks"]:
+            f = AUDIO / speaking_track_file(d, tr[0])
+            if stale or not f.exists():
+                export(speaking_audio(d, tr), f, f"{d['title']} · Part {tr[0]}")
+                print(f"   🎧 {f.name}")
+        stamp.write_text(digest)
+        links = " · ".join(f'<a href="audio/{speaking_track_file(d, tr[0])}">Part {tr[0]} '
+                           f'({", ".join(d["topics"].get(t, t) for t in tr[1:])})</a>' for tr in d["tracks"])
+        write_speaking_sheet(d, links)
+        out.append((d, links))
+    return out
+
+
 # ---- Feed + index ---------------------------------------------------------------------
 def base_url():
     if os.getenv("PAGES_URL"):
@@ -461,7 +539,7 @@ def base_url():
     return "http://localhost:8000/"
 
 
-def write_feed_and_index(packs, extras=()):
+def write_feed_and_index(packs, extras=(), speaking=()):
     url, now = base_url(), datetime.now(timezone.utc)
     fg = FeedGenerator()
     fg.load_extension("podcast")
@@ -516,11 +594,25 @@ def write_feed_and_index(packs, extras=()):
         fe.enclosure(url + "audio/" + f.name, str(f.stat().st_size), "audio/mpeg")
         fe.pubDate(when)
         extras_html.append(f'<li><a href="audio/{f.name}">⭐ {esc(x["title"])}</a></li>')
+    speak_html = []
+    for d, links in speaking:
+        for k, tr in enumerate(d["tracks"]):
+            f = AUDIO / speaking_track_file(d, tr[0])
+            if not f.exists():
+                continue
+            fe = fg.add_entry()
+            fe.id(url + "audio/" + f.name)
+            fe.title(f"🗣️ {d['title']} · Part {tr[0]}")
+            fe.description(f"Answer sheet: {url}{slug(d['id'])}.html")
+            fe.enclosure(url + "audio/" + f.name, str(f.stat().st_size), "audio/mpeg")
+            fe.pubDate(now - timedelta(minutes=30 - k))
+        speak_html.append(f'<li><a href="{slug(d["id"])}.html">📄 {esc(d["title"])} answer sheet</a><br>🎧 {links}</li>')
     fg.rss_file(str(DOCS / "feed.xml"), pretty=True)
     (DOCS / "index.html").write_text(f"""<!doctype html><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Projeto SP</title><style>{TCSS}
 table{{border-collapse:collapse;width:100%}}td{{padding:.4em;border-bottom:1px solid var(--line)}}code{{background:var(--card);padding:2px 6px;border-radius:4px;word-break:break-all}}</style>
 <h1>Projeto SP 🇧🇷</h1><p>Podcast feed:<br><code>{url}feed.xml</code></p>
+<h2>🗣️ Speaking</h2><ul>{''.join(speak_html) or '<li>None yet</li>'}</ul>
 <h2>Packs</h2><table>{''.join(reversed(packs_html))}</table>
 <h2>⭐ Extras</h2><ul>{''.join(reversed(extras_html)) or '<li>None yet</li>'}</ul>
 <h2>Episodes</h2><ul>{''.join(reversed(eps_html))}</ul>""", encoding="utf-8")
@@ -533,7 +625,7 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
     packs = []
     for p in sorted(PACKS.glob("*.json")):
-        if p.name.startswith("extras-"):
+        if p.name.startswith(("extras-", "speaking-")):
             continue
         try:
             pack = json.loads(p.read_text(encoding="utf-8"))
@@ -562,7 +654,8 @@ def main():
         for fname, eps_, did, name in decks:
             print(f"   🃏 {fname} ({build_deck(pack, DECKS / fname, eps_, did, name)} notes)")
     extras = build_extras()
-    write_feed_and_index(packs, extras)
+    speaking = build_speaking()
+    write_feed_and_index(packs, extras, speaking)
     print(f"\n✅ Done. Home: {base_url()}")
 
 
