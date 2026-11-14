@@ -157,6 +157,48 @@
    ]
   },
   {
+   "topic": "eu",
+   "en": "Yes! She's called Gabi. She's from São Paulo.",
+   "pt": "Tenho! Ela se chama Gabi. Ela é de São Paulo.",
+   "q": "Cê tem namorada?",
+   "q_speaker": "Rafa",
+   "frame": "Tenho! Ela se chama ___. Ela é de ___.",
+   "swaps": [
+    "Gabi",
+    "São Paulo / Brasil"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "Not long, about two weeks. But I study every day.",
+   "pt": "Faz pouco tempo, umas duas semanas. Mas estudo todo dia.",
+   "q": "Há quanto tempo cê estuda português?",
+   "q_speaker": "Rafa",
+   "frame": "Faz ___. Mas estudo ___.",
+   "swaps": [
+    "pouco tempo / duas semanas / um mês",
+    "todo dia / bastante / no trem"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "I like going to the gym, watching F1 and going out with friends.",
+   "pt": "Gosto de ir pra academia, ver Fórmula 1 e sair com os amigos.",
+   "q": "O que cê gosta de fazer no tempo livre?",
+   "q_speaker": "Rafa",
+   "frame": "Gosto de ___, ___ e ___.",
+   "swaps": [
+    "ir pra academia / treinar boxe",
+    "ver Fórmula 1 / ver futebol",
+    "sair com os amigos / viajar / cozinhar"
+   ]
+  },
+  {
+   "topic": "eu",
+   "en": "Nice to meet you! / The pleasure's mine!",
+   "pt": "Prazer em te conhecer! / O prazer é meu!"
+  },
+  {
    "topic": "trabalho",
    "en": "I work in FX at a fintech.",
    "pt": "Trabalho com câmbio numa fintech.",
@@ -401,6 +443,18 @@
    "heard": "fáuta pôku pra dezẽmbru"
   },
   {
+   "topic": "viagem",
+   "en": "I loved it! It's huge, and the people are really nice.",
+   "pt": "Adorei! É enorme, e o pessoal é muito legal.",
+   "q": "O que cê achou de São Paulo?",
+   "q_speaker": "Rafa",
+   "frame": "Adorei! É ___, e ___.",
+   "swaps": [
+    "enorme / muito quente / animada",
+    "o pessoal é muito legal / a comida é incrível"
+   ]
+  },
+  {
    "topic": "esporte",
    "en": "I support Tottenham. I'm a long-suffering fan!",
    "pt": "Torço pro Tottenham. Sou sofredor!",
@@ -542,6 +596,29 @@
    ]
   },
   {
+   "topic": "comida",
+   "en": "I love it! My favourite is picanha.",
+   "pt": "Adoro! Minha favorita é picanha.",
+   "q": "Cê gosta de comida brasileira?",
+   "q_speaker": "Rafa",
+   "frame": "___! Meu favorito é/minha favorita é ___.",
+   "swaps": [
+    "Adoro / Gosto muito",
+    "picanha / brigadeiro / feijoada / açaí"
+   ]
+  },
+  {
+   "topic": "comida",
+   "en": "I don't really like spicy food.",
+   "pt": "Não gosto muito de comida apimentada.",
+   "q": "Tem alguma coisa que cê não gosta?",
+   "q_speaker": "Rafa",
+   "frame": "Não gosto muito de ___.",
+   "swaps": [
+    "comida apimentada / frio / acordar cedo / perder (Spurs!)"
+   ]
+  },
+  {
    "topic": "pedido",
    "en": "Can I have a white coffee, please? No sugar.",
    "pt": "Me vê um café com leite, por favor. Sem açúcar.",
@@ -624,6 +701,16 @@
    "pt": "Pera, tô pensando…"
   },
   {
+   "topic": "sobreviver",
+   "en": "I don't know how to say that yet.",
+   "pt": "Ainda não sei falar isso."
+  },
+  {
+   "topic": "sobreviver",
+   "en": "Can you write it down?",
+   "pt": "Pode escrever pra mim?"
+  },
+  {
    "topic": "social",
    "en": "Sure! Wednesday afternoon? Deal!",
    "pt": "Bora! Quarta à tarde? Fechou!",
@@ -675,13 +762,13 @@
   },
   {
    "topic": "social",
-   "en": "All good! And you?",
-   "pt": "Tudo bem! E você?",
+   "en": "All good! And you? (keep it going)",
+   "pt": "Tudo bem! E você? Como foi seu dia?",
    "q": "Tudo bem?",
    "q_speaker": "Rafa",
-   "frame": "Tudo ___! E você?",
+   "frame": "Tudo bem! E você? ___?",
    "swaps": [
-    "bem / ótimo / tranquilo"
+    "Como foi seu dia / Fez o quê hoje / Como tá o trabalho"
    ]
   },
   {
@@ -771,6 +858,32 @@
    "topic": "reacao",
    "en": "Just kidding!",
    "pt": "Brincadeira!"
+  },
+  {
+   "topic": "reacao",
+   "en": "That's cool!",
+   "pt": "Que legal!"
+  },
+  {
+   "topic": "reacao",
+   "en": "Wow! (surprise)",
+   "pt": "Nossa!"
+  },
+  {
+   "topic": "reacao",
+   "en": "What a shame!",
+   "pt": "Que pena!"
+  },
+  {
+   "topic": "reacao",
+   "en": "Got it. / I see.",
+   "pt": "Entendi.",
+   "heard": "ẽntẽndjí"
+  },
+  {
+   "topic": "reacao",
+   "en": "True! / That's right.",
+   "pt": "Verdade!"
   }
  ]
 }
