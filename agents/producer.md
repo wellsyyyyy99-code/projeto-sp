@@ -49,11 +49,15 @@ facts in the README.
 
 1. `python3 tools/check_pack.py packs/pack-NN.json` for each new pack. Fix everything it reports.
 2. One commit with both packs. Fetch, rebase, push (README).
-3. The push starts the build ("Build Projeto SP", about 4 to 10 minutes). Poll
-   `gh run list -R wellsyyyyy99-code/projeto-sp -L 3` every minute, for up to 15 minutes, until the run for your
-   commit completes.
-4. If it failed: `gh run view <id> -R wellsyyyyy99-code/projeto-sp --log-failed | tail -40`, fix the pack, push
-   again. Two attempts at most; a "voice service" error just needs `gh run rerun <id> -R …`.
+3. The push starts the build ("Build Projeto SP"). A week of 7 new episodes took 27 minutes on 14 Nov. Poll
+   `gh run list -R wellsyyyyy99-code/projeto-sp -L 3` every two minutes, for up to 40 minutes, until the run for
+   your commit completes. Push once: a second push while the build runs starts it again from zero.
+4. If it failed: `gh run view <id> -R wellsyyyyy99-code/projeto-sp --log-failed | tail -40`. A failure in the
+   "deploy-pages" step after the build step succeeded is the website only: the audio is already committed, so
+   carry on. A pack error: fix the pack and push again, two attempts at most. A "voice service" error:
+   start the workflow again with `gh workflow run "Build Projeto SP" -R wellsyyyyy99-code/projeto-sp`.
+5. If the build has not finished after 40 minutes, skip step 5 below and say so: the Coach publishes to the app
+   on its next morning run.
 
 ## 5. Publish to the app
 
