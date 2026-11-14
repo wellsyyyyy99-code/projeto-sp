@@ -623,28 +623,16 @@
    "pt": "Onde fica a saída? E onde eu pego o Uber?"
   },
   {
-   "en": "It's more expensive at the airport.",
-   "pt": "No aeroporto é mais caro."
-  },
-  {
    "en": "That's right, it's me.",
    "pt": "Isso, sou eu."
   },
   {
-   "en": "The traffic's terrible!",
-   "pt": "Tá mó trânsito!"
+   "en": "The traffic's terrible! How long does it take?",
+   "pt": "Tá mó trânsito! Quanto tempo demora?"
   },
   {
-   "en": "How long does it take?",
-   "pt": "Quanto tempo demora?"
-  },
-  {
-   "en": "You can stop here, please.",
-   "pt": "Pode parar aqui, por favor."
-  },
-  {
-   "en": "Cheers, good night!",
-   "pt": "Valeu, boa noite!"
+   "en": "You can stop here, please. Cheers, good night!",
+   "pt": "Pode parar aqui, por favor. Valeu, boa noite!"
   },
   {
    "en": "So good to see you! (to Gabi's mum)",
@@ -711,12 +699,8 @@
    "pt": "Trabalho com câmbio."
   },
   {
-   "en": "Spurs lose a lot.",
-   "pt": "O Spurs perde muito."
-  },
-  {
-   "en": "We don't always lose!",
-   "pt": "A gente não perde sempre!"
+   "en": "Spurs lose a lot. But we don't always lose!",
+   "pt": "O Spurs perde muito. Mas a gente não perde sempre!"
   },
   {
    "en": "I'm not very good at it.",
@@ -729,6 +713,22 @@
   {
    "en": "I have one brother and two sisters.",
    "pt": "Tenho um irmão e duas irmãs."
+  },
+  {
+   "en": "After São Paulo, I'm going to Rio.",
+   "pt": "Depois de São Paulo, vou pro Rio."
+  },
+  {
+   "en": "I studied for a month and a half before coming.",
+   "pt": "Estudei por um mês e meio antes de vir."
+  },
+  {
+   "en": "Gabi lives with her mum.",
+   "pt": "A Gabi mora com a mãe dela."
+  },
+  {
+   "en": "I want to walk along Paulista on Sunday.",
+   "pt": "Quero andar pela Paulista no domingo."
   }
  ],
  "talk": [
