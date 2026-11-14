@@ -625,7 +625,7 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
     packs = []
     for p in sorted(PACKS.glob("*.json")):
-        if p.name.startswith(("extras-", "speaking-")):
+        if p.name.startswith(("extras-", "speaking-", "treino-")):
             continue
         try:
             pack = json.loads(p.read_text(encoding="utf-8"))
@@ -656,6 +656,11 @@ def main():
     extras = build_extras()
     speaking = build_speaking()
     write_feed_and_index(packs, extras, speaking)
+    try:  # Treino app: card data + one short clip per line (never blocks the podcast build)
+        import treino_build
+        treino_build.build(tts_path, voice_for)
+    except Exception as e:
+        print(f"⚠️ Treino build skipped: {e}")
     print(f"\n✅ Done. Home: {base_url()}")
 
 
