@@ -55,7 +55,7 @@ facts in the README.
 4. If it failed: `gh run view <id> -R wellsyyyyy99-code/projeto-sp --log-failed | tail -40`. A failure in the
    "deploy-pages" step after the build step succeeded is the website only: the audio is already committed, so
    carry on. A pack error: fix the pack and push again, two attempts at most. A "voice service" error:
-   start the workflow again with `gh workflow run "Build Projeto SP" -R wellsyyyyy99-code/projeto-sp`.
+   start the workflow again with `gh api -X POST repos/wellsyyyyy99-code/projeto-sp/actions/workflows/build.yml/dispatches -f ref=main` (GitHub GraphQL, which `gh workflow run` uses, is unavailable here).
 5. If the build has not finished after 40 minutes, skip step 5 below and say so: the Coach publishes to the app
    on its next morning run.
 
