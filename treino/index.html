@@ -436,6 +436,7 @@ function viewHoje(){
   var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dn+' of 44</div></header>';
   h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div><div class="small muted" style="margin-top:8px">Study today: <b class="num" style="color:var(--ink)">'+studyMin(today())+' min</b>'+CATS.map(function(c){var v=Math.round((d[c.k]||0)/60);return v?' · '+c.lab.toLowerCase()+' '+v:'';}).join('')+'</div></section>';
   if(note)h+='<p class="note"><span class="eyebrow">Coach</span><br>'+esc(note)+'</p>';
+  h+='<button class="link" data-a="guide" style="align-self:flex-start">How it works, and voice mode phrases</button>';
   if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today…</p>';
   var rm=rafaMsg(),rn=S.notes[today()+'-rafa'],rDone=rn&&rn.turns&&rn.turns.length;
   h+='<div class="eyebrow">Morning</div>';
@@ -449,14 +450,14 @@ function viewHoje(){
   h+=rnd(1,r1,'Drills',r1?(d.drillOk||0)+' / '+(d.drills||0)+' right · back tomorrow':q+' cards ready · about '+Math.max(2,Math.round(q*0.12))+' min','drill');
   h+=rnd(2,r2,'Conversa',(sit?esc(sit.title)+' · with '+esc(sit.char):'')+(r2&&bestScore(today())>=0?' · best '+bestScore(today())+'/10':'<br>In Claude voice mode, say <b>"Bora praticar, Treino '+(sit?sit.n:1)+'"</b>. It logs here by itself.'),'chat',' data-id="'+(sit?sit.id:'')+'"');
   h+=rnd(3,r3,'Ouvido',r3?(d.listenOk||0)+' / '+(d.listens||0)+' understood':'10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min','listen');
-  if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
+  if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · or in voice mode say <b>"exame de domingo"</b>')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
   var lb=S.bonus[S.bonus.length-1];if(isSun&&lb)h+='<button class="sit" data-a="bonus" data-id="'+esc(lb.id)+'"><span class="n">⭐</span><span class="grow"><b>Bonus audio</b><br><span class="small muted">'+esc(lb.title)+' · for the gym this week</span></span>'+((S.days[today()]||{}).bonus?'<span class="pill good">✓</span>':'')+'</button>';
   var dn2=S.notes[today()+'-diario'];
   h+='<div class="eyebrow" style="margin-top:4px">Evening</div>';
   h+='<button class="sit" data-a="diario"'+((hr>=18||hr<CUTOVER_H)&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
   if(foc.length)h+='<section><div class="eyebrow" style="margin-bottom:6px">Focus now</div><div class="chips">'+foc.map(function(c){return '<span class="chip">'+esc(c.pt)+'</span>';}).join('')+'</div></section>';
   if(('speechSynthesis' in window)&&!S.tts&&!hasGoodVoice())h+='<p class="note small"><span class="eyebrow">Better live voices</span><br>Replies made on the spot (Rafa\'s answers, scene replies, Diário corrections) use your phone\'s own voice, and yours is the basic one. On iPhone: Settings → Accessibility → Spoken Content → Voices → Portuguese (Brazil), then download an Enhanced or Premium voice. Reopen Treino after.</p>';
-  h+='<p class="tiny muted">'+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off. ')+'Want to talk out loud with no typing? Open a Claude chat, start voice mode and say "Bora praticar, Treino '+(sit?sit.n:1)+'". Then log it from the Conversa screen.</p>';
+  h+='<p class="tiny muted">'+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off. ')+'Talking with Claude in voice mode? Tap <i>How it works</i> above for the phrases.</p>';
   return h+syncLine();
 }
 function viewTracker(){
@@ -1144,6 +1145,45 @@ function parts(date){
                {k:'bonus',ic:'⭐',lab:'Bonus audio',done:!!d.bonus,val:d.bonus?'listened':''}]:[]);
 }
 
+
+/* ---------- how it works ---------- */
+function startGuide(){
+  var sit=todaySit(),n=sit?sit.n:1;
+  function sec(t,b){return '<section class="card"><h3 style="margin-bottom:6px">'+t+'</h3>'+b+'</section>';}
+  function say(p){return '<div class="note" style="margin:6px 0"><b>"'+esc(p)+'"</b></div>';}
+  var h=sec('Your day',
+    '<ol class="small" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">'+
+    '<li><b>Rafa\'s voice note</b> (morning): listen, then dictate your reply.</li>'+
+    '<li><b>Today\'s episode</b> (train): listen, shadow George, tap <i>I\'ve listened to it</i>. That unlocks its phrases for tomorrow\'s drills.</li>'+
+    '<li><b>Round 1 · Drills</b>: say it out loud, <i>Show answer</i>, rate Again / Hard / Good / Easy. One round a day.</li>'+
+    '<li><b>Round 3 · Ouvido</b>: 10 lines, no text, pick the meaning.</li>'+
+    '<li><b>Round 2 · Conversa</b> (evening, out loud): in Claude voice mode, see below.</li>'+
+    '<li><b>Diário</b> (night): dictate 3 sentences about your day, then say the corrected version aloud.</li></ol>'+
+    '<p class="small muted" style="margin:8px 0 0">Target: 20 minutes spoken. The day resets at 03:00.</p>')+
+  sec('Talking with Claude in voice mode',
+    '<ol class="small" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">'+
+    '<li>Open the Claude app and start a <b>new chat</b>.</li>'+
+    '<li>Tap the <b>voice mode</b> button next to the message box.</li>'+
+    '<li>Say one of the phrases below and talk. Answer in full sentences; it\'s fine to say <i>"pera"</i> to think, or <i>"não entendi"</i>.</li>'+
+    '<li>Say <b>"fim"</b> to finish. You get your feedback in English, and Claude sends the result to this app. You\'ll see <i>Logged in Treino ✓</i>.</li>'+
+    '<li>Open Treino afterwards: it shows "Logged … from Claude" and adds the minutes, the scene, and your mistakes (as drills from tomorrow).</li></ol>'+
+    '<div class="eyebrow" style="margin-top:10px">Today\'s scene (Round 2)</div>'+say('Bora praticar, Treino '+n)+
+    '<div class="small muted">'+(sit?esc(sit.title)+' with '+esc(sit.char)+'. ':'')+'Add <i>"com twist"</i> once you\'ve won it.</div>'+
+    '<div class="eyebrow" style="margin-top:10px">A free chat with a character</div>'+say('Rafa, bora conversar?')+'<div class="small muted">Or Ana, Gabi, Mãe, Seu Zé, the Barista.</div>'+
+    '<div class="eyebrow" style="margin-top:10px">The Sunday exam</div>'+say('Exame de domingo')+'<div class="small muted">Five questions, no help, scored out of 25 and saved here.</div>'+
+    '<p class="small" style="margin:10px 0 0"><b>If it says it couldn\'t log it:</b> copy the 📋 log it gives you, then here go to Conversa → today\'s scene → <i>Paste the voice-mode log</i>.</p>')+
+  sec('Drills: rating yourself',
+    '<div class="small" style="display:flex;flex-direction:column;gap:4px"><div><b>Again</b>: didn\'t get it. It comes back in this round.</div><div><b>Hard</b>: got there slowly or with a slip. Back tomorrow.</div><div><b>Good</b>: said the whole sentence right. Counts toward beating a mistake.</div><div><b>Easy</b>: instant. Skips ahead.</div></div>'+
+    '<p class="small muted" style="margin:8px 0 0">Listening cards (no text) are lines from the episodes: say what it means, then repeat it. A card that\'s wrong or not about you: tap <i>remove it</i>.</p>')+
+  sec('No typing on the train?',
+    '<p class="small" style="margin:0">Use the mic on your Portuguese (Brasil) keyboard: answers send themselves 2–3 seconds after you stop. Round 2 also works typed here when you can\'t talk out loud.</p>')+
+  sec('Sundays',
+    '<p class="small" style="margin:0">The exam (voice mode or here), the bonus audio in Episódios, and new episodes for the week. The weekly report appears in the Tracker.</p>')+
+  sec('Where to see progress',
+    '<p class="small" style="margin:0"><b>Hoje</b>: today\'s minutes and a ✓ on each part. <b>Tracker</b>: study time by kind, day by day for all 44 days, situations won, mistakes beaten, exam scores, and the Coach\'s and Examiner\'s reports.</p>');
+  S.mode={k:'guide'};openMode('How it works',h,null);
+}
+
 /* ---------- actions ---------- */
 function next(){
   var M=S.mode||{},k=M.k;
@@ -1153,6 +1193,7 @@ function next(){
   S.chain=false;render();
 }
 var A={
+  guide:function(){S.chain=false;startGuide();},
   rmcard:function(){var M=S.mode,cur=M&&M.cur;if(!cur)return;var c=cur.c;var st=Object.assign({},S.srs[c.id]||{});st.s='removed';st.t=today();st.n=(st.n||0)+1;S.srs[c.id]=st;saveSrs();M.cur=null;M.q=M.q.filter(function(x){return x.id!==c.id;});toast('Removed. It won\'t come back.');showCard();},
   bonus:function(d){S.chain=false;startBonus(d.id);},
   bonusshow:function(d){S.mode.shown[+d.i]=1;drawBonus();},
