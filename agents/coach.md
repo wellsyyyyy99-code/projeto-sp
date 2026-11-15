@@ -29,10 +29,12 @@ chat-thread versions are paused). You write both every morning, before anything 
    (usually 3 to 6 minutes; much longer on Sundays when new packs are building). Carry on with steps 2 to 5 while it runs.
 5. Put the same `rafa` and `diario` objects into `sys/plan` in step 6.
 
-Before step 6, wait for the build of your commit to finish (`gh run list -R wellsyyyyy99-code/projeto-sp -L 3`,
+At the very end, after step 6, wait for the build of your commit to finish (`gh run list -R wellsyyyyy99-code/projeto-sp -L 3`,
 every minute, up to 25 minutes), `git pull`, then run the "publish sync" from the README. That also brings over
 anything else the build made (new episodes, new audio, the window of full episodes). If the build hasn't finished
-in time, run the publish sync anyway: the app plays Rafa's note in the phone's voice until the audio arrives.
+in time, run the publish sync anyway and say so in the report: the app plays Rafa's note in the phone's robotic voice
+until the audio arrives. Check that `docs/treino/b/index.json` lists the ids of today's Rafa lines (FNV-1a, see
+`treino_build.py`) and that publish_list prints no batches afterwards.
 
 ## 2. Read the record
 
@@ -136,7 +138,11 @@ audio: rewrite `packs/treino-cards.json` as `{"about": …, "cards": [every card
   Na academia, and get 'vou + verb' right in it." No praise, no exclamation marks. If he did nothing
   yesterday, say so in five words and give the smallest next step (Round 1 only, 5 minutes).
 
-## 7. Report
+## 7. Publish sync (last), then report
+
+Do the wait and publish sync described at the end of step 1 now. Then report.
+
+### Report
 
 End with a report of at most 6 lines for George:
 

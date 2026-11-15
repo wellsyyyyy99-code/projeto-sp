@@ -111,7 +111,13 @@ them, bring the artifact up to date:
    before today to 3 days after, and lists older ones under `remove`.
 3. Call `get_artifact` for the live version, then one `publish_files` per batch (slug, `base_version` from the
    previous result, `mode: "patch"`, the batch as `files`; add `remove` to the first call if it is not empty).
-4. `python3 tools/publish_list.py --mark`, commit `treino/published.json`, push.
+4. Run `python3 tools/publish_list.py` again. It must print no batches. If it still lists files, the publish did not
+   land: try once more.
+5. Only then `python3 tools/publish_list.py --mark`, commit `treino/published.json`, push.
+
+On 15 Nov the Coach and the Producer both skipped or failed this step and Rafa's recorded voice note never reached
+the app, so George heard his phone's robotic voice instead. This step is not optional. If `publish_files` is missing or
+refuses, the FIRST line of your report must say "App NOT updated:" followed by the exact error text.
 
 ## Rules for everything written for George
 

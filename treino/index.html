@@ -217,16 +217,25 @@ document.addEventListener('pointerdown',function(){
   if(unlocked)return;unlocked=true;
   try{player.src='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=';var p=player.play();if(p&&p.catch)p.catch(function(){});}catch(e){}
 },true);
-function synth(pt,rate){return new Promise(function(res,rej){try{
+var MALE=/^(rafa|george|seu z|gar[cç]om|motorista|passageiro|vendedor|estranho|torcedor)/i;
+function phoneVoice(who){
+  var vs=speechSynthesis.getVoices().filter(function(v){return /^pt[-_]BR/i.test(v.lang);});if(!vs.length)return null;
+  var good=function(v){return /premium|enhanced|aprimorad|melhorad|neural|natural|online|google/i.test(v.name)?2:0;};
+  var male=function(v){return /felipe|daniel|ant[oô]nio|male|masculin|homem/i.test(v.name);};
+  var want=MALE.test(who||'');
+  return vs.slice().sort(function(a,b){return (good(b)+(male(b)===want?1:0))-(good(a)+(male(a)===want?1:0));})[0];
+}
+function hasGoodVoice(){try{var v=phoneVoice('');return !!v&&/premium|enhanced|aprimorad|melhorad|neural|natural|online|google/i.test(v.name);}catch(e){return false;}}
+function synth(pt,rate,who){return new Promise(function(res,rej){try{
   var u=new SpeechSynthesisUtterance(pt);u.lang='pt-BR';
-  var vs=speechSynthesis.getVoices().filter(function(v){return /^pt[-_]BR/i.test(v.lang);});var v=vs.filter(function(v){return /premium|enhanced|aprimorad|neural|natural|online/i.test(v.name);})[0]||vs.filter(function(v){return /google/i.test(v.name);})[0]||vs[0];if(v)u.voice=v;
+  var v=phoneVoice(who);if(v)u.voice=v;
   u.rate=rate;u.onend=function(){res('synth');};u.onerror=function(){rej(new Error('synth'));};speechSynthesis.speak(u);}catch(e){rej(e);}});}
 function hasVoice(){return Object.keys(S.clips).length>0||!!S.tts||('speechSynthesis' in window);}
-function say(pt,rate){
+function say(pt,rate,who){
   rate=clamp(rate||baseRate(),0.7,1.5);stopAudio();
   var id=fnv(pt),tok=++sayTok,chain=S.clips[id]?playClip(id,rate,tok):Promise.reject(0);
   return chain.catch(function(){if(!S.tts)throw 0;return S.tts.speak(pt,{language:'pt-BR',rate:rate}).then(function(){return 'tts';});})
-    .catch(function(){if(!('speechSynthesis' in window))throw 0;return synth(pt,rate);})
+    .catch(function(){if(!('speechSynthesis' in window))throw 0;return synth(pt,rate,who);})
     .catch(function(){return null;});
 }
 
@@ -422,6 +431,7 @@ function viewHoje(){
   h+='<div class="eyebrow" style="margin-top:4px">Evening</div>';
   h+='<button class="sit" data-a="diario"'+(hr>=18&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
   if(foc.length)h+='<section><div class="eyebrow" style="margin-bottom:6px">Focus now</div><div class="chips">'+foc.map(function(c){return '<span class="chip">'+esc(c.pt)+'</span>';}).join('')+'</div></section>';
+  if(('speechSynthesis' in window)&&!S.tts&&!hasGoodVoice())h+='<p class="note small"><span class="eyebrow">Better live voices</span><br>Replies made on the spot (Rafa\'s answers, scene replies, Diário corrections) use your phone\'s own voice, and yours is the basic one. On iPhone: Settings → Accessibility → Spoken Content → Voices → Portuguese (Brazil), then download an Enhanced or Premium voice. Reopen Treino after.</p>';
   h+='<p class="tiny muted">'+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off. ')+'Want to talk out loud with no typing? Open a Claude chat, start voice mode and say "Bora praticar, Treino '+(sit?sit.n:1)+'". Then log it from the Conversa screen.</p>';
   return h+syncLine();
 }
@@ -573,7 +583,7 @@ function startChat(id){
     log:[{who:s.char,pt:s.open.pt,en:s.open.en}],goals:[],fixes:[],used:{},turns:0,secs:0,t0:Date.now(),tTurn:Date.now(),blur:false};
   openMode(s.title,'',answerFoot('send','<button class="btn ghost" data-a="finish">Finish</button>'),'0:00');
   dictBox=$('#ans');dictDone=function(){sendChat();};focusAns();
-  drawChat();say(s.open.pt);
+  drawChat();say(s.open.pt,0,s.char);
   S.mode.tick=setInterval(function(){var e=$('#mright');if(!S.mode||S.mode.k!=='chat'||!e)return;var t=Math.floor((Date.now()-S.mode.t0)/1000);e.textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0');},1000);
 }
 function drawChat(wait){
@@ -582,7 +592,7 @@ function drawChat(wait){
   h+='<button class="link" data-a="blur" style="align-self:flex-start">'+(M.blur?'Show the words':'Ears only: hide the words')+'</button>';
   M.log.forEach(function(m,i){
     if(m.who==='me'){h+='<div class="bub me">'+esc(m.pt)+'</div>';if(m.fix)h+='<div class="fix"><s>'+esc(m.fix.said)+'</s> → <b>'+esc(m.fix.ok)+'</b><br>'+esc(m.fix.why||'')+'</div>';}
-    else h+='<div class="bub'+(M.blur&&!m.show?' blur':'')+'" data-a="unblur" data-i="'+i+'"><div class="row"><button class="play" data-a="say" data-t="'+esc(m.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="txt grow">'+esc(m.pt)+'</span></div>'+(m.showEn?'<span class="en">'+esc(m.en)+'</span>':'<button class="link tiny" data-a="en" data-i="'+i+'">English</button>')+'</div>';
+    else h+='<div class="bub'+(M.blur&&!m.show?' blur':'')+'" data-a="unblur" data-i="'+i+'"><div class="row"><button class="play" data-a="say" data-w="'+esc(m.who)+'" data-t="'+esc(m.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="txt grow">'+esc(m.pt)+'</span></div>'+(m.showEn?'<span class="en">'+esc(m.en)+'</span>':'<button class="link tiny" data-a="en" data-i="'+i+'">English</button>')+'</div>';
   });
   if(wait)h+='<div class="bub"><span class="spin"></span></div>';
   $('#mbody').innerHTML=h;var b=$('.mbody');b.scrollTop=b.scrollHeight;
@@ -602,7 +612,7 @@ function sendChat(){
     if(Array.isArray(r.goals))r.goals.forEach(function(g){g=+g;if(g>=1&&g<=M.sit.goals.length&&M.goals.indexOf(g)<0)M.goals.push(g);});
     if(Array.isArray(r.used))r.used.forEach(function(u){var c=M.foc[+u-1];if(c)M.used[c.id]=1;});
     M.log.push({who:M.sit.char,pt:r.pt,en:r.en||''});M.busy=false;M.tTurn=Date.now();drawChat();
-    say(r.pt).then(function(){if(S.mode===M)M.tTurn=Date.now();});
+    say(r.pt,0,M.sit.char).then(function(){if(S.mode===M)M.tTurn=Date.now();});
     if(r.end||M.turns>=14)setTimeout(function(){if(S.mode===M)finishChat();},1200);
   },function(e){
     if(!S.mode||S.mode!==M)return;
@@ -846,17 +856,17 @@ function startRafa(){
   drawRafa();dictBox=$('#ans');dictDone=function(){sendRafa();};focusAns();
   if(!n.turns.length){var all=msg.lines.map(function(l){return l.pt;}).concat(msg.q?[msg.q.pt]:[]);playSeq(all,S.mode);}
 }
-function playSeq(arr,M){var i=0;(function nx(){if(i>=arr.length||S.mode!==M)return;say(arr[i++]).then(function(r){if(r!==null)nx();});})();}
+function playSeq(arr,M){var i=0;(function nx(){if(i>=arr.length||S.mode!==M)return;say(arr[i++],0,'Rafa').then(function(r){if(r!==null)nx();});})();}
 function drawRafa(wait){
   var M=S.mode,n=M.n,msg=n.msg;
-  var h='<div class="bub"><div class="eyebrow">Rafa · voice note</div>'+msg.lines.map(function(l,i){return '<div class="row" style="gap:8px;margin-top:6px"><button class="play" data-a="say" data-t="'+esc(l.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(l.pt)+'</span></div>';}).join('')+
-    (msg.q?'<div class="row" style="gap:8px;margin-top:8px"><button class="play" data-a="say" data-t="'+esc(msg.q.pt)+'" aria-label="Play">'+ICON.play+'</button><b class="grow">'+esc(msg.q.pt)+'</b></div>':'')+
+  var h='<div class="bub"><div class="eyebrow">Rafa · voice note</div>'+msg.lines.map(function(l,i){return '<div class="row" style="gap:8px;margin-top:6px"><button class="play" data-a="say" data-w="Rafa" data-t="'+esc(l.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(l.pt)+'</span></div>';}).join('')+
+    (msg.q?'<div class="row" style="gap:8px;margin-top:8px"><button class="play" data-a="say" data-w="Rafa" data-t="'+esc(msg.q.pt)+'" aria-label="Play">'+ICON.play+'</button><b class="grow">'+esc(msg.q.pt)+'</b></div>':'')+
     '<button class="link tiny" data-a="rafaen">'+(M.en?'Hide English':'English')+'</button>'+(M.en?'<div class="small muted">'+msg.lines.map(function(l){return esc(l.en);}).join(' ')+(msg.q?' '+esc(msg.q.en):'')+'</div>':'')+
     (msg.sources&&msg.sources.length?'<div class="tiny muted">Sources: '+msg.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title||s.url)+'</a>';}).join(', ')+'</div>':'')+'</div>';
   n.turns.forEach(function(t){
     h+='<div class="bub me">'+esc(t.said)+'</div>';
     if(t.fixes&&t.fixes.length)h+='<div class="fix">✅ <b>'+esc(t.ok)+'</b><br>'+t.fixes.map(function(f){return '🔧 <s>'+esc(f.said)+'</s> → '+esc(f.ok)+(f.why?' · '+esc(f.why):'');}).join('<br>')+'</div>';
-    h+='<div class="bub"><div class="row" style="gap:8px"><button class="play" data-a="say" data-t="'+esc(t.reply.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(t.reply.pt)+'</span></div>'+(M.en?'<span class="en">'+esc(t.reply.en||'')+'</span>':'')+'</div>';
+    h+='<div class="bub"><div class="row" style="gap:8px"><button class="play" data-a="say" data-w="Rafa" data-t="'+esc(t.reply.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(t.reply.pt)+'</span></div>'+(M.en?'<span class="en">'+esc(t.reply.en||'')+'</span>':'')+'</div>';
   });
   if(wait)h+='<div class="bub"><span class="spin"></span></div>';
   $('#mbody').innerHTML=h;var b=$('.mbody');b.scrollTop=b.scrollHeight;
@@ -875,7 +885,7 @@ function sendRafa(){
     (r.used||[]).forEach(function(u){var c=M.foc[+u-1];if(c)creditCard(c.id);});saveSrs();
     n.secs=(n.secs||0)+secs;n.synced=false;save('notes/'+n.date+'-rafa',n);
     var d=theDay();d.rafa=1;bump({speakSecs:secs});
-    M.busy=false;M.t0=Date.now();drawRafa();say(r.pt);
+    M.busy=false;M.t0=Date.now();drawRafa();say(r.pt,0,'Rafa');
     if(n.turns.length>=3)setFoot('<button class="btn pri wide" data-a="close">Done</button>');
   },function(e){if(S.mode!==M)return;M.busy=false;box.value=said;drawRafa();toast(e&&e.code==='rate_limited'?'Claude is busy. Send again in a moment.':'That didn\'t go through. Send again.');});
 }
@@ -980,7 +990,7 @@ var A={
   exam:function(){S.chain=false;startExam();},
   close:function(){if(S.mode&&S.mode.k==='chat'&&!S.mode.done&&S.mode.turns>=2){finishChat();return;}if(S.mode&&S.mode.tick)clearInterval(S.mode.tick);S.chain=false;closeMode();},
   next:function(){next();},
-  say:function(d){say(d.t);},
+  say:function(d){say(d.t,0,d.w||'');},
   reveal:function(d,el){el.outerHTML='<span class="small muted">'+esc(d.t)+'</span>';},
   mic:function(){
     if(!S.dict)return;
