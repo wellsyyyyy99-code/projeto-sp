@@ -57,3 +57,6 @@ At most 8 lines for George, numbers first:
   https://claude.ai/artifact/4eS5Vh7pkT5wanWQAeNbB5
 
 Be exact. If a number is missing, say it is missing; do not estimate it.
+
+Also `db_write` the report to `sys/report` with `set` (pass `ifVersion` if it exists): `{"date": "<today>", "lines": ["line 1", ...]}`.
+George reads it in the app's Tracker tab.

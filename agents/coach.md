@@ -140,7 +140,9 @@ audio: rewrite `packs/treino-cards.json` as `{"about": …, "cards": [every card
 
 ## 7. Publish sync (last), then report
 
-Do the wait and publish sync described at the end of step 1 now. Then report.
+Do the wait and publish sync described at the end of step 1 now. Then write the report below, and also `merge`
+`{"report": ["line 1", "line 2", ...]}` into `sys/plan` (read it first for `ifVersion`), so George sees it in the app's
+Tracker tab.
 
 ### Report
 

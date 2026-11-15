@@ -55,14 +55,15 @@ the agent files in `agents/` and the prompt that started you.
 | Path | Written by | Contents |
 |---|---|---|
 | `sys/config` | Examiner | `{start, flight, dailyMin, newPerDay}` |
-| `sys/plan` | Coach | today's plan: `{date, day, note, focus:[card ids], sit}` |
+| `sys/plan` | Coach | today's plan: `{date, day, note, focus:[card ids], sit, rafa, diario, report: [lines]}` |
 | `cards/{id}` | app, Coach | mistake and pattern cards (see below). Core and episode cards are not here; they ship in `data/cards.json` |
 | `me/srs` | app only | `{c: {cardId: {d: due date, i: interval, r: streak, l: times wrong, n: times seen, ok: [dates right], s: "open" or "beaten", t: last seen, xl}}}` |
 | `me/sits` | app only | `{s: {sitId: {tries, best, last, pass: date, pass2: date}}}` |
 | `me/prefs` | app only | `{listenRate}` |
-| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, ep, rafa, diario, synced}` |
+| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, ep, rafa, diario, bonus, synced}` |
 | `sessions/{id}` | app; Coach merges `synced` | one role-play (`kind` "chat", or "voice" when logged from Claude voice mode): `{date, sit, char, twist, mins, speakSecs, turns, score, pass, goalsDone, goalsAll, fixes:[{said, ok, en, why, type}], used, words, better, summary, log, synced}` |
 | `me/eps` | app only | `{d: {"<episode number>": "<date marked listened>"}}` |
+| `sys/report` | Examiner | `{date, lines: [...]}`: the weekly report, shown in the Tracker |
 | `sys/history` | Coach | `{days: {"YYYY-MM-DD": {min, ep}}}` from the sheet, for the app's Tracker |
 | `notes/{YYYY-MM-DD}-rafa` | app; Coach merges `synced` | `{date, kind: "rafa", msg, turns: [{said, reply: {pt, en}, ok, fixes}], secs, synced}` |
 | `notes/{YYYY-MM-DD}-diario` | app; Coach merges `synced` | `{date, kind: "diario", prompt, said, ok, en, fixes, plus: {pt, en}, secs, synced}` |

@@ -41,6 +41,12 @@ def current():
             f = ROOT / "docs" / "audio" / (e.get("audio") or "-")
             if e.get("audio") and n - 3 <= e["ep"] <= n + 3 and f.exists():
                 files[f"ep/{e['audio']}"] = f
+    bonus = ROOT / "docs" / "treino" / "data" / "bonus.json"
+    if bonus.exists():
+        for b in json.loads(bonus.read_text(encoding="utf-8"))[-2:]:
+            f = ROOT / "docs" / "audio" / (b.get("audio") or "-")
+            if b.get("audio") and f.exists():
+                files[f"bonus/{b['audio']}"] = f
     return files
 
 

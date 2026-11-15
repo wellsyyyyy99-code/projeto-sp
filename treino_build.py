@@ -43,6 +43,9 @@ def _load(p):
     return json.loads(p.read_text(encoding="utf-8"))
 
 
+BONUS = []
+
+
 def collect():
     """Returns (cards, eps, clips). clips = {id: (text, speaker)}."""
     cards, seen, eps, clips = [], set(), [], {}
@@ -120,6 +123,21 @@ def collect():
             clip((day.get("diario") or {}).get("pt"), "narrador")
 
     grp[0] = "x"
+    bonus = []
+    for bp in sorted(PACKS.glob("extras-*.json")):
+        try:
+            x = _load(bp)
+        except json.JSONDecodeError:
+            continue
+        aud = sorted((ROOT / "docs" / "audio").glob(f"extra-{_slug(str(x.get('id', '')))}*.mp3"))
+        items = []
+        for it in x.get("items", []):
+            clip(it.get("pt"), it.get("speaker", "rafa"))
+            clip(it.get("answer"), "george")
+            items.append({k: it[k] for k in ("speaker", "pt", "en", "answer", "answer_en") if it.get(k)})
+        bonus.append({"id": x.get("id"), "date": x.get("date", ""), "title": x.get("title", ""), "intro": x.get("intro", ""),
+                      "audio": aud[0].name if aud else "", "items": items})
+    BONUS[:] = bonus
     if SITS.exists():
         for st in _load(SITS).get("situations", []):
             clip(st.get("open", {}).get("pt"), st.get("char", "rafa"))
@@ -147,6 +165,7 @@ def write_data():
     (d / "eps.json").write_text(dump(eps), encoding="utf-8")
     if SITS.exists():
         (d / "sits.json").write_text(dump(_load(SITS)), encoding="utf-8")
+    (d / "bonus.json").write_text(dump(BONUS), encoding="utf-8")
     meta = ROOT / "curriculum" / "episodes.json"
     if meta.exists():
         (d / "meta.json").write_text(dump(_load(meta)), encoding="utf-8")

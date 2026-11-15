@@ -172,7 +172,7 @@ function gradeCard(st,res,day){
 
 /* ---------- state ---------- */
 var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,newPerDay:10},
-  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1,drillMode:'say'},
+  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},bonus:[],sessions:[],report:null,srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1,drillMode:'say'},
   db:null,ai:null,tts:null,dict:null,view:'hoje',chain:false,ready:false,dbState:'wait',mode:null};
 var LS={get:function(k){try{return JSON.parse(localStorage.getItem('treino:'+k));}catch(e){return null;}},
         set:function(k,v){try{localStorage.setItem('treino:'+k,JSON.stringify(v));}catch(e){}}};
@@ -366,7 +366,7 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
 function loadDb(){
   var db=S.db,t=today(),timer=setTimeout(function(){if(S.dbState==='wait'){S.dbState='slow';render();}},10000);
   return Promise.all([db.doc('me/srs').get(),db.doc('me/sits').get(),db.doc('sys/plan').get(),db.doc('sys/config').get(),
-    db.collection('cards').get(),db.collection('days').orderBy('date','desc').limit(30).get(),db.collection('exams').orderBy('date','desc').limit(8).get(),db.doc('me/prefs').get(),db.doc('me/eps').get(),db.doc('sys/history').get(),db.collection('notes').where('date','==',t).get()])
+    db.collection('cards').get(),db.collection('days').orderBy('date','desc').limit(30).get(),db.collection('exams').orderBy('date','desc').limit(8).get(),db.doc('me/prefs').get(),db.doc('me/eps').get(),db.doc('sys/history').get(),db.collection('notes').where('date','==',t).get(),db.collection('sessions').orderBy('date','desc').limit(200).get(),db.doc('sys/report').get()])
   .then(function(r){
     clearTimeout(timer);S.dbState='ok';
     var ahead=mergeSrs(r[0].exists?((r[0].data()||{}).c||{}):{});
@@ -381,6 +381,8 @@ function loadDb(){
     if(r[7].exists)S.prefs=Object.assign(S.prefs,r[7].data());
     if(r[8].exists){var ed=(r[8].data()||{}).d||{};for(var en in ed)if(!S.epsDone[en])S.epsDone[en]=ed[en];}
     if(r[9].exists)S.hist=(r[9].data()||{}).days||{};
+    S.sessions=r[11].docs.map(function(d){return d.data();});
+    if(r[12].exists)S.report=r[12].data();
     r[10].docs.forEach(function(d){var x=d.data(),loc=S.notes[d.id];if(!loc||((x.turns||[]).length>=((loc.turns||[]).length))&&(!loc.ok||x.ok))S.notes[d.id]=x;});
     S.day=null;theDay();foldExternal();if(ahead)saveSrs();var td=S.days[t];if(td&&LS.get('days/'+t))save('days/'+t,td);
   },function(){clearTimeout(timer);S.dbState='err';});
@@ -389,7 +391,7 @@ function boot(){
   S.srs=(LS.get('me/srs')||{}).c||{};S.epsDone=(LS.get('me/eps')||{}).d||{};['rafa','diario'].forEach(function(k){var x=LS.get('notes/'+today()+'-'+k);if(x)S.notes[today()+'-'+k]=x;});S.sitState=(LS.get('me/sits')||{}).s||{};S.prefs=Object.assign(S.prefs,LS.get('me/prefs')||{});
   var ld=LS.get('days/'+today());if(ld)S.days[ld.date]=ld;
   render();
-  Promise.all(['data/cards.json','data/eps.json','data/sits.json','b/index.json','data/meta.json'].map(getJSON)).then(function(r){S.meta=r[4]||{};
+  Promise.all(['data/cards.json','data/eps.json','data/sits.json','b/index.json','data/meta.json','data/bonus.json'].map(getJSON)).then(function(r){S.meta=r[4]||{};S.bonus=r[5]||[];
     S.cards=r[0]||[];S.eps=r[1]||[];S.sits=(r[2]&&r[2].situations)||[];if(r[3]&&r[3].clips){S.clips=r[3].clips;S.bundles=r[3].bundles||[];}
     indexCards();S.ready=true;render();
     return Promise.all(['db','sample','tts','dictation'].map(use));
@@ -431,6 +433,7 @@ function viewHoje(){
   h+='<section class="card round'+(d.chats>0?' done':'')+'"><div class="n">2</div><div class="grow"><h3>Conversa</h3><div class="small muted">'+(sit?esc(sit.title)+' · with '+esc(sit.char):'')+' · about 8 min</div></div><button class="btn" data-a="chat" data-id="'+(sit?sit.id:'')+'">Start</button></section>';
   h+='<section class="card round'+(d.listens>=10?' done':'')+'"><div class="n">3</div><div class="grow"><h3>Ouvido</h3><div class="small muted">10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min</div></div><button class="btn" data-a="listen">Start</button></section>';
   if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
+  var lb=S.bonus[S.bonus.length-1];if(isSun&&lb)h+='<button class="sit" data-a="bonus" data-id="'+esc(lb.id)+'"><span class="n">⭐</span><span class="grow"><b>Bonus audio</b><br><span class="small muted">'+esc(lb.title)+' · for the gym this week</span></span>'+((S.days[today()]||{}).bonus?'<span class="pill good">✓</span>':'')+'</button>';
   var dn2=S.notes[today()+'-diario'];
   h+='<div class="eyebrow" style="margin-top:4px">Evening</div>';
   h+='<button class="sit" data-a="diario"'+(hr>=18&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
@@ -443,28 +446,43 @@ function viewTracker(){
   var t=today(),goal=S.cfg.dailyMin,dn=dayNum(),bars='',xs='',tot14=0,i,all=0,epn=0;
   for(i=13;i>=0;i--){var d=addDays(t,-i),m=dayMin(d);tot14+=m;bars+='<div class="b'+(m>=goal?' hit':'')+'" style="height:'+Math.min(100,m/(goal*1.5)*100)+'%" title="'+d+': '+m+' min"></div>';xs+='<span>'+d.slice(8)+'</span>';}
   for(i=1;i<=Math.min(dn,47);i++){all+=dayMin(dateOfDay(i));if(epDone(i))epn++;}
+  var tot={dr:0,dok:0,ra:0,di:0,li:0,lok:0,bo:0};Object.keys(S.days).forEach(function(k){var x=S.days[k];tot.dr+=x.drills||0;tot.dok+=x.drillOk||0;tot.ra+=x.rafa?1:0;tot.di+=x.diario?1:0;tot.li+=x.listens||0;tot.lok+=x.listenOk||0;tot.bo+=x.bonus?1:0;});
+  Object.keys(S.hist).forEach(function(k){if(!S.days[k]){if(S.hist[k].rafa)tot.ra++;if(S.hist[k].diario)tot.di++;}});
   var ms=S.cards.filter(isMistake),beaten=ms.filter(function(c){return okCount(c)>=3;}).length;
   var won=S.sits.filter(function(s){return sitLevel(s.id)>=2;}).length;
   var exk=Object.keys(S.exams).sort().filter(function(k){return S.exams[k].result;}),lastEx=exk.length?S.exams[exk[exk.length-1]].result:null;
   function tile(lab,val,sub){return '<div class="card" style="padding:10px 12px"><div class="eyebrow">'+lab+'</div><div class="disp num" style="font-size:30px">'+val+'</div>'+(sub?'<div class="tiny muted">'+sub+'</div>':'')+'</div>';}
   var h='<header class="top"><h1 class="disp">Tracker</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to the flight</div></header>';
+  var P=parts(t),pd=P.filter(function(x){return x.done;}).length;
+  h+='<section class="card"><div class="row"><div class="eyebrow grow">Today · '+pd+' of '+P.length+' parts</div><span class="num small"><b>'+dayMin(t)+'</b> / '+goal+' min spoken</span></div><div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">'+
+    P.map(function(x){return '<div class="row small"><span style="width:22px;text-align:center">'+x.ic+'</span><span class="grow">'+esc(x.lab)+(x.val?' <span class="muted">· '+esc(x.val)+'</span>':'')+'</span>'+(x.done?'<span class="pill good">✓</span>':'<span class="pill off">to do</span>')+'</div>';}).join('')+'</div></section>';
+  var pl=S.plan&&S.plan.date===t&&S.plan.report;
+  if(pl&&pl.length)h+='<section class="card"><div class="eyebrow">Coach report · this morning</div>'+pl.map(function(l){return '<div class="small" style="margin-top:4px">'+esc(l)+'</div>';}).join('')+'</section>';
+  if(S.report&&S.report.lines)h+='<section class="card"><div class="eyebrow">Weekly report · '+esc(S.report.date||'')+'</div>'+S.report.lines.map(function(l){return '<div class="small" style="margin-top:4px">'+esc(l)+'</div>';}).join('')+'</section>';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
     tile('Spoken',(all/60).toFixed(1)+' h','target by today '+(goal*Math.min(dn,44)/60).toFixed(1)+' h')+
     tile('Streak',streak()+' d','days with 10+ minutes')+
     tile('Episodes',epn+' / 44','')+
     tile('Situations won',won+' / '+S.sits.length,'')+
     tile('Mistakes beaten',beaten+' / '+ms.length,'right on 3 days')+
-    tile('Last exam',lastEx?lastEx.total+' / 25':'–',lastEx?esc(lastEx.level||''):'Sundays')+'</div>';
+    tile('Last exam',lastEx?lastEx.total+' / 25':'–',lastEx?esc(lastEx.level||''):'Sundays')+
+    tile('Drill reviews',tot.dr,tot.dok+' right')+
+    tile('Scenes',S.sessions.length,'role-plays done')+
+    tile('Rafa notes',tot.ra,'answered')+
+    tile('Diário',tot.di,'entries')+
+    tile('Ouvido',tot.li,tot.lok+' understood')+
+    tile('Bonus audio',tot.bo,'Sundays listened')+'</div>';
   var nextGate=S.sits.filter(function(s){return s.gate>=t;}).map(function(s){return s.gate;}).sort()[0];
   if(nextGate){var due=S.sits.filter(function(s){return s.gate===nextGate;}),wonG=due.filter(function(s){return sitLevel(s.id)>=2;}).length;
     h+='<section class="card"><div class="eyebrow">Next gate · '+nextGate.slice(8)+'/'+nextGate.slice(5,7)+'</div><div class="row small" style="margin-top:4px"><span class="grow">Win '+due.map(function(s){return esc(s.title);}).join(', ')+'</span><span class="pill '+(wonG===due.length?'good':'warn')+'">'+wonG+' / '+due.length+'</span></div></section>';}
   h+='<section class="card"><div class="eyebrow" style="margin-bottom:8px">Minutes spoken, last 14 days (dashed line = '+goal+') · '+tot14+' min</div><div class="bars"><div class="t" style="bottom:'+(100/1.5)+'%"></div>'+bars+'</div><div class="barx">'+xs+'</div></section>';
   var B=S.meta.bosses||{};
-  h+='<section><div class="eyebrow" style="margin-bottom:6px">Day by day</div><div class="card" style="padding:4px 0;overflow-x:auto"><table class="small num" style="width:100%;border-collapse:collapse"><thead><tr class="muted tiny" style="text-align:left"><th style="padding:6px 8px">Day</th><th>Episode</th><th>Min</th><th title="Rafa">☀</th><th title="Diário">☾</th></tr></thead><tbody>';
+  h+='<section><div class="eyebrow" style="margin-bottom:6px">Day by day</div><div class="card" style="padding:4px 0;overflow-x:auto"><table class="small num" style="width:100%;border-collapse:collapse;min-width:360px"><thead><tr class="muted tiny" style="text-align:center"><th style="padding:6px 8px;text-align:left">Day</th><th title="Rafa">☀</th><th title="Episode">▶</th><th title="Drills right / done">Drills</th><th title="Best scene score">Scene</th><th title="Ouvido understood">Ouvido</th><th title="Diário">☾</th><th>Min</th></tr></thead><tbody>';
   for(i=1;i<=44;i++){
-    var dt=dateOfDay(i),dd=S.days[dt]||{},hi=S.hist[dt]||{},mm=dayMin(dt),fut=i>dn,isT=i===dn;
-    var bs=B[dt.slice(5)]||B[dt]||'';
-    h+='<tr style="border-top:1px solid var(--line);'+(isT?'background:var(--soft);':'')+(fut?'opacity:.55;':'')+'"><td style="padding:6px 8px;white-space:nowrap"><b>'+i+'</b> <span class="tiny muted">'+dt.slice(8)+'/'+dt.slice(5,7)+'</span></td><td>'+(epDone(i)?'✓ ':'')+esc(titleFor(i))+(bs?'<br><span class="tiny" style="color:var(--brand)">Sunday: '+esc(bs)+'</span>':'')+'</td><td>'+(fut?'':'<span style="color:var('+(mm>=goal?'--good':mm>=10?'--warn':'--muted')+')">'+mm+'</span>')+'</td><td>'+(dd.rafa||hi.rafa?'✓':'')+'</td><td>'+(dd.diario||hi.diario?'✓':'')+'</td></tr>';
+    var dt=dateOfDay(i),dd=S.days[dt]||{},hi=S.hist[dt]||{},mm=dayMin(dt),fut=i>dn,isT=i===dn,bs=B[dt.slice(5)]||'',sc=bestScore(dt);
+    h+='<tr style="border-top:1px solid var(--line);text-align:center;'+(isT?'background:var(--soft);':'')+(fut?'opacity:.5;':'')+'"><td style="padding:6px 8px;text-align:left"><b>'+i+'</b> <span class="tiny muted">'+dt.slice(8)+'/'+dt.slice(5,7)+'</span><div class="tiny muted" style="max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(titleFor(i))+'</div>'+(bs?'<div class="tiny" style="color:var(--brand)">Sunday: '+esc(bs)+(S.exams[dt]&&S.exams[dt].result?' · '+S.exams[dt].result.total+'/25':'')+'</div>':'')+'</td>'+
+      '<td>'+(dd.rafa||hi.rafa?'✓':'')+'</td><td>'+(epDone(i)?'✓':'')+'</td><td>'+(dd.drills?(dd.drillOk||0)+'/'+dd.drills:'')+'</td><td>'+(sc>=0?sc:'')+'</td><td>'+(dd.listens?(dd.listenOk||0)+'/'+dd.listens:'')+'</td><td>'+(dd.diario||hi.diario?'✓':'')+'</td>'+
+      '<td>'+(fut?'':'<b style="color:var('+(mm>=goal?'--good':mm>=10?'--warn':'--muted')+')">'+mm+'</b>')+'</td></tr>';
   }
   h+='</tbody></table></div></section>';
   if(exk.length)h+='<section class="card"><div class="eyebrow" style="margin-bottom:6px">Sunday exams</div>'+exk.map(function(k){var r=S.exams[k].result;return '<div class="row small"><span class="grow">'+k+'</span><span class="num"><b>'+r.total+'</b> / 25 · '+esc(r.level||'')+'</span></div>';}).join('')+'</section>';
@@ -679,7 +697,7 @@ function chatDone(r){
   saveSrs();bump({chats:1});
   var id=t+'-'+Date.now().toString(36),doc={date:t,ts:Date.now(),kind:'chat',sit:s.id,char:s.char,twist:M.twist||'',mins:Math.round((Date.now()-M.t0)/60000),speakSecs:Math.round(M.secs),turns:M.turns,
     score:score,pass:pass,goalsDone:M.goals.length,goalsAll:s.goals.length,fixes:M.fixes,used:Object.keys(M.used),words:r.words||[],better:r.better||[],summary:r.summary||'',log:M.log.map(function(m){return {w:m.who,pt:m.pt};}).slice(0,40),synced:false};
-  save('sessions/'+id,doc);
+  save('sessions/'+id,doc);S.sessions.push(doc);
   M.done=true;
   var h='<div class="row"><div class="grow"><div class="eyebrow">'+esc(s.title)+'</div><div class="big num">'+(score||'–')+'<span class="muted" style="font-size:24px"> / 10</span></div></div>'+(pass?'<span class="pill good">Won'+(M.twist?' with a twist':'')+'</span>':'<span class="pill warn">'+M.goals.length+' of '+s.goals.length+' goals</span>')+'</div>';
   if(r.summary)h+='<p>'+esc(r.summary)+'</p>';
@@ -858,6 +876,7 @@ function drawEp(){
 function viewEps(){
   var dn=dayNum(),done=0,i;for(i=1;i<=44;i++)if(epDone(i))done++;
   var h='<header class="top"><h1 class="disp">Episódios</h1><div class="meta"><b class="num">'+done+' / 44</b>listened</div></header><p class="muted small">Today\'s episode and the three either side have full audio here. Every episode has its transcript, and each line plays on its own.</p>';
+  if(S.bonus.length){h+='<div class="eyebrow">⭐ Sunday bonus audio</div>';S.bonus.slice().reverse().forEach(function(b){h+='<button class="sit" data-a="bonus" data-id="'+esc(b.id)+'"><span class="n">⭐</span><span class="grow"><b>'+esc(b.title)+'</b><br><span class="small muted">'+b.items.length+' lines · '+esc(b.date||'')+'</span></span></button>';});h+='<div class="eyebrow" style="margin-top:6px">Episodes</div>';}
   for(i=1;i<=44;i++){
     var e=epByN(i),t=titleFor(i),ok=epDone(i),isT=i===dn;
     var pill=ok?'<span class="pill good">✓</span>':isT?'<span class="pill warn">Today</span>':e?'':'<span class="pill off">'+esc(dateOfDay(i).slice(8)+'/'+dateOfDay(i).slice(5,7))+'</span>';
@@ -1000,11 +1019,46 @@ function sendVlog(){
     var fx=(r.fixes||[]).filter(function(f){return f&&f.ok&&realFix(f.said,f.ok);});fx.forEach(function(f){addMistake(f,'voice:'+s.id);});saveSrs();
     var m=clamp(+r.mins||8,1,60),secs=Math.round(m*60*0.6);bump({speakSecs:secs,chats:1});
     var id=t+'-v'+Date.now().toString(36);
-    save('sessions/'+id,{date:t,ts:Date.now(),kind:'voice',sit:s.id,char:s.char,twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
+    S.sessions.push({date:t,score:score});save('sessions/'+id,{date:t,ts:Date.now(),kind:'voice',sit:s.id,char:s.char,twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
     M.done=true;
     setBody('<div class="row"><div class="grow"><div class="eyebrow">'+esc(s.title)+' · voice mode</div><div class="big num">'+score+'<span class="muted" style="font-size:24px"> / 10</span></div></div>'+(pass?'<span class="pill good">Won</span>':'<span class="pill warn">'+gd+' of '+ga+' goals</span>')+'</div><p class="small muted">Logged '+Math.round(secs/60)+' spoken minutes (60% of the scene) and '+fx.length+' fixes into your drills.</p>');
     setFoot('<button class="btn pri wide" data-a="close">Done</button>');
   },function(){if(S.mode!==M)return;M.busy=false;setFoot('<textarea id="ans" rows="8">'+esc(txt)+'</textarea><button class="btn pri wide" data-a="vlogsend">Try again</button>');toast('Couldn\'t read that log. Check it\'s the whole thing.');});
+}
+
+/* ---------- Sunday bonus audio ---------- */
+function startBonus(id){
+  var x=S.bonus.filter(function(b){return b.id===id;})[0];if(!x)return;
+  var latest=S.bonus.slice(-2).indexOf(x)>=0&&x.audio;
+  S.mode={k:'bonus',x:x,shown:{}};
+  openMode('⭐ '+x.title,'<p class="muted">'+esc(x.intro||'')+'</p><div class="card" id="epaudio">'+(latest?'<p class="small muted"><span class="spin"></span> Loading…</p>':'<p class="small muted">Tap any line to hear it. The full recording is in your podcast feed.</p>')+'</div><div id="bonuslist"></div>',
+    (S.days[today()]||{}).bonus?'<p class="small muted" style="text-align:center">Listened ✓</p>':'<button class="btn pri wide" data-a="bonusdone">I\'ve listened to it</button>');
+  drawBonus();
+  if(latest)fetch('bonus/'+x.audio).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){if(!S.mode||S.mode.x!==x)return;if(epUrl)URL.revokeObjectURL(epUrl);epUrl=URL.createObjectURL(b);epPlayer.src=epUrl;epPlayer.playbackRate=S.prefs.epRate||1;drawPlayer();})
+    .catch(function(){var e=$('#epaudio');if(e)e.innerHTML='<p class="small muted">Couldn\'t load the recording. Tap any line below to hear it.</p>';});
+}
+function drawBonus(){
+  var M=S.mode,x=M.x;
+  $('#bonuslist').innerHTML='<div style="display:flex;flex-direction:column;gap:8px">'+x.items.map(function(it,i){
+    if(it.answer)return '<div class="card" style="padding:10px 12px"><div class="eyebrow">'+esc(it.speaker||'')+' asks · answer out loud</div><div class="row" style="gap:8px"><button class="play" data-a="say" data-w="'+esc(it.speaker||'')+'" data-t="'+esc(it.pt)+'" aria-label="Play">'+ICON.play+'</button><b class="grow">'+esc(it.pt)+'</b></div>'+
+      (M.shown[i]?'<div class="row" style="gap:8px;margin-top:6px"><button class="play" data-a="say" data-w="George" data-t="'+esc(it.answer)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(it.answer)+'</span></div>':'<button class="link" data-a="bonusshow" data-i="'+i+'">Show your answer</button>')+'</div>';
+    return '<div class="row" style="gap:10px;align-items:flex-start"><button class="play" data-a="say" data-w="'+esc(it.speaker||'')+'" data-t="'+esc(it.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><div class="eyebrow">'+esc(it.speaker||'')+'</div><div>'+esc(it.pt)+'</div>'+(it.en?'<div class="small muted">'+esc(it.en)+'</div>':'')+'</div></div>';
+  }).join('')+'</div>';
+}
+
+/* ---------- what counts for each part, per day ---------- */
+function bestScore(date){var b=-1;S.sessions.forEach(function(x){if(x.date===date&&typeof x.score==='number')b=Math.max(b,x.score);});return b;}
+function parts(date){
+  var d=S.days[date]||{},hi=S.hist[date]||{},n=diffDays(S.cfg.start,date)+1,sun=new Date(date+'T12:00:00').getDay()===0;
+  return [
+    {k:'rafa',ic:'☀',lab:'Rafa\'s note',done:!!(d.rafa||hi.rafa),val:d.rafa||hi.rafa?'answered':''},
+    {k:'ep',ic:'▶',lab:'Episode '+n,done:epDone(n),val:epDone(n)?'listened':''},
+    {k:'drill',ic:'1',lab:'Drills',done:(d.drills||0)>=10,val:d.drills?(d.drillOk||0)+' / '+d.drills+' right':''},
+    {k:'chat',ic:'2',lab:'Conversa',done:(d.chats||0)>0,val:d.chats?d.chats+' scene'+(d.chats>1?'s':'')+(bestScore(date)>=0?' · best '+bestScore(date)+'/10':''):''},
+    {k:'listen',ic:'3',lab:'Ouvido',done:(d.listens||0)>=10,val:d.listens?(d.listenOk||0)+' / '+d.listens+' understood':''},
+    {k:'diario',ic:'☾',lab:'Diário',done:!!(d.diario||hi.diario),val:d.diario||hi.diario?'written':''}
+  ].concat(sun?[{k:'exam',ic:'4',lab:'Exame',done:!!(S.exams[date]&&S.exams[date].result),val:S.exams[date]&&S.exams[date].result?S.exams[date].result.total+' / 25':''},
+               {k:'bonus',ic:'⭐',lab:'Bonus audio',done:!!d.bonus,val:d.bonus?'listened':''}]:[]);
 }
 
 /* ---------- actions ---------- */
@@ -1016,6 +1070,9 @@ function next(){
   S.chain=false;render();
 }
 var A={
+  bonus:function(d){S.chain=false;startBonus(d.id);},
+  bonusshow:function(d){S.mode.shown[+d.i]=1;drawBonus();},
+  bonusdone:function(){var x=theDay();x.bonus=1;S.days[x.date]=x;save('days/'+x.date,x);setFoot('<p class="small muted" style="text-align:center">Listened ✓</p>');toast('Marked as listened.');},
   flip:function(){showBack();},
   selfrate:function(d){rateSelf(d.v);},
   drillmode:function(d){S.prefs.drillMode=d.v;save('me/prefs',S.prefs);var M=S.mode;if(M&&M.k==='drill'){M.cur=null;showCard();}},
