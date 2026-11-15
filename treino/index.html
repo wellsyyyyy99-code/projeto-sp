@@ -440,11 +440,13 @@ function viewHoje(){
   h+='<button class="sit" data-a="rafa"><span class="n">☀</span><span class="grow"><b>Rafa\'s voice note</b><br><span class="small muted">'+(rm?esc((rm.q&&rm.q.pt)||rm.lines[0].pt):'Arrives at 05:40'+(S.ai?' · tap to get one now':''))+'</span></span>'+(rDone?'<span class="pill good">✓</span>':'')+'</button>';
   var e=epByN(dn);
   h+='<button class="sit" data-a="ep" data-n="'+dn+'"'+(e?'':' disabled')+'><span class="n">▶</span><span class="grow"><b>Ep '+dn+' · '+esc(titleFor(dn))+'</b><br><span class="small muted">'+(e?(winEp(e)?'Listen on the train, then shadow George\'s lines':'Transcript here; full audio in your podcast app'):'Not out yet: the Producer adds it on Sunday')+'</span></span>'+(epDone(dn)?'<span class="pill good">✓</span>':'')+'</button>';
+  var r1=d.r1||(S.ready&&q===0&&d.drills>0),r2=d.r2||d.chats>0,r3=d.r3||d.listens>=10;
   h+='<div class="eyebrow" style="margin-top:4px">Speaking session</div>';
-  h+='<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">Start today\'s session</button>';
-  h+='<section class="card round'+(d.drills>=10?' done':'')+'"><div class="n">1</div><div class="grow"><h3>Drills</h3><div class="small muted">'+q+' cards ready · about '+Math.max(2,Math.round(q*0.35))+' min</div></div><button class="btn" data-a="drill">Start</button></section>';
-  h+='<section class="card round'+(d.chats>0?' done':'')+'"><div class="n">2</div><div class="grow"><h3>Conversa</h3><div class="small muted">'+(sit?esc(sit.title)+' · with '+esc(sit.char):'')+' · about 8 min</div></div><button class="btn" data-a="chat" data-id="'+(sit?sit.id:'')+'">Start</button></section>';
-  h+='<section class="card round'+(d.listens>=10?' done':'')+'"><div class="n">3</div><div class="grow"><h3>Ouvido</h3><div class="small muted">10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min</div></div><button class="btn" data-a="listen">Start</button></section>';
+  h+=(r1&&r2&&r3)?'<div class="verdict right" style="text-align:center">Today\'s session done ✓</div>':'<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">'+(r1||r2||r3?'Continue today\'s session':'Start today\'s session')+'</button>';
+  function rnd(n,ok,title,sub,act,extra){return '<section class="card round'+(ok?' done':'')+'"'+(ok?' style="background:var(--soft)"':'')+'><div class="n">'+(ok?'✓':n)+'</div><div class="grow"><h3>'+title+(ok?' <span class="pill good">Done</span>':'')+'</h3><div class="small muted">'+sub+'</div></div><button class="btn'+(ok?' ghost':'')+'" data-a="'+act+'"'+(extra||'')+'>'+(ok?'Again':'Start')+'</button></section>';}
+  h+=rnd(1,r1,'Drills',r1?(d.drillOk||0)+' / '+(d.drills||0)+' right'+(q?' · '+q+' more ready':''):q+' cards ready · about '+Math.max(2,Math.round(q*0.12))+' min','drill');
+  h+=rnd(2,r2,'Conversa',(sit?esc(sit.title)+' · with '+esc(sit.char):'')+(r2&&bestScore(today())>=0?' · best '+bestScore(today())+'/10':' · about 8 min'),'chat',' data-id="'+(sit?sit.id:'')+'"');
+  h+=rnd(3,r3,'Ouvido',r3?(d.listenOk||0)+' / '+(d.listens||0)+' understood':'10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min','listen');
   if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
   var lb=S.bonus[S.bonus.length-1];if(isSun&&lb)h+='<button class="sit" data-a="bonus" data-id="'+esc(lb.id)+'"><span class="n">⭐</span><span class="grow"><b>Bonus audio</b><br><span class="small muted">'+esc(lb.title)+' · for the gym this week</span></span>'+((S.days[today()]||{}).bonus?'<span class="pill good">✓</span>':'')+'</button>';
   var dn2=S.notes[today()+'-diario'];
@@ -642,7 +644,7 @@ function rateCard(v){
   showCard();
 }
 function drillEnd(){
-  var M=S.mode;M.done=true;$('#mright').textContent='';
+  var M=S.mode;M.done=true;if(M.seen){var x=theDay();x.r1=1;S.days[x.date]=x;save('days/'+x.date,x);}$('#mright').textContent='';
   setBody('<div class="eyebrow">Round 1 done</div><div class="big num">'+M.right+' / '+M.seen+'</div><p class="muted">right first time. The ones you missed come back tomorrow.</p>');
   setFoot('<button class="btn pri wide" data-a="next">'+(S.chain?'Round 2: Conversa':'Done')+'</button>');
 }
@@ -715,7 +717,7 @@ function chatDone(r){
   S.sitState[s.id]=st;save('me/sits',{s:S.sitState});
   var added=M.fixes.map(function(f){return addMistake(f,'chat:'+s.id);}).filter(Boolean);
   Object.keys(M.used).forEach(function(id){var x=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[id]);x.ok=(x.ok||[]).slice();if(x.ok.indexOf(t)<0)x.ok.push(t);x.s=x.ok.length>=3?'beaten':'open';if(!x.d)x.d=addDays(t,1);S.srs[id]=x;});
-  saveSrs();bump({chats:1});
+  saveSrs();theDay().r2=1;bump({chats:1});
   var id=t+'-'+Date.now().toString(36),doc={date:t,ts:Date.now(),kind:'chat',sit:s.id,char:s.char,twist:M.twist||'',mins:Math.round((Date.now()-M.t0)/60000),speakSecs:Math.round(M.secs),turns:M.turns,
     score:score,pass:pass,goalsDone:M.goals.length,goalsAll:s.goals.length,fixes:M.fixes,used:Object.keys(M.used),words:r.words||[],better:r.better||[],summary:r.summary||'',log:M.log.map(function(m){return {w:m.who,pt:m.pt};}).slice(0,40),synced:false};
   save('sessions/'+id,doc);S.sessions.push(doc);
@@ -759,7 +761,7 @@ function pickLine(i){
   $('#reveal').innerHTML='<div class="card"><div class="pt">'+esc(it.l.pt)+'</div>'+(it.l.heard?'<div class="small muted">Sounds like: '+esc(it.l.heard)+'</div>':'')+'<p class="small muted" style="margin:6px 0 0">Shadow it: play it and say it along with '+esc(it.l.s)+'.</p></div><button class="btn pri wide" data-a="nextline" style="margin-top:10px">Next</button>';
 }
 function listenEnd(){
-  var M=S.mode;M.done=true;S.prefs.listenRate=M.rate;save('me/prefs',S.prefs);
+  var M=S.mode;M.done=true;theDay().r3=1;bump({});S.prefs.listenRate=M.rate;save('me/prefs',S.prefs);
   setBody('<div class="eyebrow">Round 3 done</div><div class="big num">'+M.right+' / '+M.items.length+'</div><p class="muted">understood first time. Next time starts at ×'+M.rate.toFixed(2)+' speed.</p><button class="btn pri wide" data-a="next">Done</button>');
 }
 
@@ -1075,9 +1077,9 @@ function parts(date){
   return [
     {k:'rafa',ic:'☀',lab:'Rafa\'s note',done:!!(d.rafa||hi.rafa),val:d.rafa||hi.rafa?'answered':''},
     {k:'ep',ic:'▶',lab:'Episode '+n,done:epDone(n),val:epDone(n)?'listened':''},
-    {k:'drill',ic:'1',lab:'Drills',done:(d.drills||0)>=10,val:d.drills?(d.drillOk||0)+' / '+d.drills+' right':''},
+    {k:'drill',ic:'1',lab:'Drills',done:!!d.r1||(d.drills||0)>=10,val:d.drills?(d.drillOk||0)+' / '+d.drills+' right':''},
     {k:'chat',ic:'2',lab:'Conversa',done:(d.chats||0)>0,val:d.chats?d.chats+' scene'+(d.chats>1?'s':'')+(bestScore(date)>=0?' · best '+bestScore(date)+'/10':''):''},
-    {k:'listen',ic:'3',lab:'Ouvido',done:(d.listens||0)>=10,val:d.listens?(d.listenOk||0)+' / '+d.listens+' understood':''},
+    {k:'listen',ic:'3',lab:'Ouvido',done:!!d.r3||(d.listens||0)>=10,val:d.listens?(d.listenOk||0)+' / '+d.listens+' understood':''},
     {k:'diario',ic:'☾',lab:'Diário',done:!!(d.diario||hi.diario),val:d.diario||hi.diario?'written':''}
   ].concat(sun?[{k:'exam',ic:'4',lab:'Exame',done:!!(S.exams[date]&&S.exams[date].result),val:S.exams[date]&&S.exams[date].result?S.exams[date].result.total+' / 25':''},
                {k:'bonus',ic:'⭐',lab:'Bonus audio',done:!!d.bonus,val:d.bonus?'listened':''}]:[]);
@@ -1114,7 +1116,7 @@ var A={
   vlog:function(d){startVlog(d.id);},
   vlogsend:function(){sendVlog();},
   tab:function(d){S.view=d.v;render();window.scrollTo(0,0);},
-  session:function(){S.chain=true;startDrill();},
+  session:function(){S.chain=true;var d=theDay();if(!d.r1)startDrill();else if(!(d.r2||d.chats)){var s=todaySit();if(s&&S.ai)sitSheet(s.id);else startListen();}else startListen();},
   drill:function(){S.chain=false;startDrill();},
   chat:function(d){S.chain=false;if(d.id)sitSheet(d.id);},
   sit:function(d){S.chain=false;sitSheet(d.id);},
