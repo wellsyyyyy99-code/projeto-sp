@@ -8,7 +8,7 @@
  "b/core-6.mp3": "ad0fa659f367fd346d9f40f14fc80267645a46c3",
  "b/core-7.mp3": "e377e96db1ecefeeb526441ec7bc275eb4340b06",
  "b/d-0.mp3": "502f3717bc3d0ca01e7ddaf5d7a3fbda10a968db",
- "b/index.json": "87a356ee59f6808e267a2cf77337fffca7f3d2f1",
+ "b/index.json": "8b1c979bd2f59270887941e8570f4fdc44ba3089",
  "b/p01-0.mp3": "b925183cb3ad8b8dcf31c1a02b7e749d52cebd62",
  "b/p01-1.mp3": "813c55c518db7fc8c83798f9c089098b014d93ef",
  "b/p01-2.mp3": "c1de4642d2968aaf2f7db693a74bbd54b3f43959",
@@ -47,11 +47,15 @@
  "b/x-1.mp3": "3b5193999e287d4940fed9b722bdcd77052d48ee",
  "b/x-2.mp3": "ee96c3fe315524814eb436449608fd38e5f7667f",
  "b/x-3.mp3": "98ea8226bb0f70314c6ebb86be170f43903f8553",
- "b/x-4.mp3": "8b0cc8ac07e3887cf56a30b1a90d375f7fe886aa",
+ "b/x-4.mp3": "c2a444e59a417540941d27ffe01018dcbd5cec72",
+ "b/x-5.mp3": "b198c85427cbccc8c56beca27e7096bfc060e784",
+ "b/x-6.mp3": "821066c8eb93de205d448ae922f079e0521c85bd",
+ "b/x-7.mp3": "25d12ec6d2df66b245ae15e1079ca418c9d09e9a",
+ "b/x-8.mp3": "c5aea9ac81fcbdb4a8267c0c8c2b23d726e80a6d",
  "bonus/extra-2026-11-09-semana-2.mp3": "d268935ab0155a62c1fc1b99812984e0573a9fc3",
  "bonus/extra-2026-11-15.mp3": "ec6f5e1eeb247b05c802e48997f65de52e0685a7",
  "data/bonus.json": "95042e0040ab00a99a6d75b491a6647b0e9dc5fe",
- "data/cards.json": "855a0078acf2fa7db980d6a6df1b6deba15b5e37",
+ "data/cards.json": "fa89a7d93adbdc5d2744340520bdff5f717be7d6",
  "data/eps.json": "8e19a62806ce4d5ba0307819d725de6586de9e45",
  "data/meta.json": "f61e03d305249523431cbd4e73f4e9cb6051439c",
  "data/sits.json": "534d0685551078b5a24c375a54e7959d8ea99c48",
@@ -62,5 +66,5 @@
  "ep/ep16-planejando-a-viagem.mp3": "e58720b29a8283948f1f9f0d485b092863179312",
  "ep/ep17-no-aeroporto.mp3": "d954eccf3c0044b8f0401fc8c0ee1294a2e7b919",
  "ep/ep18-no-aviao.mp3": "57d7f30c325afc6937a3bd6cbebc0a5a44413277",
- "index.html": "9a9610d62c94c0235cfaf944bb444136ff9086be"
+ "index.html": "3af7c78cd589d0c237f7ae408b3b19e85e8c76ba"
 }

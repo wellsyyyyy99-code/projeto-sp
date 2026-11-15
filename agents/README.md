@@ -71,6 +71,13 @@ the agent files in `agents/` and the prompt that started you.
 
 Never write `me/*`. Never `set` a document the app writes; `merge` only the fields listed for you.
 
+### Cards brought over from Anki
+
+`packs/anki-cards.json` holds the 207 cards from George's Anki collection that weren't already Treino cards
+(episode lines as listening cards with `mode: "listen"`, Pack 00 sound rules, answer-aloud cards; `mode: "open"`
+means answer freely and `pt` is a hint). They are part of the course data like the packs. His Anki review history
+was imported into `me/srs` once by the app on 15 Nov 2026 and is not in the repo. Anki is retired.
+
 ### Cards in the database
 
 ```json
