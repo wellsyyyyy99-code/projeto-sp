@@ -632,7 +632,7 @@ def main():
         d.mkdir(parents=True, exist_ok=True)
     packs = []
     for p in sorted(PACKS.glob("*.json")):
-        if p.name.startswith(("extras-", "speaking-", "treino-")):
+        if p.name.startswith(("extras-", "speaking-", "treino-", "anki-")):
             continue
         try:
             pack = json.loads(p.read_text(encoding="utf-8"))
