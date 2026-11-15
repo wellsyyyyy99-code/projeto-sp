@@ -166,7 +166,7 @@ function gradeCard(st,res,day){
   }else if(res==='hard'){
     st.i=st.m===day?1:Math.max(1,LADDER[Math.max(st.r-1,0)]);st.d=addDays(day,st.i);
   }else{st.m=day;st.r=0;st.i=0;st.d=day;if(res==='wrong')st.l++;}
-  var last=addDays(S.cfg.flight,-5);if(st.d>last&&day<last)st.d=last; /* everything gets one more go before the flight */
+  var last=addDays(S.cfg.flight,-5);if(st.d>last&&day<last)st.d=addDays(last,-(parseInt(fnv((st.f||'')+'|'+st.n+'|'+st.l),16)%9)); /* one more go before the flight, spread over the last 9 days */
   st.s=st.ok.length>=3?'beaten':'open';
   return st;
 }
@@ -321,7 +321,7 @@ function focusCards(){
 }
 function buildQueue(){
   var t=today(),dn=dayNum(),foc={};focusCards().forEach(function(c){foc[c.id]=1;});
-  var avail=S.cards.filter(function(c){return c.pt&&c.en&&(!c.ep||c.ep<=dn);});
+  var avail=S.cards.filter(function(c){return c.pt&&c.en&&(!c.ep||c.ep<dn||(c.ep===dn&&epDone(dn)));}); /* today's episode cards unlock once it's listened to */
   var due=avail.filter(function(c){var st=S.srs[c.id];return st&&st.n>0&&st.d<=t;});
   due.sort(function(a,b){var x=S.srs[a.id],y=S.srs[b.id];return (foc[b.id]||0)-(foc[a.id]||0)||(y.l||0)-(x.l||0)||(x.d<y.d?-1:x.d>y.d?1:0);});
   var fresh=avail.filter(function(c){var st=S.srs[c.id];return !st||!st.n;});
@@ -367,9 +367,9 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
 function importAnki(){
   return getJSON('data/anki-srs.json').then(function(imp){
     if(!imp||!imp.c||S.prefs.ankiImport===imp.id)return;
-    var n=0;for(var id in imp.c){var a=S.srs[id],b=imp.c[id];if(!a||(a.t||'')<(b.t||'')||((a.t||'')===(b.t||'')&&(a.n||0)<(b.n||0))){S.srs[id]=b;n++;}}
+    var redo=!!S.prefs.ankiImport,n=0;for(var id in imp.c){var a=S.srs[id],b=imp.c[id];if(!a||(a.t||'')<(b.t||'')||((a.t||'')===(b.t||'')&&(a.n||0)<(b.n||0))||(redo&&a.src==='anki'&&a.t===b.t&&a.n===b.n)){S.srs[id]=b;n++;}}
     saveSrs();S.prefs.ankiImport=imp.id;save('me/prefs',S.prefs);
-    setTimeout(function(){toast('Imported your Anki progress: '+n+' cards.');},600);
+    setTimeout(function(){toast(redo?'Spread out '+n+' Anki cards that were all due on 12 Dec.':'Imported your Anki progress: '+n+' cards.');},600);
   });
 }
 function loadDb(){
@@ -1094,7 +1094,7 @@ var A={
   selfrate:function(d){rateSelf(d.v);},
   drillmode:function(d){S.prefs.drillMode=d.v;save('me/prefs',S.prefs);var M=S.mode;if(M&&M.k==='drill'){M.cur=null;showCard();}},
   ep:function(d){S.chain=false;startEp(d.n);},
-  epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));toast('Marked as listened.');},
+  epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));var k=S.cards.filter(function(c){return c.ep===n&&!(S.srs[c.id]&&S.srs[c.id].n);}).length;toast(n===dayNum()&&k?'Marked as listened. '+k+' new phrases from this episode unlocked for your drills.':'Marked as listened.');},
   epplay:function(){if(epPlayer.paused){stopAudio();var p=epPlayer.play();if(p&&p.catch)p.catch(function(){});}else epPlayer.pause();},
   epback:function(){epPlayer.currentTime=Math.max(0,epPlayer.currentTime-10);},
   eprate:function(d){S.prefs.epRate=+d.v;epPlayer.playbackRate=+d.v;save('me/prefs',S.prefs);drawPlayer();},
