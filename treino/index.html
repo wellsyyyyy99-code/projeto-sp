@@ -128,7 +128,8 @@ textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px s
 var $=function(s){return document.querySelector(s);};
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function today(){return fmtD(new Date());}
+var CUTOVER_H=3; /* a new day starts at 03:00, so a late-night session still counts for the day before */
+function today(){return fmtD(new Date(Date.now()-CUTOVER_H*3600e3));}
 function addDays(s,n){var d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return fmtD(d);}
 function diffDays(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5);}
 function fnv(s){var b=new TextEncoder().encode(String(s).trim()),h=0x811c9dc5;for(var i=0;i<b.length;i++){h^=b[i];h=Math.imul(h,0x01000193)>>>0;}return h.toString(16).padStart(8,'0');}
@@ -429,7 +430,7 @@ function render(){
 }
 function viewHoje(){
   var d=theDay(),m=mins(d.speakSecs),goal=S.cfg.dailyMin,sit=todaySit(),q=S.ready?dueCount():0,foc=S.ready?focusCards():[];
-  var isSun=new Date().getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result,hr=new Date().getHours(),dn=dayNum();
+  var isSun=new Date(today()+'T12:00:00').getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result,hr=new Date().getHours(),dn=dayNum();
   var note=S.plan&&S.plan.date===today()&&S.plan.note;
   var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dn+' of 44</div></header>';
   h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div></section>';
@@ -451,7 +452,7 @@ function viewHoje(){
   var lb=S.bonus[S.bonus.length-1];if(isSun&&lb)h+='<button class="sit" data-a="bonus" data-id="'+esc(lb.id)+'"><span class="n">⭐</span><span class="grow"><b>Bonus audio</b><br><span class="small muted">'+esc(lb.title)+' · for the gym this week</span></span>'+((S.days[today()]||{}).bonus?'<span class="pill good">✓</span>':'')+'</button>';
   var dn2=S.notes[today()+'-diario'];
   h+='<div class="eyebrow" style="margin-top:4px">Evening</div>';
-  h+='<button class="sit" data-a="diario"'+(hr>=18&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
+  h+='<button class="sit" data-a="diario"'+((hr>=18||hr<CUTOVER_H)&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
   if(foc.length)h+='<section><div class="eyebrow" style="margin-bottom:6px">Focus now</div><div class="chips">'+foc.map(function(c){return '<span class="chip">'+esc(c.pt)+'</span>';}).join('')+'</div></section>';
   if(('speechSynthesis' in window)&&!S.tts&&!hasGoodVoice())h+='<p class="note small"><span class="eyebrow">Better live voices</span><br>Replies made on the spot (Rafa\'s answers, scene replies, Diário corrections) use your phone\'s own voice, and yours is the basic one. On iPhone: Settings → Accessibility → Spoken Content → Voices → Portuguese (Brazil), then download an Enhanced or Premium voice. Reopen Treino after.</p>';
   h+='<p class="tiny muted">'+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off. ')+'Want to talk out loud with no typing? Open a Claude chat, start voice mode and say "Bora praticar, Treino '+(sit?sit.n:1)+'". Then log it from the Conversa screen.</p>';

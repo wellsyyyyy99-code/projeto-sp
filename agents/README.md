@@ -28,7 +28,8 @@ Diário prompt, and the Producer makes the weekly bonus audio.
 - Repo: `wellsyyyyy99-code/projeto-sp` (public). Site: https://wellsyyyyy99-code.github.io/projeto-sp/
 - Treino app artifact: slug `1d8563d8-af32-41fa-b60c-7000acfc6b88`, https://claude.ai/artifact/4eS5Vh7pkT5wanWQAeNbB5
 - Tracker sheet: spreadsheet id `1mG4gx_LyPcxVnku13iB1naxWwCUPreknpiLpb5M8L5M`
-- Day number = days since 2026-11-01, plus 1. Episode N is day N. Dates are Europe/London.
+- Day number = days since 2026-11-01, plus 1. Episode N is day N. Dates are Europe/London. The app's day starts at 03:00 London time,
+  so anything George does between midnight and 03:00 is filed under the day before.
 
 ## Tools an agent needs
 
