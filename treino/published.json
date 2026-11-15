@@ -46,7 +46,11 @@
  "b/x-2.mp3": "9d836582cfe82af30fe3eb81fac16a479f563197",
  "b/x-3.mp3": "58191d8853f477644533b33727663641d4b6af45",
  "data/cards.json": "b75d92bf180fbdd3fe2b896da919edafd7f56779",
- "data/eps.json": "78f71cb3484869c825d9e5b3531923567f08b76d",
+ "data/eps.json": "16ce0297ddee5065d2584363083c3d1c44c96d93",
+ "data/meta.json": "f61e03d305249523431cbd4e73f4e9cb6051439c",
  "data/sits.json": "534d0685551078b5a24c375a54e7959d8ea99c48",
- "index.html": "f482b5ca80bcb44fea1b3f46e5109ee249dbb3d9"
+ "ep/ep12-um-dia-corrido.mp3": "f53d134a9b0c01967612db4ec97230a86e36609b",
+ "ep/ep13-uma-historia-engracada.mp3": "a56da0e96a052d4b5d6b0e877518f26a3b76c211",
+ "ep/ep14-na-academia.mp3": "ffa6efbd83aabb461e884eeba694428747e886e6",
+ "index.html": "33bf74babc2f53bf41d558b026cc59929eeb4cbd"
 }
