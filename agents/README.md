@@ -61,7 +61,7 @@ the agent files in `agents/` and the prompt that started you.
 | `me/srs` | app only | `{c: {cardId: {d: due date, i: interval, r: streak, l: times wrong, n: times seen, ok: [dates right], s: "open" or "beaten", t: last seen, xl}}}` |
 | `me/sits` | app only | `{s: {sitId: {tries, best, last, pass: date, pass2: date}}}` |
 | `me/prefs` | app only | `{listenRate}` |
-| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, ep, rafa, diario, bonus, synced}` |
+| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, ep, rafa, diario, bonus, r1, r2, r3, tDr, tSp, tLi, tRe, synced}` (t* = seconds of study time: drills, speaking, listening, reading) |
 | `sessions/{id}` | app; Coach merges `synced` | one role-play (`kind` "chat", or "voice" when logged from Claude voice mode): `{date, sit, char, twist, mins, speakSecs, turns, score, pass, goalsDone, goalsAll, fixes:[{said, ok, en, why, type}], used, words, better, summary, log, synced}` |
 | `me/eps` | app only | `{d: {"<episode number>": "<date marked listened>"}}` |
 | `sys/report` | Examiner | `{date, lines: [...]}`: the weekly report, shown in the Tracker |

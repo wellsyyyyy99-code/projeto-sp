@@ -434,7 +434,7 @@ function viewHoje(){
   var isSun=new Date(today()+'T12:00:00').getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result,hr=new Date().getHours(),dn=dayNum();
   var note=S.plan&&S.plan.date===today()&&S.plan.note;
   var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dn+' of 44</div></header>';
-  h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div></section>';
+  h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div><div class="small muted" style="margin-top:8px">Study today: <b class="num" style="color:var(--ink)">'+studyMin(today())+' min</b>'+CATS.map(function(c){var v=Math.round((d[c.k]||0)/60);return v?' · '+c.lab.toLowerCase()+' '+v:'';}).join('')+'</div></section>';
   if(note)h+='<p class="note"><span class="eyebrow">Coach</span><br>'+esc(note)+'</p>';
   if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today…</p>';
   var rm=rafaMsg(),rn=S.notes[today()+'-rafa'],rDone=rn&&rn.turns&&rn.turns.length;
@@ -471,12 +471,24 @@ function viewTracker(){
   function tile(lab,val,sub){return '<div class="card" style="padding:10px 12px"><div class="eyebrow">'+lab+'</div><div class="disp num" style="font-size:30px">'+val+'</div>'+(sub?'<div class="tiny muted">'+sub+'</div>':'')+'</div>';}
   var h='<header class="top"><h1 class="disp">Tracker</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to the flight</div></header>';
   var P=parts(t),pd=P.filter(function(x){return x.done;}).length;
-  h+='<section class="card"><div class="row"><div class="eyebrow grow">Today · '+pd+' of '+P.length+' parts</div><span class="num small"><b>'+dayMin(t)+'</b> / '+goal+' min spoken</span></div><div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">'+
+  h+='<section class="card"><div class="row"><div class="eyebrow grow">Today · '+pd+' of '+P.length+' parts</div><span class="num small"><b>'+studyMin(t)+'</b> min study · <b>'+dayMin(t)+'</b> / '+goal+' spoken</span></div><div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">'+
     P.map(function(x){return '<div class="row small"><span style="width:22px;text-align:center">'+x.ic+'</span><span class="grow">'+esc(x.lab)+(x.val?' <span class="muted">· '+esc(x.val)+'</span>':'')+'</span>'+(x.done?'<span class="pill good">✓</span>':'<span class="pill off">to do</span>')+'</div>';}).join('')+'</div></section>';
   var pl=S.plan&&S.plan.date===t&&S.plan.report;
   if(pl&&pl.length)h+='<section class="card"><div class="eyebrow">Coach report · this morning</div>'+pl.map(function(l){return '<div class="small" style="margin-top:4px">'+esc(l)+'</div>';}).join('')+'</section>';
   if(S.report&&S.report.lines)h+='<section class="card"><div class="eyebrow">Weekly report · '+esc(S.report.date||'')+'</div>'+S.report.lines.map(function(l){return '<div class="small" style="margin-top:4px">'+esc(l)+'</div>';}).join('')+'</section>';
+  var ct={},ctot=0,stAll=0;CATS.forEach(function(c){ct[c.k]=0;});
+  for(i=1;i<=Math.min(dn,47);i++){var dd0=dateOfDay(i),x0=S.days[dd0]||{};CATS.forEach(function(c){ct[c.k]+=x0[c.k]||0;});stAll+=studyMin(dd0);}
+  CATS.forEach(function(c){ctot+=ct[c.k];});
+  var sbars='',sx='',smax=1;for(i=13;i>=0;i--){smax=Math.max(smax,studyMin(addDays(t,-i)));}
+  for(i=13;i>=0;i--){var d1=addDays(t,-i),x1=S.days[d1]||{},sm=studyMin(d1),known=studySecs(d1)/60,other=Math.max(0,sm-known);
+    sbars+='<div style="flex:1;display:flex;flex-direction:column-reverse;height:100%" title="'+d1+': '+sm+' min">'+CATS.map(function(c){return '<div style="height:'+((x1[c.k]||0)/60/smax*100)+'%;background:'+c.col+'"></div>';}).join('')+(other?'<div style="height:'+(other/smax*100)+'%;background:var(--muted);opacity:.5"></div>':'')+'</div>';
+    sx+='<span>'+d1.slice(8)+'</span>';}
+  h+='<section class="card"><div class="row"><div class="eyebrow grow">Study time</div><span class="disp num" style="font-size:26px">'+fmtDur(stAll*60)+'</span></div>'+
+    '<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">'+CATS.map(function(c){var hrs=ct[c.k]/3600;return '<div class="row small"><span style="width:10px;height:10px;border-radius:2px;background:'+c.col+'"></span><span style="width:80px">'+c.lab+'</span><span class="meter grow"><i style="width:'+(ctot?ct[c.k]/ctot*100:0)+'%;background:'+c.col+'"></i></span><b class="num" style="width:60px;text-align:right">'+fmtDur(ct[c.k])+'</b></div>';}).join('')+'</div>'+
+    '<div class="eyebrow" style="margin:12px 0 6px">Last 14 days, minutes</div><div class="bars" style="align-items:stretch">'+sbars+'</div><div class="barx">'+sx+'</div>'+
+    '<p class="tiny muted" style="margin:6px 0 0">Counted while you\'re active on a screen in Treino (episodes playing in the background count as listening). Grey = speaking logged in your sheet before the app could time things.</p></section>';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+    tile('Total study',fmtDur(stAll*60),'since day 1')+
     tile('Spoken',(all/60).toFixed(1)+' h','target by today '+(goal*Math.min(dn,44)/60).toFixed(1)+' h')+
     tile('Streak',streak()+' d','days with 10+ minutes')+
     tile('Episodes',epn+' / 44','')+
@@ -494,12 +506,12 @@ function viewTracker(){
     h+='<section class="card"><div class="eyebrow">Next gate · '+nextGate.slice(8)+'/'+nextGate.slice(5,7)+'</div><div class="row small" style="margin-top:4px"><span class="grow">Win '+due.map(function(s){return esc(s.title);}).join(', ')+'</span><span class="pill '+(wonG===due.length?'good':'warn')+'">'+wonG+' / '+due.length+'</span></div></section>';}
   h+='<section class="card"><div class="eyebrow" style="margin-bottom:8px">Minutes spoken, last 14 days (dashed line = '+goal+') · '+tot14+' min</div><div class="bars"><div class="t" style="bottom:'+(100/1.5)+'%"></div>'+bars+'</div><div class="barx">'+xs+'</div></section>';
   var B=S.meta.bosses||{};
-  h+='<section><div class="eyebrow" style="margin-bottom:6px">Day by day</div><div class="card" style="padding:4px 0;overflow-x:auto"><table class="small num" style="width:100%;border-collapse:collapse"><thead><tr class="muted tiny" style="text-align:center"><th style="padding:6px 8px;text-align:left">Day</th><th title="Rafa">☀</th><th title="Episode">▶</th><th title="Drills right / done">Drills</th><th title="Best scene score">Scene</th><th title="Ouvido understood">Ouvido</th><th title="Diário">☾</th><th>Min</th></tr></thead><tbody>';
+  h+='<section><div class="eyebrow" style="margin-bottom:6px">Day by day</div><div class="card" style="padding:4px 0;overflow-x:auto"><table class="small num" style="width:100%;border-collapse:collapse"><thead><tr class="muted tiny" style="text-align:center"><th style="padding:6px 8px;text-align:left">Day</th><th title="Rafa">☀</th><th title="Episode">▶</th><th title="Drills right / done">Drills</th><th title="Best scene score">Scene</th><th title="Ouvido understood">Ouvido</th><th title="Diário">☾</th><th title="Study minutes (spoken)">Min</th></tr></thead><tbody>';
   for(i=1;i<=44;i++){
     var dt=dateOfDay(i),dd=S.days[dt]||{},hi=S.hist[dt]||{},mm=dayMin(dt),fut=i>dn,isT=i===dn,bs=B[dt.slice(5)]||'',sc=bestScore(dt);
     h+='<tr style="border-top:1px solid var(--line);text-align:center;'+(isT?'background:var(--soft);':'')+(fut?'opacity:.5;':'')+'"><td style="padding:6px 8px;text-align:left"><b>'+i+'</b> <span class="tiny muted">'+dt.slice(8)+'/'+dt.slice(5,7)+'</span><div class="tiny muted" style="max-width:96px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(titleFor(i))+'</div>'+(bs?'<div class="tiny" style="color:var(--brand)">Sunday: '+esc(bs)+(S.exams[dt]&&S.exams[dt].result?' · '+S.exams[dt].result.total+'/25':'')+'</div>':'')+'</td>'+
       '<td>'+(dd.rafa||hi.rafa?'✓':'')+'</td><td>'+(epDone(i)?'✓':'')+'</td><td>'+(dd.drills?(dd.drillOk||0)+'/'+dd.drills:'')+'</td><td>'+(sc>=0?sc:'')+'</td><td>'+(dd.listens?(dd.listenOk||0)+'/'+dd.listens:'')+'</td><td>'+(dd.diario||hi.diario?'✓':'')+'</td>'+
-      '<td>'+(fut?'':'<b style="color:var('+(mm>=goal?'--good':mm>=10?'--warn':'--muted')+')">'+mm+'</b>')+'</td></tr>';
+      '<td>'+(fut?'':'<b>'+studyMin(dt)+'</b><div class="tiny" style="color:var('+(mm>=goal?'--good':mm>=10?'--warn':'--muted')+')">'+mm+' spk</div>')+'</td></tr>';
   }
   h+='</tbody></table></div></section>';
   if(exk.length)h+='<section class="card"><div class="eyebrow" style="margin-bottom:6px">Sunday exams</div>'+exk.map(function(k){var r=S.exams[k].result;return '<div class="row small"><span class="grow">'+k+'</span><span class="num"><b>'+r.total+'</b> / 25 · '+esc(r.level||'')+'</span></div>';}).join('')+'</section>';
@@ -527,7 +539,7 @@ function openMode(title,body,foot,right){
 }
 function setBody(h){$('#mbody').innerHTML=h;$('.mbody').scrollTop=0;}
 function setFoot(h){var f=$('#mfoot');if(f)f.innerHTML=h;}
-function closeMode(){stopAudio();clearTimeout(autoT);if(epUrl){try{epPlayer.removeAttribute('src');epPlayer.load();}catch(e){}URL.revokeObjectURL(epUrl);epUrl=null;}if(S.dict&&dictOn){dictDone=null;S.dict.stop().catch(function(){});}S.mode=null;dictBox=null;dictDone=null;$('#mode').hidden=true;$('#mode').innerHTML='';render();}
+function closeMode(){flushTime();stopAudio();clearTimeout(autoT);if(epUrl){try{epPlayer.removeAttribute('src');epPlayer.load();}catch(e){}URL.revokeObjectURL(epUrl);epUrl=null;}if(S.dict&&dictOn){dictDone=null;S.dict.stop().catch(function(){});}S.mode=null;dictBox=null;dictDone=null;$('#mode').hidden=true;$('#mode').innerHTML='';render();}
 function answerFoot(btn,extra){
   if(btn==='check'||btn==='send')extra=(extra||'')+'</div><div class="row">'+autoBox();
   return '<div id="partial" class="small muted" aria-live="polite"></div><div class="row" style="gap:8px;align-items:stretch"><textarea id="ans" rows="2" lang="pt-BR" autocapitalize="sentences" placeholder="Fala em português…"></textarea>'+micHtml()+'</div><div class="row" style="gap:8px"><button class="btn pri grow" data-a="'+btn+'">'+(btn==='send'||btn==='rafasend'?'Send':btn==='examnext'?'Next question':'Check')+'</button>'+(extra||'')+'</div><div class="tiny muted">'+esc(micTip())+'</div>';
@@ -848,6 +860,32 @@ document.addEventListener('focusin',function(e){if(e.target&&e.target.id==='ans'
 function fitVV(){var vv=window.visualViewport,m=$('#mode');if(!vv||!m)return;m.style.top=vv.offsetTop+'px';m.style.height=vv.height+'px';m.style.bottom='auto';}
 if(window.visualViewport){visualViewport.addEventListener('resize',function(){fitVV();setTimeout(showAns,50);});visualViewport.addEventListener('scroll',fitVV);}
 
+/* ---------- study time: counted while a screen is open and you're active, split by kind ---------- */
+var CATS=[{k:'tDr',lab:'Drills',col:'var(--accent)'},{k:'tSp',lab:'Speaking',col:'var(--brand)'},{k:'tLi',lab:'Listening',col:'var(--good)'},{k:'tRe',lab:'Reading',col:'var(--warn)'}];
+var lastAct=Date.now(),tAcc={};
+['pointerdown','keydown','input','scroll','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){lastAct=Date.now();},true);});
+function epPlaying(){try{return !!epPlayer.src&&!epPlayer.paused&&!epPlayer.ended;}catch(e){return false;}}
+function bucket(){var M=S.mode;if(!M)return null;var k=M.k;
+  if(k==='drill')return 'tDr';
+  if(k==='chat'||k==='rafa'||k==='diario'||k==='exam'||k==='vlog')return 'tSp';
+  if(k==='listen')return 'tLi';
+  if(k==='sheet')return 'tRe';
+  if(k==='ep'||k==='bonus')return epPlaying()?'tLi':'tRe';
+  return null;}
+function flushTime(){var any=false;for(var k in tAcc)if(tAcc[k])any=true;if(!any)return;var o=tAcc;tAcc={};bump(o);}
+setInterval(function(){
+  var hiddenNow=document.visibilityState!=='visible',b=bucket();if(!b)return;
+  if(hiddenNow){if(!epPlaying())return;b='tLi';}
+  else if(!(Date.now()-lastAct<120000||epPlaying()||!player.paused))return;
+  tAcc[b]=(tAcc[b]||0)+5;
+  if(b==='tLi'&&S.mode&&(S.mode.k==='ep'))S.mode.epSecs=(S.mode.epSecs||0)+5;
+},5000);
+setInterval(flushTime,30000);
+document.addEventListener('visibilitychange',function(){if(document.visibilityState!=='visible')flushTime();});
+function fmtDur(sec){return sec<3600?Math.round(sec/60)+' min':(sec/3600).toFixed(1)+' h';}
+function studySecs(d){var x=S.days[d]||{};return CATS.reduce(function(a,c){return a+(x[c.k]||0);},0);}
+function studyMin(d){return Math.max(Math.round(studySecs(d)/60),dayMin(d));}
+
 /* ---------- tracker data: app days + what the sheet already had ---------- */
 function dateOfDay(n){return addDays(S.cfg.start,n-1);}
 function dayMin(d){return Math.max(mins((S.days[d]||{}).speakSecs),((S.hist[d]||{}).min)||0);}
@@ -1043,7 +1081,7 @@ function sendVlog(){
     if(pass){if(st.pass&&r.twist)st.pass2=st.pass2||t;else st.pass=st.pass||t;}
     S.sitState[s.id]=st;save('me/sits',{s:S.sitState});
     var fx=(r.fixes||[]).filter(function(f){return f&&f.ok&&realFix(f.said,f.ok);});fx.forEach(function(f){addMistake(f,'voice:'+s.id);});saveSrs();
-    var m=clamp(+r.mins||8,1,60),secs=Math.round(m*60*0.6);bump({speakSecs:secs,chats:1});
+    var m=clamp(+r.mins||8,1,60),secs=Math.round(m*60*0.6);bump({speakSecs:secs,chats:1,tSp:m*60});
     var id=t+'-v'+Date.now().toString(36);
     S.sessions.push({date:t,score:score});save('sessions/'+id,{date:t,ts:Date.now(),kind:'voice',sit:s.id,char:s.char,twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
     M.done=true;
@@ -1099,12 +1137,12 @@ var A={
   rmcard:function(){var M=S.mode,cur=M&&M.cur;if(!cur)return;var c=cur.c;var st=Object.assign({},S.srs[c.id]||{});st.s='removed';st.t=today();st.n=(st.n||0)+1;S.srs[c.id]=st;saveSrs();M.cur=null;M.q=M.q.filter(function(x){return x.id!==c.id;});toast('Removed. It won\'t come back.');showCard();},
   bonus:function(d){S.chain=false;startBonus(d.id);},
   bonusshow:function(d){S.mode.shown[+d.i]=1;drawBonus();},
-  bonusdone:function(){var x=theDay();x.bonus=1;S.days[x.date]=x;save('days/'+x.date,x);setFoot('<p class="small muted" style="text-align:center">Listened ✓</p>');toast('Marked as listened.');},
+  bonusdone:function(){var x=theDay();if(!epPlaying())x.tLi=(x.tLi||0)+600;x.bonus=1;S.days[x.date]=x;save('days/'+x.date,x);setFoot('<p class="small muted" style="text-align:center">Listened ✓</p>');toast('Marked as listened.');},
   flip:function(){showBack();},
   selfrate:function(d){rateSelf(d.v);},
   drillmode:function(d){S.prefs.drillMode=d.v;save('me/prefs',S.prefs);var M=S.mode;if(M&&M.k==='drill'){M.cur=null;showCard();}},
   ep:function(d){S.chain=false;startEp(d.n);},
-  epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));var k=S.cards.filter(function(c){return c.ep===n&&!(S.srs[c.id]&&S.srs[c.id].n);}).length;toast(n===dayNum()&&k?'Marked as listened. '+k+' new phrases from this episode unlocked for your drills.':'Marked as listened.');},
+  epdone:function(d){var n=+d.n;var M0=S.mode;if(M0&&M0.k==='ep'&&(M0.epSecs||0)<60){var dur=epPlayer.duration&&isFinite(epPlayer.duration)?epPlayer.duration:360;tAcc.tLi=(tAcc.tLi||0)+Math.round(Math.min(dur,900));flushTime();}S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));var k=S.cards.filter(function(c){return c.ep===n&&!(S.srs[c.id]&&S.srs[c.id].n);}).length;toast(n===dayNum()&&k?'Marked as listened. '+k+' new phrases from this episode unlocked for your drills.':'Marked as listened.');},
   epplay:function(){if(epPlayer.paused){stopAudio();var p=epPlayer.play();if(p&&p.catch)p.catch(function(){});}else epPlayer.pause();},
   epback:function(){epPlayer.currentTime=Math.max(0,epPlayer.currentTime-10);},
   epfwd:function(){if(epPlayer.duration)epPlayer.currentTime=Math.min(epPlayer.duration-0.5,epPlayer.currentTime+10);},
