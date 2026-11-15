@@ -31,7 +31,29 @@
    "diario": {
     "pt": "O Rafa e o George passaram o domingo no parque. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu fiz…, hoje eu vi…",
     "en": "Rafa and George spent Sunday in the park. And you, what did you do today? Say three sentences: Today I went…, today I did…, today I saw…"
-   }
+   },
+   "exam": [
+    {
+     "pt": "Se apresenta pra mim: quem é você, onde cê mora e com o que cê trabalha?",
+     "who": "Mãe"
+    },
+    {
+     "pt": "E ontem, o que cê fez? Me conta o seu sábado inteiro.",
+     "who": "Mãe"
+    },
+    {
+     "pt": "George, me conta: como foi que você e a Gabi se conheceram? Quero saber a história toda.",
+     "who": "Mãe"
+    },
+    {
+     "pt": "Cê gosta de viajar? Me fala de uma viagem longa que cê quer fazer: pra onde e por quanto tempo?",
+     "who": "Mãe"
+    },
+    {
+     "pt": "E o Tottenham, hein? Cê acha que esse ano o time tá bem ou tá mal? Me explica.",
+     "who": "Mãe"
+    }
+   ]
   }
  ]
 }

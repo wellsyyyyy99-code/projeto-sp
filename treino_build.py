@@ -44,6 +44,13 @@ def _load(p):
 
 
 BONUS = []
+DEFAULT_EXAM = [
+    "Se apresenta pra mim: quem é você, onde cê mora e com o que cê trabalha?",
+    "Me conta como foi a sua semana. O que cê fez?",
+    "Como você e a Gabi se conheceram?",
+    "Quais são os seus planos pra viagem pro Brasil?",
+    "O que cê acha mais difícil no português, e por quê?",
+]
 
 
 def collect():
@@ -122,8 +129,12 @@ def collect():
                 clip(l.get("pt"), "rafa")
             clip((r.get("q") or {}).get("pt"), "rafa")
             clip((day.get("diario") or {}).get("pt"), "narrador")
+            for t in day.get("exam", []):
+                clip(t.get("pt"), t.get("who") or "mãe")
 
     grp[0] = "x"
+    for q in DEFAULT_EXAM:
+        clip(q, "mãe")
     bonus = []
     for bp in sorted(PACKS.glob("extras-*.json")):
         try:

@@ -35,6 +35,14 @@ Five tasks, always in this shape so the weeks compare:
 
 Questions are in spoken São Paulo Portuguese, one or two sentences, at the level of this week's episodes.
 
+### Record the questions
+
+So George hears them in a natural voice: add them to today's entry in `packs/treino-daily.json` as
+`"exam": [{"pt": "<question>", "who": "Mãe"}, ...]` (keep the entry's `rafa` and `diario`; create the entry with just
+`date` and `exam` if the Coach hasn't written one). Commit, fetch and rebase, push. Then wait for that build to
+finish (`gh run list -R wellsyyyyy99-code/projeto-sp -L 3`, every minute, up to 25 minutes), `git pull`, and run the
+"publish sync" from the README. If the build or the publish fails, say so in the first line of the report.
+
 ## 3. Tune the load
 
 `merge` into `sys/config` only if a value changes:

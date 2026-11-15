@@ -783,10 +783,10 @@ function startExam(){
 function showTask(){
   var M=S.mode,t=M.tasks[M.i];M.t0=Date.now();
   $('#mright').textContent=(M.i+1)+' / '+M.tasks.length;
-  setBody((M.i===0?'<p class="small muted">No notes, no looking things up. Talk for as long as you can on each one. Aim for the time shown.</p>':'')+'<div class="eyebrow">Question '+(M.i+1)+' · aim for '+t.secs+' seconds</div><div class="row"><button class="play" data-a="say" data-t="'+esc(t.pt)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(t.pt)+'</div></div><button class="link" data-a="reveal" data-t="'+esc(t.en||'')+'">Show English</button>');
+  setBody((M.i===0?'<p class="small muted">No notes, no looking things up. Talk for as long as you can on each one. Aim for the time shown.</p>':'')+'<div class="eyebrow">Question '+(M.i+1)+' · aim for '+t.secs+' seconds</div><div class="row"><button class="play" data-a="say" data-w="Mãe" data-t="'+esc(t.pt)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(t.pt)+'</div></div><button class="link" data-a="reveal" data-t="'+esc(t.en||'')+'">Show English</button>');
   setFoot(answerFoot('examnext'));var b=$('#ans');b.rows=4;dictBox=b;dictDone=null;
   $('[data-a="examnext"]').textContent=M.i===M.tasks.length-1?'Finish and score':'Next question';
-  say(t.pt);
+  say(t.pt,0,t.who||'Mãe');
 }
 function examNext(){
   var M=S.mode,t=M.tasks[M.i],a=($('#ans').value||'').trim(),secs=Math.round(clamp((Date.now()-M.t0)/1000,1,240));
