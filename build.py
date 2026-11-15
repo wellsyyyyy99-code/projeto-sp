@@ -96,7 +96,9 @@ def tts_path(text, voice, pitch="+0Hz", r="+0%"):
             duration=400 + 55 * len(text)).apply_gain(-18).export(path, format="mp3")
         return path
     v, last = voice, None
-    for attempt in range(4):
+    for attempt in range(7):  # edge-tts sometimes says 'No audio was received': back off and retry
+        if attempt == 5:
+            pitch = "+0Hz"  # last tries: plain voice settings
         try:
             asyncio.run(_edge(text, v, r, pitch, path))
             if path.exists() and path.stat().st_size > 0:
@@ -107,7 +109,7 @@ def tts_path(text, voice, pitch="+0Hz", r="+0%"):
             v = "pt-BR-ThalitaNeural"
         elif attempt == 2 and v.startswith("pt-BR") and v not in ("pt-BR-FranciscaNeural", "pt-BR-AntonioNeural"):
             v, pitch = "pt-BR-FranciscaNeural", "+0Hz"
-        time.sleep(2 + attempt * 2)
+        time.sleep(3 + attempt * 5)
     raise RuntimeError(f"TTS failed for {text!r} ({voice}): {last}")
 
 
