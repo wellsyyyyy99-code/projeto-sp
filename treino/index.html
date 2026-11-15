@@ -868,10 +868,11 @@ function startEp(n){
 function epFoot(e){return epDone(e.ep)?'<p class="small muted" style="text-align:center">Listened ✓</p>':'<button class="btn pri wide" data-a="epdone" data-n="'+e.ep+'">I\'ve listened to it</button>';}
 function drawPlayer(){
   var x=$('#epaudio');if(!x)return;var r=S.prefs.epRate||1;
-  x.innerHTML='<div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn brand" data-a="epplay" id="epplaybtn">'+(epPlayer.paused?'▶ Play':'❚❚ Pause')+'</button><button class="btn" data-a="epback">↺ 10s</button><span class="grow"></span>'+
+  x.innerHTML='<div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn brand" data-a="epplay" id="epplaybtn">'+(epPlayer.paused?'▶ Play':'❚❚ Pause')+'</button><button class="btn" data-a="epback">↺ 10s</button><button class="btn" data-a="epfwd">10s ↻</button><span class="grow"></span>'+
     [0.8,0.9,1,1.15].map(function(v){return '<button class="btn'+(Math.abs(v-r)<0.01?' pri':'')+'" data-a="eprate" data-v="'+v+'" style="padding:8px 10px">×'+v+'</button>';}).join('')+
-    '</div><div class="meter" style="margin-top:10px" id="epbar"><i style="width:0%"></i></div><div class="tiny muted num" id="eptime"></div>';
+    '</div><div class="meter" style="margin-top:10px;height:16px;cursor:pointer" id="epbar" title="Tap to jump"><i style="width:0%"></i></div><div class="tiny muted num" id="eptime"></div>';
 }
+document.addEventListener('click',function(e){var bar=e.target.closest&&e.target.closest('#epbar');if(!bar||!epPlayer.duration)return;var r=bar.getBoundingClientRect();epPlayer.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*epPlayer.duration;});
 epPlayer.addEventListener('timeupdate',function(){var b=$('#epbar i'),t=$('#eptime');if(!b||!epPlayer.duration)return;b.style.width=(epPlayer.currentTime/epPlayer.duration*100)+'%';
   if(t)t.textContent=fmtT(epPlayer.currentTime)+' / '+fmtT(epPlayer.duration);});
 ['play','pause','ended'].forEach(function(ev){epPlayer.addEventListener(ev,function(){var b=$('#epplaybtn');if(b)b.textContent=epPlayer.paused?'▶ Play':'❚❚ Pause';});});
@@ -1097,6 +1098,7 @@ var A={
   epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));var k=S.cards.filter(function(c){return c.ep===n&&!(S.srs[c.id]&&S.srs[c.id].n);}).length;toast(n===dayNum()&&k?'Marked as listened. '+k+' new phrases from this episode unlocked for your drills.':'Marked as listened.');},
   epplay:function(){if(epPlayer.paused){stopAudio();var p=epPlayer.play();if(p&&p.catch)p.catch(function(){});}else epPlayer.pause();},
   epback:function(){epPlayer.currentTime=Math.max(0,epPlayer.currentTime-10);},
+  epfwd:function(){if(epPlayer.duration)epPlayer.currentTime=Math.min(epPlayer.duration-0.5,epPlayer.currentTime+10);},
   eprate:function(d){S.prefs.epRate=+d.v;epPlayer.playbackRate=+d.v;save('me/prefs',S.prefs);drawPlayer();},
   eptog:function(d){var M=S.mode;M[d.v]=!M[d.v];drawEp();},
   rafa:function(){S.chain=false;startRafa();},
