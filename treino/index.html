@@ -156,13 +156,15 @@ function sim(a,b){
 }
 
 /* ---------- spaced schedule: 1, 2, 4, 7, 12 days; beaten after 3 correct days ---------- */
-var LADDER=[1,2,4,7,12];
+var LADDER=[1,2,4,7,12,20,30];
 function gradeCard(st,res,day){
   st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},st||{});st.ok=(st.ok||[]).slice();
   if(!st.f)st.f=day;st.n++;st.t=day;
-  if(res==='right'){
+  if(res==='right'||res==='easy'){
     if(st.m===day){st.d=addDays(day,1);}
-    else{st.i=LADDER[Math.min(st.r,LADDER.length-1)];st.r++;st.d=addDays(day,st.i);if(st.ok.indexOf(day)<0)st.ok.push(day);}
+    else{var step=res==='easy'?Math.min(st.r+1,LADDER.length-1):Math.min(st.r,LADDER.length-1);st.i=LADDER[step];st.r=step+1;st.d=addDays(day,st.i);if(st.ok.indexOf(day)<0)st.ok.push(day);}
+  }else if(res==='hard'){
+    st.i=st.m===day?1:Math.max(1,LADDER[Math.max(st.r-1,0)]);st.d=addDays(day,st.i);
   }else{st.m=day;st.r=0;st.i=0;st.d=day;if(res==='wrong')st.l++;}
   st.s=st.ok.length>=3?'beaten':'open';
   return st;
@@ -170,7 +172,7 @@ function gradeCard(st,res,day){
 
 /* ---------- state ---------- */
 var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,newPerDay:10},
-  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1},
+  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1,drillMode:'say'},
   db:null,ai:null,tts:null,dict:null,view:'hoje',chain:false,ready:false,dbState:'wait',mode:null};
 var LS={get:function(k){try{return JSON.parse(localStorage.getItem('treino:'+k));}catch(e){return null;}},
         set:function(k,v){try{localStorage.setItem('treino:'+k,JSON.stringify(v));}catch(e){}}};
@@ -505,6 +507,7 @@ function startDrill(){
 }
 function showCard(){
   var M=S.mode,c=M.q[0];if(!c){return drillEnd();}
+  if(S.prefs.drillMode!=='type')return showFront();
   var st=S.srs[c.id]||{},mode=(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
   M.cur={c:c,mode:mode,t0:Date.now()};
   $('#mright').textContent=(M.seen+1)+' / '+Math.max(M.total,M.seen+M.q.length);
@@ -515,8 +518,45 @@ function showCard(){
   }else{
     h='<div class="eyebrow">Say it in Portuguese</div><div class="prompt">'+esc(c.en)+'</div>'+(isMistake(c)?'<span class="pill warn" style="align-self:flex-start">Your mistake</span>':'');
   }
-  setBody(h);setFoot(answerFoot('check','<button class="btn ghost" data-a="dunno">Don\'t know</button>'));warm(c.pt);
+  setBody(h);setFoot(answerFoot('check','<button class="btn ghost" data-a="dunno">Don\'t know</button>')+'<button class="link tiny" data-a="drillmode" data-v="say">Switch to saying it aloud and rating yourself</button>');warm(c.pt);
   dictBox=$('#ans');dictDone=function(){checkCard();};focusAns();
+}
+function nextIn(c,res){var st=gradeCard(JSON.parse(JSON.stringify(S.srs[c.id]||{})),res,today());var n=diffDays(today(),st.d);return res==='wrong'?'again soon':n<=0?'today':n===1?'1 day':n+' days';}
+function showFront(){
+  var M=S.mode,c=M.q[0],st=S.srs[c.id]||{},mode=(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
+  M.cur={c:c,mode:mode,t0:Date.now(),self:true};
+  $('#mright').textContent=(M.seen+1)+' / '+Math.max(M.total,M.seen+M.q.length);
+  var h=mode==='q'?'<div class="eyebrow">'+esc(c.qs||'Rafa')+' asks. Answer out loud.</div><div class="row"><button class="play" data-a="say" data-w="'+esc(c.qs||'Rafa')+'" data-t="'+esc(c.q)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(c.q)+'</div></div>'+(c.qen?'<button class="link" data-a="reveal" data-t="'+esc(c.qen)+'">Show English</button>':'')
+    :'<div class="eyebrow">Say it out loud in Portuguese</div><div class="prompt">'+esc(c.en)+'</div>'+(isMistake(c)?'<span class="pill warn" style="align-self:flex-start">Your mistake</span>':'');
+  setBody(h);
+  setFoot('<button class="btn pri wide" data-a="flip" style="min-height:64px;font-size:18px">Show answer</button><p class="tiny muted" style="text-align:center">Say the whole sentence aloud first, then check.</p><button class="link tiny" data-a="drillmode" data-v="type">Answer by dictation instead</button>');
+  warm(c.pt);if(mode==='q')say(c.q,0,c.qs||'Rafa');
+}
+function showBack(){
+  var M=S.mode,cur=M.cur;if(!cur||cur.flipped)return;cur.flipped=true;cur.secs=clamp((Date.now()-cur.t0)/1000,2,15);var c=cur.c;
+  var h=(cur.mode==='q'?'<div class="small muted">'+esc(c.q)+'</div>':'<div class="small muted">'+esc(c.en)+'</div>')+
+    '<div class="row"><button class="play" data-a="say" data-t="'+esc(c.pt)+'" aria-label="Play the answer">'+ICON.play+'</button><div class="pt grow">'+esc(c.pt)+'</div></div><dl class="kv">';
+  if(cur.mode==='q')h+='<dt>Means</dt><dd>'+esc(c.en)+'</dd>';
+  if(c.said&&c.said.charAt(0)!=='(')h+='<dt>You once said</dt><dd>'+esc(c.said)+'</dd>';
+  if(c.why)h+='<dt>Why</dt><dd>'+esc(c.why)+'</dd>';
+  if(c.lit)h+='<dt>Word for word</dt><dd>'+esc(c.lit)+'</dd>';
+  if(c.heard)h+='<dt>Sounds like</dt><dd>'+esc(c.heard)+'</dd>';
+  if(c.note)h+='<dt>Note</dt><dd>'+esc(c.note)+'</dd>';
+  h+='</dl>';h=h.replace('<dl class="kv"></dl>','');h+='<p class="small muted">Say it again with the audio, then be honest: did you get the whole sentence right?</p>';
+  setBody(h);
+  var b=function(v,lab,cls){return '<button class="btn grow'+(cls?' '+cls:'')+'" data-a="selfrate" data-v="'+v+'" style="flex-direction:column;display:flex;align-items:center;padding:8px 4px"><span>'+lab+'</span><span class="tiny muted" style="font-weight:400">'+nextIn(c,v)+'</span></button>';};
+  setFoot('<div class="row" style="gap:6px">'+b('wrong','Again')+b('hard','Hard')+b('right','Good','pri')+b('easy','Easy')+'</div>');
+  say(c.pt);
+}
+function rateSelf(v){
+  var M=S.mode,cur=M.cur;if(!cur)return;var c=cur.c;M.cur=null;
+  S.srs[c.id]=gradeCard(S.srs[c.id],v,today());saveSrs();
+  var ok=v==='right'||v==='easy';
+  if(!M.missed[c.id]){M.seen++;if(ok)M.right++;}
+  bump({speakSecs:Math.round(cur.secs+3),drills:1,drillOk:ok?1:0});
+  M.q.shift();
+  if(v==='wrong'){M.missed[c.id]=1;M.q.splice(Math.min(3,M.q.length),0,c);}
+  showCard();
 }
 function checkCard(giveUp){
   var M=S.mode,cur=M.cur;if(!cur||cur.busy)return;
@@ -976,6 +1016,9 @@ function next(){
   S.chain=false;render();
 }
 var A={
+  flip:function(){showBack();},
+  selfrate:function(d){rateSelf(d.v);},
+  drillmode:function(d){S.prefs.drillMode=d.v;save('me/prefs',S.prefs);var M=S.mode;if(M&&M.k==='drill'){M.cur=null;showCard();}},
   ep:function(d){S.chain=false;startEp(d.n);},
   epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));toast('Marked as listened.');},
   epplay:function(){if(epPlayer.paused){stopAudio();var p=epPlayer.play();if(p&&p.catch)p.catch(function(){});}else epPlayer.pause();},
