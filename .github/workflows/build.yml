@@ -49,10 +49,15 @@ jobs:
           git add docs
           git diff --cached --quiet || git commit -m "Build packs [skip ci]"
           # someone (an agent) may have pushed while this ran: rebase onto it and retry
+          # Someone (an agent) may have pushed while this ran. docs/ is build output, so lay this build's docs/
+          # on top of the newest main and push that; never touch their other files.
           for i in 1 2 3 4 5; do
             git push && break
-            git pull --rebase -X theirs origin main
             sleep $((i * 5))
+            git fetch origin main
+            git reset --mixed origin/main
+            git add docs
+            git diff --cached --quiet || git commit -m "Build packs [skip ci]"
           done
 
       - uses: actions/configure-pages@v5

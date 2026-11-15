@@ -120,6 +120,11 @@ On 15 Nov the Coach and the Producer both skipped or failed this step and Rafa's
 the app, so George heard his phone's robotic voice instead. This step is not optional. If `publish_files` is missing or
 refuses, the FIRST line of your report must say "App NOT updated:" followed by the exact error text.
 
+## Never commit build output
+
+`docs/` (audio, decks, the app's `docs/treino/` data and bundles) is written by the build robot only. If you run
+`treino_build.py` or `build.py` locally, do not commit what it changes in `docs/`: `git checkout -- docs` before committing.
+
 ## Rules for everything written for George
 
 - Brazilian Portuguese as spoken in São Paulo: tá, tô, cê, pra, a gente, né. Never European Portuguese.
