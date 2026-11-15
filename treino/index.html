@@ -218,7 +218,7 @@ document.addEventListener('pointerdown',function(){
 },true);
 function synth(pt,rate){return new Promise(function(res,rej){try{
   var u=new SpeechSynthesisUtterance(pt);u.lang='pt-BR';
-  var v=speechSynthesis.getVoices().filter(function(v){return /^pt[-_]BR/i.test(v.lang);})[0];if(v)u.voice=v;
+  var vs=speechSynthesis.getVoices().filter(function(v){return /^pt[-_]BR/i.test(v.lang);});var v=vs.filter(function(v){return /premium|enhanced|aprimorad|neural|natural|online/i.test(v.name);})[0]||vs.filter(function(v){return /google/i.test(v.name);})[0]||vs[0];if(v)u.voice=v;
   u.rate=rate;u.onend=function(){res('synth');};u.onerror=function(){rej(new Error('synth'));};speechSynthesis.speak(u);}catch(e){rej(e);}});}
 function hasVoice(){return Object.keys(S.clips).length>0||!!S.tts||('speechSynthesis' in window);}
 function say(pt,rate){
@@ -258,8 +258,9 @@ function ask(input,tier){
   return p.then(unwrap).catch(function(e){if(e&&e.code==='not_granted'){S.ai=null;}throw e;});
 }
 var ME='GEORGE: British, 26, relationship manager in FX at a fintech in London ("trabalha com câmbio"); lives in Brentwood near London and takes the train; goes to the gym every day and does boxing; Tottenham and F1 fan; does not eat eggs, fish or cheese; has one brother and two sisters; his girlfriend Gabi is from São Paulo and lives there with her mum (he calls her "a senhora"); he flies to São Paulo on 17 December and spends Réveillon in Copacabana; next year he and Gabi backpack around South America.';
+function realFix(said,ok){return !!ok&&norm(said)!==norm(ok);}
 function judgePrompt(c,mode,said){
-  return 'You grade one spoken answer from George, an English speaker learning Brazilian Portuguese. His words came through speech-to-text or were typed without accents, so ignore punctuation, capitals, missing accents and obvious transcription slips.\n'+
+  return 'You grade one spoken answer from George, an English speaker learning Brazilian Portuguese. His words are DICTATED by a phone keyboard: they never have punctuation, question marks, capitals or accents, and that is not an error. Never correct, mention or count punctuation, question marks, capitals, accents or spelling. Judge only the words and grammar as they would sound spoken. Also ignore obvious speech-to-text slips.\n'+
   (mode==='q'?'He was asked (Portuguese): "'+c.q+'"\nAn example of a good answer: "'+c.pt+'"\nAny relevant answer that fits him counts; the example is only an example.\n':'He saw this English and had to say it in Portuguese: "'+c.en+'"\nTarget: "'+c.pt+'"\n')+
   'What he said: "'+said+'"\n'+ME+'\n'+
   'Mark "right" if a Paulistano would accept it as correct, natural spoken Portuguese with the right meaning. Different wording is fine. Spoken forms (tô, tá, cê, pra, a gente) equal written ones. Mark "almost" if the meaning lands but there is one small error. Mark "wrong" if the meaning is off, a key word is missing or in English, or there are two or more errors.\n'+
@@ -273,15 +274,15 @@ function scenePrompt(sit,twist,focus,maxTurns){
   (focus.length?'\nPHRASES HE IS TRAINING. Ask questions whose natural answer needs them. Never say them for him first:\n'+focus.map(function(c,i){return (i+1)+'. '+c.pt;}).join('\n')+'\n':'')+
   '\nHOW TO SPEAK\n- One or two short sentences, then exactly one question or prompt that moves the scene on.\n- If he makes a mistake, do not lecture. Use the correct form naturally in your own reply and carry on.\n- If he uses an English word, give him the Portuguese word inside your reply and carry on.\n- If he says "não entendi", "mais devagar" or "como se diz", help him in Portuguese, in character, more simply.\n- If his message is empty or makes no sense, say you did not catch it and ask again more simply.\n- When every goal is done, close the scene warmly in one line and set "end" to true. Also end after about '+maxTurns+' of his turns.\n\n'+
   'OUTPUT: JSON only, nothing else:\n{"pt":"your line","en":"natural British English translation of your line","fix":null,"goals":[],"used":[],"end":false}\n'+
-  '- "fix": null, or the single most important error in HIS last message: {"said":"the wrong part, as he said it","ok":"the whole sentence as a Paulistano would say it","en":"what that sentence means in English","why":"the rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}. No fix for accents, punctuation, capitals or speech-to-text slips.\n- "goals": the numbers of the goals he has achieved so far in the scene.\n- "used": the numbers of the training phrases he has used correctly in his last message.';
+  '- "fix": null, or the single most important error in HIS last message: {"said":"the wrong part, as he said it","ok":"the whole sentence as a Paulistano would say it","en":"what that sentence means in English","why":"the rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}. Never a fix for punctuation, question marks, capitals, accents, spelling or speech-to-text slips: his words are DICTATED by a phone keyboard: they never have punctuation, question marks, capitals or accents, and that is not an error. Never correct, mention or count punctuation, question marks, capitals, accents or spelling. Judge only the words and grammar as they would sound spoken. If the only difference is one of those, fix is null.\n- "goals": the numbers of the goals he has achieved so far in the scene.\n- "used": the numbers of the training phrases he has used correctly in his last message.';
 }
 function debriefPrompt(sit,log){
-  return 'You are the coach reviewing George\'s Portuguese role-play. Scene: '+sit.en+' with '+sit.char+'. Goals: '+sit.goals.join('; ')+'.\nTRANSCRIPT:\n'+log+'\n\n'+
+  return 'You are the coach reviewing George\'s Portuguese role-play. His words are DICTATED by a phone keyboard: they never have punctuation, question marks, capitals or accents, and that is not an error. Never correct, mention or count punctuation, question marks, capitals, accents or spelling. Judge only the words and grammar as they would sound spoken. Scene: '+sit.en+' with '+sit.char+'. Goals: '+sit.goals.join('; ')+'.\nTRANSCRIPT:\n'+log+'\n\n'+
   'Score his Portuguese from 1 to 10 on this fixed scale: 9–10 handled everything in Portuguese with only slips; 7–8 achieved every goal with some errors and at most one English word; 5–6 achieved most goals with frequent errors or several English words; 3–4 struggled to get meaning across; 1–2 mostly English or silence. Be strict and consistent.\n'+
   'JSON only: {"score":n,"summary":"two short sentences in English: what went well, what to fix first","words":[up to 6 of {"pt":"a word or phrase '+sit.char+' used that George probably did not know","en":"meaning"}],"better":[up to 3 of {"en":"something George wanted to say but could not","pt":"how to say it simply"}]}';
 }
 function examPrompt(items){
-  return 'You are the Examiner for George\'s weekly Portuguese oral exam. The rubric is the same every week so scores can be compared. Be strict and consistent. Do not inflate.\nHis answers were spoken and transcribed by speech-to-text: ignore punctuation, capitals, accents and obvious transcription slips.\nTarget: conversational Brazilian Portuguese as spoken in São Paulo.\n'+ME+'\n\nTASKS AND ANSWERS\n'+
+  return 'You are the Examiner for George\'s weekly Portuguese oral exam. The rubric is the same every week so scores can be compared. Be strict and consistent. Do not inflate.\nHis answers were spoken. His words are DICTATED by a phone keyboard: they never have punctuation, question marks, capitals or accents, and that is not an error. Never correct, mention or count punctuation, question marks, capitals, accents or spelling. Judge only the words and grammar as they would sound spoken. Ignore obvious transcription slips.\nTarget: conversational Brazilian Portuguese as spoken in São Paulo.\n'+ME+'\n\nTASKS AND ANSWERS\n'+
   items.map(function(t,i){return (i+1)+'. Q: '+t.pt+'\n   A ('+t.secs+' seconds, '+t.words+' words): '+(t.ans||'[no answer]');}).join('\n')+'\n\n'+
   'SCORE each dimension 0 to 5, whole numbers:\n- comunicacao: did he get the message across and complete each task? 0 nothing; 3 most tasks, with gaps; 5 every task fully.\n- fluidez: length and flow, from the word and second counts. 0 isolated words; 3 short connected sentences, about 40 words per task; 5 long connected turns with aí, então, porque, mas, 80+ words per task.\n- precisao: verb tense and person, gender agreement, prepositions. 0 almost every sentence wrong; 3 errors in about half the sentences; 5 only slips.\n- vocabulario: range, and falling back on English. 0 mostly English; 3 enough words with two or three English fallbacks; 5 varied and no English.\n- registro: sounds like spoken São Paulo Portuguese (tô, tá, a gente, pra, né; a senhora with elders), not textbook, Spanish or European forms. 0 never; 3 sometimes; 5 consistently.\n'+
   'JSON only: {"dims":{"comunicacao":n,"fluidez":n,"precisao":n,"vocabulario":n,"registro":n},"level":"A1|A1+|A2|A2+|B1","english":n,"strengths":["up to 3 short English phrases"],"fixes":[up to 6 of {"said":"what he said","ok":"the whole sentence corrected","en":"its meaning in English","why":"rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}],"focus":"one English sentence: the single thing to train this week"}';
@@ -484,7 +485,7 @@ function checkCard(giveUp){
   if(!S.ai)return showResult(null,null);
   setFoot('<p class="muted"><span class="spin"></span> Checking…</p>');
   ask(judgePrompt(c,cur.mode,said),'quick').then(function(r){
-    var v=r&&(r.v==='right'||r.v==='almost'||r.v==='wrong')?r.v:null;showResult(v,r);
+    var v=r&&(r.v==='right'||r.v==='almost'||r.v==='wrong')?r.v:null;if(v&&v!=='right'&&r.fix&&!realFix(said,r.fix)){v='right';r.fix='';r.why='';}showResult(v,r);
   },function(){showResult(null,null);});
 }
 function showResult(v,r){
@@ -565,7 +566,7 @@ function sendChat(){
     if(!S.mode||S.mode!==M)return;
     if(!r||!r.pt)throw new Error('empty');
     M.msgs.push({role:'assistant',content:JSON.stringify(r)});
-    if(r.fix&&r.fix.ok){mine.fix=r.fix;M.fixes.push(r.fix);}
+    if(r.fix&&r.fix.ok&&realFix(r.fix.said||said,r.fix.ok)&&realFix(said,r.fix.ok)){mine.fix=r.fix;M.fixes.push(r.fix);}
     if(Array.isArray(r.goals))r.goals.forEach(function(g){g=+g;if(g>=1&&g<=M.sit.goals.length&&M.goals.indexOf(g)<0)M.goals.push(g);});
     if(Array.isArray(r.used))r.used.forEach(function(u){var c=M.foc[+u-1];if(c)M.used[c.id]=1;});
     M.log.push({who:M.sit.char,pt:r.pt,en:r.en||''});M.busy=false;M.tTurn=Date.now();drawChat();
@@ -676,7 +677,7 @@ function scoreExam(){
     var d=r.dims||{},tot=['comunicacao','fluidez','precisao','vocabulario','registro'].reduce(function(s,k){return s+clamp(Math.round(+d[k]||0),0,5);},0);
     r.total=tot;var t0=today(),doc=Object.assign({},S.exams[t0]||{},{date:t0,tasks:M.tasks,answers:M.ans,result:r,ts:Date.now(),synced:false});
     S.exams[t0]=doc;save('exams/'+t0,doc);bump({exam:1});
-    (r.fixes||[]).forEach(function(f){addMistake(f,'exam');});saveSrs();
+    r.fixes=(r.fixes||[]).filter(function(f){return f&&realFix(f.said,f.ok);});r.fixes.forEach(function(f){addMistake(f,'exam');});saveSrs();
     M.done=true;
     var names={comunicacao:'Getting the message across',fluidez:'Flow and length',precisao:'Grammar',vocabulario:'Vocabulary',registro:'Sounding Paulistano'};
     var h='<div class="row"><div class="grow"><div class="eyebrow">Exam score</div><div class="big num">'+tot+'<span class="muted" style="font-size:24px"> / 25</span></div></div><span class="pill off">'+esc(r.level||'')+'</span></div>';
