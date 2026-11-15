@@ -110,9 +110,11 @@ Rules for these cards:
 - Not a duplicate of any card in `cards` or in `docs/treino/data/cards.json`.
 - At most 5 new cards a day, and none if he has more than 40 cards due (count `me/srs` entries with `d` on or before today).
 
-If you added any card today (here or in step 3), mirror the database into the repo so the build makes their
-audio: rewrite `packs/treino-cards.json` as `{"about": …, "cards": [every card in the database with id, k, pt, en, q, qs]}`
-(indent 1, UTF-8), commit, push. The build runs by itself; tomorrow's step 1 publishes the audio.
+Every morning (not only when you added cards: the app adds them all day from scenes, the exam, Rafa and the Diário,
+and they first come up in drills the next day), mirror the database into the repo so the build records their
+audio before George sees them: rewrite `packs/treino-cards.json` as `{"about": …, "cards": [every card in the database with id, k, pt, en, q, qs]}`
+(indent 1, UTF-8; leave out cards George removed), and commit it together with `packs/treino-daily.json` in step 1, so one build records
+everything and the publish sync at the end brings it to the app.
 
 ## 6. Set today's plan
 
