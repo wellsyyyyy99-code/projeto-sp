@@ -1,0 +1,1632 @@
+{
+ "about": "Cards brought over from George's Anki collection on 15 Nov 2026 that weren't already Treino cards: episode lines as listening cards, Pack 00 sound rules, and answer-aloud cards (mode open = answer freely, pt holds the hint). Review history is not kept here.",
+ "cards": [
+  {
+   "mode": "listen",
+   "pt": "Tô chegando.",
+   "en": "I'm on my way.",
+   "heard": "Tô chegano.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "estou → tô, -ndo → -no"
+  },
+  {
+   "mode": "listen",
+   "pt": "Cê tá onde?",
+   "en": "Where are you?",
+   "heard": "Cê tá ondji?",
+   "deck": "Projeto SP › Pack 00",
+   "note": "você → cê, está → tá"
+  },
+  {
+   "mode": "listen",
+   "pt": "Não sei.",
+   "en": "I don't know.",
+   "heard": "Num sei.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "não → num"
+  },
+  {
+   "mode": "listen",
+   "pt": "Péra aí!",
+   "en": "Hang on!",
+   "heard": "Péra aí!",
+   "deck": "Projeto SP › Pack 00",
+   "note": "espera → péra"
+  },
+  {
+   "mode": "listen",
+   "pt": "É bom, né?",
+   "en": "It's good, right?",
+   "heard": "É bom, né?",
+   "deck": "Projeto SP › Pack 00",
+   "note": "não é → né"
+  },
+  {
+   "mode": "listen",
+   "pt": "Eu tava cansado.",
+   "en": "I was tired.",
+   "heard": "Eu tava cansadu.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "estava → tava"
+  },
+  {
+   "mode": "listen",
+   "pt": "Deixa eu ver.",
+   "en": "Let me see.",
+   "heard": "Deixa eu vê.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "final r dropped"
+  },
+  {
+   "mode": "listen",
+   "pt": "Cê tá ligado?",
+   "en": "You know? / You get me?",
+   "heard": "Cêtáligadu?",
+   "deck": "Projeto SP › Pack 00",
+   "who": "Narrador"
+  },
+  {
+   "mode": "listen",
+   "pt": "Leite quente.",
+   "en": "Hot milk.",
+   "heard": "Leitchi kentchi.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "te → tchi"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bom dia, tia!",
+   "en": "Good morning, auntie!",
+   "heard": "Bom djia, tchia!",
+   "deck": "Projeto SP › Pack 00",
+   "note": "di → dji, ti → tchi"
+  },
+  {
+   "mode": "listen",
+   "pt": "A cidade é grande.",
+   "en": "The city is big.",
+   "heard": "A cidadji é grandji.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "de → dji"
+  },
+  {
+   "mode": "listen",
+   "pt": "Muito obrigado.",
+   "en": "Thank you very much.",
+   "heard": "Muitu obrigadu.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "final o → u"
+  },
+  {
+   "mode": "listen",
+   "pt": "Brasil.",
+   "en": "Brazil.",
+   "heard": "Brasiu.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "final l → u"
+  },
+  {
+   "mode": "listen",
+   "pt": "Quer pão?",
+   "en": "Want some bread?",
+   "heard": "Ké pão?",
+   "deck": "Projeto SP › Pack 00",
+   "note": "nasal ão: air through the nose"
+  },
+  {
+   "mode": "listen",
+   "pt": "Minha mãe.",
+   "en": "My mum.",
+   "heard": "Minha mãinh.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "nasal ãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Também tem.",
+   "en": "There's that too.",
+   "heard": "Tambeim teim.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "nasal -em"
+  },
+  {
+   "mode": "listen",
+   "pt": "Minha avó e meu avô.",
+   "en": "My grandma",
+   "heard": "Minha avÓ i meu avÔ.",
+   "deck": "Projeto SP › Pack 00",
+   "note": "open aw) and my grandad (closed oh)."
+  },
+  {
+   "mode": "q",
+   "pt": "Fiz sim! Foi longa, mas tranquila.",
+   "en": "Yes! It was long, but easy.",
+   "q": "Fez boa viagem?",
+   "qen": "Did you have a good trip?"
+  },
+  {
+   "mode": "q",
+   "pt": "Um pouco, mas tô muito feliz de estar aqui.",
+   "en": "A bit, but I'm really happy to be here.",
+   "q": "Tá cansado?",
+   "qen": "Are you tired?"
+  },
+  {
+   "mode": "q",
+   "pt": "Gosto muito. É corrido, mas é legal.",
+   "en": "I really like it. It's hectic, but good.",
+   "q": "Você gosta do seu trabalho?",
+   "qen": "Do you like your job?"
+  },
+  {
+   "mode": "q",
+   "pt": "Moro perto de Londres. Pego o trem todo dia.",
+   "en": "I live near London. I get the train every day.",
+   "q": "Onde você mora?",
+   "qen": "Where do you live?"
+  },
+  {
+   "mode": "open",
+   "pt": "A gente se conheceu em... (where) ... em (year). Add one funny detail!",
+   "en": "How did you two meet?",
+   "q": "Como vocês se conheceram?",
+   "qen": "How did you two meet?"
+  },
+  {
+   "mode": "open",
+   "pt": "Tenho um irmão / uma irmã / dois irmãos... or: Sou filho único.",
+   "en": "Do you have brothers or sisters?",
+   "q": "Você tem irmãos?",
+   "qen": "Do you have brothers or sisters?"
+  },
+  {
+   "mode": "open",
+   "pt": "Meus pais moram em... É perto de / longe de Londres.",
+   "en": "And where does your family live?",
+   "q": "E a sua família, mora onde?",
+   "qen": "And where does your family live?"
+  },
+  {
+   "mode": "open",
+   "pt": "É a minha primeira vez! / Não, já vim uma vez, em...",
+   "en": "Is this your first time in Brazil?",
+   "q": "É a sua primeira vez no Brasil?",
+   "qen": "Is this your first time in Brazil?"
+  },
+  {
+   "mode": "q",
+   "pt": "Tô adorando! Mas que trânsito, hein!",
+   "en": "I'm loving it! But what traffic!",
+   "q": "Tá gostando de São Paulo?",
+   "qen": "Are you enjoying São Paulo?"
+  },
+  {
+   "mode": "q",
+   "pt": "Adoro! Quero provar tudo.",
+   "en": "I love it! I want to try everything.",
+   "q": "Você gosta de comida brasileira?",
+   "qen": "Do you like Brazilian food?"
+  },
+  {
+   "mode": "q",
+   "pt": "Obrigado, tô satisfeito. Tava uma delícia!",
+   "en": "Thanks, I'm full. It was delicious!",
+   "q": "Quer mais um pouquinho?",
+   "qen": "Want a little more?"
+  },
+  {
+   "mode": "q",
+   "pt": "Tô estudando sozinho faz dois meses. Queria fazer uma surpresa!",
+   "en": "I've been studying on my own for two months. I wanted to surprise you!",
+   "q": "Onde você aprendeu português?",
+   "qen": "Where did you learn Portuguese?"
+  },
+  {
+   "mode": "q",
+   "pt": "Porque a Gabi e a senhora são muito importantes pra mim.",
+   "en": "Because Gabi and you are really important to me.",
+   "q": "Por que você quis aprender?",
+   "qen": "Why did you want to learn?"
+  },
+  {
+   "mode": "q",
+   "pt": "Gosto de academia, boxe e Fórmula 1.",
+   "en": "I like the gym, boxing and F1.",
+   "q": "O que você gosta de fazer no tempo livre?",
+   "qen": "What do you like doing in your free time?"
+  },
+  {
+   "mode": "q",
+   "pt": "Tô achando incrível. As pessoas são muito calorosas.",
+   "en": "I think it's amazing. People are really warm.",
+   "q": "O que você tá achando do Brasil?",
+   "qen": "What do you think of Brazil so far?"
+  },
+  {
+   "mode": "open",
+   "pt": "Laugh first! 'Calma, calma!' then: 'Um dia, quem sabe!' (One day, who knows!)",
+   "en": "So, when are you two getting married?",
+   "q": "E aí, quando vocês vão casar?",
+   "qen": "So, when are you two getting married?"
+  },
+  {
+   "mode": "q",
+   "pt": "Com certeza! Espero voltar logo.",
+   "en": "Definitely! I hope to come back soon.",
+   "q": "Vai voltar logo?",
+   "qen": "Will you come back soon?"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, amor! Peraí, a minha mãe quer falar com você.",
+   "en": "Hi love! Hang on, my mum wants to talk to you.",
+   "heard": "Oi, amor! Peraí, a minha mãinh ké falá cum você.",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Gabi"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sério? Tô nervoso!",
+   "en": "Really? I'm nervous!",
+   "heard": "Sériu? Tô nervozu!",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Relaxa! Ela é um amor. Mãe, vem cá!",
+   "en": "Relax! She's lovely. Mum, come here!",
+   "heard": "Relaxa! Ela é um amor. Mãinh, vein cá!",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Gabi"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, George! Tudo bem?",
+   "en": "Hi George! How are you?",
+   "heard": "Oi, George! Tudu bein?",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Mãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi! Tudo bem, e a senhora?",
+   "en": "Hi! I'm good, and you?",
+   "heard": "Oi! Tudu bein, i a sinhora?",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Tudo ótimo! Nossa, você fala português!",
+   "en": "Great! Wow, you speak Portuguese!",
+   "heard": "Tudu ótchimu! Nóssa, você fala portuguêis!",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Mãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que lindo! A Gabi fala muito de você.",
+   "en": "That's lovely! Gabi talks about you a lot.",
+   "heard": "Ki lindu! A Gabi fala muitu dji você.",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Mãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ela fala muito da senhora também!",
+   "en": "She talks about you a lot too!",
+   "heard": "Ela fala muitu da sinhora tambeim!",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Só coisa boa, né?",
+   "en": "Only good things, right?",
+   "heard": "Só coisa boa, né?",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Mãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Claro! Tô muito animado pra conhecer a senhora.",
+   "en": "Of course! I'm really excited to meet you.",
+   "heard": "Claru! Tô muitu animadu pra conhecê a sinhora.",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Eu também! Vem logo, viu? A casa é sua.",
+   "en": "Me too! Come soon, OK? Our home is your home.",
+   "heard": "Eu tambeim! Vein logu, viu? A casa é sua.",
+   "deck": "Projeto SP › Ep 01 · Oi, mãe da Gabi!",
+   "who": "Mãe"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi! Tudo bem? Eu sou a Ana.",
+   "en": "Hi! How are you? I'm Ana.",
+   "heard": "Oi! Tudu bein? Eu sô a Ana.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, Ana! Tudo bem, e você? Eu sou o George.",
+   "en": "Hi Ana! Good, and you? I'm George.",
+   "heard": "Oi, Ana! Tudu bein, i você? Eu sô u George.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Prazer, George! Você é de onde?",
+   "en": "Nice to meet you, George! Where are you from?",
+   "heard": "Prazê, George! Você é dji ondji?",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que legal! E o que você faz da vida?",
+   "en": "Cool! And what do you do for a living?",
+   "heard": "Ki legau! I u ki você faz da vida?",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Nossa, que chique! Você gosta?",
+   "en": "Wow, fancy! Do you like it?",
+   "heard": "Nóssa, ki chiki! Você gosta?",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Gosto, sim. É corrido, mas é legal.",
+   "en": "I do. It's hectic, but it's good.",
+   "heard": "Gostu, sim. É corridu, mas é legau.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E por que você tá aprendendo português?",
+   "en": "And why are you learning Portuguese?",
+   "heard": "I purkê você tá aprendenu portuguêis?",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sério? Que demais! Você vai adorar.",
+   "en": "Really? Amazing! You'll love it.",
+   "heard": "Sériu? Ki demais! Você vai adorá.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Espero que sim! Ainda falo pouco, mas tô tentando.",
+   "en": "I hope so! I don't speak much yet, but I'm trying.",
+   "heard": "Esperu ki sim! Inda falu poucu, mas tô tentanu.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Você fala bem! Bora praticar toda semana?",
+   "en": "You speak well! Shall we practise every week?",
+   "heard": "Você fala bein! Bora pratchicá toda semana?",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bora! Combinado.",
+   "en": "Let's! Deal.",
+   "heard": "Bora! Combinadu.",
+   "deck": "Projeto SP › Ep 02 · Prazer, eu sou o George",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bom dia, Ana! Acabei de acordar.",
+   "en": "Morning, Ana! I've just woken up.",
+   "heard": "Bom djia, Ana! Acabei dji acordá.",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bom dia! Aqui ainda é madrugada, hein!",
+   "en": "Morning! It's still the middle of the night here!",
+   "heard": "Bom djia! Aki inda é madrugada, hein!",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Desculpa! Agora vou pra academia.",
+   "en": "Sorry! I'm off to the gym now.",
+   "heard": "Discurpa! Agora vô pra academia.",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí, como é o seu dia a dia?",
+   "en": "So, what's your daily routine like?",
+   "heard": "Iaí, cumu é u seu djia a djia?",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Acordo cedo, vou pra academia e depois pego o trem pro trabalho.",
+   "en": "I get up early, go to the gym and then get the train to work.",
+   "heard": "Acordu cedu, vô pra academia i dispois pegu u trein pru trabalhu.",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Você vai pra academia todo dia?",
+   "en": "You go to the gym every day?",
+   "heard": "Você vai pra academia todu djia?",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Nossa, que disciplina! E à noite?",
+   "en": "Wow, what discipline! And in the evening?",
+   "heard": "Nóssa, ki disciplina! I à noitchi?",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "À noite eu janto, estudo português e durmo cedo.",
+   "en": "In the evening I have dinner, study Portuguese and go to bed early.",
+   "heard": "À noitchi eu jantu, estudu portuguêis i durmu cedu.",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que vida saudável! A gente se fala amanhã?",
+   "en": "What a healthy life! Talk tomorrow?",
+   "heard": "Ki vida saudáveu! A gentchi si fala amanhã?",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Combinado! Te mando um áudio. Tchau!",
+   "en": "Deal! I'll send you a voice note. Bye!",
+   "heard": "Combinadu! Tchi mandu um áudiu. Tchau!",
+   "deck": "Projeto SP › Ep 03 · Um dia normal",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ana, por que todo mundo fala 'tô' e não 'estou'?",
+   "en": "Ana, why does everyone say 'tô' and not 'estou'?",
+   "heard": "Ana, purkê todu mundu fala 'tô' i num 'estou'?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Porque é mais rápido! Ninguém fala 'estou' no dia a dia.",
+   "en": "Because it's quicker! Nobody says 'estou' day to day.",
+   "heard": "Purki é mais rápidu! Ninguein fala 'estou' nu djia a djia.",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "E 'cê'? É 'você'?",
+   "en": "And 'cê'? Is that 'você'?",
+   "heard": "I 'cê'? É 'você'?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Isso! 'Cê tá bem?' é 'você está bem?'.",
+   "en": "Yes! 'Cê tá bem?' is 'você está bem?'.",
+   "heard": "Issu! 'Cê tá bein?' é 'você está bein?'.",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Entendi. Então... cê tá cansada?",
+   "en": "Got it. So... are you tired?",
+   "heard": "Entendji. Entãu... cê tá cansada?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Tô morta! Trabalhei o dia inteiro.",
+   "en": "I'm dead! I worked all day.",
+   "heard": "Tô morta! Trabalhei u djia intêru.",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "E 'pra'? É 'para'?",
+   "en": "And 'pra'? Is that 'para'?",
+   "heard": "I 'pra'? É 'para'?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Exato. 'Vou pra casa', 'vou pro trabalho'.",
+   "en": "Exactly. 'I'm going home', 'I'm going to work'.",
+   "heard": "Ezatu. 'Vô pra casa', 'vô pru trabalhu'.",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "E o 'né' no final de tudo?",
+   "en": "And the 'né' at the end of everything?",
+   "heard": "I u 'né' nu finau dji tudu?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "É tipo 'right?' em inglês. Fácil, né?",
+   "en": "It's like 'right?' in English. Easy, right?",
+   "heard": "É tchipu 'right?' in inglêis. Fáciu, né?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Fácil! Tô ficando paulistano, né?",
+   "en": "Easy! I'm turning into a Paulistano, right?",
+   "heard": "Fáciu! Tô ficanu paulistanu, né?",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Calma! Ainda falta muito.",
+   "en": "Easy! You've still got a long way to go.",
+   "heard": "Carma! Inda fauta muitu.",
+   "deck": "Projeto SP › Ep 04 · Falando como paulistano",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Boa noite! Mesa pra quantas pessoas?",
+   "en": "Good evening! Table for how many?",
+   "heard": "Boa noitchi! Meza pra kuantas pessoas?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Boa noite! Só pra mim.",
+   "en": "Good evening! Just me.",
+   "heard": "Boa noitchi! Só pra mim.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Fica à vontade. O que você vai querer?",
+   "en": "Make yourself comfortable. What would you like?",
+   "heard": "Fica à vontadji. U ki você vai kerê?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ótima escolha! Com arroz, feijão e farofa?",
+   "en": "Great choice! With rice, beans and farofa?",
+   "heard": "Ótchima escolha! Cum arrôis, feijãu i farofa?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Pode ser! Mas sem ovo, por favor. Não como ovo.",
+   "en": "Sure! But no egg, please. I don't eat eggs.",
+   "heard": "Pódi sê! Mas sein ovu, pur favor. Num comu ovu.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sem problema. E pra beber?",
+   "en": "No problem. And to drink?",
+   "heard": "Sein problema. I pra bebê?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Você fala português! Você é de onde?",
+   "en": "You speak Portuguese! Where are you from?",
+   "heard": "Você fala portuguêis! Você é dji ondji?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sou inglês, mas tô aprendendo.",
+   "en": "I'm English, but I'm learning.",
+   "heard": "Sô inglêis, mas tô aprendenu.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí, tá gostando da comida?",
+   "en": "So, are you enjoying the food?",
+   "heard": "Iaí, tá gostanu da comida?",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Tá uma delícia! Picanha eu não recuso.",
+   "en": "It's delicious! I never say no to picanha.",
+   "heard": "Tá uma delícia! Picanha eu num recuzu.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Quer sobremesa? Tem pudim e brigadeiro.",
+   "en": "Want dessert? There's pudim and brigadeiro.",
+   "heard": "Ké sobremesa? Teim pudim i brigadêru.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "Garçom"
+  },
+  {
+   "mode": "listen",
+   "pt": "Brigadeiro, por favor! E a conta, por favor.",
+   "en": "Brigadeiro, please! And the bill, please.",
+   "heard": "Brigadêru, pur favor! I a conta, pur favor.",
+   "deck": "Projeto SP › Ep 05 · No restaurante brasileiro",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí, cara! Você torce pra quem?",
+   "en": "Hey mate! Who do you support?",
+   "heard": "Iaí, cara! Você torci pra kein?",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "listen",
+   "pt": "Eu também! Sou brasileiro, mas sou Spurs.",
+   "en": "Me too! I'm Brazilian, but I'm Spurs.",
+   "heard": "Eu tambein! Sô brasilêru, mas sô Spurs.",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sério? Que legal! Você é de onde?",
+   "en": "Really? Cool! Where are you from?",
+   "heard": "Sériu? Ki legau! Você é dji ondji?",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sou de São Paulo. E você fala português?",
+   "en": "I'm from São Paulo. And you speak Portuguese?",
+   "heard": "Sô dji São Paulu. I você fala portuguêis?",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "listen",
+   "pt": "Um pouco. Tô aprendendo.",
+   "en": "A bit. I'm learning.",
+   "heard": "Um poucu. Tô aprendenu.",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Gol! Que golaço!",
+   "en": "Goal! What a goal!",
+   "heard": "Gou! Ki golaçu!",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que golaço! Finalmente!",
+   "en": "What a goal! Finally!",
+   "heard": "Ki golaçu! Finalmentchi!",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Você gosta de outros esportes?",
+   "en": "Do you like other sports?",
+   "heard": "Você gosta dji ôtrus esportchis?",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "listen",
+   "pt": "Gosto de Fórmula 1 e boxe. Eu treino boxe.",
+   "en": "I like F1 and boxing. I do boxing.",
+   "heard": "Gostu dji Fórmula um i boxi. Eu treinu boxi.",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Boxe? Nossa! Bora assistir o próximo jogo junto?",
+   "en": "Boxing? Wow! Shall we watch the next game together?",
+   "heard": "Boxi? Nóssa! Bora assistchí u próssimu jogu juntu?",
+   "deck": "Projeto SP › Ep 06 · Futebol no pub",
+   "who": "Torcedor"
+  },
+  {
+   "mode": "open",
+   "pt": "Ganhou! / Perdeu de... a... / Empatou. (say the real result)",
+   "en": "And the last game, did they win?",
+   "q": "E no último jogo, ganhou?",
+   "qen": "And the last game, did they win?"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí, o que cê vai fazer no fim de semana?",
+   "en": "So, what are you doing this weekend?",
+   "heard": "Iaí, u ki cê vai fazê nu fim dji semana?",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Hoje de manhã vou pra academia. À tarde, não sei.",
+   "en": "This morning I'm going to the gym. This afternoon, no idea.",
+   "heard": "Hoji dji manhã vô pra academia. À tardji, num sei.",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bora fazer uma chamada de vídeo hoje à noite?",
+   "en": "Shall we do a video call tonight?",
+   "heard": "Bora fazê uma chamada dji vídjiu hoji à noitchi?",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Umas oito da noite aqui. Que horas são aí?",
+   "en": "Around eight at night here. What time is that there?",
+   "heard": "Umas oitu da noitchi aki. Ki oras sãu aí?",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Aqui são onze. Tá tarde, mas pode ser!",
+   "en": "Here it's eleven. It's late, but OK!",
+   "heard": "Aki sãu onzi. Tá tardji, mas pódi sê!",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ou amanhã às três da tarde? Aí são seis.",
+   "en": "Or tomorrow at three in the afternoon? That's six there.",
+   "heard": "Ô amanhã às treis da tardji? Aí sãu seis.",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Amanhã é melhor. Combinado!",
+   "en": "Tomorrow's better. Deal!",
+   "heard": "Amanhã é melhó. Combinadu!",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E amanhã de manhã, cê faz o quê?",
+   "en": "And tomorrow morning, what are you doing?",
+   "heard": "I amanhã dji manhã, cê faz u kê?",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Domingo eu durmo até tarde e depois estudo português.",
+   "en": "On Sundays I sleep in and then study Portuguese.",
+   "heard": "Dumingu eu durmu até tardji i dispois estudu portuguêis.",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Cê tá ficando bom, hein!",
+   "en": "You're getting good, you know!",
+   "heard": "Cê tá ficanu bom, hein!",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Tô tentando! Falta pouco pra dezembro.",
+   "en": "I'm trying! It's not long till December.",
+   "heard": "Tô tentanu! Fauta poucu pra dezembru.",
+   "deck": "Projeto SP › Ep 07 · Bora?",
+   "who": "George"
+  },
+  {
+   "mode": "open",
+   "pt": "Sábado vou pra... Domingo vou... (your real plans)",
+   "en": "What are you doing this weekend?",
+   "q": "O que cê vai fazer no fim de semana?",
+   "qen": "What are you doing this weekend?"
+  },
+  {
+   "mode": "open",
+   "pt": "Aqui são... (say the real time)",
+   "en": "What time is it there now?",
+   "q": "Que horas são aí agora?",
+   "qen": "What time is it there now?"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bom dia! O que vai ser hoje? Tem pão de queijo quentinho, coxinha, e o café tá saindo agora!",
+   "en": "Morning! What'll it be today? There's warm pão de queijo, coxinha, and the coffee's coming out now!",
+   "heard": "Bom djia! U ki vai sê hoji? Teim pãu dji keiju kentchinhu, coxinha, i u café tá saínu agora!",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Desculpa, pode falar mais devagar?",
+   "en": "Sorry, can you speak more slowly?",
+   "heard": "Discurpa, pódi falá mais devagá?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Claro! O que... você... quer?",
+   "en": "Of course! What... do you... want?",
+   "heard": "Claru! U ki... você... ké?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ah, entendi! Um café, por favor.",
+   "en": "Ah, got it! A coffee, please.",
+   "heard": "Ah, entendji! Um café, pur favor.",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Coado ou expresso?",
+   "en": "Filter or espresso?",
+   "heard": "Coadu ô espressu?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Como assim, coado?",
+   "en": "What do you mean, coado?",
+   "heard": "Cumu assim, coadu?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "É o café de filtro, tradicional.",
+   "en": "It's filter coffee, the traditional kind.",
+   "heard": "É u café dji fiutru, tradicionau.",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ah, tá! Um coado, então. E o que significa coxinha?",
+   "en": "Ah, OK! A filter one, then. And what does coxinha mean?",
+   "heard": "Ah, tá! Um coadu, entãu. I u ki significa coxinha?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "É um salgado de frango. É uma delícia!",
+   "en": "It's a chicken savoury snack. It's delicious!",
+   "heard": "É um saugadu dji frangu. É uma delícia!",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Frango? Então quero uma coxinha!",
+   "en": "Chicken? Then I'll have a coxinha!",
+   "heard": "Frangu? Entãu kéru uma coxinha!",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Pra comer aqui ou pra viagem?",
+   "en": "To eat in or to take away?",
+   "heard": "Pra comê aki ô pra viagein?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Repete, por favor? Pra... o quê?",
+   "en": "Say that again, please? For... what?",
+   "heard": "Repetchi, pur favor? Pra... u kê?",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Pra viagem: pra levar.",
+   "en": "Pra viagem: to take away.",
+   "heard": "Pra viagein: pra levá.",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ah! Pra viagem, por favor. Obrigado!",
+   "en": "Ah! To take away, please. Thanks!",
+   "heard": "Ah! Pra viagein, pur favor. Obrigadu!",
+   "deck": "Projeto SP › Ep 08 · Não entendi!",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Opa, desculpa!",
+   "en": "Oops, sorry!",
+   "heard": "Ópa, djiscupa!",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Peraí... cê fala português?",
+   "en": "Hang on... you speak Portuguese?",
+   "heard": "Peraí... cê fala portuguêis?",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que demais! Eu sou o Rafa, sou de São Paulo.",
+   "en": "That's brilliant! I'm Rafa, I'm from São Paulo.",
+   "heard": "Ki dimais! Eu sô u Rafa, sô dji Sãu Paulu.",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Prazer, Rafa! Eu sou o George. Minha namorada também é de São Paulo.",
+   "en": "Nice to meet you, Rafa! I'm George. My girlfriend's from São Paulo too.",
+   "heard": "Prazê, Rafa! Eu sô u George. Minha namorada tambein é dji Sãu Paulu.",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Olha só! E cê mora aqui em Londres?",
+   "en": "Look at that! And do you live here in London?",
+   "heard": "Ólha só! I cê mora akí ein Londris?",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Moro em Brentwood, perto de Londres. E você, tá aqui há quanto tempo?",
+   "en": "I live in Brentwood, near London. And you, how long have you been here?",
+   "heard": "Moru ein Brentwood, pertu dji Londris. I você, tá akí á kuantu tempu?",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Me mudei faz dois anos. Vim pra estudar inglês... e fiquei!",
+   "en": "I moved two years ago. I came to study English... and stayed!",
+   "heard": "Mi mudei faiz dois anus. Vim pra estudá inglêis... i fikei!",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "E gosta daqui?",
+   "en": "And do you like it here?",
+   "heard": "I gosta dakí?",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Gosto, mas sinto falta do sol. E a sua namorada sabe que cê tá aprendendo?",
+   "en": "I do, but I miss the sun. And does your girlfriend know you're learning?",
+   "heard": "Gostu, mas sintu falta du sóu. I a sua namorada sabi ki cê tá aprendenu?",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Não! É surpresa. Não conta pra ninguém!",
+   "en": "No! It's a surprise. Don't tell anyone!",
+   "heard": "Num! É surpreza. Num conta pra ningéin!",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Fica tranquilo. Eu nem conheço ela!",
+   "en": "Don't worry. I don't even know her!",
+   "heard": "Fika trankilu. Eu nein conheçu ela!",
+   "deck": "Projeto SP › Ep 09 · Conhecendo alguém novo",
+   "who": "Rafa"
+  },
+  {
+   "mode": "open",
+   "pt": "Já fui pra... (São Paulo / o Rio) em... / Ainda não, mas vou em dezembro!",
+   "en": "Have you been to Brazil?",
+   "q": "Cê já foi pro Brasil?",
+   "qen": "Have you been to Brazil?"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí, George! Como foi o fim de semana?",
+   "en": "Hey, George! How was your weekend?",
+   "heard": "I aí, George! Comu foi u fin dji semana?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Foi bom! Sábado eu fui numa festa, né? Conheci você!",
+   "en": "It was good! On Saturday I went to a party, right? I met you!",
+   "heard": "Foi bom! Sábadu eu fui numa féssta, né? Conhecí você!",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Verdade! E domingo, cê fez o quê?",
+   "en": "True! And on Sunday, what did you do?",
+   "heard": "Verdadji! I dumingu, cê féis u kê?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "De manhã eu fui pra academia. Depois vi o jogo do Tottenham.",
+   "en": "In the morning I went to the gym. Then I watched the Spurs game.",
+   "heard": "Dji manhã eu fui pra academia. Dipois vi u jogu du Tottenham.",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E aí? Ganhou?",
+   "en": "And? Did they win?",
+   "heard": "I aí? Ganhô?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Empatou. Pra gente, isso é quase uma vitória!",
+   "en": "It was a draw. For us, that's almost a win!",
+   "heard": "Empatô. Pra genchi, issu é kuazi uma vitória!",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sofredor, hein! E comeu o quê?",
+   "en": "Long-suffering, eh! And what did you eat?",
+   "heard": "Sofredô, hein! I comeu u kê?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Comi um hambúrguer. Sem queijo, claro.",
+   "en": "I had a burger. No cheese, obviously.",
+   "heard": "Comí um hambúrgué. Sein keiju, cláru.",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sem queijo? Cê é doido, meu!",
+   "en": "No cheese? You're mad, mate!",
+   "heard": "Sein keiju? Cê é doidu, meu!",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Eu sei! E você, fez o quê?",
+   "en": "I know! And you, what did you do?",
+   "heard": "Eu sei! I você, féis u kê?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Nada! Dormi o dia inteiro. Bora tomar um café essa semana? Minha amiga trabalha numa cafeteria brasileira.",
+   "en": "Nothing! I slept all day. Fancy a coffee this week? My friend works at a Brazilian café.",
+   "heard": "Nada! Durmí u djia intêru. Bóra tomá um café éssa semana? Minha amiga trabalha numa cafeteria brazilera.",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Bora! Quarta à tarde?",
+   "en": "Let's do it! Wednesday afternoon?",
+   "heard": "Bóra! Kuarta à tardji?",
+   "deck": "Projeto SP › Ep 10 · Meu fim de semana",
+   "who": "George"
+  },
+  {
+   "mode": "open",
+   "pt": "Comi... (uma pizza / um churrasco / um hambúrguer sem queijo) em...",
+   "en": "What did you eat that was good?",
+   "q": "O que cê comeu de bom?",
+   "qen": "What did you eat that was good?"
+  },
+  {
+   "mode": "open",
+   "pt": "Fiz... (uma caminhada / um jantar com amigos) / Não fiz nada de diferente, só...",
+   "en": "Did you do anything different?",
+   "q": "Cê fez alguma coisa diferente?",
+   "qen": "Did you do anything different?"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, gente! O que vocês vão querer?",
+   "en": "Hi, guys! What are you having?",
+   "heard": "Oi, genchi! U ki vocêis vãu kerê?",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi! Me vê um café com leite, por favor.",
+   "en": "Hi! Can I have a white coffee, please?",
+   "heard": "Oi! Mi vê um café cun leitchi, pur favô.",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Com leite normal ou de aveia?",
+   "en": "With normal milk or oat?",
+   "heard": "Cun leitchi normau ou dji aveia?",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Pode ser de aveia. Sem açúcar.",
+   "en": "Oat's fine. No sugar.",
+   "heard": "Pódji sê dji aveia. Sein açúca.",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E pra comer? O pão de queijo acabou de sair, tá quentinho!",
+   "en": "And to eat? The pão de queijo's just come out, it's nice and warm!",
+   "heard": "I pra comê? U pãu dji keiju acabô dji saí, tá kentchinhu!",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ai, não posso. Não como queijo.",
+   "en": "Oh, I can't. I don't eat cheese.",
+   "heard": "Ai, num póssu. Num comu keiju.",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ele é assim mesmo. Pode trazer dois pra mim!",
+   "en": "He's just like that. Bring me two!",
+   "heard": "Eli é assin mezmu. Pódji trazê dois pra min!",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Pra tomar aqui. Quanto fica?",
+   "en": "To have here. How much is it?",
+   "heard": "Pra tomá akí. Kuantu fika?",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Fica oito libras. Peraí... cê é o inglês da coxinha?",
+   "en": "That's eight pounds. Hang on... are you the English guy with the coxinha?",
+   "heard": "Fika oitu libras. Peraí... cê é u inglêis da coxinha?",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sou eu! Hoje eu falei mais devagar que você.",
+   "en": "That's me! Today I spoke slower than you.",
+   "heard": "Sô eu! Oji eu falei mais devagá ki você.",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "E falou bem, viu! O Rafa me contou tudo.",
+   "en": "And you spoke well! Rafa told me everything.",
+   "heard": "I falô bein, viu! U Rafa mi contô tudu.",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "Barista"
+  },
+  {
+   "mode": "listen",
+   "pt": "Rafa! Não conta pra ninguém, lembra?",
+   "en": "Rafa! Don't tell anyone, remember?",
+   "heard": "Rafa! Num conta pra ningéin, lembra?",
+   "deck": "Projeto SP › Ep 11 · Na cafeteria",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, George! Tudo bem? Cê tá com uma cara de cansado.",
+   "en": "Hi, George! All good? You look tired.",
+   "heard": "Oi, George! Tudu bein? Cê tá cun uma cara dji cansadu.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Oi, Ana! Tô morto. Hoje foi muito corrido.",
+   "en": "Hi, Ana! I'm knackered. Today was really hectic.",
+   "heard": "Oi, Ana! Tô mortu. Oji foi muintu corridu.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Nossa! O que aconteceu?",
+   "en": "Wow! What happened?",
+   "heard": "Nóssa! U ki acontesseu?",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Primeiro, o trem atrasou. Cheguei tarde no trabalho.",
+   "en": "First, the train was late. I got to work late.",
+   "heard": "Primêru, u trein atrazô. Cheguei tardji nu trabalhu.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ai, que chato! E depois?",
+   "en": "Oh, how annoying! And then?",
+   "heard": "Ai, ki chatu! I dipois?",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Depois tive cinco reuniões. Falei com clientes o dia inteiro.",
+   "en": "Then I had five meetings. I talked to clients all day.",
+   "heard": "Dipois tchivi sinku reuniõis. Falei cun clientchis u djia intêru.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Cinco? E cê almoçou pelo menos?",
+   "en": "Five? And did you at least have lunch?",
+   "heard": "Sinku? I cê almoçô pelu menus?",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Não deu tempo. Comi um sanduíche na frente do computador.",
+   "en": "There wasn't time. I ate a sandwich at my computer.",
+   "heard": "Num deu tempu. Comí um sanduíchi na frentchi du computadô.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Coitado! E no final, foi tudo bem?",
+   "en": "Poor thing! And in the end, was it all OK?",
+   "heard": "Coitadu! I nu finau, foi tudu bein?",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Foi. Um cliente ficou bravo, mas no final deu tudo certo.",
+   "en": "Yeah. One client got angry, but in the end it all worked out.",
+   "heard": "Foi. Um clientchi ficô bravu, mas nu finau deu tudu certu.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que bom! E a academia? Hoje não deu, né?",
+   "en": "Good! And the gym? No chance today, right?",
+   "heard": "Ki bom! I a academia? Oji num deu, né?",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "listen",
+   "pt": "Deu, sim! Fui às seis da manhã. Por isso tô morto!",
+   "en": "Yes, I made it! I went at six in the morning. That's why I'm knackered!",
+   "heard": "Deu, sin! Fui às seis da manhã. Pur issu tô mortu!",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Então vai descansar! A gente se fala no sábado.",
+   "en": "Then go and rest! We'll talk on Saturday.",
+   "heard": "Entãu vai djiscansá! A genchi si fala nu sábadu.",
+   "deck": "Projeto SP › Ep 12 · Um dia corrido",
+   "who": "Ana"
+  },
+  {
+   "mode": "open",
+   "pt": "Cheguei às... (oito / nove) / Cheguei tarde porque o trem atrasou.",
+   "en": "What time did you get to work today?",
+   "q": "Que horas cê chegou no trabalho hoje?",
+   "qen": "What time did you get to work today?"
+  },
+  {
+   "mode": "open",
+   "pt": "A pior parte foi quando... (o trem atrasou / o cliente ficou bravo / não deu tempo de almoçar)",
+   "en": "Tell me: what was the worst part of the day?",
+   "q": "Me conta: qual foi a pior parte do dia?",
+   "qen": "Tell me: what was the worst part of the day?"
+  },
+  {
+   "mode": "listen",
+   "pt": "Rafa, cê não vai acreditar no que aconteceu na terça.",
+   "en": "Rafa, you won't believe what happened on Tuesday.",
+   "heard": "Rafa, cê num vai acreditá nu ki acontesseu na tersa.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Então, eu peguei o trem pra casa. Tava muito cansado...",
+   "en": "So, I got the train home. I was really tired...",
+   "heard": "Entãu, eu peguei u trein pra caza. Tava muintu cansadu...",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Ih, já sei onde isso vai dar.",
+   "en": "Uh-oh, I know where this is going.",
+   "heard": "Ih, já sei ondji issu vai dá.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Aí eu dormi. E de repente... acordei em Southend!",
+   "en": "Then I fell asleep. And suddenly... I woke up in Southend!",
+   "heard": "Aí eu durmí. I dji repentchi... acordei ein Southend!",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Southend? Na praia?",
+   "en": "Southend? At the seaside?",
+   "heard": "Southend? Na praia?",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Na praia! Longe de casa. Às onze da noite!",
+   "en": "At the seaside! Miles from home. At eleven at night!",
+   "heard": "Na praia! Longi dji caza. Às onzi da noitchi!",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Que mico! E aí, cê fez o quê?",
+   "en": "How embarrassing! So what did you do?",
+   "heard": "Ki micu! I aí, cê féis u kê?",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Peguei outro trem de volta. Cheguei em casa à meia-noite e meia.",
+   "en": "I got another train back. I got home at half twelve.",
+   "heard": "Peguei outru trein dji vóuta. Cheguei ein caza à meia-noitchi i meia.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Meu, cê tem que contar isso pra sua namorada.",
+   "en": "Mate, you've got to tell your girlfriend that.",
+   "heard": "Meu, cê tein ki contá issu pra sua namorada.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "Rafa"
+  },
+  {
+   "mode": "listen",
+   "pt": "Só em português! Em dezembro.",
+   "en": "Only in Portuguese! In December.",
+   "heard": "Só ein portuguêis! Ein dezembru.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Vai ser a melhor história da viagem.",
+   "en": "It'll be the best story of the trip.",
+   "heard": "Vai sê a melhó istória da viajein.",
+   "deck": "Projeto SP › Ep 13 · Uma história engraçada",
+   "who": "Rafa"
+  },
+  {
+   "mode": "open",
+   "pt": "Uma vez eu... Aí... E de repente... No final...",
+   "en": "Tell me another funny story!",
+   "q": "Me conta outra história engraçada!",
+   "qen": "Tell me another funny story!"
+  },
+  {
+   "mode": "open",
+   "pt": "O maior mico foi quando eu... (caí / falei errado / esqueci...)",
+   "en": "What's the most embarrassing thing that's ever happened to you?",
+   "q": "Qual foi o maior mico da sua vida?",
+   "qen": "What's the most embarrassing thing that's ever happened to you?"
+  },
+  {
+   "mode": "listen",
+   "pt": "Tô, mas falta só uma série. Opa, cê fala português?",
+   "en": "Yeah, but I've only got one set left. Oh, you speak Portuguese?",
+   "heard": "Tô, mas falta só uma séri. Ópa, cê fala portuguêis?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Um pouquinho! Posso revezar com você?",
+   "en": "A little bit! Can I work in with you?",
+   "heard": "Um pokinhu! Póssu revezá cun você?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Claro, fica à vontade. Quanto peso cê vai usar?",
+   "en": "Sure, go ahead. How much weight are you going to use?",
+   "heard": "Cláru, fika à vontadji. Kuantu pezu cê vai uzá?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sessenta quilos. Mas primeiro vou aquecer.",
+   "en": "Sixty kilos. But I'll warm up first.",
+   "heard": "Sessenta kilus. Mas primêru vô akecê.",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Boa! Cê treina sempre?",
+   "en": "Nice! Do you train a lot?",
+   "heard": "Boa! Cê treina sempri?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Boxe? Ih, então não vou brigar com você!",
+   "en": "Boxing? Right, I'm not picking a fight with you then!",
+   "heard": "Bóksi? Ih, entãu num vô brigá cun você!",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Relaxa, eu só bato no saco!",
+   "en": "Relax, I only hit the bag!",
+   "heard": "Relaxa, eu só batu nu sacu!",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Peraí... cê é o inglês amigo do Rafa?",
+   "en": "Hang on... are you Rafa's English mate?",
+   "heard": "Peraí... cê é u inglêis amigu du Rafa?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Sou eu! Cê conhece o Rafa?",
+   "en": "That's me! You know Rafa?",
+   "heard": "Sô eu! Cê conhéssi u Rafa?",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "George"
+  },
+  {
+   "mode": "listen",
+   "pt": "Todo brasileiro em Londres conhece o Rafa! O mundo é pequeno.",
+   "en": "Every Brazilian in London knows Rafa! It's a small world.",
+   "heard": "Todu brazilêru ein Londris conhéssi u Rafa! U mundu é pekenu.",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "Estranho"
+  },
+  {
+   "mode": "listen",
+   "pt": "Muito pequeno! E ele conta tudo pra todo mundo.",
+   "en": "Very small! And he tells everyone everything.",
+   "heard": "Muintu pekenu! I eli conta tudu pra todu mundu.",
+   "deck": "Projeto SP › Ep 14 · Na academia",
+   "who": "George"
+  },
+  {
+   "mode": "open",
+   "pt": "Treino boxe faz... (um ano / dois anos / seis meses).",
+   "en": "How long have you been doing boxing?",
+   "q": "Há quanto tempo cê treina boxe?",
+   "qen": "How long have you been doing boxing?"
+  },
+  {
+   "mode": "open",
+   "pt": "Gosto porque... (ajuda com o estresse / é divertido / me deixa mais forte).",
+   "en": "Why do you like boxing?",
+   "q": "Por que cê gosta de boxe?",
+   "qen": "Why do you like boxing?"
+  }
+ ]
+}

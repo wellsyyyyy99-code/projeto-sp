@@ -166,6 +166,7 @@ function gradeCard(st,res,day){
   }else if(res==='hard'){
     st.i=st.m===day?1:Math.max(1,LADDER[Math.max(st.r-1,0)]);st.d=addDays(day,st.i);
   }else{st.m=day;st.r=0;st.i=0;st.d=day;if(res==='wrong')st.l++;}
+  var last=addDays(S.cfg.flight,-5);if(st.d>last&&day<last)st.d=last; /* everything gets one more go before the flight */
   st.s=st.ok.length>=3?'beaten':'open';
   return st;
 }
@@ -330,7 +331,7 @@ function buildQueue(){
   var sit=todaySit(),must={};if(sit)(sit.must||[]).forEach(function(m){must[norm(m.pt)]=1;});
   rest.sort(function(a,b){return (must[norm(b.pt)]||0)-(must[norm(a.pt)]||0)||rank(a)-rank(b);});
   function rank(c){return c.k==='core'?0:c.k==='speak'?1:c.k==='chunk'?2:3;}
-  return due.concat(mist.slice(0,12),rest.slice(0,room)).slice(0,24);
+  return due.slice(0,60).concat(mist.slice(0,12),rest.slice(0,room)).slice(0,70);
 }
 function dueCount(){return buildQueue().length;}
 
@@ -362,6 +363,14 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
     st.s=st.ok.length>=3?'beaten':'open';if(!st.d)st.d=t;S.srs[c.id]=st;
   });
   if(ch)saveSrs();
+}
+function importAnki(){
+  return getJSON('data/anki-srs.json').then(function(imp){
+    if(!imp||!imp.c||S.prefs.ankiImport===imp.id)return;
+    var n=0;for(var id in imp.c){var a=S.srs[id],b=imp.c[id];if(!a||(a.t||'')<(b.t||'')||((a.t||'')===(b.t||'')&&(a.n||0)<(b.n||0))){S.srs[id]=b;n++;}}
+    saveSrs();S.prefs.ankiImport=imp.id;save('me/prefs',S.prefs);
+    setTimeout(function(){toast('Imported your Anki progress: '+n+' cards.');},600);
+  });
 }
 function loadDb(){
   var db=S.db,t=today(),timer=setTimeout(function(){if(S.dbState==='wait'){S.dbState='slow';render();}},10000);
@@ -397,8 +406,8 @@ function boot(){
     return Promise.all(['db','sample','tts','dictation'].map(use));
   }).then(function(c){
     S.db=c[0];S.ai=c[1];S.tts=c[2];S.dict=c[3];initDict();
-    if(!S.db){S.dbState='none';render();return;}
-    return loadDb().then(render);
+    if(!S.db){S.dbState='none';return importAnki().then(render);}
+    return loadDb().then(importAnki).then(render);
   });
 }
 
@@ -525,7 +534,7 @@ function startDrill(){
 }
 function showCard(){
   var M=S.mode,c=M.q[0];if(!c){return drillEnd();}
-  if(S.prefs.drillMode!=='type')return showFront();
+  if(S.prefs.drillMode!=='type'||c.mode==='listen'||c.mode==='open')return showFront();
   var st=S.srs[c.id]||{},mode=(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
   M.cur={c:c,mode:mode,t0:Date.now()};
   $('#mright').textContent=(M.seen+1)+' / '+Math.max(M.total,M.seen+M.q.length);
@@ -541,30 +550,38 @@ function showCard(){
 }
 function nextIn(c,res){var st=gradeCard(JSON.parse(JSON.stringify(S.srs[c.id]||{})),res,today());var n=diffDays(today(),st.d);return res==='wrong'?'again soon':n<=0?'today':n===1?'1 day':n+' days';}
 function showFront(){
-  var M=S.mode,c=M.q[0],st=S.srs[c.id]||{},mode=(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
+  var M=S.mode,c=M.q[0],st=S.srs[c.id]||{},mode=c.mode==='listen'?'listen':c.mode==='open'?'q':(c.q&&(c.k==='speak'||(st.r||0)>=1))?'q':'en';
   M.cur={c:c,mode:mode,t0:Date.now(),self:true};
   $('#mright').textContent=(M.seen+1)+' / '+Math.max(M.total,M.seen+M.q.length);
-  var h=mode==='q'?'<div class="eyebrow">'+esc(c.qs||'Rafa')+' asks. Answer out loud.</div><div class="row"><button class="play" data-a="say" data-w="'+esc(c.qs||'Rafa')+'" data-t="'+esc(c.q)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(c.q)+'</div></div>'+(c.qen?'<button class="link" data-a="reveal" data-t="'+esc(c.qen)+'">Show English</button>':'')
+  var h=mode==='listen'?'<div class="eyebrow">Listen. What does it mean?</div><div class="row" style="gap:12px"><button class="play" data-a="say" data-w="'+esc(c.who||'')+'" data-t="'+esc(c.pt)+'" aria-label="Play again" style="width:72px;height:72px">'+ICON.play+'</button><span class="small muted">Say the meaning in English, then repeat it in Portuguese. Tap to hear it again.</span></div>'
+    :mode==='q'?'<div class="eyebrow">'+esc(c.qs||'Rafa')+' asks. Answer out loud.</div><div class="row"><button class="play" data-a="say" data-w="'+esc(c.qs||'Rafa')+'" data-t="'+esc(c.q)+'" aria-label="Play the question">'+ICON.play+'</button><div class="prompt grow">'+esc(c.q)+'</div></div>'+(c.qen?'<button class="link" data-a="reveal" data-t="'+esc(c.qen)+'">Show English</button>':'')
     :'<div class="eyebrow">Say it out loud in Portuguese</div><div class="prompt">'+esc(c.en)+'</div>'+(isMistake(c)?'<span class="pill warn" style="align-self:flex-start">Your mistake</span>':'');
   setBody(h);
   setFoot('<button class="btn pri wide" data-a="flip" style="min-height:64px;font-size:18px">Show answer</button><p class="tiny muted" style="text-align:center">Say the whole sentence aloud first, then check.</p><button class="link tiny" data-a="drillmode" data-v="type">Answer by dictation instead</button>');
-  warm(c.pt);if(mode==='q')say(c.q,0,c.qs||'Rafa');
+  warm(c.pt);if(mode==='q')say(c.q,0,c.qs||'Rafa');if(mode==='listen')say(c.pt,0,c.who||'');
 }
 function showBack(){
   var M=S.mode,cur=M.cur;if(!cur||cur.flipped)return;cur.flipped=true;cur.secs=clamp((Date.now()-cur.t0)/1000,2,15);var c=cur.c;
-  var h=(cur.mode==='q'?'<div class="small muted">'+esc(c.q)+'</div>':'<div class="small muted">'+esc(c.en)+'</div>')+
+  var h;
+  if(c.mode==='open'){
+    h='<div class="small muted">'+esc(c.q)+(c.qen?' · '+esc(c.qen):'')+'</div><div class="eyebrow">Ways to answer</div><div class="pt">'+esc(c.pt)+'</div><dl class="kv">';
+  }else if(cur.mode==='listen'){
+    h='<div class="row"><button class="play" data-a="say" data-w="'+esc(c.who||'')+'" data-t="'+esc(c.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="pt grow">'+esc(c.pt)+'</div></div><dl class="kv"><dt>Means</dt><dd><b>'+esc(c.en)+'</b></dd>'+(c.who?'<dt>Who</dt><dd>'+esc(c.who)+'</dd>':'');
+  }else{
+  h=(cur.mode==='q'?'<div class="small muted">'+esc(c.q)+'</div>':'<div class="small muted">'+esc(c.en)+'</div>')+
     '<div class="row"><button class="play" data-a="say" data-t="'+esc(c.pt)+'" aria-label="Play the answer">'+ICON.play+'</button><div class="pt grow">'+esc(c.pt)+'</div></div><dl class="kv">';
   if(cur.mode==='q')h+='<dt>Means</dt><dd>'+esc(c.en)+'</dd>';
+  }
   if(c.said&&c.said.charAt(0)!=='(')h+='<dt>You once said</dt><dd>'+esc(c.said)+'</dd>';
   if(c.why)h+='<dt>Why</dt><dd>'+esc(c.why)+'</dd>';
   if(c.lit)h+='<dt>Word for word</dt><dd>'+esc(c.lit)+'</dd>';
   if(c.heard)h+='<dt>Sounds like</dt><dd>'+esc(c.heard)+'</dd>';
   if(c.note)h+='<dt>Note</dt><dd>'+esc(c.note)+'</dd>';
-  h+='</dl>';h=h.replace('<dl class="kv"></dl>','');h+='<p class="small muted">Say it again with the audio, then be honest: did you get the whole sentence right?</p>';
+  h+='</dl>';h=h.replace('<dl class="kv"></dl>','');h+='<p class="small muted">'+(c.mode==='open'?'Be honest: did you answer in full sentences, without stopping for long?':cur.mode==='listen'?'Did you understand all of it the first time you heard it? Say it along with the audio before you rate.':'Say it again with the audio, then be honest: did you get the whole sentence right?')+'</p>';
   setBody(h);
   var b=function(v,lab,cls){return '<button class="btn grow'+(cls?' '+cls:'')+'" data-a="selfrate" data-v="'+v+'" style="flex-direction:column;display:flex;align-items:center;padding:8px 4px"><span>'+lab+'</span><span class="tiny muted" style="font-weight:400">'+nextIn(c,v)+'</span></button>';};
   setFoot('<div class="row" style="gap:6px">'+b('wrong','Again')+b('hard','Hard')+b('right','Good','pri')+b('easy','Easy')+'</div>');
-  say(c.pt);
+  if(c.mode!=='open')say(c.pt,0,cur.mode==='listen'?(c.who||''):'George');
 }
 function rateSelf(v){
   var M=S.mode,cur=M.cur;if(!cur)return;var c=cur.c;M.cur=null;

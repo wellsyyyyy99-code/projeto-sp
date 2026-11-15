@@ -62,7 +62,8 @@ def collect():
         seen.add(cid)
         c["id"] = cid
         cards.append({k: v for k, v in c.items() if v not in (None, "", [])})
-        clip(c["pt"], "george")
+        if c.get("mode") != "open":       # an open card's pt is a hint, partly English
+            clip(c["pt"], "george")
         if c.get("q"):
             clip(c["q"], c.get("qs") or "rafa")
 
@@ -143,6 +144,15 @@ def collect():
             clip(st.get("open", {}).get("pt"), st.get("char", "rafa"))
             for m in st.get("must", []):
                 clip(m.get("pt"), "george")
+
+    # cards brought over from Anki (episode lines to listen to, Pack 00 sound rules, answer-aloud)
+    ak = PACKS / "anki-cards.json"
+    if ak.exists():
+        grp[0] = "x"
+        for c in _load(ak).get("cards", []):
+            clip(c.get("pt"), (c.get("who") or "narrador") if c.get("mode") == "listen" else "george")
+            card({"k": "anki", "mode": c.get("mode"), "en": c.get("en", ""), "pt": c["pt"], "heard": c.get("heard"),
+                  "who": c.get("who"), "q": c.get("q"), "qen": c.get("qen"), "note": c.get("note")})
 
     # cards the Coach adds (mistakes and pattern drills live in the app's database;
     # this file only exists so their audio gets built)
