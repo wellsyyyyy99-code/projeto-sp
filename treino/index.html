@@ -315,9 +315,10 @@ function addMistake(f,src){
   if(!f||!f.ok)return null;
   if(f.said&&f.said.charAt(0)!=='('&&!realFix(f.said,f.ok))return null; /* only punctuation, capitals or accents differ */
   var id='m'+fnv(norm(f.ok)),c=S.byId[id]||S.cards.filter(function(x){return isMistake(x)&&norm(x.pt)===norm(f.ok);})[0],t=today();
-  if(c){var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.l++;st.r=0;st.d=t;st.m=t;st.t=t;S.srs[c.id]=st;return c;}
+  var tm=addDays(t,1);
+  if(c){var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.l++;st.r=0;st.d=tm;st.m=t;st.t=t;S.srs[c.id]=st;return c;}
   c={id:id,k:'mistake',pt:f.ok,en:f.en||'',said:f.said||'',why:f.why||'',type:f.type||'grammar',added:t,src:src};
-  S.cards.unshift(c);S.byId[id]=c;S.srs[id]={r:0,i:0,l:1,n:0,ok:[],d:t,f:t,t:t,s:'open'};
+  S.cards.unshift(c);S.byId[id]=c;S.srs[id]={r:0,i:0,l:1,n:0,ok:[],d:tm,f:t,t:t,s:'open'};
   save('cards/'+id,c);return c;
 }
 function focusCards(){
@@ -332,7 +333,7 @@ function buildQueue(){
   var fresh=avail.filter(function(c){var st=S.srs[c.id];return !st||!st.n;});
   var newToday=avail.filter(function(c){var st=S.srs[c.id];return st&&st.n>0&&st.f===t&&!isMistake(c);}).length;
   var room=Math.max(0,S.cfg.newPerDay-newToday);
-  var mist=fresh.filter(isMistake),rest=fresh.filter(function(c){return !isMistake(c);});
+  var mist=fresh.filter(function(c){return isMistake(c)&&!(c.added===t&&(S.srs[c.id]||{}).d>t);}),rest=fresh.filter(function(c){return !isMistake(c);});
   var sit=todaySit(),must={};if(sit)(sit.must||[]).forEach(function(m){must[norm(m.pt)]=1;});
   rest.sort(function(a,b){return (must[norm(b.pt)]||0)-(must[norm(a.pt)]||0)||rank(a)-rank(b);});
   function rank(c){return c.k==='core'?0:c.k==='speak'?1:c.k==='chunk'?2:3;}
@@ -445,7 +446,7 @@ function viewHoje(){
   h+='<div class="eyebrow" style="margin-top:4px">Speaking session</div>';
   h+=(r1&&r2&&r3)?'<div class="verdict right" style="text-align:center">Today\'s session done ✓</div>':'<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">'+(r1||r2||r3?'Continue today\'s session':'Start today\'s session')+'</button>';
   function rnd(n,ok,title,sub,act,extra){return '<section class="card round'+(ok?' done':'')+'"'+(ok?' style="background:var(--soft)"':'')+'><div class="n">'+(ok?'✓':n)+'</div><div class="grow"><h3>'+title+(ok?' <span class="pill good">Done</span>':'')+'</h3><div class="small muted">'+sub+'</div></div><button class="btn'+(ok?' ghost':'')+'" data-a="'+act+'"'+(extra||'')+'>'+(ok?'Again':'Start')+'</button></section>';}
-  h+=rnd(1,r1,'Drills',r1?(d.drillOk||0)+' / '+(d.drills||0)+' right'+(q?' · '+q+' more ready':''):q+' cards ready · about '+Math.max(2,Math.round(q*0.12))+' min','drill');
+  h+=rnd(1,r1,'Drills',r1?(d.drillOk||0)+' / '+(d.drills||0)+' right · back tomorrow':q+' cards ready · about '+Math.max(2,Math.round(q*0.12))+' min','drill');
   h+=rnd(2,r2,'Conversa',(sit?esc(sit.title)+' · with '+esc(sit.char):'')+(r2&&bestScore(today())>=0?' · best '+bestScore(today())+'/10':' · about 8 min'),'chat',' data-id="'+(sit?sit.id:'')+'"');
   h+=rnd(3,r3,'Ouvido',r3?(d.listenOk||0)+' / '+(d.listens||0)+' understood':'10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min','listen');
   if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
