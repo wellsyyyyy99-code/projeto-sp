@@ -1,0 +1,37 @@
+{
+ "about": "Rafa's note and the Diário prompt for the Treino app",
+ "days": [
+  {
+   "date": "2026-11-15",
+   "rafa": {
+    "lines": [
+     {
+      "pt": "E aí, sofredor! Bom dia!",
+      "en": "Hey, sufferer! Morning!"
+     },
+     {
+      "pt": "Ontem eu vi umas crianças jogando bola na rua e lembrei de quando eu era pequeno.",
+      "en": "Yesterday I saw some kids playing football in the street and remembered when I was little."
+     },
+     {
+      "pt": "Eu morava na Zona Leste e jogava todo dia com os meus amigos.",
+      "en": "I used to live in the East Zone and played every day with my mates."
+     },
+     {
+      "pt": "Falei de você pra minha mãe ontem, e ela ficou curiosa.",
+      "en": "I told my mum about you yesterday, and she got curious."
+     }
+    ],
+    "q": {
+     "pt": "Ela perguntou: cê trabalha com o quê mesmo?",
+     "en": "She asked: what is it you do for work again?"
+    },
+    "sources": []
+   },
+   "diario": {
+    "pt": "O Rafa e o George passaram o domingo no parque. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu fiz…, hoje eu vi…",
+    "en": "Rafa and George spent Sunday in the park. And you, what did you do today? Say three sentences: Today I went…, today I did…, today I saw…"
+   }
+  }
+ ]
+}
