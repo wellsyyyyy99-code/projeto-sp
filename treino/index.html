@@ -413,7 +413,7 @@ function boot(){
   }).then(function(c){
     S.db=c[0];S.ai=c[1];S.tts=c[2];S.dict=c[3];initDict();
     if(!S.db){S.dbState='none';return importAnki().then(render);}
-    return loadDb().then(importAnki).then(render);
+    return loadDb().then(importAnki).then(importVoice).then(render);
   });
 }
 
@@ -447,7 +447,7 @@ function viewHoje(){
   h+=(r1&&r2&&r3)?'<div class="verdict right" style="text-align:center">Today\'s session done ✓</div>':'<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">'+(r1||r2||r3?'Continue today\'s session':'Start today\'s session')+'</button>';
   function rnd(n,ok,title,sub,act,extra){return '<section class="card round'+(ok?' done':'')+'"'+(ok?' style="background:var(--soft)"':'')+'><div class="n">'+(ok?'✓':n)+'</div><div class="grow"><h3>'+title+(ok?' <span class="pill good">Done</span>':'')+'</h3><div class="small muted">'+sub+'</div></div><button class="btn'+(ok?' ghost':'')+'" data-a="'+act+'"'+(extra||'')+'>'+(ok?'Again':'Start')+'</button></section>';}
   h+=rnd(1,r1,'Drills',r1?(d.drillOk||0)+' / '+(d.drills||0)+' right · back tomorrow':q+' cards ready · about '+Math.max(2,Math.round(q*0.12))+' min','drill');
-  h+=rnd(2,r2,'Conversa',(sit?esc(sit.title)+' · with '+esc(sit.char):'')+(r2&&bestScore(today())>=0?' · best '+bestScore(today())+'/10':' · about 8 min'),'chat',' data-id="'+(sit?sit.id:'')+'"');
+  h+=rnd(2,r2,'Conversa',(sit?esc(sit.title)+' · with '+esc(sit.char):'')+(r2&&bestScore(today())>=0?' · best '+bestScore(today())+'/10':'<br>In Claude voice mode, say <b>"Bora praticar, Treino '+(sit?sit.n:1)+'"</b>. It logs here by itself.'),'chat',' data-id="'+(sit?sit.id:'')+'"');
   h+=rnd(3,r3,'Ouvido',r3?(d.listenOk||0)+' / '+(d.listens||0)+' understood':'10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min','listen');
   if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
   var lb=S.bonus[S.bonus.length-1];if(isSun&&lb)h+='<button class="sit" data-a="bonus" data-id="'+esc(lb.id)+'"><span class="n">⭐</span><span class="grow"><b>Bonus audio</b><br><span class="small muted">'+esc(lb.title)+' · for the gym this week</span></span>'+((S.days[today()]||{}).bonus?'<span class="pill good">✓</span>':'')+'</button>';
@@ -1076,18 +1076,37 @@ function sendVlog(){
     'Extract only what the log says. JSON only: {"sit":"situation id, or empty","mins":minutes as a number or 0,"score":0 to 10,"goalsDone":n,"goalsAll":n,"twist":true or false,"fixes":[{"said":"","ok":"whole sentence corrected","en":"","why":"","type":"grammar|vocab|pronunciation"}],"words":[{"pt":"","en":""}],"summary":"one English sentence"}','quick').then(function(r){
     if(S.mode!==M)return;
     var s=sitById(r.sit)||M.sit;if(!s)throw 0;
-    var t=today(),score=clamp(Math.round(+r.score||0),0,10),ga=+r.goalsAll||s.goals.length,gd=Math.min(+r.goalsDone||0,ga),pass=gd>=ga&&score>=7;
-    var st=Object.assign({tries:0,best:0},S.sitState[s.id]);st.tries++;st.best=Math.max(st.best||0,score);st.last=t;
-    if(pass){if(st.pass&&r.twist)st.pass2=st.pass2||t;else st.pass=st.pass||t;}
-    S.sitState[s.id]=st;save('me/sits',{s:S.sitState});
-    var fx=(r.fixes||[]).filter(function(f){return f&&f.ok&&realFix(f.said,f.ok);});fx.forEach(function(f){addMistake(f,'voice:'+s.id);});saveSrs();
-    var m=clamp(+r.mins||8,1,60),secs=Math.round(m*60*0.6);bump({speakSecs:secs,chats:1,tSp:m*60});
-    var id=t+'-v'+Date.now().toString(36);
-    S.sessions.push({date:t,score:score});save('sessions/'+id,{date:t,ts:Date.now(),kind:'voice',sit:s.id,char:s.char,twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
+    var L=logVoice(r,s,today()),score=L.score,pass=L.pass,gd=L.gd,ga=L.ga,fx=L.fx,secs=L.secs;
     M.done=true;
     setBody('<div class="row"><div class="grow"><div class="eyebrow">'+esc(s.title)+' · voice mode</div><div class="big num">'+score+'<span class="muted" style="font-size:24px"> / 10</span></div></div>'+(pass?'<span class="pill good">Won</span>':'<span class="pill warn">'+gd+' of '+ga+' goals</span>')+'</div><p class="small muted">Logged '+Math.round(secs/60)+' spoken minutes (60% of the scene) and '+fx.length+' fixes into your drills.</p>');
     setFoot('<button class="btn pri wide" data-a="close">Done</button>');
   },function(){if(S.mode!==M)return;M.busy=false;setFoot('<textarea id="ans" rows="8">'+esc(txt)+'</textarea><button class="btn pri wide" data-a="vlogsend">Try again</button>');toast('Couldn\'t read that log. Check it\'s the whole thing.');});
+}
+
+/* one voice-mode chat (pasted, or sent straight from the chat) into drills, minutes, scenes and wins */
+function bumpOn(date,o){if(date===today())return bump(o);var d=S.days[date]||{date:date};for(var k in o)d[k]=(d[k]||0)+o[k];S.days[date]=d;save('days/'+date,d);}
+function logVoice(r,s,t){
+  var score=clamp(Math.round(+r.score||0),0,10),ga=s?(+r.goalsAll||s.goals.length):0,gd=s?Math.min(+r.goalsDone||0,ga):0,pass=!!s&&gd>=ga&&score>=7;
+  if(s){var st=Object.assign({tries:0,best:0},S.sitState[s.id]);st.tries++;st.best=Math.max(st.best||0,score);st.last=t;
+    if(pass){if(st.pass&&r.twist)st.pass2=st.pass2||t;else st.pass=st.pass||t;}
+    S.sitState[s.id]=st;save('me/sits',{s:S.sitState});}
+  var fx=(r.fixes||[]).filter(function(f){return f&&f.ok&&realFix(f.said,f.ok);});fx.forEach(function(f){addMistake(f,'voice:'+(s?s.id:'chat'));});saveSrs();
+  var m=clamp(+r.mins||8,1,90),secs=Math.round(m*60*0.6),o={speakSecs:secs,tSp:m*60};if(s){o.chats=1;}
+  if(r.kind==='exam')o.exam=1;
+  bumpOn(t,o);if(s&&t===today())theDay().r2=1;
+  var id=t+'-v'+Date.now().toString(36);
+  if(s)S.sessions.push({date:t,score:score});
+  save('sessions/'+id,{date:t,ts:Date.now(),kind:s?'voice':'voicechat',sit:s?s.id:'',char:s?s.char:(r.char||'Rafa'),twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
+  return {score:score,pass:pass,gd:gd,ga:ga,fx:fx,secs:secs};
+}
+function importVoice(){
+  if(!S.db)return Promise.resolve();
+  return S.db.collection('voice').get().then(function(q){
+    var seen=S.prefs.voiceSeen||[],n=0;
+    q.docs.forEach(function(d){if(seen.indexOf(d.id)>=0)return;var r=d.data()||{};var s=r.sit?(sitById(r.sit)||S.sits.filter(function(x){return String(x.n)===String(r.sit);})[0]):null;
+      logVoice(r,s,/^\d{4}-\d\d-\d\d$/.test(r.date||'')?r.date:today());seen.push(d.id);n++;});
+    if(n){S.prefs.voiceSeen=seen.slice(-300);save('me/prefs',S.prefs);setTimeout(function(){toast('Logged '+n+' voice-mode chat'+(n>1?'s':'')+' from Claude.');},900);}
+  },function(){});
 }
 
 /* ---------- Sunday bonus audio ---------- */

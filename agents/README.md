@@ -68,6 +68,7 @@ the agent files in `agents/` and the prompt that started you.
 | `sys/history` | Coach | `{days: {"YYYY-MM-DD": {min, ep}}}` from the sheet, for the app's Tracker |
 | `notes/{YYYY-MM-DD}-rafa` | app; Coach merges `synced` | `{date, kind: "rafa", msg, turns: [{said, reply: {pt, en}, ok, fixes}], secs, synced}` |
 | `notes/{YYYY-MM-DD}-diario` | app; Coach merges `synced` | `{date, kind: "diario", prompt, said, ok, en, fixes, plus: {pt, en}, secs, synced}` |
+| `voice/{YYYY-MM-DD-HHMM}` | George's Claude voice-mode chats | `{date, sit (Treino number or id, empty for a free chat), mins, score, goalsDone, goalsAll, twist, fixes, words, summary, char}`; the app turns each into a session, minutes and drill cards once |
 | `exams/{YYYY-MM-DD}` | Examiner writes `theme` and `tasks`; app writes `answers` and `result`; Coach merges `synced` | `result = {dims:{comunicacao, fluidez, precisao, vocabulario, registro}, total (of 25), level, english, strengths, fixes, focus}` |
 
 Never write `me/*`. Never `set` a document the app writes; `merge` only the fields listed for you.
