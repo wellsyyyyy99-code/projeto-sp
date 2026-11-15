@@ -1,31 +1,133 @@
 {
  "id": "2026-11-15",
  "date": "2026-11-15",
- "title": "Semana 3 · Your corrected answers + Rafa's note",
- "intro": "Part one: Rafa, Ana, Bia and Gabi's mum ask you questions. Answer out loud, then hear your corrected answer twice. Part two: shadow Rafa.",
+ "title": "Semana 3 · Rafa's week + your fixes",
+ "intro": "Bonus audio for week three. First, shadow Rafa's messages from this week: repeat each line after him. Then answer his questions out loud before you hear the corrected answer.",
  "items": [
-  {"speaker": "Rafa", "pt": "Cê é de onde? E mora onde?", "answer": "Sou da Inglaterra e moro em Brentwood, perto de Londres."},
-  {"speaker": "Rafa", "pt": "E cê trabalha com o quê por lá?", "answer": "Trabalho com câmbio, numa fintech em Londres."},
-  {"speaker": "Rafa", "pt": "Cê gosta de boxe?", "answer": "Gosto, sim! Faço boxe e vou pra academia todo dia."},
-  {"speaker": "Rafa", "pt": "E a Gabi, faz boxe também?", "answer": "Não! A Gabi não é muito boa nisso."},
-  {"speaker": "Rafa", "pt": "E o Tottenham, tá ganhando?", "answer": "O Spurs perde muito. Mas a gente não perde sempre!"},
-  {"speaker": "Ana", "pt": "O que cê fez hoje?", "answer": "Trabalhei o dia inteiro. Foi muito corrido."},
-  {"speaker": "Ana", "pt": "Cê trabalha de casa?", "answer": "Na sexta eu trabalho de casa. Nos outros dias, eu pego o trem."},
-  {"speaker": "Ana", "pt": "O que cê quer fazer em São Paulo?", "answer": "Quero andar pela Paulista no domingo."},
-  {"speaker": "Rafa", "pt": "E depois de São Paulo, cê vai pra onde?", "answer": "Depois de São Paulo, vou pro Rio, pro Réveillon."},
-  {"speaker": "Rafa", "pt": "Pra onde cê quer viajar?", "answer": "Quero ir pra Colômbia. Quero viajar pela América do Sul por seis meses."},
-  {"speaker": "Rafa", "pt": "Por que cê vai morar com a sua família?", "answer": "Porque é mais barato. Vou economizar dinheiro porque quero viajar pelo mundo todo."},
-  {"speaker": "Rafa", "pt": "E a Gabi, mora com quem?", "answer": "A Gabi mora com a mãe dela."},
-  {"speaker": "Bia", "pt": "Quanto tempo cê estudou português?", "answer": "Estudei por um mês e meio antes de vir."},
-  {"speaker": "Bia", "pt": "Cê dança bem?", "answer": "Eu danço muito mal! Não sou muito bom nisso."},
-  {"speaker": "Mãe", "pt": "Como foi a viagem?", "answer": "A viagem foi longa, mas deu tudo certo."},
-  {"speaker": "Mãe", "pt": "Tá gostando de São Paulo?", "answer": "Tô, sim! Tô muito animado de estar aqui."},
-  {"speaker": "Mãe", "pt": "Você tem irmãos?", "answer": "Tenho um irmão e duas irmãs."},
-  {"speaker": "Mãe", "pt": "Como vocês se conheceram?", "answer": "A gente se conheceu pela internet, e depois a gente se viu pessoalmente em Londres."},
-  {"speaker": "Rafa", "pt": "E aí, sofredor! Bom dia!", "en": "Hey, sufferer! Morning!"},
-  {"speaker": "Rafa", "pt": "Ontem eu vi umas crianças jogando bola na rua e lembrei de quando eu era pequeno.", "en": "Yesterday I saw some kids playing football in the street and remembered when I was little."},
-  {"speaker": "Rafa", "pt": "Eu morava na Zona Leste e jogava todo dia com os meus amigos.", "en": "I used to live in the East Zone and played every day with my mates."},
-  {"speaker": "Rafa", "pt": "Falei de você pra minha mãe ontem, e ela ficou curiosa.", "en": "I told my mum about you yesterday, and she got curious."},
-  {"speaker": "Rafa", "pt": "Prazer, George! A Gabi é gente boa.", "en": "Nice to meet you, George! Gabi's a good one."}
+  {
+   "speaker": "Rafa",
+   "pt": "E aí, sofredor! Bom dia!",
+   "en": "Hey, sufferer! Good morning!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Tá de pé o café amanhã, né? Fechou!",
+   "en": "Coffee tomorrow is still on, right? Deal!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Eu vou pedir um coado… e cê, sem pão de queijo, eu sei!",
+   "en": "I'm going to order a filter coffee… and you, no pão de queijo, I know!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "E aí, como foi a viagem de trem hoje?",
+   "en": "So, how was the train journey today?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Bom dia, meu! Hoje é dia de café!",
+   "en": "Morning, mate! Today's coffee day!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Meu amigo barista já sabe que cê vem.",
+   "en": "My barista friend already knows you're coming."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Cê gosta de café brasileiro?",
+   "en": "Do you like Brazilian coffee?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Hoje tem chamada com a Ana, né?",
+   "en": "You've got a call with Ana today, right?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Meu primo perguntou de você… cê trabalha com o quê mesmo?",
+   "en": "My cousin asked about you… what do you do again?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Sextou, meu!",
+   "en": "It's Friday, mate!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Pub hoje? Mas não dorme no trem, hein… Southend de novo não!",
+   "en": "Pub today? But don't fall asleep on the train… not Southend again!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Falta pouco pra São Paulo… cê tá animado?",
+   "en": "Not long till São Paulo… are you excited?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Bom dia! Sábado é dia de academia, né?",
+   "en": "Morning! Saturday is gym day, right?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Cê gosta de treinar no fim de semana?",
+   "en": "Do you like training at the weekend?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Bom domingo, meu! Pelo menos em São Paulo…",
+   "en": "Happy Sunday, mate! At least in São Paulo…"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Ontem minha mãe me ligou e perguntou da sua namorada.",
+   "en": "Yesterday my mum called me and asked about your girlfriend."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Como cê conheceu a Gabi mesmo?",
+   "en": "How did you meet Gabi again?"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "E aí, como foi a viagem de trem hoje?",
+   "answer": "Foi longa! O trem atrasou."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Cê trabalha com o quê mesmo?",
+   "answer": "Trabalho com câmbio numa fintech."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Falta pouco pra São Paulo… cê tá animado?",
+   "answer": "Tô muito animado!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Cê gosta de café brasileiro?",
+   "answer": "Gosto, sim! Adoro!"
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Como cê conheceu a Gabi mesmo?",
+   "answer": "A gente se conheceu na internet, e depois a gente se viu pessoalmente em Londres."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "O Spurs ganha muito?",
+   "answer": "Não! O Spurs perde muito."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Pra onde cê quer viajar?",
+   "answer": "Quero viajar pela América do Sul por seis meses."
+  },
+  {
+   "speaker": "Rafa",
+   "pt": "Cê dança bem?",
+   "answer": "Não, eu não sou muito bom. Danço muito mal!"
+  }
  ]
 }

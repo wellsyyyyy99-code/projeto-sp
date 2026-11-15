@@ -13,7 +13,8 @@
   "sobreviver": "Survival",
   "social": "Making plans",
   "historia": "Stories",
-  "reacao": "Reactions"
+  "reacao": "Reactions",
+  "planos": "Future plans"
  },
  "tracks": [
   [
@@ -34,7 +35,8 @@
    "C",
    "sobreviver",
    "historia",
-   "reacao"
+   "reacao",
+   "planos"
   ]
  ],
  "cards": [
@@ -199,6 +201,22 @@
    "pt": "Prazer em te conhecer! / O prazer é meu!"
   },
   {
+   "topic": "eu",
+   "en": "Nice! And you? Where are you from? What do you do?",
+   "pt": "E você? De onde você é? Trabalha com o quê?"
+  },
+  {
+   "topic": "eu",
+   "en": "I'm learning Portuguese because I love Brazil.",
+   "pt": "Tô aprendendo português porque eu amo o Brasil.",
+   "q": "Por que cê tá aprendendo português?",
+   "q_speaker": "Rafa",
+   "frame": "Tô aprendendo português porque ___.",
+   "swaps": [
+    "eu amo o Brasil / minha namorada é brasileira / quero falar com a família dela"
+   ]
+  },
+  {
    "topic": "trabalho",
    "en": "I work in FX at a fintech.",
    "pt": "Trabalho com câmbio numa fintech.",
@@ -260,6 +278,17 @@
    "swaps": [
     "Não deu tempo / Almocei, sim",
     "na mesa / um sanduíche / no restaurante"
+   ]
+  },
+  {
+   "topic": "trabalho",
+   "en": "Yes, sometimes I work from home.",
+   "pt": "Às vezes eu trabalho de casa.",
+   "q": "Cê trabalha em casa às vezes?",
+   "q_speaker": "Rafa",
+   "frame": "Às vezes eu trabalho ___.",
+   "swaps": [
+    "de casa / no escritório / em Londres"
    ]
   },
   {
@@ -350,6 +379,17 @@
    "frame": "Tô indo pra ___.",
    "swaps": [
     "casa / academia / o trabalho / o pub"
+   ]
+  },
+  {
+   "topic": "rotina",
+   "en": "I have to tidy the house.",
+   "pt": "Tenho que arrumar a casa.",
+   "q": "O que cê vai fazer hoje?",
+   "q_speaker": "Rafa",
+   "frame": "Tenho que ___.",
+   "swaps": [
+    "arrumar a casa / fazer compras / trabalhar"
    ]
   },
   {
@@ -524,6 +564,24 @@
     "Bora / Pode ser / Fechou",
     "seu número / seu Instagram"
    ]
+  },
+  {
+   "topic": "esporte",
+   "en": "No! Spurs lose a lot.",
+   "pt": "Não! O Spurs perde muito.",
+   "q": "O Spurs ganha muito?",
+   "q_speaker": "Rafa",
+   "frame": "O Spurs ___ muito.",
+   "swaps": [
+    "perde / ganha / empata"
+   ]
+  },
+  {
+   "topic": "esporte",
+   "en": "No, we didn't lose this time!",
+   "pt": "Não, a gente não perdeu dessa vez!",
+   "q": "Cês perderam de novo?",
+   "q_speaker": "Rafa"
   },
   {
    "topic": "comida",
@@ -772,6 +830,51 @@
    ]
   },
   {
+   "topic": "social",
+   "en": "I dance really badly!",
+   "pt": "Danço muito mal!",
+   "q": "Cê gosta de dançar?",
+   "q_speaker": "Rafa",
+   "frame": "Danço muito ___!",
+   "swaps": [
+    "mal / bem",
+    "(or) Não sou muito bom"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "I'm not very good.",
+   "pt": "Eu não sou muito bom.",
+   "q": "Cê é bom de dança?",
+   "q_speaker": "Rafa",
+   "frame": "Eu não sou muito bom de ___.",
+   "swaps": [
+    "dança / cozinha / futebol"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "Gabi's not very good either!",
+   "pt": "A Gabi também não é muito boa!",
+   "q": "E a Gabi, dança bem?",
+   "q_speaker": "Rafa",
+   "frame": "A Gabi (não) é muito ___.",
+   "swaps": [
+    "boa / engraçada / animada"
+   ]
+  },
+  {
+   "topic": "social",
+   "en": "Yes, lots of parties in December!",
+   "pt": "Vou, sim! Muitas festas em dezembro!",
+   "q": "Cê vai em muita festa?",
+   "q_speaker": "Rafa",
+   "frame": "Vou, sim! Muitas ___.",
+   "swaps": [
+    "festas / viagens / reuniões"
+   ]
+  },
+  {
    "topic": "historia",
    "en": "It was good! I went to the gym and watched the Spurs game.",
    "pt": "Foi bom! Fui pra academia e vi o jogo do Tottenham.",
@@ -884,6 +987,62 @@
    "topic": "reacao",
    "en": "True! / That's right.",
    "pt": "Verdade!"
+  },
+  {
+   "topic": "planos",
+   "en": "I'm going to live with my family.",
+   "pt": "Vou morar com a minha família.",
+   "q": "Cê vai morar onde?",
+   "q_speaker": "Rafa",
+   "frame": "Vou morar com ___.",
+   "swaps": [
+    "a minha família / a Gabi / uns amigos"
+   ]
+  },
+  {
+   "topic": "planos",
+   "en": "I want to go to Colombia, to Medellín.",
+   "pt": "Quero ir pra Colômbia, pra Medellín.",
+   "q": "Pra onde cê quer viajar?",
+   "q_speaker": "Rafa",
+   "frame": "Quero ir pra ___.",
+   "swaps": [
+    "Colômbia / Medellín / o Rio / a Argentina"
+   ]
+  },
+  {
+   "topic": "planos",
+   "en": "I'm saving money because I want to travel the whole world.",
+   "pt": "Vou economizar dinheiro porque quero viajar pelo mundo todo.",
+   "q": "Por que cê tá economizando?",
+   "q_speaker": "Rafa",
+   "frame": "Vou economizar porque quero ___.",
+   "swaps": [
+    "viajar pelo mundo todo / comprar um carro"
+   ]
+  },
+  {
+   "topic": "planos",
+   "en": "I want to travel around South America for six months.",
+   "pt": "Quero viajar pela América do Sul por seis meses.",
+   "q": "Quanto tempo cê quer viajar?",
+   "q_speaker": "Rafa",
+   "frame": "Quero viajar pela/pelo ___ por ___.",
+   "swaps": [
+    "América do Sul / Brasil / Europa",
+    "seis meses / um mês / duas semanas"
+   ]
+  },
+  {
+   "topic": "planos",
+   "en": "Because it's cheaper.",
+   "pt": "Porque é mais barato.",
+   "q": "Por que lá?",
+   "q_speaker": "Rafa",
+   "frame": "Porque é mais ___.",
+   "swaps": [
+    "barato / quente / bonito / perto"
+   ]
   }
  ]
 }
