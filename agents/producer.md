@@ -63,8 +63,18 @@ facts in the README.
 
 Run the "publish sync" from the README, so the new episodes' cards, lines and audio are in Treino today.
 
-## 6. Report
+## 6. Bonus audio for the gym
 
-At most 5 lines for George: which packs and episodes are in his podcast feed, which of his mistakes you
+(This replaced the old "Weekly bonus audio" task.) From the app database, read the last 7 days of `notes`
+(Rafa's notes with George's corrected replies, and his Diário entries) and `sessions`. Write
+`packs/extras-<today>.json`: `{"id": "<today>", "date": "<today>", "title": "Semana N · <theme>", "intro": "<one English line>",
+"items": [...]}` with 15 to 25 items: Rafa's lines as `{"speaker": "Rafa", "pt", "en"}` for shadowing, and his corrected
+answers as answer drills `{"speaker": "<who asked>", "pt": "<the question>", "answer": "<his corrected answer>"}`.
+If the week is thin, fill it from the week's episode chunks. Validate the JSON, commit and push it, and let the
+build run (it can share the wait in step 4 if you push it with the packs).
+
+## 7. Report
+
+At most 5 lines for George: which packs and episodes are in his podcast feed and the app, whether the bonus audio is in, which of his mistakes you
 wove in (the 3 most important), whether the build and the app update succeeded, and anything you skipped.
 Links: https://wellsyyyyy99-code.github.io/projeto-sp/ and https://claude.ai/artifact/4eS5Vh7pkT5wanWQAeNbB5

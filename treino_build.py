@@ -23,6 +23,13 @@ OUT = ROOT / "docs" / "treino"
 SITS = ROOT / "curriculum" / "situations.json"
 
 
+def _slug(t):
+    """Same as build.py's slug(): the episode's audio file name."""
+    import re, unicodedata
+    t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")[:40]
+
+
 def fnv(s):
     """FNV-1a 32-bit of the trimmed text. The app computes the same id in JS."""
     h = 0x811C9DC5
@@ -86,12 +93,31 @@ def collect():
             for l in e.get("lines", []):
                 clip(l["pt"], l["speaker"])
                 lines.append({"s": l["speaker"], "pt": l["pt"], "en": l["en"], "heard": l.get("heard")})
-            eps.append({"ep": ep, "title": e.get("title", ""), "lines": lines,
+            fn = f"ep{ep:02d}-{_slug(e.get('title', ''))}.mp3"
+            eps.append({"ep": ep, "title": e.get("title", ""), "pack": pack.get("pack"), "intro": e.get("intro", ""),
+                        "task": e.get("task", ""), "audio": fn if (ROOT / "docs" / "audio" / fn).exists() else "",
+                        "chunks": [{"pt": c.get("pt"), "en": c.get("en"), "heard": c.get("heard"), "note": c.get("note")}
+                                   for c in e.get("chunks", [])],
+                        "lines": lines,
                         "speak": [{"s": q.get("speaker"), "q": q.get("q"), "qen": q.get("q_en"),
                                    "model": q.get("model"), "hint": q.get("hint")} for q in e.get("speak", [])]})
         if first >= 1:
             for d in pack.get("drills", []):
                 card({"k": "drill", "ep": first, "en": d["en"], "pt": d["pt"]})
+
+    daily = PACKS / "treino-daily.json"
+    if daily.exists():
+        grp[0] = "d"
+        try:
+            dd = _load(daily)
+        except json.JSONDecodeError:
+            dd = {}
+        for day in dd.get("days", []):
+            r = day.get("rafa") or {}
+            for l in r.get("lines", []):
+                clip(l.get("pt"), "rafa")
+            clip((r.get("q") or {}).get("pt"), "rafa")
+            clip((day.get("diario") or {}).get("pt"), "narrador")
 
     grp[0] = "x"
     if SITS.exists():
@@ -121,6 +147,9 @@ def write_data():
     (d / "eps.json").write_text(dump(eps), encoding="utf-8")
     if SITS.exists():
         (d / "sits.json").write_text(dump(_load(SITS)), encoding="utf-8")
+    meta = ROOT / "curriculum" / "episodes.json"
+    if meta.exists():
+        (d / "meta.json").write_text(dump(_load(meta)), encoding="utf-8")
     return cards, eps, clips
 
 

@@ -114,8 +114,9 @@ textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px s
 <main class="wrap" id="app"></main>
 <nav class="tabs" aria-label="Sections"><div>
   <button id="tab-hoje" data-a="tab" data-v="hoje">Hoje</button>
+  <button id="tab-eps" data-a="tab" data-v="eps">Episódios</button>
   <button id="tab-sits" data-a="tab" data-v="sits">Situações</button>
-  <button id="tab-prog" data-a="tab" data-v="prog">Progresso</button>
+  <button id="tab-prog" data-a="tab" data-v="prog">Tracker</button>
 </div></nav>
 <div id="mode" hidden></div>
 <script>
@@ -167,7 +168,7 @@ function gradeCard(st,res,day){
 
 /* ---------- state ---------- */
 var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,newPerDay:10},
-  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9},
+  cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1},
   db:null,ai:null,tts:null,dict:null,view:'hoje',chain:false,ready:false,dbState:'wait',mode:null};
 var LS={get:function(k){try{return JSON.parse(localStorage.getItem('treino:'+k));}catch(e){return null;}},
         set:function(k,v){try{localStorage.setItem('treino:'+k,JSON.stringify(v));}catch(e){}}};
@@ -196,7 +197,7 @@ function saveSrs(){save('me/srs',{c:S.srs,t:Date.now()});}
 
 /* ---------- voice out: recorded clip, else Claude voice, else the phone's voice ---------- */
 var player=new Audio();
-function stopAudio(){sayTok++;try{player.pause();}catch(e){}try{if(S.tts)S.tts.stop();}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}}
+function stopAudio(){sayTok++;try{epPlayer.pause();}catch(e){}try{player.pause();}catch(e){}try{if(S.tts)S.tts.stop();}catch(e){}try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}}
 var bcache={},curUrl=null,sayTok=0,unlocked=false;
 function getBundle(i){
   var n=S.bundles[i];
@@ -352,7 +353,7 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
 function loadDb(){
   var db=S.db,t=today(),timer=setTimeout(function(){if(S.dbState==='wait'){S.dbState='slow';render();}},10000);
   return Promise.all([db.doc('me/srs').get(),db.doc('me/sits').get(),db.doc('sys/plan').get(),db.doc('sys/config').get(),
-    db.collection('cards').get(),db.collection('days').orderBy('date','desc').limit(30).get(),db.collection('exams').orderBy('date','desc').limit(8).get(),db.doc('me/prefs').get()])
+    db.collection('cards').get(),db.collection('days').orderBy('date','desc').limit(30).get(),db.collection('exams').orderBy('date','desc').limit(8).get(),db.doc('me/prefs').get(),db.doc('me/eps').get(),db.doc('sys/history').get(),db.collection('notes').where('date','==',t).get()])
   .then(function(r){
     clearTimeout(timer);S.dbState='ok';
     var ahead=mergeSrs(r[0].exists?((r[0].data()||{}).c||{}):{});
@@ -365,14 +366,17 @@ function loadDb(){
     r[5].docs.forEach(function(d){var x=d.data(),loc=S.days[x.date];if(!loc){S.days[x.date]=Object.assign({},x);}else{for(var f in x)if(typeof x[f]==='number')loc[f]=Math.max(loc[f]||0,x[f]);else if(loc[f]==null)loc[f]=x[f];}});
     r[6].docs.forEach(function(d){S.exams[d.id]=d.data();});
     if(r[7].exists)S.prefs=Object.assign(S.prefs,r[7].data());
+    if(r[8].exists){var ed=(r[8].data()||{}).d||{};for(var en in ed)if(!S.epsDone[en])S.epsDone[en]=ed[en];}
+    if(r[9].exists)S.hist=(r[9].data()||{}).days||{};
+    r[10].docs.forEach(function(d){var x=d.data(),loc=S.notes[d.id];if(!loc||((x.turns||[]).length>=((loc.turns||[]).length))&&(!loc.ok||x.ok))S.notes[d.id]=x;});
     S.day=null;theDay();foldExternal();if(ahead)saveSrs();var td=S.days[t];if(td&&LS.get('days/'+t))save('days/'+t,td);
   },function(){clearTimeout(timer);S.dbState='err';});
 }
 function boot(){
-  S.srs=(LS.get('me/srs')||{}).c||{};S.sitState=(LS.get('me/sits')||{}).s||{};S.prefs=Object.assign(S.prefs,LS.get('me/prefs')||{});
+  S.srs=(LS.get('me/srs')||{}).c||{};S.epsDone=(LS.get('me/eps')||{}).d||{};['rafa','diario'].forEach(function(k){var x=LS.get('notes/'+today()+'-'+k);if(x)S.notes[today()+'-'+k]=x;});S.sitState=(LS.get('me/sits')||{}).s||{};S.prefs=Object.assign(S.prefs,LS.get('me/prefs')||{});
   var ld=LS.get('days/'+today());if(ld)S.days[ld.date]=ld;
   render();
-  Promise.all(['data/cards.json','data/eps.json','data/sits.json','b/index.json'].map(getJSON)).then(function(r){
+  Promise.all(['data/cards.json','data/eps.json','data/sits.json','b/index.json','data/meta.json'].map(getJSON)).then(function(r){S.meta=r[4]||{};
     S.cards=r[0]||[];S.eps=r[1]||[];S.sits=(r[2]&&r[2].situations)||[];if(r[3]&&r[3].clips){S.clips=r[3].clips;S.bundles=r[3].bundles||[];}
     indexCards();S.ready=true;render();
     return Promise.all(['db','sample','tts','dictation'].map(use));
@@ -386,31 +390,76 @@ function boot(){
 /* ---------- screens ---------- */
 function toast(msg){var o=$('.toast');if(o)o.remove();var d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=msg;document.body.appendChild(d);setTimeout(function(){d.remove();},4200);}
 function mins(s){return Math.round((s||0)/60);}
-function streak(){var n=0,d=today();if(mins((S.days[d]||{}).speakSecs)<10)d=addDays(d,-1);while(mins((S.days[d]||{}).speakSecs)>=10){n++;d=addDays(d,-1);}return n;}
+function streak(){var n=0,d=today();if(dayMin(d)<10)d=addDays(d,-1);while(dayMin(d)>=10){n++;d=addDays(d,-1);}return n;}
 function syncLine(){
   var m={wait:'Loading your saved progress…',slow:'Still trying to reach your saved progress. What you do now is kept on this phone.',ok:'',err:'Could not save to your account just now. Progress is kept on this phone and will sync next time.',none:'Not signed in here, so progress stays on this phone only.'}[S.dbState];
   return m?'<p class="tiny muted">'+esc(m)+'</p>':'';
 }
 function render(){
-  ['hoje','sits','prog'].forEach(function(v){var b=$('#tab-'+v);if(b){if(S.view===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');}});
-  $('#app').innerHTML=S.view==='sits'?viewSits():S.view==='prog'?viewProg():viewHoje();
+  ['hoje','eps','sits','prog'].forEach(function(v){var b=$('#tab-'+v);if(b){if(S.view===v)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');}});
+  $('#app').innerHTML=S.view==='sits'?viewSits():S.view==='prog'?viewTracker():S.view==='eps'?viewEps():viewHoje();
 }
 function viewHoje(){
   var d=theDay(),m=mins(d.speakSecs),goal=S.cfg.dailyMin,sit=todaySit(),q=S.ready?dueCount():0,foc=S.ready?focusCards():[];
-  var isSun=new Date().getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result;
+  var isSun=new Date().getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result,hr=new Date().getHours(),dn=dayNum();
   var note=S.plan&&S.plan.date===today()&&S.plan.note;
-  var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dayNum()+' of 44</div></header>';
+  var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dn+' of 44</div></header>';
   h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div></section>';
   if(note)h+='<p class="note"><span class="eyebrow">Coach</span><br>'+esc(note)+'</p>';
-  if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today\'s session…</p>';
+  if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today…</p>';
+  var rm=rafaMsg(),rn=S.notes[today()+'-rafa'],rDone=rn&&rn.turns&&rn.turns.length;
+  h+='<div class="eyebrow">Morning</div>';
+  h+='<button class="sit" data-a="rafa"><span class="n">☀</span><span class="grow"><b>Rafa\'s voice note</b><br><span class="small muted">'+(rm?esc((rm.q&&rm.q.pt)||rm.lines[0].pt):'Arrives at 05:40'+(S.ai?' · tap to get one now':''))+'</span></span>'+(rDone?'<span class="pill good">✓</span>':'')+'</button>';
+  var e=epByN(dn);
+  h+='<button class="sit" data-a="ep" data-n="'+dn+'"'+(e?'':' disabled')+'><span class="n">▶</span><span class="grow"><b>Ep '+dn+' · '+esc(titleFor(dn))+'</b><br><span class="small muted">'+(e?(winEp(e)?'Listen on the train, then shadow George\'s lines':'Transcript here; full audio in your podcast app'):'Not out yet: the Producer adds it on Sunday')+'</span></span>'+(epDone(dn)?'<span class="pill good">✓</span>':'')+'</button>';
+  h+='<div class="eyebrow" style="margin-top:4px">Speaking session</div>';
   h+='<button class="btn pri wide" data-a="session" style="font-size:18px;min-height:56px">Start today\'s session</button>';
   h+='<section class="card round'+(d.drills>=10?' done':'')+'"><div class="n">1</div><div class="grow"><h3>Drills</h3><div class="small muted">'+q+' cards ready · about '+Math.max(2,Math.round(q*0.35))+' min</div></div><button class="btn" data-a="drill">Start</button></section>';
   h+='<section class="card round'+(d.chats>0?' done':'')+'"><div class="n">2</div><div class="grow"><h3>Conversa</h3><div class="small muted">'+(sit?esc(sit.title)+' · with '+esc(sit.char):'')+' · about 8 min</div></div><button class="btn" data-a="chat" data-id="'+(sit?sit.id:'')+'">Start</button></section>';
   h+='<section class="card round'+(d.listens>=10?' done':'')+'"><div class="n">3</div><div class="grow"><h3>Ouvido</h3><div class="small muted">10 lines at ×'+S.prefs.listenRate.toFixed(2)+' speed · 3 min</div></div><button class="btn" data-a="listen">Start</button></section>';
   if(isSun||exDone)h+='<section class="card round'+(exDone?' done':'')+'"><div class="n">4</div><div class="grow"><h3>Exame de domingo</h3><div class="small muted">'+(exDone?'Done: '+ex.result.total+' / 25':'5 questions · 6 min · scored the same way every week')+'</div></div><button class="btn" data-a="exam">'+(exDone?'Redo':'Start')+'</button></section>';
+  var dn2=S.notes[today()+'-diario'];
+  h+='<div class="eyebrow" style="margin-top:4px">Evening</div>';
+  h+='<button class="sit" data-a="diario"'+(hr>=18&&!dn2?' style="border-color:var(--accent)"':'')+'><span class="n">☾</span><span class="grow"><b>Diário</b><br><span class="small muted">'+esc(diarioPrompt().pt)+'</span></span>'+(dn2?'<span class="pill good">✓</span>':'')+'</button>';
   if(foc.length)h+='<section><div class="eyebrow" style="margin-bottom:6px">Focus now</div><div class="chips">'+foc.map(function(c){return '<span class="chip">'+esc(c.pt)+'</span>';}).join('')+'</div></section>';
-  h+='<p class="tiny muted">Voice out: '+(Object.keys(S.clips).length?Object.keys(S.clips).length+' recorded lines':S.tts?'Claude voice':('speechSynthesis' in window)?'phone voice':'not available here')+'. Voice in: '+(S.dict?'tap-to-talk mic':'your keyboard\'s mic (add the Portuguese keyboard)')+'. '+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off.')+'</p>';
+  h+='<p class="tiny muted">'+(S.ai?'':'Claude isn\'t reachable in this view, so you mark your own answers and Conversa is off. ')+'Want to talk out loud with no typing? Open a Claude chat, start voice mode and say "Bora praticar, Treino '+(sit?sit.n:1)+'". Then log it from the Conversa screen.</p>';
   return h+syncLine();
+}
+function viewTracker(){
+  var t=today(),goal=S.cfg.dailyMin,dn=dayNum(),bars='',xs='',tot14=0,i,all=0,epn=0;
+  for(i=13;i>=0;i--){var d=addDays(t,-i),m=dayMin(d);tot14+=m;bars+='<div class="b'+(m>=goal?' hit':'')+'" style="height:'+Math.min(100,m/(goal*1.5)*100)+'%" title="'+d+': '+m+' min"></div>';xs+='<span>'+d.slice(8)+'</span>';}
+  for(i=1;i<=Math.min(dn,47);i++){all+=dayMin(dateOfDay(i));if(epDone(i))epn++;}
+  var ms=S.cards.filter(isMistake),beaten=ms.filter(function(c){return okCount(c)>=3;}).length;
+  var won=S.sits.filter(function(s){return sitLevel(s.id)>=2;}).length;
+  var exk=Object.keys(S.exams).sort().filter(function(k){return S.exams[k].result;}),lastEx=exk.length?S.exams[exk[exk.length-1]].result:null;
+  function tile(lab,val,sub){return '<div class="card" style="padding:10px 12px"><div class="eyebrow">'+lab+'</div><div class="disp num" style="font-size:30px">'+val+'</div>'+(sub?'<div class="tiny muted">'+sub+'</div>':'')+'</div>';}
+  var h='<header class="top"><h1 class="disp">Tracker</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to the flight</div></header>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+    tile('Spoken',(all/60).toFixed(1)+' h','target by today '+(goal*Math.min(dn,44)/60).toFixed(1)+' h')+
+    tile('Streak',streak()+' d','days with 10+ minutes')+
+    tile('Episodes',epn+' / 44','')+
+    tile('Situations won',won+' / '+S.sits.length,'')+
+    tile('Mistakes beaten',beaten+' / '+ms.length,'right on 3 days')+
+    tile('Last exam',lastEx?lastEx.total+' / 25':'–',lastEx?esc(lastEx.level||''):'Sundays')+'</div>';
+  var nextGate=S.sits.filter(function(s){return s.gate>=t;}).map(function(s){return s.gate;}).sort()[0];
+  if(nextGate){var due=S.sits.filter(function(s){return s.gate===nextGate;}),wonG=due.filter(function(s){return sitLevel(s.id)>=2;}).length;
+    h+='<section class="card"><div class="eyebrow">Next gate · '+nextGate.slice(8)+'/'+nextGate.slice(5,7)+'</div><div class="row small" style="margin-top:4px"><span class="grow">Win '+due.map(function(s){return esc(s.title);}).join(', ')+'</span><span class="pill '+(wonG===due.length?'good':'warn')+'">'+wonG+' / '+due.length+'</span></div></section>';}
+  h+='<section class="card"><div class="eyebrow" style="margin-bottom:8px">Minutes spoken, last 14 days (dashed line = '+goal+') · '+tot14+' min</div><div class="bars"><div class="t" style="bottom:'+(100/1.5)+'%"></div>'+bars+'</div><div class="barx">'+xs+'</div></section>';
+  var B=S.meta.bosses||{};
+  h+='<section><div class="eyebrow" style="margin-bottom:6px">Day by day</div><div class="card" style="padding:4px 0;overflow-x:auto"><table class="small num" style="width:100%;border-collapse:collapse"><thead><tr class="muted tiny" style="text-align:left"><th style="padding:6px 8px">Day</th><th>Episode</th><th>Min</th><th title="Rafa">☀</th><th title="Diário">☾</th></tr></thead><tbody>';
+  for(i=1;i<=44;i++){
+    var dt=dateOfDay(i),dd=S.days[dt]||{},hi=S.hist[dt]||{},mm=dayMin(dt),fut=i>dn,isT=i===dn;
+    var bs=B[dt.slice(5)]||B[dt]||'';
+    h+='<tr style="border-top:1px solid var(--line);'+(isT?'background:var(--soft);':'')+(fut?'opacity:.55;':'')+'"><td style="padding:6px 8px;white-space:nowrap"><b>'+i+'</b> <span class="tiny muted">'+dt.slice(8)+'/'+dt.slice(5,7)+'</span></td><td>'+(epDone(i)?'✓ ':'')+esc(titleFor(i))+(bs?'<br><span class="tiny" style="color:var(--brand)">Sunday: '+esc(bs)+'</span>':'')+'</td><td>'+(fut?'':'<span style="color:var('+(mm>=goal?'--good':mm>=10?'--warn':'--muted')+')">'+mm+'</span>')+'</td><td>'+(dd.rafa||hi.rafa?'✓':'')+'</td><td>'+(dd.diario||hi.diario?'✓':'')+'</td></tr>';
+  }
+  h+='</tbody></table></div></section>';
+  if(exk.length)h+='<section class="card"><div class="eyebrow" style="margin-bottom:6px">Sunday exams</div>'+exk.map(function(k){var r=S.exams[k].result;return '<div class="row small"><span class="grow">'+k+'</span><span class="num"><b>'+r.total+'</b> / 25 · '+esc(r.level||'')+'</span></div>';}).join('')+'</section>';
+  h+='<section><div class="eyebrow" style="margin-bottom:6px">Your mistakes (three correct days beats one)</div><div style="display:flex;flex-direction:column;gap:8px">';
+  ms.sort(function(a,b){return okCount(a)-okCount(b)||((S.srs[b.id]||{}).l||0)-((S.srs[a.id]||{}).l||0);}).forEach(function(c){
+    var n=Math.min(3,okCount(c));
+    h+='<div class="card" style="padding:10px 12px"><div class="row"><b class="grow">'+esc(c.pt)+'</b><span class="dots" aria-label="'+n+' of 3 correct days"><i class="'+(n>0?'on':'')+'"></i><i class="'+(n>1?'on':'')+'"></i><i class="'+(n>2?'on':'')+'"></i></span></div><div class="small muted">'+(c.said&&c.said.charAt(0)!=='('?'You said: '+esc(c.said)+'. ':'')+esc(c.why||'')+'</div></div>';
+  });
+  return h+'</div></section>'+syncLine();
 }
 function viewSits(){
   var passed=S.sits.filter(function(s){return sitLevel(s.id)>=2;}).length;
@@ -422,24 +471,6 @@ function viewSits(){
   });
   return h;
 }
-function viewProg(){
-  var t=today(),goal=S.cfg.dailyMin,bars='',xs='',tot=0,i;
-  for(i=13;i>=0;i--){var d=addDays(t,-i),m=mins((S.days[d]||{}).speakSecs);tot+=m;bars+='<div class="b'+(m>=goal?' hit':'')+'" style="height:'+Math.min(100,m/(goal*1.5)*100)+'%" title="'+d+': '+m+' min"></div>';xs+='<span>'+d.slice(8)+'</span>';}
-  var ms=S.cards.filter(isMistake),beaten=ms.filter(function(c){return okCount(c)>=3;}).length;
-  var learned=S.cards.filter(function(c){var st=S.srs[c.id];return st&&st.r>=2;}).length;
-  var h='<header class="top"><h1 class="disp">Progresso</h1><div class="meta"><b class="num">'+tot+' min</b>spoken in 14 days</div></header>';
-  h+='<section class="card"><div class="eyebrow" style="margin-bottom:8px">Minutes spoken per day (dashed line = '+goal+')</div><div class="bars"><div class="t" style="bottom:'+(100/1.5)+'%"></div>'+bars+'</div><div class="barx">'+xs+'</div></section>';
-  h+='<section class="card row"><div class="grow"><div class="eyebrow">Mistakes beaten</div><div class="disp num" style="font-size:32px">'+beaten+' / '+ms.length+'</div></div><div class="grow"><div class="eyebrow">Phrases that stick</div><div class="disp num" style="font-size:32px">'+learned+' / '+S.cards.length+'</div></div></section>';
-  var ex=Object.keys(S.exams).sort().filter(function(k){return S.exams[k].result;});
-  if(ex.length)h+='<section class="card"><div class="eyebrow" style="margin-bottom:6px">Sunday exams</div>'+ex.map(function(k){var r=S.exams[k].result;return '<div class="row small"><span class="grow">'+k+'</span><span class="num"><b>'+r.total+'</b> / 25 · '+esc(r.level||'')+'</span></div>';}).join('')+'</section>';
-  h+='<section><div class="eyebrow" style="margin-bottom:6px">Your mistakes (three correct days beats one)</div><div style="display:flex;flex-direction:column;gap:8px">';
-  ms.sort(function(a,b){return okCount(a)-okCount(b)||((S.srs[b.id]||{}).l||0)-((S.srs[a.id]||{}).l||0);}).forEach(function(c){
-    var n=Math.min(3,okCount(c));
-    h+='<div class="card" style="padding:10px 12px"><div class="row"><b class="grow">'+esc(c.pt)+'</b><span class="dots" aria-label="'+n+' of 3 correct days"><i class="'+(n>0?'on':'')+'"></i><i class="'+(n>1?'on':'')+'"></i><i class="'+(n>2?'on':'')+'"></i></span></div><div class="small muted">'+(c.said?'You said: '+esc(c.said)+'. ':'')+esc(c.why||'')+'</div></div>';
-  });
-  return h+'</div></section>'+syncLine();
-}
-
 /* ---------- round shell ---------- */
 function openMode(title,body,foot,right){
   var m=$('#mode');m.hidden=false;
@@ -447,9 +478,10 @@ function openMode(title,body,foot,right){
 }
 function setBody(h){$('#mbody').innerHTML=h;$('.mbody').scrollTop=0;}
 function setFoot(h){var f=$('#mfoot');if(f)f.innerHTML=h;}
-function closeMode(){stopAudio();if(S.dict&&dictOn){dictDone=null;S.dict.stop().catch(function(){});}S.mode=null;dictBox=null;dictDone=null;$('#mode').hidden=true;$('#mode').innerHTML='';render();}
+function closeMode(){stopAudio();clearTimeout(autoT);if(epUrl){try{epPlayer.removeAttribute('src');epPlayer.load();}catch(e){}URL.revokeObjectURL(epUrl);epUrl=null;}if(S.dict&&dictOn){dictDone=null;S.dict.stop().catch(function(){});}S.mode=null;dictBox=null;dictDone=null;$('#mode').hidden=true;$('#mode').innerHTML='';render();}
 function answerFoot(btn,extra){
-  return '<div id="partial" class="small muted" aria-live="polite"></div><div class="row" style="gap:8px;align-items:stretch"><textarea id="ans" rows="2" lang="pt-BR" autocapitalize="sentences" placeholder="Fala em português…"></textarea>'+micHtml()+'</div><div class="row" style="gap:8px"><button class="btn pri grow" data-a="'+btn+'">'+(btn==='send'?'Send':'Check')+'</button>'+(extra||'')+'</div><div class="tiny muted">'+esc(micTip())+'</div>';
+  if(btn==='check'||btn==='send')extra=(extra||'')+'</div><div class="row">'+autoBox();
+  return '<div id="partial" class="small muted" aria-live="polite"></div><div class="row" style="gap:8px;align-items:stretch"><textarea id="ans" rows="2" lang="pt-BR" autocapitalize="sentences" placeholder="Fala em português…"></textarea>'+micHtml()+'</div><div class="row" style="gap:8px"><button class="btn pri grow" data-a="'+btn+'">'+(btn==='send'||btn==='rafasend'?'Send':btn==='examnext'?'Next question':'Check')+'</button>'+(extra||'')+'</div><div class="tiny muted">'+esc(micTip())+'</div>';
 }
 
 /* ---------- round 1: drills ---------- */
@@ -472,7 +504,7 @@ function showCard(){
     h='<div class="eyebrow">Say it in Portuguese</div><div class="prompt">'+esc(c.en)+'</div>'+(isMistake(c)?'<span class="pill warn" style="align-self:flex-start">Your mistake</span>':'');
   }
   setBody(h);setFoot(answerFoot('check','<button class="btn ghost" data-a="dunno">Don\'t know</button>'));warm(c.pt);
-  dictBox=$('#ans');dictDone=function(){checkCard();};
+  dictBox=$('#ans');dictDone=function(){checkCard();};focusAns();
 }
 function checkCard(giveUp){
   var M=S.mode,cur=M.cur;if(!cur||cur.busy)return;
@@ -530,7 +562,7 @@ function sitSheet(id){
   S.mode={k:'sheet',sit:s};warm(s.open.pt);s.must.forEach(function(m){warm(m.pt);});
   var h='<div class="eyebrow">'+esc(s.place)+' · with '+esc(s.char)+'</div><p class="prompt">'+esc(s.title)+'</p><div><div class="eyebrow" style="margin-bottom:4px">What you have to do</div><div class="goals">'+s.goals.map(function(g){return '<span><span>○</span><span>'+esc(g)+'</span></span>';}).join('')+'</div></div><div><div class="eyebrow" style="margin-bottom:6px">Phrases to have ready (tap to hear, say each aloud)</div><div style="display:flex;flex-direction:column;gap:8px">'+
     s.must.map(function(m){return '<div class="row"><button class="play" data-a="say" data-t="'+esc(m.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><b>'+esc(m.pt)+'</b><br><span class="small muted">'+esc(m.en)+'</span></div></div>';}).join('')+'</div></div>';
-  openMode('Round 2 · Conversa',h,'<button class="btn pri wide" data-a="chatgo" data-id="'+s.id+'">'+(lv>=2?'Start, with a twist':'Start the scene')+'</button>'+(S.ai?'':'<p class="tiny muted">Claude isn\'t reachable in this view. Open this page from your Claude account to run the scene.</p>'));
+  openMode('Round 2 · Conversa',h,'<button class="btn pri wide" data-a="chatgo" data-id="'+s.id+'">'+(lv>=2?'Start, with a twist':'Start the scene')+'</button>'+'<p class="tiny muted">Rather talk out loud with no typing? Open a Claude chat, start voice mode and say <b>"Bora praticar, Treino '+s.n+'"</b>. Say "fim" at the end, then:</p><button class="btn wide" data-a="vlog" data-id="'+s.id+'">Paste the voice-mode log</button>'+(S.ai?'':'<p class="tiny muted">Claude isn\'t reachable in this view. Open this page from your Claude account to run the scene.</p>'));
 }
 function startChat(id){
   var s=sitById(id);if(!s)return;
@@ -540,7 +572,7 @@ function startChat(id){
   S.mode={k:'chat',sit:s,twist:twist,foc:foc,msgs:[{role:'user',content:sys+'\n\nStart the scene now.'},{role:'assistant',content:JSON.stringify({pt:s.open.pt,en:s.open.en,fix:null,goals:[],used:[],end:false})}],
     log:[{who:s.char,pt:s.open.pt,en:s.open.en}],goals:[],fixes:[],used:{},turns:0,secs:0,t0:Date.now(),tTurn:Date.now(),blur:false};
   openMode(s.title,'',answerFoot('send','<button class="btn ghost" data-a="finish">Finish</button>'),'0:00');
-  dictBox=$('#ans');dictDone=function(){sendChat();};
+  dictBox=$('#ans');dictDone=function(){sendChat();};focusAns();
   drawChat();say(s.open.pt);
   S.mode.tick=setInterval(function(){var e=$('#mright');if(!S.mode||S.mode.k!=='chat'||!e)return;var t=Math.floor((Date.now()-S.mode.t0)/1000);e.textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0');},1000);
 }
@@ -692,6 +724,230 @@ function scoreExam(){
   });
 }
 
+/* ---------- hands-light answering: auto-send after you stop dictating ---------- */
+var autoT=null;
+function focusAns(){var b=$('#ans');if(b){try{b.focus({preventScroll:true});}catch(e){try{b.focus();}catch(e2){}}}}
+document.addEventListener('input',function(e){
+  if(!e.target||e.target.id!=='ans')return;
+  clearTimeout(autoT);
+  var box=e.target,M=S.mode,k=M&&M.k;
+  if(!S.prefs.auto||!(k==='drill'||k==='chat'||k==='rafa'))return;
+  autoT=setTimeout(function(){
+    if(box!==document.getElementById('ans')||S.mode!==M)return;
+    if(!(box.value||'').trim())return;
+    try{box.blur();}catch(x){}
+    if(k==='drill'&&M.cur&&!M.cur.busy)checkCard(false);
+    else if(k==='chat')sendChat();
+    else if(k==='rafa')sendRafa();
+  },2600);
+});
+document.addEventListener('change',function(e){
+  if(e.target&&e.target.id==='autosend'){S.prefs.auto=!!e.target.checked;save('me/prefs',S.prefs);}
+});
+function autoBox(){return '<label class="tiny muted row" style="gap:6px"><input type="checkbox" id="autosend"'+(S.prefs.auto?' checked':'')+'> Send by itself when I stop talking</label>';}
+
+/* ---------- tracker data: app days + what the sheet already had ---------- */
+function dateOfDay(n){return addDays(S.cfg.start,n-1);}
+function dayMin(d){return Math.max(mins((S.days[d]||{}).speakSecs),((S.hist[d]||{}).min)||0);}
+function epDone(n){return !!(S.epsDone[n]||(S.hist[dateOfDay(n)]||{}).ep);}
+function epByN(n){return S.eps.filter(function(e){return e.ep===n;})[0];}
+function titleFor(n){var e=epByN(n);return e?e.title:((S.meta.titles||{})[n]||'');}
+function winEp(e){return !!(e&&e.audio&&Math.abs(e.ep-dayNum())<=3);}
+
+/* ---------- episodes ---------- */
+var epPlayer=new Audio(),epUrl=null;
+function stopEp(){try{epPlayer.pause();}catch(e){}}
+function startEp(n){
+  var e=epByN(+n);if(!e){toast('That episode isn\'t out yet.');return;}
+  S.mode={k:'ep',e:e,pt:true,en:false};
+  openMode('Ep '+e.ep+' · '+e.title,'',epFoot(e),'');
+  drawEp();
+  if(winEp(e)){
+    var box=$('#epaudio');if(box)box.innerHTML='<p class="small muted"><span class="spin"></span> Loading the episode…</p>';
+    fetch('ep/'+e.audio).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){
+      if(!S.mode||S.mode.e!==e)return;
+      if(epUrl)URL.revokeObjectURL(epUrl);epUrl=URL.createObjectURL(b);
+      epPlayer.src=epUrl;epPlayer.playbackRate=S.prefs.epRate||1;drawPlayer();
+    }).catch(function(){var x=$('#epaudio');if(x)x.innerHTML='<p class="small muted">Couldn\'t load the full audio. Tap any line below to hear it, or play it in your podcast app.</p>';});
+  }
+}
+function epFoot(e){return epDone(e.ep)?'<p class="small muted" style="text-align:center">Listened ✓</p>':'<button class="btn pri wide" data-a="epdone" data-n="'+e.ep+'">I\'ve listened to it</button>';}
+function drawPlayer(){
+  var x=$('#epaudio');if(!x)return;var r=S.prefs.epRate||1;
+  x.innerHTML='<div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn brand" data-a="epplay" id="epplaybtn">'+(epPlayer.paused?'▶ Play':'❚❚ Pause')+'</button><button class="btn" data-a="epback">↺ 10s</button><span class="grow"></span>'+
+    [0.8,0.9,1,1.15].map(function(v){return '<button class="btn'+(Math.abs(v-r)<0.01?' pri':'')+'" data-a="eprate" data-v="'+v+'" style="padding:8px 10px">×'+v+'</button>';}).join('')+
+    '</div><div class="meter" style="margin-top:10px" id="epbar"><i style="width:0%"></i></div><div class="tiny muted num" id="eptime"></div>';
+}
+epPlayer.addEventListener('timeupdate',function(){var b=$('#epbar i'),t=$('#eptime');if(!b||!epPlayer.duration)return;b.style.width=(epPlayer.currentTime/epPlayer.duration*100)+'%';
+  if(t)t.textContent=fmtT(epPlayer.currentTime)+' / '+fmtT(epPlayer.duration);});
+['play','pause','ended'].forEach(function(ev){epPlayer.addEventListener(ev,function(){var b=$('#epplaybtn');if(b)b.textContent=epPlayer.paused?'▶ Play':'❚❚ Pause';});});
+function fmtT(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function drawEp(){
+  var M=S.mode,e=M.e;
+  var h='<p class="muted">'+esc(e.intro||'')+'</p>';
+  h+='<div class="card" id="epaudio">'+(winEp(e)?'':'<p class="small muted">The full recording of this one is in your podcast feed. Tap any line below to hear it.</p>')+'</div>';
+  h+='<div class="row" style="gap:8px"><span class="eyebrow grow">Transcript</span><button class="btn'+(M.pt?' pri':'')+'" data-a="eptog" data-v="pt" style="padding:6px 12px">PT</button><button class="btn'+(M.en?' pri':'')+'" data-a="eptog" data-v="en" style="padding:6px 12px">EN</button></div>';
+  h+='<div style="display:flex;flex-direction:column;gap:6px">'+e.lines.map(function(l){
+    return '<div class="row" style="align-items:flex-start;gap:10px"><button class="play" data-a="say" data-t="'+esc(l.pt)+'" aria-label="Play this line">'+ICON.play+'</button><div class="grow"><div class="eyebrow">'+esc(l.s)+'</div>'+
+      (M.pt?'<div>'+esc(l.pt)+'</div>':'')+(M.pt&&l.heard?'<div class="tiny muted">'+esc(l.heard)+'</div>':'')+(M.en?'<div class="small muted">'+esc(l.en)+'</div>':'')+(!M.pt&&!M.en?'<div class="tiny muted">Tap ▶ to hear it</div>':'')+'</div></div>';
+  }).join('')+'</div>';
+  if(e.chunks&&e.chunks.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">Phrases to keep</div>'+e.chunks.map(function(c){return '<div class="row" style="margin-bottom:8px"><button class="play" data-a="say" data-t="'+esc(c.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><b>'+esc(c.pt)+'</b><br><span class="small muted">'+esc(c.en)+(c.note?' · '+esc(c.note):'')+'</span></div></div>';}).join('')+'</div>';
+  if(e.task)h+='<p class="note"><span class="eyebrow">Your task</span><br>'+esc(e.task)+'</p>';
+  var keep=$('#epaudio')?$('#epaudio').innerHTML:null;
+  $('#mbody').innerHTML=h;if(keep&&epPlayer.src)$('#epaudio').innerHTML=keep;
+}
+function viewEps(){
+  var dn=dayNum(),done=0,i;for(i=1;i<=44;i++)if(epDone(i))done++;
+  var h='<header class="top"><h1 class="disp">Episódios</h1><div class="meta"><b class="num">'+done+' / 44</b>listened</div></header><p class="muted small">Today\'s episode and the three either side have full audio here. Every episode has its transcript, and each line plays on its own.</p>';
+  for(i=1;i<=44;i++){
+    var e=epByN(i),t=titleFor(i),ok=epDone(i),isT=i===dn;
+    var pill=ok?'<span class="pill good">✓</span>':isT?'<span class="pill warn">Today</span>':e?'':'<span class="pill off">'+esc(dateOfDay(i).slice(8)+'/'+dateOfDay(i).slice(5,7))+'</span>';
+    h+='<button class="sit" data-a="ep" data-n="'+i+'"'+(e?'':' disabled')+(isT?' id="ep-today"':'')+'><span class="n">'+i+'</span><span class="grow"><b>'+esc(t)+'</b>'+(e&&winEp(e)?'<br><span class="small muted">Full audio</span>':'')+'</span>'+pill+'</button>';
+  }
+  return h;
+}
+
+/* ---------- Rafa's morning note ---------- */
+function rafaMsg(){
+  var p=S.plan&&S.plan.date===today()&&S.plan.rafa;if(p&&p.lines)return p;
+  var n=S.notes[today()+'-rafa'];return n&&n.msg&&n.msg.lines?n.msg:null;
+}
+function rafaPrompt(msg,turns,said,foc){
+  return 'You are Rafa, George\'s friend from São Paulo (a Corinthians fan who teases him about Tottenham), chatting with him on WhatsApp. Speak only spoken São Paulo Portuguese at his level: '+level()+'.\n'+ME+'\n\n'+
+  'Your morning message to him was:\n'+msg.lines.map(function(l){return l.pt;}).join(' ')+' '+(msg.q?msg.q.pt:'')+'\n'+
+  (turns.length?'The chat since then:\n'+turns.map(function(t){return 'George: '+t.said+'\nRafa: '+t.reply.pt;}).join('\n')+'\n':'')+
+  'George now replies (dictated): "'+said.replace(/"/g,"'")+'"\n\n'+
+  'His words are DICTATED: no punctuation, question marks, capitals or accents, and that is never an error. Never mention or correct punctuation, capitals, accents or spelling.\n'+
+  (foc.length?'Phrases he is training (number them 1 to '+foc.length+'):\n'+foc.map(function(c,i){return (i+1)+'. '+c.pt;}).join('\n')+'\n':'')+
+  'Reply as Rafa in one or two short lines that react to what he actually said'+(turns.length>=2?' and wrap up warmly (no question).':', ending with one natural follow-up question.')+' If he used English words, use the Portuguese words in your reply.\n'+
+  'Then coach him. JSON only:\n{"pt":"Rafa\'s reply","en":"English translation of the reply","ok":"his whole message as a Paulistano would say it","fixes":[up to 3 of {"said":"the wrong part as he said it","ok":"the whole sentence corrected","en":"its meaning","why":"the rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}],"used":[numbers of training phrases he used correctly]}\nIf his message was already natural, fixes is [] and ok repeats it.';
+}
+function makeRafaPrompt(foc){
+  return 'Write Rafa\'s morning WhatsApp voice-note text to George. Rafa is his friend from São Paulo, a Corinthians fan who teases him about Tottenham. '+ME+' Level: '+level()+'. Today is day '+dayNum()+' of 44 before George flies to São Paulo on 17 December; today\'s episode is "'+titleFor(dayNum())+'".\n'+
+  '3 to 5 short sentences in spoken São Paulo Portuguese, then ONE question for George to answer out loud. Make the question one whose natural answer uses one of these phrases (do not say so): '+foc.map(function(c){return c.pt;}).join(' | ')+'. No invented facts about George. Never mention Gabi or her mum practising with him.\n'+
+  'JSON only: {"lines":[{"pt":"one sentence","en":"translation"}],"q":{"pt":"the question","en":"translation"}}';
+}
+function startRafa(){
+  var msg=rafaMsg(),t=today();
+  if(!msg){
+    if(!S.ai){toast('Rafa\'s note arrives at 05:40.');return;}
+    openMode('Rafa','<p class="muted"><span class="spin"></span> Rafa is recording…</p>',null);
+    S.mode={k:'rafawait'};var M=S.mode;
+    ask(makeRafaPrompt(focusCards().slice(0,5)),'default').then(function(r){
+      if(S.mode!==M)return;if(!r||!r.lines||!r.lines.length)throw 0;
+      var n=S.notes[t+'-rafa']||{date:t,kind:'rafa',turns:[]};n.msg={lines:r.lines,q:r.q,made:'app'};S.notes[t+'-rafa']=n;save('notes/'+t+'-rafa',n);
+      closeMode();startRafa();
+    }).catch(function(){if(S.mode===M){setBody('<p>Rafa couldn\'t be reached. Try again in a minute.</p>');}});
+    return;
+  }
+  var n=S.notes[t+'-rafa']||{date:t,kind:'rafa',turns:[],secs:0};n.msg=n.msg||msg;S.notes[t+'-rafa']=n;
+  S.mode={k:'rafa',n:n,foc:focusCards().slice(0,5),t0:Date.now(),used:{}};
+  openMode('Rafa · bom dia','',n.turns.length>=3?'<button class="btn pri wide" data-a="close">Done</button>':answerFoot('rafasend',autoBox()),'');
+  drawRafa();dictBox=$('#ans');dictDone=function(){sendRafa();};focusAns();
+  if(!n.turns.length){var all=msg.lines.map(function(l){return l.pt;}).concat(msg.q?[msg.q.pt]:[]);playSeq(all,S.mode);}
+}
+function playSeq(arr,M){var i=0;(function nx(){if(i>=arr.length||S.mode!==M)return;say(arr[i++]).then(function(r){if(r!==null)nx();});})();}
+function drawRafa(wait){
+  var M=S.mode,n=M.n,msg=n.msg;
+  var h='<div class="bub"><div class="eyebrow">Rafa · voice note</div>'+msg.lines.map(function(l,i){return '<div class="row" style="gap:8px;margin-top:6px"><button class="play" data-a="say" data-t="'+esc(l.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(l.pt)+'</span></div>';}).join('')+
+    (msg.q?'<div class="row" style="gap:8px;margin-top:8px"><button class="play" data-a="say" data-t="'+esc(msg.q.pt)+'" aria-label="Play">'+ICON.play+'</button><b class="grow">'+esc(msg.q.pt)+'</b></div>':'')+
+    '<button class="link tiny" data-a="rafaen">'+(M.en?'Hide English':'English')+'</button>'+(M.en?'<div class="small muted">'+msg.lines.map(function(l){return esc(l.en);}).join(' ')+(msg.q?' '+esc(msg.q.en):'')+'</div>':'')+
+    (msg.sources&&msg.sources.length?'<div class="tiny muted">Sources: '+msg.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title||s.url)+'</a>';}).join(', ')+'</div>':'')+'</div>';
+  n.turns.forEach(function(t){
+    h+='<div class="bub me">'+esc(t.said)+'</div>';
+    if(t.fixes&&t.fixes.length)h+='<div class="fix">✅ <b>'+esc(t.ok)+'</b><br>'+t.fixes.map(function(f){return '🔧 <s>'+esc(f.said)+'</s> → '+esc(f.ok)+(f.why?' · '+esc(f.why):'');}).join('<br>')+'</div>';
+    h+='<div class="bub"><div class="row" style="gap:8px"><button class="play" data-a="say" data-t="'+esc(t.reply.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow">'+esc(t.reply.pt)+'</span></div>'+(M.en?'<span class="en">'+esc(t.reply.en||'')+'</span>':'')+'</div>';
+  });
+  if(wait)h+='<div class="bub"><span class="spin"></span></div>';
+  $('#mbody').innerHTML=h;var b=$('.mbody');b.scrollTop=b.scrollHeight;
+}
+function sendRafa(){
+  var M=S.mode;if(!M||M.k!=='rafa'||M.busy)return;
+  var box=$('#ans'),said=(box.value||'').trim();if(!said){toast('Say or type your answer first.');return;}
+  if(!S.ai){toast('Claude isn\'t reachable in this view.');return;}
+  var secs=Math.round(clamp((Date.now()-M.t0)/1000,3,90));M.busy=true;box.value='';
+  var n=M.n;drawRafa(true);
+  ask(rafaPrompt(n.msg,n.turns,said,M.foc),'default').then(function(r){
+    if(S.mode!==M)return;if(!r||!r.pt)throw 0;
+    var fx=(r.fixes||[]).filter(function(f){return f&&realFix(f.said||said,f.ok)&&realFix(said,f.ok);});
+    n.turns.push({said:said,reply:{pt:r.pt,en:r.en||''},ok:r.ok||said,fixes:fx,ts:Date.now()});
+    fx.forEach(function(f){addMistake(f,'rafa');});
+    (r.used||[]).forEach(function(u){var c=M.foc[+u-1];if(c)creditCard(c.id);});saveSrs();
+    n.secs=(n.secs||0)+secs;n.synced=false;save('notes/'+n.date+'-rafa',n);
+    var d=theDay();d.rafa=1;bump({speakSecs:secs});
+    M.busy=false;M.t0=Date.now();drawRafa();say(r.pt);
+    if(n.turns.length>=3)setFoot('<button class="btn pri wide" data-a="close">Done</button>');
+  },function(e){if(S.mode!==M)return;M.busy=false;box.value=said;drawRafa();toast(e&&e.code==='rate_limited'?'Claude is busy. Send again in a moment.':'That didn\'t go through. Send again.');});
+}
+function creditCard(id){var t=today(),x=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[id]);x.ok=(x.ok||[]).slice();if(x.ok.indexOf(t)<0)x.ok.push(t);x.s=x.ok.length>=3?'beaten':'open';if(!x.d)x.d=addDays(t,1);S.srs[id]=x;}
+
+/* ---------- Diário ---------- */
+function diarioPrompt(){var p=S.plan&&S.plan.date===today()&&S.plan.diario;return p&&p.pt?p:{pt:'Como foi o seu dia hoje? Me conta em três frases.',en:'How was your day today? Tell me in three sentences.'};}
+function startDiario(){
+  var t=today(),p=diarioPrompt(),n=S.notes[t+'-diario'];
+  S.mode={k:'diario',p:p,t0:Date.now()};
+  var h='<div class="eyebrow">Tonight\'s prompt</div><div class="row"><button class="play" data-a="say" data-t="'+esc(p.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="prompt grow">'+esc(p.pt)+'</div></div><div class="small muted">'+esc(p.en)+'</div><p class="small muted">Three sentences about your real day, in the past tense (fui, foi, trabalhei, comi…). Then write them in your notepad too.</p>';
+  if(n&&n.ok)h+=diarioResult(n);
+  openMode('Diário',h,'<div class="row" style="gap:8px;align-items:stretch"><textarea id="ans" rows="5" lang="pt-BR" placeholder="Hoje eu…"></textarea>'+micHtml()+'</div><button class="btn pri wide" data-a="diariosend">'+(n&&n.ok?'Send another':'Send')+'</button><div class="tiny muted">'+esc(micTip())+'</div>');
+  dictBox=$('#ans');dictDone=null;focusAns();
+}
+function diarioResult(n){
+  return '<div class="card"><div class="eyebrow">You wrote</div><p class="small" style="margin:4px 0 10px">'+esc(n.said)+'</p><div class="eyebrow">✅ Natural version (say it aloud)</div><div class="row" style="gap:8px;margin-top:4px"><button class="play" data-a="say" data-t="'+esc(n.ok)+'" aria-label="Play">'+ICON.play+'</button><b class="grow">'+esc(n.ok)+'</b></div><div class="small muted" style="margin-top:4px">'+esc(n.en||'')+'</div>'+
+   ((n.fixes||[]).length?'<div class="eyebrow" style="margin-top:10px">🔧 Fixes</div>'+n.fixes.map(function(f){return '<div class="small"><s class="muted">'+esc(f.said)+'</s> → <b>'+esc(f.ok)+'</b><br><span class="muted">'+esc(f.why||'')+'</span></div>';}).join(''):'')+
+   (n.plus&&n.plus.pt?'<div class="eyebrow" style="margin-top:10px">➕ A phrase you were missing</div><div class="row" style="gap:8px"><button class="play" data-a="say" data-t="'+esc(n.plus.pt)+'" aria-label="Play">'+ICON.play+'</button><span class="grow"><b>'+esc(n.plus.pt)+'</b> · '+esc(n.plus.en||'')+'</span></div>':'')+'</div>';
+}
+function sendDiario(){
+  var M=S.mode;if(!M||M.k!=='diario'||M.busy)return;
+  var said=($('#ans').value||'').trim();if(!said){toast('Say or type your three sentences first.');return;}
+  if(!S.ai){toast('Claude isn\'t reachable in this view.');return;}
+  M.busy=true;var secs=Math.round(clamp((Date.now()-M.t0)/1000,10,300));
+  setFoot('<p class="muted"><span class="spin"></span> Correcting…</p>');
+  ask('George dictated his Portuguese diary for today, aiming for three sentences in the past tense about his real day. The prompt was: "'+M.p.pt+'".\nHis text: "'+said.replace(/"/g,"'")+'"\n'+ME+'\nHis words are DICTATED: no punctuation, capitals or accents, and that is never an error. Never mention or correct punctuation, capitals, accents or spelling.\n'+
+    'JSON only: {"ok":"his whole entry rewritten as natural spoken São Paulo Portuguese, keeping exactly his meaning","en":"English translation of ok","fixes":[up to 3 most important of {"said":"the wrong part as he said it","ok":"that whole sentence corrected","en":"its meaning","why":"the rule in 12 English words or fewer","type":"grammar|vocab|pronunciation"}],"plus":{"pt":"one useful phrase he was missing for what he wanted to say","en":"meaning"}}','default').then(function(r){
+    if(S.mode!==M)return;if(!r||!r.ok)throw 0;
+    var t=today(),fx=(r.fixes||[]).filter(function(f){return f&&realFix(f.said,f.ok);});
+    var n={date:t,kind:'diario',prompt:M.p,said:said,ok:r.ok,en:r.en||'',fixes:fx,plus:r.plus||null,secs:secs,ts:Date.now(),synced:false};
+    S.notes[t+'-diario']=n;save('notes/'+t+'-diario',n);
+    fx.forEach(function(f){addMistake(f,'diario');});
+    if(r.plus&&r.plus.pt)addMistake({ok:r.plus.pt,en:r.plus.en||'',said:'(missing)',why:'a phrase you needed in your diário',type:'vocab'},'diario');
+    saveSrs();var d=theDay();d.diario=1;bump({speakSecs:secs});
+    M.busy=false;M.t0=Date.now();
+    var mb=$('#mbody'),old=mb.querySelector('.card');if(old)old.remove();mb.insertAdjacentHTML('beforeend',diarioResult(n));
+    setFoot('<button class="btn pri wide" data-a="close">Done</button>');say(r.ok);
+  },function(){if(S.mode!==M)return;M.busy=false;startDiario();$('#ans').value=said;toast('That didn\'t go through. Send again.');});
+}
+
+/* ---------- a scene done live in Claude voice mode ---------- */
+function startVlog(id){
+  var s=sitById(id);
+  S.mode={k:'vlog',sit:s};
+  openMode('Log a voice-mode scene','<p class="small">Did the scene live in Claude voice mode? When you said "fim", Claude gave you a <b>📋 TREINO LOG</b>. Copy it, paste it below, and it counts here like any scene: minutes, score, win, and your mistakes go into your drills.</p>',
+    '<textarea id="ans" rows="8" placeholder="📋 TREINO LOG…"></textarea><button class="btn pri wide" data-a="vlogsend">Log it</button>');
+}
+function sendVlog(){
+  var M=S.mode;if(!M||M.k!=='vlog'||M.busy)return;var txt=($('#ans').value||'').trim();
+  if(txt.length<20){toast('Paste the whole log first.');return;}
+  if(!S.ai){toast('Claude isn\'t reachable in this view.');return;}
+  M.busy=true;setFoot('<p class="muted"><span class="spin"></span> Reading the log…</p>');
+  ask('Below is a log George pasted from a Claude voice-mode role-play. Situations (id: number title):\n'+S.sits.map(function(s){return s.id+': '+s.n+' '+s.title+' ('+s.en+')';}).join('\n')+
+    (M.sit?'\nHe opened this from situation "'+M.sit.id+'".':'')+'\nLOG:\n"""'+txt.slice(0,6000)+'"""\n'+
+    'Extract only what the log says. JSON only: {"sit":"situation id, or empty","mins":minutes as a number or 0,"score":0 to 10,"goalsDone":n,"goalsAll":n,"twist":true or false,"fixes":[{"said":"","ok":"whole sentence corrected","en":"","why":"","type":"grammar|vocab|pronunciation"}],"words":[{"pt":"","en":""}],"summary":"one English sentence"}','quick').then(function(r){
+    if(S.mode!==M)return;
+    var s=sitById(r.sit)||M.sit;if(!s)throw 0;
+    var t=today(),score=clamp(Math.round(+r.score||0),0,10),ga=+r.goalsAll||s.goals.length,gd=Math.min(+r.goalsDone||0,ga),pass=gd>=ga&&score>=7;
+    var st=Object.assign({tries:0,best:0},S.sitState[s.id]);st.tries++;st.best=Math.max(st.best||0,score);st.last=t;
+    if(pass){if(st.pass&&r.twist)st.pass2=st.pass2||t;else st.pass=st.pass||t;}
+    S.sitState[s.id]=st;save('me/sits',{s:S.sitState});
+    var fx=(r.fixes||[]).filter(function(f){return f&&f.ok&&realFix(f.said,f.ok);});fx.forEach(function(f){addMistake(f,'voice:'+s.id);});saveSrs();
+    var m=clamp(+r.mins||8,1,60),secs=Math.round(m*60*0.6);bump({speakSecs:secs,chats:1});
+    var id=t+'-v'+Date.now().toString(36);
+    save('sessions/'+id,{date:t,ts:Date.now(),kind:'voice',sit:s.id,char:s.char,twist:r.twist?'voice-mode twist':'',mins:m,speakSecs:secs,turns:0,score:score,pass:pass,goalsDone:gd,goalsAll:ga,fixes:fx,used:[],words:r.words||[],better:[],summary:r.summary||'',log:[],synced:false});
+    M.done=true;
+    setBody('<div class="row"><div class="grow"><div class="eyebrow">'+esc(s.title)+' · voice mode</div><div class="big num">'+score+'<span class="muted" style="font-size:24px"> / 10</span></div></div>'+(pass?'<span class="pill good">Won</span>':'<span class="pill warn">'+gd+' of '+ga+' goals</span>')+'</div><p class="small muted">Logged '+Math.round(secs/60)+' spoken minutes (60% of the scene) and '+fx.length+' fixes into your drills.</p>');
+    setFoot('<button class="btn pri wide" data-a="close">Done</button>');
+  },function(){if(S.mode!==M)return;M.busy=false;setFoot('<textarea id="ans" rows="8">'+esc(txt)+'</textarea><button class="btn pri wide" data-a="vlogsend">Try again</button>');toast('Couldn\'t read that log. Check it\'s the whole thing.');});
+}
+
 /* ---------- actions ---------- */
 function next(){
   var M=S.mode||{},k=M.k;
@@ -701,6 +957,19 @@ function next(){
   S.chain=false;render();
 }
 var A={
+  ep:function(d){S.chain=false;startEp(d.n);},
+  epdone:function(d){var n=+d.n;S.epsDone[n]=today();save('me/eps',{d:S.epsDone});var x=theDay();x.ep=Math.max(x.ep||0,n);S.days[x.date]=x;save('days/'+x.date,x);setFoot(epFoot(S.mode.e));toast('Marked as listened.');},
+  epplay:function(){if(epPlayer.paused){stopAudio();var p=epPlayer.play();if(p&&p.catch)p.catch(function(){});}else epPlayer.pause();},
+  epback:function(){epPlayer.currentTime=Math.max(0,epPlayer.currentTime-10);},
+  eprate:function(d){S.prefs.epRate=+d.v;epPlayer.playbackRate=+d.v;save('me/prefs',S.prefs);drawPlayer();},
+  eptog:function(d){var M=S.mode;M[d.v]=!M[d.v];drawEp();},
+  rafa:function(){S.chain=false;startRafa();},
+  rafasend:function(){sendRafa();},
+  rafaen:function(){S.mode.en=!S.mode.en;drawRafa();},
+  diario:function(){S.chain=false;startDiario();},
+  diariosend:function(){sendDiario();},
+  vlog:function(d){startVlog(d.id);},
+  vlogsend:function(){sendVlog();},
   tab:function(d){S.view=d.v;render();window.scrollTo(0,0);},
   session:function(){S.chain=true;startDrill();},
   drill:function(){S.chain=false;startDrill();},
@@ -741,6 +1010,7 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Enter'&&!e.shiftKey&&e.target&&e.target.id==='ans'&&S.mode){
     if(S.mode.k==='drill'&&S.mode.cur&&!S.mode.cur.busy){e.preventDefault();checkCard(false);}
     else if(S.mode.k==='chat'){e.preventDefault();sendChat();}
+    else if(S.mode.k==='rafa'){e.preventDefault();sendRafa();}
   }
 });
 window.__treino={S:S,say:say,norm:norm,sim:sim,gradeCard:gradeCard,fnv:fnv,buildQueue:buildQueue};

@@ -29,28 +29,31 @@ FORCE = os.getenv("FORCE") == "1" or "--force" in sys.argv
 DAY1 = datetime(2026, 11, 1, 6, tzinfo=timezone.utc)  # Episode 1 date
 
 VOICES = {
+    # Women: no big pitch shifts (they made Bia, Ana, the barista and the narrator sound robotic).
+    # Three real voices instead: Francisca, Thalita, Thalita Multilingual (falls back to Thalita).
     "george":   ("pt-BR-AntonioNeural",   "+0Hz"),
     "gabi":     ("pt-BR-FranciscaNeural", "+0Hz"),
-    "mãe":      ("pt-BR-ThalitaNeural",   "-4Hz"),
-    "mae":      ("pt-BR-ThalitaNeural",   "-4Hz"),
-    "bia":      ("pt-BR-FranciscaNeural", "+12Hz"),
+    "mãe":      ("pt-BR-ThalitaNeural",   "-2Hz"),
+    "mae":      ("pt-BR-ThalitaNeural",   "-2Hz"),
+    "bia":      ("pt-BR-ThalitaMultilingualNeural", "+0Hz"),
     "seu zé":   ("pt-BR-AntonioNeural",   "-16Hz"),
     "seu ze":   ("pt-BR-AntonioNeural",   "-16Hz"),
-    "narrador": ("pt-BR-ThalitaNeural",   "+10Hz"),
-    "ana":      ("pt-BR-FranciscaNeural", "-10Hz"),
+    "narrador": ("pt-BR-ThalitaMultilingualNeural", "-2Hz"),
+    "ana":      ("pt-BR-FranciscaNeural", "+3Hz"),
     "rafa":     ("pt-BR-AntonioNeural",   "-8Hz"),
     "garçom":   ("pt-BR-AntonioNeural",   "-14Hz"),
     "garcom":   ("pt-BR-AntonioNeural",   "-14Hz"),
     "torcedor": ("pt-BR-AntonioNeural",   "+8Hz"),
-    "barista":  ("pt-BR-ThalitaNeural",   "+18Hz"),
-    "atendente": ("pt-BR-ThalitaNeural",  "+4Hz"),
+    "barista":  ("pt-BR-ThalitaNeural",   "+3Hz"),
+    "atendente": ("pt-BR-ThalitaMultilingualNeural", "+2Hz"),
     "vendedor": ("pt-BR-AntonioNeural",   "-4Hz"),
     "motorista": ("pt-BR-AntonioNeural",  "-20Hz"),
     "passageiro": ("pt-BR-AntonioNeural", "+14Hz"),
-    "farmacêutico": ("pt-BR-FranciscaNeural", "-16Hz"),
+    "farmacêutico": ("pt-BR-FranciscaNeural", "-4Hz"),
+    "farmaceutico": ("pt-BR-FranciscaNeural", "-4Hz"),
     "estranho": ("pt-BR-AntonioNeural",   "+4Hz"),
 }
-EXTRA = [("pt-BR-AntonioNeural", "-8Hz"), ("pt-BR-FranciscaNeural", "-10Hz"), ("pt-BR-ThalitaNeural", "+16Hz")]
+EXTRA = [("pt-BR-AntonioNeural", "-8Hz"), ("pt-BR-FranciscaNeural", "-3Hz"), ("pt-BR-ThalitaMultilingualNeural", "+0Hz")]
 EN_VOICE = ("en-GB-RyanNeural", "+0Hz")
 _extra = {}
 
@@ -100,8 +103,10 @@ def tts_path(text, voice, pitch="+0Hz", r="+0%"):
                 return path
         except Exception as e:
             last = e
-        if attempt == 1 and v.startswith("pt-BR") and v not in ("pt-BR-FranciscaNeural", "pt-BR-AntonioNeural"):
-            v = "pt-BR-FranciscaNeural"
+        if attempt == 1 and v == "pt-BR-ThalitaMultilingualNeural":
+            v = "pt-BR-ThalitaNeural"
+        elif attempt == 2 and v.startswith("pt-BR") and v not in ("pt-BR-FranciscaNeural", "pt-BR-AntonioNeural"):
+            v, pitch = "pt-BR-FranciscaNeural", "+0Hz"
         time.sleep(2 + attempt * 2)
     raise RuntimeError(f"TTS failed for {text!r} ({voice}): {last}")
 

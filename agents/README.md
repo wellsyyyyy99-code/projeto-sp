@@ -18,9 +18,10 @@ Three scheduled agents keep it running. Each one clones this repo and follows it
 | Producer | Sunday 06:10 | `agents/producer.md` | write the week's two packs around his weak spots, push, check the build |
 | Examiner | Sunday 07:20 | `agents/examiner.md` | set the Sunday oral exam, write the weekly report |
 
-Older scheduled tasks that still run in George's Projeto SP thread: Rafa's morning voice note (07:26),
-Diário before bed (21:26), Weekly bonus audio (Sunday 08:43). They read "Focus now" from the sheet,
-which the Coach keeps fed.
+Everything George does happens in the Treino app: Rafa's morning voice note, the day's episode with its transcript,
+the speaking session, the Diário, the Sunday exam and the Tracker. The old chat-thread tasks (Rafa's morning voice
+note, Diário before bed, Weekly bonus audio) were paused on 15 Nov 2026: the Coach now writes Rafa's note and the
+Diário prompt, and the Producer makes the weekly bonus audio.
 
 ## Addresses
 
@@ -59,8 +60,12 @@ the agent files in `agents/` and the prompt that started you.
 | `me/srs` | app only | `{c: {cardId: {d: due date, i: interval, r: streak, l: times wrong, n: times seen, ok: [dates right], s: "open" or "beaten", t: last seen, xl}}}` |
 | `me/sits` | app only | `{s: {sitId: {tries, best, last, pass: date, pass2: date}}}` |
 | `me/prefs` | app only | `{listenRate}` |
-| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, synced}` |
-| `sessions/{id}` | app; Coach merges `synced` | one role-play: `{date, sit, char, twist, mins, speakSecs, turns, score, pass, goalsDone, goalsAll, fixes:[{said, ok, en, why, type}], used, words, better, summary, log, synced}` |
+| `days/{YYYY-MM-DD}` | app; Coach merges `synced` | `{date, speakSecs, listenSecs, drills, drillOk, chats, listens, listenOk, exam, ep, rafa, diario, synced}` |
+| `sessions/{id}` | app; Coach merges `synced` | one role-play (`kind` "chat", or "voice" when logged from Claude voice mode): `{date, sit, char, twist, mins, speakSecs, turns, score, pass, goalsDone, goalsAll, fixes:[{said, ok, en, why, type}], used, words, better, summary, log, synced}` |
+| `me/eps` | app only | `{d: {"<episode number>": "<date marked listened>"}}` |
+| `sys/history` | Coach | `{days: {"YYYY-MM-DD": {min, ep}}}` from the sheet, for the app's Tracker |
+| `notes/{YYYY-MM-DD}-rafa` | app; Coach merges `synced` | `{date, kind: "rafa", msg, turns: [{said, reply: {pt, en}, ok, fixes}], secs, synced}` |
+| `notes/{YYYY-MM-DD}-diario` | app; Coach merges `synced` | `{date, kind: "diario", prompt, said, ok, en, fixes, plus: {pt, en}, secs, synced}` |
 | `exams/{YYYY-MM-DD}` | Examiner writes `theme` and `tasks`; app writes `answers` and `result`; Coach merges `synced` | `result = {dims:{comunicacao, fluidez, precisao, vocabulario, registro}, total (of 25), level, english, strengths, fixes, focus}` |
 
 Never write `me/*`. Never `set` a document the app writes; `merge` only the fields listed for you.
@@ -89,7 +94,8 @@ Never write `me/*`. Never `set` a document the app writes; `merge` only the fiel
 
 - `'🧠 Mistakes'!A11:I` : A correct version, B what he said, C why, D type, E times wrong, F correct uses,
   G last seen, H status (a formula: **never write H**), I first seen. `A3:C7` is "Focus now" (formulas: never write).
-- `'📅 Tracker'` : row = day number + 5. G = "Speak (min)", J = notes. E and F are his own tick boxes: never write them.
+- `'📅 Tracker'` : row = day number + 5. E = episode listened (the Coach ticks it from `me/eps`), F = Anki (his own: never write it),
+  G = "Speak (min)", J = notes.
 - `'💬 Sessions'` : A date, B minutes, C score /10, D number of mistakes, F new words, G topic. **Never write E or H.**
 - `'Boss Fights'` : A date like `15 Nov`, F "Claude's score /10", G notes.
 
@@ -99,10 +105,12 @@ The app loads `data/*.json` and `b/*` (audio bundles) from its own artifact. Aft
 them, bring the artifact up to date:
 
 1. `git pull` so you have the build's output.
-2. `python3 tools/publish_list.py` prints `{"files": [...], "remove": [...]}`: the files that differ from what
-   was last published (it compares against `treino/published.json`). Both empty means nothing to do.
-3. Call `get_artifact` for the live version, then `publish_files` with slug, `base_version`, `mode: "patch"`,
-   that `files` array, and `remove` if it is not empty. At most 256 files per call.
+2. `python3 tools/publish_list.py` prints `{"batches": [[...], ...], "remove": [...]}`: the files that differ from
+   what was last published (it compares against `treino/published.json`), split into batches that fit one call.
+   No batches and an empty `remove` means nothing to do. It includes full audio only for the episodes from 3 days
+   before today to 3 days after, and lists older ones under `remove`.
+3. Call `get_artifact` for the live version, then one `publish_files` per batch (slug, `base_version` from the
+   previous result, `mode: "patch"`, the batch as `files`; add `remove` to the first call if it is not empty).
 4. `python3 tools/publish_list.py --mark`, commit `treino/published.json`, push.
 
 ## Rules for everything written for George

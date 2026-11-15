@@ -6,12 +6,38 @@ Read `agents/README.md` first: it has the addresses, the tools and the data layo
 
 Work through the steps in order. A step that fails must not stop the next one.
 
-## 1. Bring the app's files up to date
+## 1. Write Rafa's note and the Diário prompt, then bring the app up to date
 
-Run the "publish sync" from the README. This picks up anything the Producer or yesterday's build added
-(new episodes, new audio).
+George's morning voice note from Rafa and his evening Diário prompt now live in the Treino app (the old
+chat-thread versions are paused). You write both every morning, before anything else, so their audio can be built.
+
+1. Read the sheet's Focus now (`'🧠 Mistakes'!A3:C7`) and today's episode (number = day number) from
+   `packs/pack-*.json`, or from `curriculum/episodes.json` if its pack is not written yet.
+2. **Rafa's note:** a short WhatsApp-style voice note from Rafa (George's friend in São Paulo, a Corinthians fan who
+   calls him "sofredor" about Spurs). 3 to 5 short sentences of spoken São Paulo Portuguese at today's episode level,
+   recycling that episode's chunks, in story (Rafa, Ana, the café, Spurs, the trip in December). Then ONE question
+   whose natural answer uses one of his Focus now items (never say so).
+   **Mondays:** instead, the weekend recap. Look up the real results with WebSearch (Tottenham's weekend match;
+   the F1 race if there was one) and tell them in 5 to 7 simple sentences, then a question that targets a Focus item.
+   Never invent a result: if you can't find one, leave it out. Keep the links for `sources`.
+3. **Diário prompt:** one line in Portuguese tied to today's episode, asking for three sentences about his real day
+   in the past tense (for example "Hoje eu fui… / Hoje eu tive…"), with its English.
+4. Write `packs/treino-daily.json` (indent 1, UTF-8), keeping only today:
+   `{"about": "Rafa's note and the Diário prompt for the Treino app", "days": [{"date": "<today>",
+   "rafa": {"lines": [{"pt", "en"}], "q": {"pt", "en"}, "sources": [{"title", "url"}]}, "diario": {"pt", "en"}}]}`.
+   Commit and push it straight away (fetch and rebase first). The push starts the build, which records the audio
+   (usually 3 to 6 minutes; much longer on Sundays when new packs are building). Carry on with steps 2 to 5 while it runs.
+5. Put the same `rafa` and `diario` objects into `sys/plan` in step 6.
+
+Before step 6, wait for the build of your commit to finish (`gh run list -R wellsyyyyy99-code/projeto-sp -L 3`,
+every minute, up to 25 minutes), `git pull`, then run the "publish sync" from the README. That also brings over
+anything else the build made (new episodes, new audio, the window of full episodes). If the build hasn't finished
+in time, run the publish sync anyway: the app plays Rafa's note in the phone's voice until the audio arrives.
 
 ## 2. Read the record
+
+Also `db_query` `notes` where `synced == false` (George's replies to Rafa and his Diário entries in the app),
+and `db_get` `me/eps` (episodes he marked as listened: `{d: {"<episode number>": "<date>"}}`).
 
 - App: `db_get` `me/srs`, `me/sits`, `sys/plan`; `db_list` `cards` (limit 500);
   `db_query` `days` ordered by `-date`, limit 10; `db_query` `sessions` where `synced == false`;
@@ -21,6 +47,8 @@ Run the "publish sync" from the README. This picks up anything the Producer or y
 Work out: today's date (London), today's day number, yesterday's date.
 
 ## 3. Sheet ⇄ app: mistakes
+
+Cards whose `src` is `rafa`, `diario` or starts with `voice:` are app mistakes like `chat` ones: give them sheet rows.
 
 Match each sheet row to a card: the card's `sheet` field equals column A exactly, or failing that the card's
 `pt` and column A are the same sentence ignoring case, accents and punctuation.
@@ -53,6 +81,13 @@ If a row is ambiguous, leave it alone.
 - Each of the last 7 `days` documents where `round(speakSecs / 60)` is more than `synced` (0 if absent):
   read that day's Tracker row (row = its day number + 5), add the difference to column G, and `merge`
   `{synced: round(speakSecs / 60)}` into the day document.
+- Each unsynced `notes` document: append its fix (the first in `turns[*].fixes` for Rafa, `fixes` for the Diário)
+  to that day's Tracker column J, then `merge` `{synced: true}`. Its minutes are already in that day's `days`
+  document, so do not add them to column G again.
+- Episodes: for each episode in `me/eps`, set that day's Tracker column E to TRUE if it isn't already.
+  Never write column F (Anki) or any other tick box.
+- History for the app's Tracker: `set` `sys/history` to `{"days": {"<YYYY-MM-DD>": {"min": <Tracker column G as a number>,
+  "ep": <column E is TRUE>}}}` for every day up to yesterday. (The app takes the larger of this and its own minutes.)
 - An `exams` document with a `result` and no `synced`: in `'Boss Fights'`, find the row for that date and write
   F = `result.total / 2.5` rounded to one decimal, G = `result.focus`. Then `merge` `{synced: true}`.
 
@@ -85,7 +120,9 @@ audio: rewrite `packs/treino-cards.json` as `{"about": …, "cards": [every card
 {"date": "<today>", "day": <day number>,
  "note": "<up to 220 characters>",
  "focus": ["<card id>", "... 5 ids"],
- "sit": "<situation id>"}
+ "sit": "<situation id>",
+ "rafa": {"lines": [{"pt": "", "en": ""}], "q": {"pt": "", "en": ""}, "sources": []},
+ "diario": {"pt": "", "en": ""}}
 ```
 
 - `focus`: the 5 open mistake or pattern cards he most needs: most times wrong first, then least recently seen.
