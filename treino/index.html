@@ -230,6 +230,7 @@ function phoneVoice(who){
   var want=MALE.test(who||'');
   return vs.slice().sort(function(a,b){return (good(b)+(male(b)===want?1:0))-(good(a)+(male(a)===want?1:0));})[0];
 }
+function hasPtVoice(){try{return speechSynthesis.getVoices().some(function(v){return /^pt[-_]BR/i.test(v.lang);});}catch(e){return false;}}
 function hasGoodVoice(){try{var v=phoneVoice('');return !!v&&/premium|enhanced|aprimorad|melhorad|neural|natural|online|google/i.test(v.name);}catch(e){return false;}}
 function synth(pt,rate,who){return new Promise(function(res,rej){try{
   var u=new SpeechSynthesisUtterance(pt);u.lang='pt-BR';
@@ -239,7 +240,8 @@ function hasVoice(){return Object.keys(S.clips).length>0||!!S.tts||('speechSynth
 function say(pt,rate,who){
   rate=clamp(rate||baseRate(),0.7,1.5);stopAudio();
   var id=fnv(pt),tok=++sayTok,chain=S.clips[id]?playClip(id,rate,tok):Promise.reject(0);
-  return chain.catch(function(){if(!S.tts)throw 0;return S.tts.speak(pt,{language:'pt-BR',rate:rate}).then(function(){return 'tts';});})
+  return chain.catch(function(){if(!('speechSynthesis' in window)||!hasGoodVoice())throw 0;return synth(pt,rate,who);})
+    .catch(function(){if(!S.tts)throw 0;return S.tts.speak(pt,{language:'pt-BR',voice:MALE.test(who||'')?'rounded':'airy',rate:rate}).then(function(){return 'tts';});})
     .catch(function(){if(!('speechSynthesis' in window))throw 0;return synth(pt,rate,who);})
     .catch(function(){return null;});
 }
@@ -304,11 +306,13 @@ function examPrompt(items){
 }
 
 /* ---------- cards ---------- */
+function hidden(c){var st=S.srs[c.id];return (st&&st.s==='removed')||(c.k==='mistake'&&c.said&&c.said.charAt(0)!=='('&&!realFix(c.said,c.pt));}
 function indexCards(){S.byId={};S.cards.forEach(function(c){S.byId[c.id]=c;});}
-function isMistake(c){return c.k==='mistake'||c.k==='pattern';}
+function isMistake(c){return (c.k==='mistake'||c.k==='pattern')&&!hidden(c);}
 function okCount(c){var st=S.srs[c.id];return st&&st.ok?st.ok.length:0;}
 function addMistake(f,src){
   if(!f||!f.ok)return null;
+  if(f.said&&f.said.charAt(0)!=='('&&!realFix(f.said,f.ok))return null; /* only punctuation, capitals or accents differ */
   var id='m'+fnv(norm(f.ok)),c=S.byId[id]||S.cards.filter(function(x){return isMistake(x)&&norm(x.pt)===norm(f.ok);})[0],t=today();
   if(c){var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.l++;st.r=0;st.d=t;st.m=t;st.t=t;S.srs[c.id]=st;return c;}
   c={id:id,k:'mistake',pt:f.ok,en:f.en||'',said:f.said||'',why:f.why||'',type:f.type||'grammar',added:t,src:src};
@@ -321,7 +325,7 @@ function focusCards(){
 }
 function buildQueue(){
   var t=today(),dn=dayNum(),foc={};focusCards().forEach(function(c){foc[c.id]=1;});
-  var avail=S.cards.filter(function(c){return c.pt&&c.en&&(!c.ep||c.ep<dn||(c.ep===dn&&epDone(dn)));}); /* today's episode cards unlock once it's listened to */
+  var avail=S.cards.filter(function(c){return !hidden(c)&&c.pt&&c.en&&(!c.ep||c.ep<dn||(c.ep===dn&&epDone(dn)));}); /* today's episode cards unlock once it's listened to */
   var due=avail.filter(function(c){var st=S.srs[c.id];return st&&st.n>0&&st.d<=t;});
   due.sort(function(a,b){var x=S.srs[a.id],y=S.srs[b.id];return (foc[b.id]||0)-(foc[a.id]||0)||(y.l||0)-(x.l||0)||(x.d<y.d?-1:x.d>y.d?1:0);});
   var fresh=avail.filter(function(c){var st=S.srs[c.id];return !st||!st.n;});
@@ -360,7 +364,7 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
     var st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},S.srs[c.id]);st.ok=(st.ok||[]).slice();
     (c.xok||[]).forEach(function(d){if(st.ok.indexOf(d)<0){st.ok.push(d);ch=true;}});
     if((c.xl||0)>(st.xl||0)){st.l+=(c.xl-(st.xl||0));st.xl=c.xl;st.d=t;ch=true;}
-    st.s=st.ok.length>=3?'beaten':'open';if(!st.d)st.d=t;S.srs[c.id]=st;
+    if(st.s==='removed')return;st.s=st.ok.length>=3?'beaten':'open';if(!st.d)st.d=t;S.srs[c.id]=st;
   });
   if(ch)saveSrs();
 }
@@ -580,7 +584,7 @@ function showBack(){
   h+='</dl>';h=h.replace('<dl class="kv"></dl>','');h+='<p class="small muted">'+(c.mode==='open'?'Be honest: did you answer in full sentences, without stopping for long?':cur.mode==='listen'?'Did you understand all of it the first time you heard it? Say it along with the audio before you rate.':'Say it again with the audio, then be honest: did you get the whole sentence right?')+'</p>';
   setBody(h);
   var b=function(v,lab,cls){return '<button class="btn grow'+(cls?' '+cls:'')+'" data-a="selfrate" data-v="'+v+'" style="flex-direction:column;display:flex;align-items:center;padding:8px 4px"><span>'+lab+'</span><span class="tiny muted" style="font-weight:400">'+nextIn(c,v)+'</span></button>';};
-  setFoot('<div class="row" style="gap:6px">'+b('wrong','Again')+b('hard','Hard')+b('right','Good','pri')+b('easy','Easy')+'</div>');
+  setFoot('<div class="row" style="gap:6px">'+b('wrong','Again')+b('hard','Hard')+b('right','Good','pri')+b('easy','Easy')+'</div><button class="link tiny" data-a="rmcard" style="align-self:center">This card is wrong or not about me: remove it</button>');
   if(c.mode!=='open')say(c.pt,0,cur.mode==='listen'?(c.who||''):'George');
 }
 function rateSelf(v){
@@ -722,7 +726,7 @@ function chatDone(r){
   if(added.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">Added to your drills</div>'+M.fixes.map(function(f){return '<div class="card" style="padding:8px 12px;margin-bottom:6px"><s class="muted">'+esc(f.said)+'</s><br><b>'+esc(f.ok)+'</b><br><span class="small muted">'+esc(f.why||'')+'</span></div>';}).join('')+'</div>';
   if(r.better&&r.better.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">What you were reaching for</div>'+r.better.map(function(b){return '<div class="row" style="margin-bottom:6px"><button class="play" data-a="say" data-t="'+esc(b.pt)+'" aria-label="Play">'+ICON.play+'</button><div class="grow"><b>'+esc(b.pt)+'</b><br><span class="small muted">'+esc(b.en)+'</span></div></div>';}).join('')+'</div>';
   if(r.words&&r.words.length)h+='<div><div class="eyebrow" style="margin-bottom:6px">New words you heard</div><div class="chips">'+r.words.map(function(w){return '<span class="chip"><b>'+esc(w.pt)+'</b> '+esc(w.en)+'</span>';}).join('')+'</div></div>';
-  (r.better||[]).forEach(function(b){if(b&&b.pt&&b.en)addMistake({ok:b.pt,en:b.en,said:'(couldn\'t say it)',why:'you reached for this in '+s.en.toLowerCase(),type:'vocab'},'chat:'+s.id);});saveSrs();
+  (r.better||[]).forEach(function(b){if(b&&b.pt&&b.en&&!/engenheir|advogad|m[eé]dic|professor/i.test(b.pt))addMistake({ok:b.pt,en:b.en,said:'(couldn\'t say it)',why:'you reached for this in '+s.en.toLowerCase(),type:'vocab'},'chat:'+s.id);});saveSrs();
   setBody(h);setFoot('<button class="btn pri wide" data-a="next">'+(S.chain?'Round 3: Ouvido':'Done')+'</button><button class="link" data-a="chatgo" data-id="'+s.id+'">Run it again</button>');
 }
 
@@ -1088,6 +1092,7 @@ function next(){
   S.chain=false;render();
 }
 var A={
+  rmcard:function(){var M=S.mode,cur=M&&M.cur;if(!cur)return;var c=cur.c;var st=Object.assign({},S.srs[c.id]||{});st.s='removed';st.t=today();st.n=(st.n||0)+1;S.srs[c.id]=st;saveSrs();M.cur=null;M.q=M.q.filter(function(x){return x.id!==c.id;});toast('Removed. It won\'t come back.');showCard();},
   bonus:function(d){S.chain=false;startBonus(d.id);},
   bonusshow:function(d){S.mode.shown[+d.i]=1;drawBonus();},
   bonusdone:function(){var x=theDay();x.bonus=1;S.days[x.date]=x;save('days/'+x.date,x);setFoot('<p class="small muted" style="text-align:center">Listened ✓</p>');toast('Marked as listened.');},

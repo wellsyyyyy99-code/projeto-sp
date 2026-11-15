@@ -97,6 +97,7 @@ was imported into `me/srs` once by the app on 15 Nov 2026 and is not in the repo
 - `xl` and `xok` carry credit earned outside the app (in Rafa's thread): `xl` = times wrong there,
   `xok` = distinct dates he used it correctly there. The app folds them into `me/srs` when it opens.
 - A mistake is beaten after it is right on 3 different days.
+- `me/srs.c[id].s == "removed"` means George removed that card in the app as wrong or not about him. Ignore it everywhere: no sheet row, no focus, no audio.
 
 ## The sheet
 
