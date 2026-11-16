@@ -1,4 +1,16 @@
 {
+ "id": "speaking-sobre-mim",
+ "title": "Sobre mim",
+ "intro": "Sobre mim. You'll hear the question, then the English. Say your answer in Portuguese, out loud. Then you'll hear it twice: repeat it both times.",
+ "topics": {
+  "sobre-mim": "About me"
+ },
+ "tracks": [
+  [
+   "A",
+   "sobre-mim"
+  ]
+ ],
  "about": "Sobre mim: George's own answers to the questions everyone will ask him in Brazil. Drilled first among new cards.",
  "cards": [
   {
