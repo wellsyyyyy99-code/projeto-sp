@@ -173,7 +173,7 @@ function gradeCard(st,res,day){
 }
 
 /* ---------- state ---------- */
-var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,newPerDay:10},
+var S={cfg:{start:'2026-11-01',flight:'2026-12-17',dailyMin:20,studyMin:45,newPerDay:10},
   cards:[],byId:{},eps:[],sits:[],clips:{},bundles:[],meta:{},epsDone:{},hist:{},notes:{},bonus:[],sessions:[],report:null,srs:{},sitState:{},plan:null,day:null,days:{},exams:{},prefs:{listenRate:0.9,auto:true,epRate:1,drillMode:'say'},
   db:null,ai:null,tts:null,dict:null,view:'hoje',chain:false,ready:false,dbState:'wait',mode:null};
 var LS={get:function(k){try{return JSON.parse(localStorage.getItem('treino:'+k));}catch(e){return null;}},
@@ -420,7 +420,7 @@ function boot(){
 /* ---------- screens ---------- */
 function toast(msg){var o=$('.toast');if(o)o.remove();var d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=msg;document.body.appendChild(d);setTimeout(function(){d.remove();},4200);}
 function mins(s){return Math.round((s||0)/60);}
-function streak(){var n=0,d=today();if(dayMin(d)<10)d=addDays(d,-1);while(dayMin(d)>=10){n++;d=addDays(d,-1);}return n;}
+function streak(){var n=0,d=today();if(studyMin(d)<10)d=addDays(d,-1);while(studyMin(d)>=10){n++;d=addDays(d,-1);}return n;}
 function syncLine(){
   var m={wait:'Loading your saved progress…',slow:'Still trying to reach your saved progress. What you do now is kept on this phone.',ok:'',err:'Could not save to your account just now. Progress is kept on this phone and will sync next time.',none:'Not signed in here, so progress stays on this phone only.'}[S.dbState];
   return m?'<p class="tiny muted">'+esc(m)+'</p>':'';
@@ -430,11 +430,11 @@ function render(){
   $('#app').innerHTML=S.view==='sits'?viewSits():S.view==='prog'?viewTracker():S.view==='eps'?viewEps():viewHoje();
 }
 function viewHoje(){
-  var d=theDay(),m=mins(d.speakSecs),goal=S.cfg.dailyMin,sit=todaySit(),q=S.ready?dueCount():0,foc=S.ready?focusCards():[];
+  var d=theDay(),m=studyMin(today()),goal=S.cfg.studyMin||45,sit=todaySit(),q=S.ready?dueCount():0,foc=S.ready?focusCards():[];
   var isSun=new Date(today()+'T12:00:00').getDay()===0,ex=S.exams[today()],exDone=ex&&ex.result,hr=new Date().getHours(),dn=dayNum();
   var note=S.plan&&S.plan.date===today()&&S.plan.note;
   var h='<header class="top"><h1 class="disp">Treino</h1><div class="meta"><b class="num">'+daysLeft()+' days</b>to São Paulo · day '+dn+' of 44</div></header>';
-  h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Spoken today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div><div class="small muted" style="margin-top:8px">Study today: <b class="num" style="color:var(--ink)">'+studyMin(today())+' min</b>'+CATS.map(function(c){var v=Math.round((d[c.k]||0)/60);return v?' · '+c.lab.toLowerCase()+' '+v:'';}).join('')+'</div></section>';
+  h+='<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Study today</div><div class="row" style="align-items:baseline;gap:6px"><span class="big num">'+m+'</span><span class="muted">of '+goal+' min</span></div></div><div style="text-align:right"><div class="eyebrow">Streak</div><div class="disp num" style="font-size:32px">'+streak()+'</div></div></div><div class="meter'+(m>=goal?' done':'')+'" style="margin-top:10px" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+Math.min(m,goal)+'"><i style="width:'+Math.min(100,m/goal*100)+'%"></i></div>'+(function(){var parts=CATS.map(function(c){var v=Math.round((d[c.k]||0)/60);return v?c.lab+' '+v:'';}).filter(Boolean);return parts.length?'<div class="small muted" style="margin-top:8px">'+parts.join(' · ')+' min</div>':'';})()+'</section>';
   if(note)h+='<p class="note"><span class="eyebrow">Coach</span><br>'+esc(note)+'</p>';
   h+='<button class="link" data-a="guide" style="align-self:flex-start">How it works, and voice mode phrases</button>';
   if(!S.ready)return h+'<p class="muted"><span class="spin"></span> Loading today…</p>';
@@ -1159,7 +1159,7 @@ function startGuide(){
     '<li><b>Round 3 · Ouvido</b>: 10 lines, no text, pick the meaning.</li>'+
     '<li><b>Round 2 · Conversa</b> (evening, out loud): in Claude voice mode, see below.</li>'+
     '<li><b>Diário</b> (night): dictate 3 sentences about your day, then say the corrected version aloud.</li></ol>'+
-    '<p class="small muted" style="margin:8px 0 0">Target: 20 minutes spoken. The day resets at 03:00.</p>')+
+    '<p class="small muted" style="margin:8px 0 0">Target: 45 minutes of study a day; everything in the app counts. The day resets at 03:00.</p>')+
   sec('Talking with Claude in voice mode',
     '<ol class="small" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">'+
     '<li>Open the Claude app and start a <b>new chat</b>.</li>'+
