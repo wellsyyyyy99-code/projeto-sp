@@ -158,14 +158,22 @@ function sim(a,b){
 
 /* ---------- spaced schedule: 1, 2, 4, 7, 12 days; beaten after 3 correct days ---------- */
 var LADDER=[1,2,4,7,12,20,30];
+/* Spread reviews: an interval of 3+ days lands on the least busy day within about ±15%, so cards don't all come back together. */
+function dueLoad(){var cnt={},id,x;for(id in S.srs){x=S.srs[id];if(x&&x.s!=='removed'&&x.d)cnt[x.d]=(cnt[x.d]||0)+1;}return cnt;}
+function spreadDay(day,iv,seed,cnt){
+  if(iv<3)return addDays(day,iv);
+  cnt=cnt||dueLoad();var w=Math.max(1,Math.round(iv*0.15)),best=null,bc=1e9,k,dd,c;
+  for(k=-w;k<=w;k++){dd=addDays(day,iv+k);c=(cnt[dd]||0)+Math.abs(k)*0.6+(parseInt(fnv(seed+'|'+dd),16)%100)/1000;if(c<bc){bc=c;best=dd;}}
+  return best;
+}
 function gradeCard(st,res,day){
   st=Object.assign({r:0,i:0,l:0,n:0,ok:[]},st||{});st.ok=(st.ok||[]).slice();
   if(!st.f)st.f=day;st.n++;st.t=day;
   if(res==='right'||res==='easy'){
     if(st.m===day){st.d=addDays(day,1);}
-    else{var step=res==='easy'?Math.min(st.r+1,LADDER.length-1):Math.min(st.r,LADDER.length-1);st.i=LADDER[step];st.r=step+1;st.d=addDays(day,st.i);if(st.ok.indexOf(day)<0)st.ok.push(day);}
+    else{var step=res==='easy'?Math.min(st.r+1,LADDER.length-1):Math.min(st.r,LADDER.length-1);st.i=LADDER[step];st.r=step+1;st.d=spreadDay(day,st.i,(st.f||'')+'|'+st.n);st.i=diffDays(day,st.d);if(st.ok.indexOf(day)<0)st.ok.push(day);}
   }else if(res==='hard'){
-    st.i=st.m===day?1:Math.max(1,LADDER[Math.max(st.r-1,0)]);st.d=addDays(day,st.i);
+    st.i=st.m===day?1:Math.max(1,LADDER[Math.max(st.r-1,0)]);st.d=spreadDay(day,st.i,(st.f||'')+'|'+st.n);st.i=diffDays(day,st.d);
   }else{st.m=day;st.r=0;st.i=0;st.d=day;if(res==='wrong')st.l++;}
   var last=addDays(S.cfg.flight,-5);if(st.d>last&&day<last)st.d=addDays(last,-(parseInt(fnv((st.f||'')+'|'+st.n+'|'+st.l),16)%9)); /* one more go before the flight, spread over the last 9 days */
   st.s=st.ok.length>=3?'beaten':'open';
@@ -370,11 +378,20 @@ function foldExternal(){ /* credit and misses the Coach logged from chats outsid
   });
   if(ch)saveSrs();
 }
+function smoothOnce(){
+  if(LS.get('smooth1'))return;var t=today(),cnt=dueLoad(),ids=Object.keys(S.srs).sort(),n=0;
+  ids.forEach(function(id){var st=S.srs[id];if(!st||st.s==='removed'||!st.d||st.d<=addDays(t,1)||(st.i||0)<3)return;
+    var base=diffDays(t,st.d);cnt[st.d]--;var nd=spreadDay(t,base,id,cnt);
+    var last=addDays(S.cfg.flight,-5);if(nd>last)nd=last;
+    if(nd!==st.d){st.d=nd;n++;}cnt[st.d]=(cnt[st.d]||0)+1;});
+  if(n)saveSrs();LS.set('smooth1',1);
+}
 function importAnki(){
   return getJSON('data/anki-srs.json').then(function(imp){
-    if(!imp||!imp.c||S.prefs.ankiImport===imp.id)return;
+    if(!imp||!imp.c||S.prefs.ankiImport===imp.id){smoothOnce();return;}
     var redo=!!S.prefs.ankiImport,n=0;for(var id in imp.c){var a=S.srs[id],b=imp.c[id];if(!a||(a.t||'')<(b.t||'')||((a.t||'')===(b.t||'')&&(a.n||0)<(b.n||0))||(redo&&a.src==='anki'&&a.t===b.t&&a.n===b.n)){S.srs[id]=b;n++;}}
     saveSrs();S.prefs.ankiImport=imp.id;save('me/prefs',S.prefs);
+    smoothOnce();
     setTimeout(function(){toast(redo?'Spread out '+n+' Anki cards that were all due on 12 Dec.':'Imported your Anki progress: '+n+' cards.');},600);
   });
 }
