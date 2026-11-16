@@ -344,7 +344,7 @@ function buildQueue(){
   var mist=fresh.filter(function(c){return isMistake(c)&&!(c.added===t&&(S.srs[c.id]||{}).d>t);}),rest=fresh.filter(function(c){return !isMistake(c);});
   var sit=todaySit(),must={};if(sit)(sit.must||[]).forEach(function(m){must[norm(m.pt)]=1;});
   rest.sort(function(a,b){return (must[norm(b.pt)]||0)-(must[norm(a.pt)]||0)||rank(a)-rank(b);});
-  function rank(c){return c.k==='core'?0:c.k==='speak'?1:c.k==='chunk'?2:3;}
+  function rank(c){return c.topic==='sobre-mim'?-1:c.k==='core'?0:c.k==='speak'?1:c.k==='chunk'?2:3;}
   return due.slice(0,60).concat(mist.slice(0,12),rest.slice(0,room)).slice(0,70);
 }
 function dueCount(){return buildQueue().length;}

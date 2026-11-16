@@ -1,0 +1,152 @@
+{
+ "about": "Sobre mim: George's own answers to the questions everyone will ask him in Brazil. Drilled first among new cards.",
+ "cards": [
+  {
+   "topic": "sobre-mim",
+   "en": "I work at an FX trading platform in London. I look after the relationships with the banks.",
+   "pt": "Trabalho numa plataforma de câmbio em Londres. Cuido do relacionamento com os bancos.",
+   "q": "Você trabalha com o quê?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I live in Brentwood, near London. But in January I'm moving back to Colchester.",
+   "pt": "Moro em Brentwood, perto de Londres. Mas em janeiro eu vou voltar pra Colchester.",
+   "q": "Onde você mora?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "It's about an hour from London. I've lived there before.",
+   "pt": "Fica a uma hora de Londres, mais ou menos. Eu já morei lá antes.",
+   "q": "Colchester? Onde fica isso?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I've got a brother and two sisters. I'm the oldest.",
+   "pt": "Tenho um irmão e duas irmãs. Eu sou o mais velho.",
+   "q": "Você tem irmãos?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "In my free time I do boxing and go to the gym.",
+   "pt": "No tempo livre eu treino boxe e vou pra academia.",
+   "q": "O que você gosta de fazer no tempo livre?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I'm also into video games, like Football Manager and sim racing.",
+   "pt": "Também curto videogame, tipo Football Manager e simulador de corrida.",
+   "q": "Só isso?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "We met online in November last year.",
+   "pt": "A gente se conheceu pela internet em novembro do ano passado.",
+   "q": "Como vocês se conheceram?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "In February she came to London and we met for the first time.",
+   "pt": "Em fevereiro ela foi pra Londres e a gente se encontrou pela primeira vez.",
+   "q": "E quando vocês se viram pela primeira vez?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "About a year.",
+   "pt": "Faz um ano, mais ou menos.",
+   "q": "Faz quanto tempo que vocês estão juntos?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "No, this is my third time! I love coming here.",
+   "pt": "Não, essa é a terceira vez! Eu adoro vir pra cá.",
+   "q": "É a primeira vez que você vem pro Brasil?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I'm really excited for New Year's in Rio!",
+   "pt": "Tô muito animado pro Réveillon no Rio!",
+   "q": "O que você mais quer fazer aqui?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "Not yet, but I really want to try it!",
+   "pt": "Ainda não, mas quero muito experimentar!",
+   "q": "Você já comeu coração de galinha?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I love açaí! You can get it in London, but it's not the same.",
+   "pt": "Eu amo açaí! Em Londres tem, mas não é a mesma coisa.",
+   "q": "Qual comida brasileira você mais gosta?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "Because I want to really talk with Gabi's family, and understand you.",
+   "pt": "Porque eu quero conversar com a família da Gabi de verdade, e entender vocês.",
+   "q": "Por que você tá aprendendo português?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "São Paulo, like Gabi! I had no choice.",
+   "pt": "Pro São Paulo, igual à Gabi! Não tive escolha.",
+   "q": "Você torce pra qual time aqui no Brasil?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "There I support Tottenham. We suffer, but it's love.",
+   "pt": "Lá eu torço pro Tottenham. A gente sofre, mas é amor.",
+   "q": "E na Inglaterra?",
+   "q_speaker": "Rafa"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "I'm loving it! People here are much friendlier and more social.",
+   "pt": "Tô adorando! O pessoal aqui é bem mais simpático e sociável.",
+   "q": "E aí, o que você tá achando do Brasil?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "Brazilians are more open. But both are big, busy cities, everyone works a lot.",
+   "pt": "Os brasileiros são mais abertos. Mas as duas são cidades grandes e corridas, todo mundo trabalha muito.",
+   "q": "Qual a diferença entre Londres e São Paulo?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "We want to travel around South America, but we don't know yet. It depends on work.",
+   "pt": "A gente quer viajar pela América do Sul, mas ainda não sabe. Depende do trabalho.",
+   "q": "Vocês têm planos pro ano que vem?",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "Thanks for having me! It's a pleasure to meet you all.",
+   "pt": "Obrigado por me receber! É um prazer conhecer vocês.",
+   "q": "Seja bem-vindo, George!",
+   "q_speaker": "Mãe"
+  },
+  {
+   "topic": "sobre-mim",
+   "en": "A little! I'm still learning, but I'm putting the effort in.",
+   "pt": "Um pouquinho! Ainda tô aprendendo, mas tô me esforçando.",
+   "q": "Nossa, você fala português!",
+   "q_speaker": "Mãe"
+  }
+ ]
+}
