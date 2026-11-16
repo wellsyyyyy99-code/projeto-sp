@@ -2,58 +2,45 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-15",
+   "date": "2026-11-16",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Bom dia!",
-      "en": "Hey, sufferer! Morning!"
+      "pt": "E aí, sofredor! Bom dia! Segunda-feira, hein?",
+      "en": "Hey, sufferer! Morning! Monday, eh?"
      },
      {
-      "pt": "Ontem eu vi umas crianças jogando bola na rua e lembrei de quando eu era pequeno.",
-      "en": "Yesterday I saw some kids playing football in the street and remembered when I was little."
+      "pt": "Fim de semana sem jogo do Tottenham: teve pausa pra seleção.",
+      "en": "A weekend with no Tottenham game: it was the international break."
      },
      {
-      "pt": "Eu morava na Zona Leste e jogava todo dia com os meus amigos.",
-      "en": "I used to live in the East Zone and played every day with my mates."
+      "pt": "Sábado eu fui pro mercado com a minha mãe, e domingo eu dormi até tarde.",
+      "en": "On Saturday I went to the market with my mum, and on Sunday I slept in."
      },
      {
-      "pt": "Falei de você pra minha mãe ontem, e ela ficou curiosa.",
-      "en": "I told my mum about you yesterday, and she got curious."
+      "pt": "Daqui a um mês cê vem pra cá! Vai fazer muito calor.",
+      "en": "In a month you're coming here! It's going to be really hot."
+     },
+     {
+      "pt": "Tem muitas festas em dezembro, e a gente vai tomar um café.",
+      "en": "There are lots of parties in December, and we're going to have a coffee."
      }
     ],
     "q": {
-     "pt": "Ela perguntou: cê trabalha com o quê mesmo?",
-     "en": "She asked: what is it you do for work again?"
+     "pt": "Mas me fala: o Spurs perde muito, ou é impressão minha?",
+     "en": "But tell me: does Spurs lose a lot, or is it just me?"
     },
-    "sources": []
+    "sources": [
+     {
+      "title": "Hotspur HQ: Tottenham's November fixtures (international break between Leeds and Ipswich)",
+      "url": "https://hotspurhq.com/dates-and-kick-off-times-confirmed-for-tottenhams-november-matches"
+     }
+    ]
    },
    "diario": {
-    "pt": "O Rafa e o George passaram o domingo no parque. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu fiz…, hoje eu vi…",
-    "en": "Rafa and George spent Sunday in the park. And you, what did you do today? Say three sentences: Today I went…, today I did…, today I saw…"
-   },
-   "exam": [
-    {
-     "pt": "Se apresenta pra mim: quem é você, onde cê mora e com o que cê trabalha?",
-     "who": "Mãe"
-    },
-    {
-     "pt": "E ontem, o que cê fez? Me conta o seu sábado inteiro.",
-     "who": "Mãe"
-    },
-    {
-     "pt": "George, me conta: como foi que você e a Gabi se conheceram? Quero saber a história toda.",
-     "who": "Mãe"
-    },
-    {
-     "pt": "Cê gosta de viajar? Me fala de uma viagem longa que cê quer fazer: pra onde e por quanto tempo?",
-     "who": "Mãe"
-    },
-    {
-     "pt": "E o Tottenham, hein? Cê acha que esse ano o time tá bem ou tá mal? Me explica.",
-     "who": "Mãe"
-    }
-   ]
+    "pt": "O George planejou a viagem com a Ana. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu tive…, hoje eu fiz…",
+    "en": "George planned the trip with Ana. And you, what did you do today? Say three sentences: Today I went…, today I had…, today I did…"
+   }
   }
  ]
 }

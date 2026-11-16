@@ -108,6 +108,15 @@
    "type": "vocab"
   },
   {
+   "id": "m09ef556b",
+   "k": "mistake",
+   "pt": "Quero ficar saudável.",
+   "en": "I want to be healthy.",
+   "said": "Quero ficar healthy",
+   "why": "'Healthy' is English; the Portuguese word is saudável.",
+   "type": "vocab"
+  },
+  {
    "id": "m10",
    "k": "mistake",
    "sheet": "Trabalhei o dia inteiro",
@@ -130,6 +139,15 @@
    "said": "Muito festas",
    "why": "muito agrees with the noun: muitas festas",
    "type": "grammar"
+  },
+  {
+   "id": "m11c79d3a",
+   "k": "mistake",
+   "pt": "Eu como bem / Eu como de forma saudável.",
+   "en": "I eat healthy / I eat well.",
+   "said": "Eu como saudável",
+   "why": "Saudável describes things, not how you eat; to describe your eating, use 'como bem' or 'de forma saudável'.",
+   "type": "vocab"
   },
   {
    "id": "m12",
@@ -175,6 +193,15 @@
    "said": "com o Gabi",
    "why": "Gabi is a woman: a Gabi",
    "type": "grammar"
+  },
+  {
+   "id": "m154a9d25",
+   "k": "mistake",
+   "pt": "batata-doce",
+   "en": "sweet potato",
+   "said": "batata sweet",
+   "why": "'Sweet potato' is English; the Portuguese word is batata-doce.",
+   "type": "vocab"
   },
   {
    "id": "m16",
@@ -223,6 +250,15 @@
    "type": "grammar"
   },
   {
+   "id": "m1d31a836",
+   "k": "mistake",
+   "pt": "Hoje comi iogurte.",
+   "en": "Today I ate yogurt.",
+   "said": "Hoje eu como iogurte",
+   "why": "Finished actions in the past use the past tense (comi), not the present.",
+   "type": "grammar"
+  },
+  {
    "id": "m20",
    "k": "mistake",
    "sheet": "O Spurs perde muito",
@@ -258,6 +294,15 @@
    "type": "vocab"
   },
   {
+   "id": "m22f7341e",
+   "k": "mistake",
+   "pt": "Eu gosto muito de pão de queijo.",
+   "en": "I really like pão de queijo.",
+   "said": "Eu gosto do pão de queijo muito",
+   "why": "Muito goes before de, and gostar takes de + noun.",
+   "type": "grammar"
+  },
+  {
    "id": "m23",
    "k": "mistake",
    "sheet": "Porque é mais barato",
@@ -269,6 +314,188 @@
    "type": "vocab",
    "q": "Por que cê vai morar com a sua família?",
    "qs": "Rafa"
+  },
+  {
+   "id": "m234234f2",
+   "k": "mistake",
+   "pt": "mas agora tá melhor",
+   "en": "but now it's doing better",
+   "said": "mas é mais melhor agora",
+   "why": "Melhor is already comparative; never say mais melhor",
+   "type": "grammar"
+  },
+  {
+   "id": "m32ff66e7",
+   "k": "mistake",
+   "pt": "Eu sou da Inglaterra, moro em Brentwood, perto de Londres.",
+   "en": "I'm from England, I live in Brentwood, near London.",
+   "said": "Sou da Inglaterra",
+   "why": "Use a comma or 'e' to join two short sentences.",
+   "type": "grammar"
+  },
+  {
+   "id": "m36677329",
+   "k": "mistake",
+   "pt": "Eu estudei português, fui pra academia, falei com a minha namorada e descansei",
+   "en": "I studied Portuguese, went to the gym, talked to my girlfriend and rested",
+   "said": "foi pra academia",
+   "why": "Eu fui is I went; foi means he/she went",
+   "type": "grammar"
+  },
+  {
+   "id": "m57e20a67",
+   "k": "mistake",
+   "pt": "Prefiro trabalhar de casa porque durmo mais.",
+   "en": "I prefer working from home because I sleep more.",
+   "said": "Eu prefiro de casa porque eu Dormo mais",
+   "why": "Prefiro needs a verb after it (trabalhar), and durmo is the form for 'I sleep'.",
+   "type": "grammar"
+  },
+  {
+   "id": "m5e21ea8c",
+   "k": "mistake",
+   "sheet": "E você? De onde você é? Trabalha com o quê?",
+   "pt": "E você? De onde você é? Trabalha com o quê?",
+   "en": "And you? Where are you from? What do you do?",
+   "said": "(couldn't say it)",
+   "why": "you reached for this in meeting someone new",
+   "type": "vocab"
+  },
+  {
+   "id": "m6263e809",
+   "k": "mistake",
+   "pt": "Gosto muito de viajar",
+   "en": "I really like travelling",
+   "said": "Gosto muito viajar",
+   "why": "Gostar always needs de before the thing liked",
+   "type": "grammar"
+  },
+  {
+   "id": "m62bef960",
+   "k": "mistake",
+   "pt": "Comi ontem.",
+   "en": "I ate yesterday.",
+   "said": "Não, mas eu como ontem",
+   "why": "Yesterday is a finished time, so use the past tense (comi).",
+   "type": "grammar"
+  },
+  {
+   "id": "m6ab72d1d",
+   "k": "mistake",
+   "pt": "A gente se conheceu na internet",
+   "en": "We met online",
+   "said": "A gente conheceu na internet",
+   "why": "Meeting each other needs reflexive se: se conhecer",
+   "type": "grammar"
+  },
+  {
+   "id": "m7d9766e8",
+   "k": "mistake",
+   "pt": "Trabalhei de casa.",
+   "en": "I worked from home.",
+   "said": "Eu trabalhei com a minha casa",
+   "why": "The idiom is trabalhar de casa; 'com a minha casa' is a literal translation of English.",
+   "type": "vocab"
+  },
+  {
+   "id": "m8641bb1d",
+   "k": "mistake",
+   "pt": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso.",
+   "en": "I needed to tidy the house, but I didn't because I'm lazy.",
+   "said": "Eu precisei arrumar a casa",
+   "why": "Imperfect 'precisava' for an ongoing need; preterite suggests it was completed.",
+   "type": "grammar"
+  },
+  {
+   "id": "m94b2795e",
+   "k": "mistake",
+   "pt": "Normalmente o Tottenham vai mal",
+   "en": "Usually Tottenham does badly",
+   "said": "Tottenham é mal, normalmente",
+   "why": "Teams take o; use ir mal or tá mal, not ser",
+   "type": "grammar"
+  },
+  {
+   "id": "m9d72686c",
+   "k": "mistake",
+   "pt": "Hoje eu estudei bastante português, falei com a minha namorada e joguei F1.",
+   "en": "Today I studied a lot of Portuguese, talked to my girlfriend and played F1.",
+   "said": "estudei português muito",
+   "why": "Use 'bastante' before the noun; 'muito' sounds unnatural after it.",
+   "type": "vocab"
+  },
+  {
+   "id": "mb479dca1",
+   "k": "mistake",
+   "pt": "Normalmente tomo, sim.",
+   "en": "Yes, I usually have one (drink coffee).",
+   "said": "Normalmente tenho, sim",
+   "why": "For drinking coffee, use tomar, not ter.",
+   "type": "vocab"
+  },
+  {
+   "id": "mc7519e6e",
+   "k": "mistake",
+   "pt": "Eu estava sem vontade de fazer nada.",
+   "en": "I didn't feel like doing anything.",
+   "said": "(missing)",
+   "why": "a phrase you needed in your diário",
+   "type": "vocab"
+  },
+  {
+   "id": "mc7eb2fe6",
+   "k": "mistake",
+   "pt": "Oi, Rafa! Eu sou o George, sou amigo da Gabi.",
+   "en": "Hi, Rafa! I'm George, I'm Gabi's friend.",
+   "said": "Oi rafa eu sou o George sou amigo da Gabi",
+   "why": "Minor: name Rafa needs a capital and commas; otherwise fine.",
+   "type": "grammar"
+  },
+  {
+   "id": "md3a083dd",
+   "k": "mistake",
+   "pt": "Treino cardio dia sim, dia não.",
+   "en": "I do cardio every other day.",
+   "said": "Eu treino cardio todo outro dia",
+   "why": "'Every other day' doesn't translate word for word; Portuguese says dia sim, dia não.",
+   "type": "vocab"
+  },
+  {
+   "id": "me5a8038e",
+   "k": "mistake",
+   "pt": "Vou pra pizzaria.",
+   "en": "I'm going to the pizzeria.",
+   "said": "Eu vou na pizzaria",
+   "why": "Ir takes a or pra before places, not na.",
+   "type": "grammar"
+  },
+  {
+   "id": "mec9a90a6",
+   "k": "mistake",
+   "pt": "Gosto de queijo na pizza.",
+   "en": "I like cheese on pizza.",
+   "said": "Gosto queijo na pizza",
+   "why": "Gostar takes the preposition de before the noun.",
+   "type": "grammar"
+  },
+  {
+   "id": "mf0a3581d",
+   "k": "mistake",
+   "pt": "Normalmente não como nada no café da manhã.",
+   "en": "I usually don't eat anything for breakfast.",
+   "said": "Normalmente eu como nada por café de manhã",
+   "why": "Negate with não before the verb, use no for 'at/for breakfast', and the word is café da manhã.",
+   "type": "grammar"
+  },
+  {
+   "id": "mf970dafb",
+   "k": "mistake",
+   "sheet": "Estou aprendendo português porque eu amo o Brasil.",
+   "pt": "Estou aprendendo português porque eu amo o Brasil.",
+   "en": "I'm learning Portuguese because I love Brazil.",
+   "said": "(couldn't say it)",
+   "why": "you reached for this in meeting someone new",
+   "type": "vocab"
   },
   {
    "id": "p20261114-1",
@@ -313,54 +540,6 @@
    "type": "grammar",
    "q": "O que cê quer fazer em São Paulo?",
    "qs": "Ana"
-  },
-  {
-   "id": "m234234f2",
-   "k": "mistake",
-   "pt": "mas agora tá melhor",
-   "src": "exam"
-  },
-  {
-   "id": "m32ff66e7",
-   "k": "mistake",
-   "pt": "Eu sou da Inglaterra, moro em Brentwood, perto de Londres.",
-   "src": "chat"
-  },
-  {
-   "id": "m36677329",
-   "k": "mistake",
-   "pt": "Eu estudei português, fui pra academia, falei com a minha namorada e descansei",
-   "src": "exam"
-  },
-  {
-   "id": "m5e21ea8c",
-   "k": "mistake",
-   "pt": "E você? De onde você é? Trabalha com o quê?",
-   "src": "chat"
-  },
-  {
-   "id": "m6263e809",
-   "k": "mistake",
-   "pt": "Gosto muito de viajar",
-   "src": "exam"
-  },
-  {
-   "id": "m6ab72d1d",
-   "k": "mistake",
-   "pt": "A gente se conheceu na internet",
-   "src": "exam"
-  },
-  {
-   "id": "m94b2795e",
-   "k": "mistake",
-   "pt": "Normalmente o Tottenham vai mal",
-   "src": "exam"
-  },
-  {
-   "id": "mf970dafb",
-   "k": "mistake",
-   "pt": "Estou aprendendo português porque eu amo o Brasil.",
-   "src": "chat"
   }
  ]
 }
