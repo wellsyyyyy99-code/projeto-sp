@@ -2,44 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Bom dia! Segunda-feira, hein?",
-      "en": "Hey, sufferer! Morning! Monday, eh?"
+      "pt": "E aí, sofredor! Bom dia! Terça-feira, hein?",
+      "en": "Hey, sufferer! Morning! Tuesday, eh?"
      },
      {
-      "pt": "Fim de semana sem jogo do Tottenham: teve pausa pra seleção.",
-      "en": "A weekend with no Tottenham game: it was the international break."
+      "pt": "A Ana tá animada: daqui a um mês cê chega no aeroporto.",
+      "en": "Ana is excited: in a month you'll arrive at the airport."
      },
      {
-      "pt": "Sábado eu fui pro mercado com a minha mãe, e domingo eu dormi até tarde.",
-      "en": "On Saturday I went to the market with my mum, and on Sunday I slept in."
+      "pt": "Dica: despacha só uma mala, e a pequena vai com você.",
+      "en": "Tip: check in just one bag, and the small one goes with you."
      },
      {
-      "pt": "Daqui a um mês cê vem pra cá! Vai fazer muito calor.",
-      "en": "In a month you're coming here! It's going to be really hot."
-     },
-     {
-      "pt": "Tem muitas festas em dezembro, e a gente vai tomar um café.",
-      "en": "There are lots of parties in December, and we're going to have a coffee."
+      "pt": "E pede janela, que a viagem é longa.",
+      "en": "And ask for a window seat, because the trip is long."
      }
     ],
     "q": {
-     "pt": "Mas me fala: o Spurs perde muito, ou é impressão minha?",
-     "en": "But tell me: does Spurs lose a lot, or is it just me?"
+     "pt": "Mas me conta: ontem cê trabalhou o dia inteiro ou saiu mais cedo?",
+     "en": "But tell me: did you work all day yesterday or leave early?"
     },
-    "sources": [
-     {
-      "title": "Hotspur HQ: Tottenham's November fixtures (international break between Leeds and Ipswich)",
-      "url": "https://hotspurhq.com/dates-and-kick-off-times-confirmed-for-tottenhams-november-matches"
-     }
-    ]
+    "sources": []
    },
    "diario": {
-    "pt": "O George planejou a viagem com a Ana. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu tive…, hoje eu fiz…",
-    "en": "George planned the trip with Ana. And you, what did you do today? Say three sentences: Today I went…, today I had…, today I did…"
+    "pt": "No episódio, o George despacha uma mala no aeroporto. E você, o que cê fez hoje? Fala três frases: Hoje eu fui…, hoje eu tive…, hoje eu fiz…",
+    "en": "In the episode, George checks in a bag at the airport. And you, what did you do today? Say three sentences: Today I went…, today I had…, today I did…"
    }
   }
  ]
