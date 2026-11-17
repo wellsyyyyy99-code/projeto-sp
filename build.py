@@ -30,22 +30,23 @@ DAY1 = datetime(2026, 11, 1, 6, tzinfo=timezone.utc)  # Episode 1 date
 
 VOICES = {
     # Women: no big pitch shifts (they made Bia, Ana, the barista and the narrator sound robotic).
-    # Three real voices instead: Francisca, Thalita, Thalita Multilingual (falls back to Thalita).
+    # Two real voices: Francisca and Thalita, with small pitch tweaks. Never Thalita Multilingual: it slips into
+    # Spanish-sounding vowels on some Portuguese words (the check-in attendant, Nov 2026).
     "george":   ("pt-BR-AntonioNeural",   "+0Hz"),
     "gabi":     ("pt-BR-FranciscaNeural", "+0Hz"),
     "mãe":      ("pt-BR-ThalitaNeural",   "-2Hz"),
     "mae":      ("pt-BR-ThalitaNeural",   "-2Hz"),
-    "bia":      ("pt-BR-ThalitaMultilingualNeural", "+0Hz"),
+    "bia":      ("pt-BR-ThalitaNeural",   "+2Hz"),
     "seu zé":   ("pt-BR-AntonioNeural",   "-16Hz"),
     "seu ze":   ("pt-BR-AntonioNeural",   "-16Hz"),
-    "narrador": ("pt-BR-ThalitaMultilingualNeural", "-2Hz"),
+    "narrador": ("pt-BR-FranciscaNeural", "-3Hz"),
     "ana":      ("pt-BR-FranciscaNeural", "+3Hz"),
     "rafa":     ("pt-BR-AntonioNeural",   "-8Hz"),
     "garçom":   ("pt-BR-AntonioNeural",   "-14Hz"),
     "garcom":   ("pt-BR-AntonioNeural",   "-14Hz"),
     "torcedor": ("pt-BR-AntonioNeural",   "+8Hz"),
     "barista":  ("pt-BR-ThalitaNeural",   "+3Hz"),
-    "atendente": ("pt-BR-ThalitaMultilingualNeural", "+2Hz"),
+    "atendente": ("pt-BR-ThalitaNeural",  "+5Hz"),
     "vendedor": ("pt-BR-AntonioNeural",   "-4Hz"),
     "motorista": ("pt-BR-AntonioNeural",  "-20Hz"),
     "passageiro": ("pt-BR-AntonioNeural", "+14Hz"),
@@ -53,9 +54,44 @@ VOICES = {
     "farmaceutico": ("pt-BR-FranciscaNeural", "-4Hz"),
     "estranho": ("pt-BR-AntonioNeural",   "+4Hz"),
 }
-EXTRA = [("pt-BR-AntonioNeural", "-8Hz"), ("pt-BR-FranciscaNeural", "-3Hz"), ("pt-BR-ThalitaMultilingualNeural", "+0Hz")]
+EXTRA = [("pt-BR-AntonioNeural", "-8Hz"), ("pt-BR-FranciscaNeural", "-3Hz"), ("pt-BR-ThalitaNeural", "+1Hz")]
 EN_VOICE = ("en-GB-RyanNeural", "+0Hz")
 _extra = {}
+
+
+# Speakers that used the Multilingual voice before stamps existed: anything they said is rebuilt once.
+OLD_MULTI = {"narrador", "atendente", "bia"}
+
+
+def speakers_in(obj):
+    """Every speaker named anywhere in a pack (lines, questions, items)."""
+    out = set()
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k in ("speaker", "q_speaker", "who", "s") and isinstance(v, str):
+                out.add(v.strip().lower())
+            else:
+                out |= speakers_in(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            out |= speakers_in(v)
+    return out
+
+
+def voice_sig(speakers):
+    """Changes whenever the voice of any of these speakers changes, so their audio is rebuilt."""
+    return hashlib.sha1("|".join(f"{s}={voice_for(s)}" for s in sorted(speakers)).encode()).hexdigest()[:16]
+
+
+def voices_stale(stamp, speakers):
+    """True if audio stamped here was made with other voices. No stamp yet: stale only if an old Multilingual speaker is in it."""
+    sig = voice_sig(speakers)
+    if stamp.exists():
+        return stamp.read_text().strip() != sig
+    if speakers & OLD_MULTI or any(s not in VOICES for s in speakers):
+        return True
+    stamp.write_text(sig)
+    return False
 
 
 def voice_for(speaker):
@@ -450,8 +486,10 @@ def build_extras():
         if not x.get("id") or not x.get("title") or not x.get("items"):
             sys.exit(f"\n❌ {p.name} needs 'id', 'title' and 'items'")
         f = AUDIO / extra_file(x)
-        if FORCE or not f.exists():
+        vstamp, vsp = f.with_suffix(".voices"), speakers_in(x) | {"narrador"}
+        if FORCE or not f.exists() or voices_stale(vstamp, vsp):
             export(extra_audio(x), f, x["title"])
+            vstamp.write_text(voice_sig(vsp))
             print(f"   🎧 {f.name}")
         extras.append(x)
     return extras
@@ -645,7 +683,9 @@ def main():
         files = [ep_file(e) for e in pack["episodes"]] + ([drill_file(pack)] if pack.get("drills") else []) \
             + ([gym_file(pack)] if pack.get("talk") else [])
         decks = deck_files(pack)
-        if not FORCE and all((DECKS / d[0]).exists() for d in decks) and all((AUDIO / f).exists() for f in files):
+        vstamp, vsp = AUDIO / f"pack{pack['pack']:02d}.voices", speakers_in(pack)
+        if not FORCE and all((DECKS / d[0]).exists() for d in decks) and all((AUDIO / f).exists() for f in files) \
+                and not voices_stale(vstamp, vsp):
             print(f"✓ Pack {pack['pack']:02d} already built — skipping")
             continue
         print(f"▶ Building pack {pack['pack']:02d}")
@@ -660,6 +700,7 @@ def main():
             print(f"   🎧 {gym_file(pack)}")
         for fname, eps_, did, name in decks:
             print(f"   🃏 {fname} ({build_deck(pack, DECKS / fname, eps_, did, name)} notes)")
+        vstamp.write_text(voice_sig(vsp))
     extras = build_extras()
     speaking = build_speaking()
     write_feed_and_index(packs, extras, speaking)

@@ -198,14 +198,36 @@ def build(tts_path, voice_for):
     cards, eps, clips = write_data()
     a = OUT / "a"
     a.mkdir(parents=True, exist_ok=True)
-    todo = [(cid, t, sp) for cid, (t, sp, _g) in sorted(clips.items())
-            if not ((a / f"{cid}.mp3").exists() and (a / f"{cid}.mp3").stat().st_size > 0)]
+    # voices.json records which voice made each clip, so a clip is remade when its speaker's voice changes.
+    vfile = a / "voices.json"
+    try:
+        made_with = json.loads(vfile.read_text())
+    except Exception:
+        made_with = {}
+    old_multi = {"narrador", "atendente", "bia"}
+
+    def want(sp):
+        return "%s %s" % voice_for(sp)
+
+    def stale(cid, sp):
+        f = a / f"{cid}.mp3"
+        if not (f.exists() and f.stat().st_size > 0):
+            return True
+        if cid in made_with:
+            return made_with[cid] != want(sp)
+        return (sp or "").strip().lower() in old_multi     # made before this file existed
+
+    todo = [(cid, t, sp) for cid, (t, sp, _g) in sorted(clips.items()) if stale(cid, sp)]
+    for cid, (_t, sp, _g) in clips.items():
+        if (cid, _t, sp) not in todo and cid not in made_with:
+            made_with[cid] = want(sp)
 
     def one(job):
         cid, text, speaker = job
         v, pitch = voice_for(speaker)
         try:
             shutil.copyfile(tts_path(text, v, pitch, "+0%"), a / f"{cid}.mp3")
+            made_with[cid] = f"{v} {pitch}"
             return 1
         except Exception as e:      # one bad line must not break the podcast build
             print(f"   ⚠️ clip skipped ({text[:40]!r}): {e}")
@@ -216,6 +238,7 @@ def build(tts_path, voice_for):
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as ex:
         made = sum(ex.map(one, todo[1:])) + (1 if todo else 0)
+    vfile.write_text(json.dumps(made_with, sort_keys=True))
     n = bundle(clips)
     print(f"🥊 Treino: {len(cards)} cards, {len(eps)} episodes, {made} new clips, {n} bundles")
 
