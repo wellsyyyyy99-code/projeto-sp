@@ -4,641 +4,452 @@
   {
    "id": "m01",
    "k": "mistake",
-   "sheet": "Foi longa (a viagem)",
    "pt": "A viagem foi longa.",
    "en": "The journey was long.",
-   "lit": "The trip was long",
-   "said": "Muito longe",
-   "why": "longe = far away; a long trip is longa",
-   "type": "vocab",
    "q": "Como foi a viagem?",
    "qs": "Mãe"
   },
   {
    "id": "m02",
    "k": "mistake",
-   "sheet": "Tô muito animado de estar aqui",
    "pt": "Tô muito animado de estar aqui.",
-   "en": "I'm really excited to be here.",
-   "lit": "I'm very excited of to-be here",
-   "said": "animado estar aqui",
-   "why": "need 'de' before a verb",
-   "type": "grammar"
+   "en": "I'm really excited to be here."
   },
   {
    "id": "m03",
    "k": "mistake",
-   "sheet": "Trabalho com câmbio",
    "pt": "Trabalho com câmbio.",
    "en": "I work in FX.",
-   "lit": "I work with exchange",
-   "said": "Eu trabalho em finanças",
-   "why": "trabalhar com + your area",
-   "type": "grammar",
    "q": "Cê trabalha com o quê?",
    "qs": "Rafa"
   },
   {
    "id": "m04",
    "k": "mistake",
-   "sheet": "Gosto, sim!",
    "pt": "Gosto, sim!",
    "en": "Yes, I do! (answering: do you like it?)",
-   "lit": "Like, yes!",
-   "said": "Sim, mais ou menos",
-   "why": "say yes by repeating the verb",
-   "type": "grammar",
    "q": "Cê gosta de São Paulo?",
    "qs": "Rafa"
   },
   {
    "id": "m05",
    "k": "mistake",
-   "sheet": "e depois a gente se viu",
    "pt": "E depois a gente se viu em Londres.",
-   "en": "And then we saw each other in London.",
-   "lit": "And after, we saw ourselves in London",
-   "said": "então em Londres",
-   "why": "então = so; depois = then/later",
-   "type": "vocab"
+   "en": "And then we saw each other in London."
   },
   {
    "id": "m06",
    "k": "mistake",
-   "sheet": "pessoalmente",
    "pt": "A gente se conheceu pessoalmente em Londres.",
-   "en": "We met in person in London.",
-   "lit": "We got-to-know ourselves personally in London",
-   "said": "em pessoa",
-   "why": "natural word for 'in person'",
-   "type": "vocab"
+   "en": "We met in person in London."
   },
   {
    "id": "m07",
    "k": "mistake",
-   "sheet": "Tenho um irmão e duas irmãs",
    "pt": "Tenho um irmão e duas irmãs.",
    "en": "I have one brother and two sisters.",
-   "said": "Temho um irmao e duas irmas",
-   "why": "nh spelling; nasal ão / ãs",
-   "type": "pronunciation",
    "q": "Cê tem irmãos?",
    "qs": "Mãe"
   },
   {
    "id": "m08",
    "k": "mistake",
-   "sheet": "Eu trabalho de casa",
    "pt": "Na sexta eu trabalho de casa.",
-   "en": "On Fridays I work from home.",
-   "lit": "On Friday I work from house",
-   "said": "Eu trabalho na minha casa",
-   "why": "work from home = trabalhar de casa (or em casa)",
-   "type": "grammar"
+   "en": "On Fridays I work from home."
   },
   {
    "id": "m09",
    "k": "mistake",
-   "sheet": "Como se diz isso em inglês?",
    "pt": "Como se diz isso em inglês?",
-   "en": "How do you say that in English?",
-   "lit": "How itself says this in English?",
-   "said": "Qual é mesmo em inglês?",
-   "why": "ask 'how do you say it' with como se diz",
-   "type": "vocab"
+   "en": "How do you say that in English?"
   },
   {
    "id": "m09ef556b",
    "k": "mistake",
    "pt": "Quero ficar saudável.",
-   "en": "I want to be healthy.",
-   "said": "Quero ficar healthy",
-   "why": "'Healthy' is English; the Portuguese word is saudável.",
-   "type": "vocab"
+   "en": "I want to be healthy."
   },
   {
    "id": "m0f42d391",
    "k": "mistake",
    "pt": "No crédito, por favor.",
-   "said": "Tenho crédito.",
-   "why": "Say how you pay: no crédito / no débito.",
-   "type": "vocab"
+   "en": ""
   },
   {
    "id": "m10",
    "k": "mistake",
-   "sheet": "Trabalhei o dia inteiro",
    "pt": "Trabalhei o dia inteiro.",
    "en": "I worked all day.",
-   "lit": "Worked the day entire",
-   "said": "Eu trabalho do dia inteiro",
-   "why": "past tense for what already happened; no 'do'",
-   "type": "grammar",
    "q": "O que cê fez hoje?",
    "qs": "Ana"
   },
   {
    "id": "m11",
    "k": "mistake",
-   "sheet": "Muitas festas",
    "pt": "Tem muitas festas em dezembro.",
-   "en": "There are lots of parties in December.",
-   "lit": "Has many parties in December",
-   "said": "Muito festas",
-   "why": "muito agrees with the noun: muitas festas",
-   "type": "grammar"
+   "en": "There are lots of parties in December."
   },
   {
    "id": "m11603f6e",
    "k": "mistake",
    "pt": "Não, mais nada, obrigado.",
-   "said": "Não preciso mais alguma coisa. Obrigado.",
-   "why": "Mais nada turns down \"mais alguma coisa?\".",
-   "type": "vocab"
+   "en": ""
   },
   {
    "id": "m11c79d3a",
    "k": "mistake",
-   "sheet": "Eu como bem / como de forma saudável",
    "pt": "Eu como bem / Eu como de forma saudável.",
-   "en": "I eat healthy / I eat well.",
-   "said": "Eu como saudável",
-   "why": "Saudável describes things, not how you eat; to describe your eating, use 'como bem' or 'de forma saudável'.",
-   "type": "vocab"
+   "en": "I eat healthy / I eat well."
   },
   {
    "id": "m12",
    "k": "mistake",
-   "sheet": "Danço muito mal / danço muito bem",
    "pt": "Eu danço muito mal.",
    "en": "I dance really badly.",
-   "said": "Danço muito bom",
-   "why": "bem/mal = adverbs for verbs; bom = adjective for nouns",
-   "type": "grammar",
    "q": "Cê dança bem?",
    "qs": "Bia"
   },
   {
    "id": "m13",
    "k": "mistake",
-   "sheet": "Eu não sou muito bom",
    "pt": "Eu não sou muito bom nisso.",
-   "en": "I'm not very good at it.",
-   "lit": "I not am very good in-this",
-   "said": "Eu não muito bom",
-   "why": "need the verb ser: não sou",
-   "type": "grammar"
+   "en": "I'm not very good at it."
   },
   {
    "id": "m14",
    "k": "mistake",
-   "sheet": "A Gabi não é muito boa",
    "pt": "A Gabi não é muito boa nisso.",
-   "en": "Gabi isn't very good at it.",
-   "lit": "The Gabi not is very good in-this",
-   "said": "Gabi é não muito bom",
-   "why": "não goes before the verb; boa for a woman",
-   "type": "grammar"
+   "en": "Gabi isn't very good at it."
   },
   {
    "id": "m15",
    "k": "mistake",
-   "sheet": "com a Gabi",
    "pt": "Vou viajar com a Gabi.",
-   "en": "I'm going to travel with Gabi.",
-   "lit": "Go to-travel with the Gabi",
-   "said": "com o Gabi",
-   "why": "Gabi is a woman: a Gabi",
-   "type": "grammar"
+   "en": "I'm going to travel with Gabi."
   },
   {
    "id": "m154a9d25",
    "k": "mistake",
    "pt": "batata-doce",
-   "en": "sweet potato",
-   "said": "batata sweet",
-   "why": "'Sweet potato' is English; the Portuguese word is batata-doce.",
-   "type": "vocab"
+   "en": "sweet potato"
   },
   {
    "id": "m16",
    "k": "mistake",
-   "sheet": "Vou morar com a minha família",
    "pt": "Vou morar com a minha família.",
-   "en": "I'm going to live with my family.",
-   "lit": "Go to-live with the my family",
-   "said": "Eu vou moro na minha família",
-   "why": "vou + infinitive (morar); morar com = live with",
-   "type": "grammar"
+   "en": "I'm going to live with my family."
   },
   {
    "id": "m17",
    "k": "mistake",
-   "sheet": "Quero ir pra Colômbia / pra Medellín",
    "pt": "Quero ir pra Colômbia.",
    "en": "I want to go to Colombia.",
-   "lit": "Want to-go to-the Colombia",
-   "said": "Quero vou para / Quero ir em Medellín",
-   "why": "quero + infinitive; ir pra a place, not 'em'",
-   "type": "grammar",
    "q": "Pra onde cê quer viajar?",
    "qs": "Rafa"
   },
   {
    "id": "m18",
    "k": "mistake",
-   "sheet": "Vou economizar dinheiro porque quero viajar pelo mundo todo",
    "pt": "Vou economizar dinheiro porque quero viajar pelo mundo todo.",
-   "en": "I'm going to save money because I want to travel all over the world.",
-   "lit": "Go to-save money because want to-travel through-the world whole",
-   "said": "Vou economizar pro dinheiro porque eu quero viagem em todo mundo",
-   "why": "no 'pro' after economizar; viajar is the verb; pelo mundo todo",
-   "type": "grammar"
+   "en": "I'm going to save money because I want to travel all over the world."
   },
   {
    "id": "m188d3571",
    "k": "mistake",
    "pt": "É bem difícil, mas tô tentando.",
-   "said": "Sou difícil, mas estou tentando.",
-   "why": "Sou difícil means \"I'm a difficult person\".",
-   "type": "vocab"
+   "en": ""
+  },
+  {
+   "id": "m189f8ea9",
+   "k": "mistake",
+   "pt": "Eu trabalhei de casa o dia todo.",
+   "en": "I worked from home all day."
   },
   {
    "id": "m19",
    "k": "mistake",
-   "sheet": "Quero viajar pela América do Sul por seis meses",
    "pt": "Quero viajar pela América do Sul por seis meses.",
-   "en": "I want to travel around South America for six months.",
-   "lit": "Want to-travel through-the America of-the South for six months",
-   "said": "Quero viajar à América do Sul de seis meses",
-   "why": "por = for a duration; pela for 'around/through'",
-   "type": "grammar"
+   "en": "I want to travel around South America for six months."
   },
   {
    "id": "m1d31a836",
    "k": "mistake",
-   "sheet": "Hoje comi iogurte.",
    "pt": "Hoje comi iogurte.",
-   "en": "Today I ate yogurt.",
-   "said": "Hoje eu como iogurte",
-   "why": "Finished actions in the past use the past tense (comi), not the present.",
-   "type": "grammar"
+   "en": "Today I ate yogurt."
+  },
+  {
+   "id": "m1db000d6",
+   "k": "mistake",
+   "pt": "Tô aprendendo português porque a minha namorada é brasileira.",
+   "en": "I'm learning Portuguese because my girlfriend is Brazilian."
   },
   {
    "id": "m20",
    "k": "mistake",
-   "sheet": "O Spurs perde muito",
    "pt": "O Spurs perde muito.",
    "en": "Spurs lose a lot.",
-   "lit": "The Spurs loses much",
-   "said": "Perdi muito",
-   "why": "present for a habit (perde), not past (perdi)",
-   "type": "grammar",
    "q": "E o Tottenham, tá ganhando?",
    "qs": "Rafa"
   },
   {
    "id": "m21",
    "k": "mistake",
-   "sheet": "A gente não perde",
    "pt": "A gente não perde sempre!",
-   "en": "We don't always lose!",
-   "lit": "The people (we) not loses always",
-   "said": "A gente não lose",
-   "why": "lose = perder",
-   "type": "vocab"
+   "en": "We don't always lose!"
   },
   {
    "id": "m22",
    "k": "mistake",
-   "sheet": "Tenho que arrumar a casa",
    "pt": "Tenho que arrumar a casa.",
-   "en": "I have to tidy the house.",
-   "lit": "Have that to-tidy the house",
-   "said": "Tenho que tidy",
-   "why": "tidy up = arrumar",
-   "type": "vocab"
+   "en": "I have to tidy the house."
   },
   {
    "id": "m22f7341e",
    "k": "mistake",
    "pt": "Eu gosto muito de pão de queijo.",
-   "en": "I really like pão de queijo.",
-   "said": "Eu gosto do pão de queijo muito",
-   "why": "Muito goes before de, and gostar takes de + noun.",
-   "type": "grammar"
+   "en": "I really like pão de queijo."
   },
   {
    "id": "m23",
    "k": "mistake",
-   "sheet": "Porque é mais barato",
    "pt": "Porque é mais barato.",
    "en": "Because it's cheaper.",
-   "lit": "Because is more cheap",
-   "said": "Porque tá cheaper",
-   "why": "cheaper = mais barato",
-   "type": "vocab",
    "q": "Por que cê vai morar com a sua família?",
    "qs": "Rafa"
   },
   {
    "id": "m234234f2",
    "k": "mistake",
-   "sheet": "mas agora tá melhor",
    "pt": "mas agora tá melhor",
-   "en": "but now it's doing better",
-   "said": "mas é mais melhor agora",
-   "why": "Melhor is already comparative; never say mais melhor",
-   "type": "grammar"
+   "en": "but now it's doing better"
+  },
+  {
+   "id": "m2370ae74",
+   "k": "mistake",
+   "pt": "Vou passar o Natal com a família da minha namorada.",
+   "en": "I'm going to spend Christmas with my girlfriend's family."
   },
   {
    "id": "m32ff66e7",
    "k": "mistake",
-   "sheet": "Eu sou da Inglaterra, moro em Brentwood, perto de Londres.",
    "pt": "Eu sou da Inglaterra, moro em Brentwood, perto de Londres.",
-   "en": "I'm from England, I live in Brentwood, near London.",
-   "said": "Sou da Inglaterra",
-   "why": "Use a comma or 'e' to join two short sentences.",
-   "type": "grammar"
+   "en": "I'm from England, I live in Brentwood, near London."
+  },
+  {
+   "id": "m33a5890a",
+   "k": "mistake",
+   "pt": "Eu trabalhei das oito às cinco.",
+   "en": "I worked from eight to five."
   },
   {
    "id": "m36677329",
    "k": "mistake",
-   "sheet": "Eu estudei português, fui pra academia, falei com a minha namorada e descansei",
    "pt": "Eu estudei português, fui pra academia, falei com a minha namorada e descansei",
-   "en": "I studied Portuguese, went to the gym, talked to my girlfriend and rested",
-   "said": "foi pra academia",
-   "why": "Eu fui is I went; foi means he/she went",
-   "type": "grammar"
+   "en": "I studied Portuguese, went to the gym, talked to my girlfriend and rested"
   },
   {
    "id": "m57e20a67",
    "k": "mistake",
    "pt": "Prefiro trabalhar de casa porque durmo mais.",
-   "en": "I prefer working from home because I sleep more.",
-   "said": "Eu prefiro de casa porque eu Dormo mais",
-   "why": "Prefiro needs a verb after it (trabalhar), and durmo is the form for 'I sleep'.",
-   "type": "grammar"
+   "en": "I prefer working from home because I sleep more."
   },
   {
    "id": "m5d94d203",
    "k": "mistake",
    "pt": "Eles perdem muito.",
-   "en": "They lose a lot.",
-   "said": "Eles perde muito",
-   "why": "Plural subject 'eles' needs plural verb ending: perdem.",
-   "type": "grammar"
+   "en": "They lose a lot."
   },
   {
    "id": "m5e21ea8c",
    "k": "mistake",
-   "sheet": "E você? De onde você é? Trabalha com o quê?",
    "pt": "E você? De onde você é? Trabalha com o quê?",
-   "en": "And you? Where are you from? What do you do?",
-   "said": "(couldn't say it)",
-   "why": "you reached for this in meeting someone new",
-   "type": "vocab"
+   "en": "And you? Where are you from? What do you do?"
+  },
+  {
+   "id": "m61cf26fe",
+   "k": "mistake",
+   "pt": "A gente comprou passagem de ônibus.",
+   "en": "We bought bus tickets."
   },
   {
    "id": "m6263e809",
    "k": "mistake",
-   "sheet": "Gosto muito de viajar",
    "pt": "Gosto muito de viajar",
-   "en": "I really like travelling",
-   "said": "Gosto muito viajar",
-   "why": "Gostar always needs de before the thing liked",
-   "type": "grammar"
+   "en": "I really like travelling"
   },
   {
    "id": "m62bef960",
    "k": "mistake",
-   "sheet": "Comi ontem.",
    "pt": "Comi ontem.",
-   "en": "I ate yesterday.",
-   "said": "Não, mas eu como ontem",
-   "why": "Yesterday is a finished time, so use the past tense (comi).",
-   "type": "grammar"
+   "en": "I ate yesterday."
   },
   {
    "id": "m6ab72d1d",
    "k": "mistake",
-   "sheet": "A gente se conheceu na internet",
    "pt": "A gente se conheceu na internet",
-   "en": "We met online",
-   "said": "A gente conheceu na internet",
-   "why": "Meeting each other needs reflexive se: se conhecer",
-   "type": "grammar"
+   "en": "We met online"
   },
   {
    "id": "m74e18aa4",
    "k": "mistake",
    "pt": "Não vou pra academia porque hoje é meu dia de descanso.",
-   "en": "I'm not going to the gym because today is my rest day.",
-   "said": "pro academia porque hoje tá minha dia descansar",
-   "why": "Academia is feminine (à/pra); dia is masculine (meu); use 'dia de' + noun.",
-   "type": "grammar"
+   "en": "I'm not going to the gym because today is my rest day."
   },
   {
    "id": "m7d9766e8",
    "k": "mistake",
-   "sheet": "Trabalhei de casa.",
    "pt": "Trabalhei de casa.",
-   "en": "I worked from home.",
-   "said": "Eu trabalhei com a minha casa",
-   "why": "The idiom is trabalhar de casa; 'com a minha casa' is a literal translation of English.",
-   "type": "vocab"
+   "en": "I worked from home."
   },
   {
    "id": "m80698e7e",
    "k": "mistake",
    "pt": "Quero, sim! Pega uma cerveja pra mim?",
-   "said": "Quero sim pegar uma cerveja para mim.",
-   "why": "Two sentences; pega is the request.",
-   "type": "grammar"
+   "en": ""
   },
   {
    "id": "m8641bb1d",
    "k": "mistake",
-   "sheet": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso.",
    "pt": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso.",
-   "en": "I needed to tidy the house, but I didn't because I'm lazy.",
-   "said": "Eu precisei arrumar a casa",
-   "why": "Imperfect 'precisava' for an ongoing need; preterite suggests it was completed.",
-   "type": "grammar"
+   "en": "I needed to tidy the house, but I didn't because I'm lazy."
+  },
+  {
+   "id": "m9314c8cc",
+   "k": "mistake",
+   "pt": "A gente comprou passagem pro ônibus.",
+   "en": "We bought tickets for the bus."
   },
   {
    "id": "m94b2795e",
    "k": "mistake",
-   "sheet": "Normalmente o Tottenham vai mal",
    "pt": "Normalmente o Tottenham vai mal",
-   "en": "Usually Tottenham does badly",
-   "said": "Tottenham é mal, normalmente",
-   "why": "Teams take o; use ir mal or tá mal, not ser",
-   "type": "grammar"
+   "en": "Usually Tottenham does badly"
   },
   {
    "id": "m979a6121",
    "k": "mistake",
    "pt": "Mas o pior jogador é o Richarlison.",
-   "en": "But the worst player is Richarlison.",
-   "said": "o prior jogador é Richarlison",
-   "why": "The word is 'pior', not 'prior'. Use 'o' before names.",
-   "type": "vocab"
+   "en": "But the worst player is Richarlison."
   },
   {
    "id": "m9d72686c",
    "k": "mistake",
-   "sheet": "Hoje eu estudei bastante português, falei com a minha namorada e joguei F1.",
    "pt": "Hoje eu estudei bastante português, falei com a minha namorada e joguei F1.",
-   "en": "Today I studied a lot of Portuguese, talked to my girlfriend and played F1.",
-   "said": "estudei português muito",
-   "why": "Use 'bastante' before the noun; 'muito' sounds unnatural after it.",
-   "type": "vocab"
+   "en": "Today I studied a lot of Portuguese, talked to my girlfriend and played F1."
   },
   {
    "id": "m9dd091f3",
    "k": "mistake",
    "pt": "Eu fui pro supermercado comprar comida.",
-   "en": "I went to the supermarket to buy food.",
-   "said": "para pedir comida",
-   "why": "Pedir means to order or ask for; comprar means to buy.",
-   "type": "vocab"
+   "en": "I went to the supermarket to buy food."
   },
   {
    "id": "ma07c6332",
    "k": "mistake",
    "pt": "Acho que é o Maddison.",
-   "en": "I think it's Maddison.",
-   "said": "Acho que o Maddison",
-   "why": "Include the verb 'é' after 'que' when naming someone.",
-   "type": "grammar"
+   "en": "I think it's Maddison."
+  },
+  {
+   "id": "ma8104988",
+   "k": "mistake",
+   "pt": "A Gabi vai me contar.",
+   "en": "Gabi will tell me."
   },
   {
    "id": "mb479dca1",
    "k": "mistake",
    "pt": "Normalmente tomo, sim.",
-   "en": "Yes, I usually have one (drink coffee).",
-   "said": "Normalmente tenho, sim",
-   "why": "For drinking coffee, use tomar, not ter.",
-   "type": "vocab"
+   "en": "Yes, I usually have one (drink coffee)."
   },
   {
    "id": "mb90467b6",
    "k": "mistake",
    "pt": "Me vê um café com leite, por favor.",
-   "said": "Me vem um café com leite, por favor.",
-   "why": "Use ver, not vir, for this request.",
-   "type": "grammar"
+   "en": ""
   },
   {
-   "id": "mc7519e6e",
+   "id": "mbfb4c801",
    "k": "mistake",
-   "sheet": "Eu estava sem vontade de fazer nada.",
-   "pt": "Eu estava sem vontade de fazer nada.",
-   "en": "I didn't feel like doing anything.",
-   "said": "(missing)",
-   "why": "a phrase you needed in your diário",
-   "type": "vocab"
+   "pt": "Ontem o trabalho foi tranquilo.",
+   "en": "Yesterday work was easy."
+  },
+  {
+   "id": "mc7138943",
+   "k": "mistake",
+   "pt": "Como assim, sete ondas? O que é isso?",
+   "en": "What do you mean, seven waves? What is that?"
   },
   {
    "id": "mc7eb2fe6",
    "k": "mistake",
-   "sheet": "Oi, Rafa! Eu sou o George, sou amigo da Gabi.",
    "pt": "Oi, Rafa! Eu sou o George, sou amigo da Gabi.",
-   "en": "Hi, Rafa! I'm George, I'm Gabi's friend.",
-   "said": "Oi rafa eu sou o George sou amigo da Gabi",
-   "why": "Minor: name Rafa needs a capital and commas; otherwise fine.",
-   "type": "grammar"
+   "en": "Hi, Rafa! I'm George, I'm Gabi's friend."
   },
   {
    "id": "mcb7388ab",
    "k": "mistake",
    "pt": "Eu comi muita comida não saudável, mas amanhã vai ser melhor.",
-   "en": "I ate a lot of unhealthy food, but tomorrow will be better.",
-   "said": "Eu comi muito comida não saudável",
-   "why": "Muito agrees with feminine comida: muita. Use 'vai ser' for tomorrow.",
-   "type": "grammar"
+   "en": "I ate a lot of unhealthy food, but tomorrow will be better."
+  },
+  {
+   "id": "mcf04b383",
+   "k": "mistake",
+   "pt": "A Gabi e eu planejamos viajar pro Rio pro Réveillon.",
+   "en": "Gabi and I planned to travel to Rio for New Year's Eve."
   },
   {
    "id": "md3a083dd",
    "k": "mistake",
    "pt": "Treino cardio dia sim, dia não.",
-   "en": "I do cardio every other day.",
-   "said": "Eu treino cardio todo outro dia",
-   "why": "'Every other day' doesn't translate word for word; Portuguese says dia sim, dia não.",
-   "type": "vocab"
+   "en": "I do cardio every other day."
   },
   {
    "id": "me1e069a0",
    "k": "mistake",
    "pt": "Hoje eu tô de folga da academia.",
-   "en": "Today I'm taking a break from the gym.",
-   "said": "(missing)",
-   "why": "a phrase you needed in your diário",
-   "type": "vocab"
+   "en": "Today I'm taking a break from the gym."
   },
   {
    "id": "me5a8038e",
    "k": "mistake",
-   "sheet": "Vou pra pizzaria.",
    "pt": "Vou pra pizzaria.",
-   "en": "I'm going to the pizzeria.",
-   "said": "Eu vou na pizzaria",
-   "why": "Ir takes a or pra before places, not na.",
-   "type": "grammar"
+   "en": "I'm going to the pizzeria."
   },
   {
    "id": "mec9a90a6",
    "k": "mistake",
    "pt": "Gosto de queijo na pizza.",
-   "en": "I like cheese on pizza.",
-   "said": "Gosto queijo na pizza",
-   "why": "Gostar takes the preposition de before the noun.",
-   "type": "grammar"
+   "en": "I like cheese on pizza."
   },
   {
    "id": "mf0a3581d",
    "k": "mistake",
    "pt": "Normalmente não como nada no café da manhã.",
-   "en": "I usually don't eat anything for breakfast.",
-   "said": "Normalmente eu como nada por café de manhã",
-   "why": "Negate with não before the verb, use no for 'at/for breakfast', and the word is café da manhã.",
-   "type": "grammar"
+   "en": "I usually don't eat anything for breakfast."
   },
   {
    "id": "mf550bd13",
    "k": "mistake",
    "pt": "Nossa, que barato!",
-   "said": "Doze reais é muito barata.",
-   "why": "Barato agrees with the price.",
-   "type": "grammar"
+   "en": ""
   },
   {
    "id": "mf970dafb",
    "k": "mistake",
-   "sheet": "Estou aprendendo português porque eu amo o Brasil.",
    "pt": "Estou aprendendo português porque eu amo o Brasil.",
-   "en": "I'm learning Portuguese because I love Brazil.",
-   "said": "(couldn't say it)",
-   "why": "you reached for this in meeting someone new",
-   "type": "vocab"
+   "en": "I'm learning Portuguese because I love Brazil."
   },
   {
    "id": "mfc6fb8cb",
    "k": "mistake",
    "pt": "Não, tá ótimo, obrigado.",
-   "said": "Não estou satisfeito. Obrigado.",
-   "why": "Without a pause it sounds like you're unhappy.",
-   "type": "pronunciation"
+   "en": ""
   },
   {
    "id": "p20261114-1",
    "k": "pattern",
    "pt": "Depois de São Paulo, vou pro Rio.",
    "en": "After São Paulo, I'm going to Rio.",
-   "lit": "After of São Paulo, go to-the Rio",
-   "why": "going to a place = ir pra; pro = pra + o",
-   "type": "grammar",
    "q": "E depois de São Paulo, cê vai pra onde?",
    "qs": "Rafa"
   },
@@ -647,9 +458,6 @@
    "k": "pattern",
    "pt": "Estudei por um mês e meio antes de vir.",
    "en": "I studied for a month and a half before coming.",
-   "lit": "Studied for a month and half before of to-come",
-   "why": "por = for a length of time",
-   "type": "grammar",
    "q": "Quanto tempo cê estudou português?",
    "qs": "Bia"
   },
@@ -658,9 +466,6 @@
    "k": "pattern",
    "pt": "A Gabi mora com a mãe dela.",
    "en": "Gabi lives with her mum.",
-   "lit": "The Gabi lives with the mother of-her",
-   "why": "live with someone = morar com",
-   "type": "grammar",
    "q": "E a Gabi, mora com quem?",
    "qs": "Rafa"
   },
@@ -669,9 +474,6 @@
    "k": "pattern",
    "pt": "Quero andar pela Paulista no domingo.",
    "en": "I want to walk along Paulista on Sunday.",
-   "lit": "Want to-walk through-the Paulista on-the Sunday",
-   "why": "pela = along or around a place (por + a)",
-   "type": "grammar",
    "q": "O que cê quer fazer em São Paulo?",
    "qs": "Ana"
   }
