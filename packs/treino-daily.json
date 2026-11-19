@@ -2,35 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-18",
+   "date": "2026-11-19",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Bom dia! Quarta-feira, hein?",
-      "en": "Hey, sufferer! Morning! Wednesday, eh?"
+      "pt": "E aí, sofredor! Bom dia! Quinta-feira, hein?",
+      "en": "Hey, sufferer! Morning! Thursday, eh?"
      },
      {
-      "pt": "No avião, todo mundo puxa papo, viu?",
-      "en": "On the plane, everybody starts a chat, you know?"
+      "pt": "Na imigração, o cara vai perguntar: \"Qual é o motivo da viagem?\"",
+      "en": "At immigration, the guy will ask: \"What's the purpose of the trip?\""
      },
      {
-      "pt": "Se perguntarem, fala: \"Tô aprendendo há quatro meses.\"",
-      "en": "If they ask, say: \"I've been learning for four months.\""
+      "pt": "Aí cê fala: \"Vim visitar a minha namorada. Vou ficar três semanas.\"",
+      "en": "Then you say: \"I've come to visit my girlfriend. I'm staying three weeks.\""
      },
      {
-      "pt": "E se o cara falar de pizza, lembra: sem queijo!",
-      "en": "And if the guy talks about pizza, remember: no cheese!"
+      "pt": "E troca só um pouco de dinheiro lá, que o câmbio do aeroporto é caro, viu?",
+      "en": "And change just a little money there, because the airport rate is expensive, you know?"
      }
     ],
     "q": {
-     "pt": "Mas me conta: o Tottenham ainda perde muito ou já melhorou?",
-     "en": "But tell me: does Tottenham still lose a lot or has it already improved?"
+     "pt": "Mas me conta: ontem cê trabalhou o dia inteiro?",
+     "en": "But tell me: did you work all day yesterday?"
     },
     "sources": []
    },
    "diario": {
-    "pt": "No episódio, o George conversa com um passageiro no avião. E cê, como foi o seu dia? Fala três frases no passado: Hoje eu acordei…, hoje eu trabalhei…, hoje eu treinei…",
-    "en": "In the episode, George chats with a passenger on the plane. And you, how was your day? Say three sentences in the past tense: Today I woke up…, today I worked…, today I trained…"
+    "pt": "Escreve três frases sobre o seu dia de hoje, no passado: \"Hoje eu fui… / Hoje eu tive… / Hoje eu cheguei…\"",
+    "en": "Write three sentences about your day today, in the past tense: \"Today I went… / Today I had… / Today I arrived…\""
    }
   }
  ]
