@@ -51,6 +51,8 @@ Connectors can finish connecting a minute or two after a run starts, so a missin
 Before you give up on one, and before step 1 of your agent file, check that the app tools are there:
 1. ToolSearch `select:` the exact names above.
 2. If any is missing, ToolSearch by keyword: `+claude-artifacts db`, then `+claude-artifacts publish`.
+   Some runs have the same abilities under other names: `ArtifactData` (database: get, list, query, write) and
+   `Artifact` (publish files to the artifact). Search `ArtifactData` and `Artifact` too; either set is fine.
 3. Still missing: wait 60 seconds (`sleep 60`) and repeat 1–2. Do this up to 5 times (about 5 minutes), doing
    the repo and sheet work in between if you like.
 Only after that, skip the step that needs the tool, do the rest, and say so in your report, naming the tool.
