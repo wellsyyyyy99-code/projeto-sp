@@ -2,35 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Bom dia! Quinta-feira, hein?",
-      "en": "Hey, sufferer! Morning! Thursday, eh?"
+      "pt": "E aí, sofredor! Bom dia! Sexta-feira, hein?",
+      "en": "Hey, sufferer! Morning! Friday, eh?"
      },
      {
-      "pt": "Na imigração, o cara vai perguntar: \"Qual é o motivo da viagem?\"",
-      "en": "At immigration, the guy will ask: \"What's the purpose of the trip?\""
+      "pt": "No Uber, o motorista vai falar: \"Tá mó trânsito na Marginal hoje.\"",
+      "en": "In the Uber, the driver will say: \"The traffic on the Marginal is terrible today.\""
      },
      {
-      "pt": "Aí cê fala: \"Vim visitar a minha namorada. Vou ficar três semanas.\"",
-      "en": "Then you say: \"I've come to visit my girlfriend. I'm staying three weeks.\""
+      "pt": "Aí cê pergunta: \"Quanto tempo demora?\" E ele fala: \"Uns cinquenta minutos.\"",
+      "en": "Then you ask: \"How long does it take?\" And he says: \"About fifty minutes.\""
      },
      {
-      "pt": "E troca só um pouco de dinheiro lá, que o câmbio do aeroporto é caro, viu?",
-      "en": "And change just a little money there, because the airport rate is expensive, you know?"
+      "pt": "Na hora de descer, fala: \"Pode parar aqui, por favor.\" Fácil, né?",
+      "en": "When it's time to get out, say: \"You can stop here, please.\" Easy, right?"
      }
     ],
     "q": {
-     "pt": "Mas me conta: ontem cê trabalhou o dia inteiro?",
-     "en": "But tell me: did you work all day yesterday?"
+     "pt": "Mas me conta: como tá o Tottenham? Ainda perde muito?",
+     "en": "But tell me: how's Tottenham doing? Do they still lose a lot?"
     },
     "sources": []
    },
    "diario": {
-    "pt": "Escreve três frases sobre o seu dia de hoje, no passado: \"Hoje eu fui… / Hoje eu tive… / Hoje eu cheguei…\"",
-    "en": "Write three sentences about your day today, in the past tense: \"Today I went… / Today I had… / Today I arrived…\""
+    "pt": "No episódio, o George pega um Uber na Marginal. E cê, como foi o seu dia? Escreve três frases no passado: \"Hoje eu peguei… / Hoje eu fui… / Hoje eu comi…\"",
+    "en": "In the episode, George takes an Uber on the Marginal. And you, how was your day? Write three sentences in the past tense: \"Today I took… / Today I went… / Today I ate…\""
    }
   }
  ]

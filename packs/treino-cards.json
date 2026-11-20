@@ -248,6 +248,18 @@
    "en": "I studied Portuguese, went to the gym, talked to my girlfriend and rested"
   },
   {
+   "id": "m494467ea",
+   "k": "mistake",
+   "pt": "Tô com saudade da Gabi, só falta um pouco pra eu ir te ver.",
+   "en": "I miss Gabi, it's only a little while until I go to see her."
+  },
+  {
+   "id": "m52a631b4",
+   "k": "mistake",
+   "pt": "Hoje foi um dia normal.",
+   "en": "Today was a normal day."
+  },
+  {
    "id": "m57e20a67",
    "k": "mistake",
    "pt": "Prefiro trabalhar de casa porque durmo mais.",
@@ -284,6 +296,12 @@
    "en": "I ate yesterday."
   },
   {
+   "id": "m69e67cdc",
+   "k": "mistake",
+   "pt": "Fui pra academia na hora do almoço.",
+   "en": "I went to the gym at lunchtime."
+  },
+  {
    "id": "m6ab72d1d",
    "k": "mistake",
    "pt": "A gente se conheceu na internet",
@@ -312,6 +330,12 @@
    "k": "mistake",
    "pt": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso.",
    "en": "I needed to tidy the house, but I didn't because I'm lazy."
+  },
+  {
+   "id": "m8eb078c9",
+   "k": "mistake",
+   "pt": "Tudo bem, e você? Me vê um café com leite, por favor.",
+   "en": "Good, thanks, and you? Can I get a coffee with milk, please?"
   },
   {
    "id": "m9314c8cc",
@@ -368,6 +392,12 @@
    "en": ""
   },
   {
+   "id": "mbab6ac8b",
+   "k": "mistake",
+   "pt": "E aí, Rafa, obrigado.",
+   "en": "Hey, Rafa, thanks."
+  },
+  {
    "id": "mbfb4c801",
    "k": "mistake",
    "pt": "Ontem o trabalho foi tranquilo.",
@@ -390,6 +420,12 @@
    "k": "mistake",
    "pt": "Eu comi muita comida não saudável, mas amanhã vai ser melhor.",
    "en": "I ate a lot of unhealthy food, but tomorrow will be better."
+  },
+  {
+   "id": "mcd982ebd",
+   "k": "mistake",
+   "pt": "Tem alguma coisa sem queijo?",
+   "en": "Do you have anything without cheese?"
   },
   {
    "id": "mcf04b383",
@@ -426,6 +462,12 @@
    "k": "mistake",
    "pt": "Normalmente não como nada no café da manhã.",
    "en": "I usually don't eat anything for breakfast."
+  },
+  {
+   "id": "mf233c609",
+   "k": "mistake",
+   "pt": "Pra comer aqui, por favor.",
+   "en": "To eat here, please."
   },
   {
    "id": "mf550bd13",
