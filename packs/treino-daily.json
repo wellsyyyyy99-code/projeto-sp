@@ -31,7 +31,29 @@
    "diario": {
     "pt": "No episódio, o George pede informação na Avenida Paulista. E cê, como foi o seu dia? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu fiz… / Hoje eu comi…\"",
     "en": "In the episode, George asks for directions on Avenida Paulista. And you, how was your day? Write three sentences in the past tense: \"Today I went… / Today I did… / Today I ate…\""
-   }
+   },
+   "exam": [
+    {
+     "pt": "Se apresenta pra mim: quem é você, onde cê mora e com o que cê trabalha?",
+     "who": "Rafa"
+    },
+    {
+     "pt": "E aí, George! Como foi a sua semana? Me conta uma coisa legal que cê fez.",
+     "who": "Ana"
+    },
+    {
+     "pt": "Seja bem-vindo, George! Como foi a viagem, e cê quer um pouco da lasanha de queijo que eu fiz?",
+     "who": "Mãe"
+    },
+    {
+     "pt": "Cê trabalha de casa ou no escritório? E depois do trabalho, cê vai pra onde?",
+     "who": "Rafa"
+    },
+    {
+     "pt": "Cê prefere treinar de manhã ou de noite? Me explica a diferença.",
+     "who": "Rafa"
+    }
+   ]
   }
  ]
 }
