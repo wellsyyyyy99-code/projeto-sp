@@ -1,0 +1,599 @@
+{
+ "pack": 7,
+ "episodes": [
+  {
+   "ep": 23,
+   "title": "Café na padaria",
+   "intro": "Saturday morning: George and Gabi go to Seu Zé's bakery, and Seu Zé talks fast. Your goal: order breakfast without cheese or egg, ask him to repeat when he's too quick, and pay by credit card.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Sábado de manhã. O George e a Gabi vão na padaria do Seu Zé, aqui perto.",
+     "heard": "Sábadu dji manhã. U George i a Gabi vãu na padaria du Séu Zé, akí pertu.",
+     "en": "Saturday morning. George and Gabi go to Seu Zé's bakery, just round the corner."
+    },
+    {
+     "speaker": "Seu Zé",
+     "pt": "Bom dia, Gabi! Quem é esse aí?",
+     "heard": "Bom djia, Gabi! Kein é êssi aí?",
+     "en": "Morning, Gabi! Who's this?"
+    },
+    {
+     "speaker": "Gabi",
+     "pt": "Seu Zé, esse é o George, meu namorado. Ele veio de Londres!",
+     "heard": "Séu Zé, êssi é u George, meu namoradu. Éli véiu dji Londris!",
+     "en": "Seu Zé, this is George, my boyfriend. He's come from London!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Prazer, Seu Zé! Tô aprendendo português há quatro meses.",
+     "heard": "Prazê, Séu Zé! Tô aprendeno portuguêis á kuatru mezis.",
+     "en": "Nice to meet you, Seu Zé! I've been learning Portuguese for four months."
+    },
+    {
+     "speaker": "Seu Zé",
+     "pt": "Que bom! Hoje tem pão de queijo, pão na chapa e bolo de batata-doce, tudo saindo agora! Então fala o que cê quer!",
+     "heard": "Ki bom! Oji tein pãu dji keiju, pãu na chapa i bolu dji batata-doci, tudu saino agóra! Entãu fala u ki cê ké!",
+     "en": "Great! Today there's cheese bread, toasted buttered rolls and sweet potato cake, all coming out now! So tell me what you want!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Desculpa, não entendi. Pode repetir? Mais devagar, por favor.",
+     "heard": "Djiscupa, num entendí. Pódji repetí? Mais devagá, pur favô.",
+     "en": "Sorry, I didn't understand. Can you say that again? More slowly, please."
+    },
+    {
+     "speaker": "Seu Zé",
+     "pt": "Calma! Tem pão de queijo, pão na chapa e bolo de batata-doce. O que vai ser?",
+     "heard": "Cauma! Tein pãu dji keiju, pãu na chapa i bolu dji batata-doci. U ki vai sê?",
+     "en": "Easy! There's cheese bread, toasted buttered rolls and sweet potato cake. What'll it be?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Eu não como queijo. Quero bolo de batata-doce e um pão na chapa.",
+     "heard": "Eu num cômu keiju. Kéru bolu dji batata-doci i um pãu na chapa.",
+     "en": "I don't eat cheese. I'd like the sweet potato cake and a toasted buttered roll."
+    },
+    {
+     "speaker": "Gabi",
+     "pt": "Pra mim, um pão de queijo e um café. E cê, George?",
+     "heard": "Pra mim, um pãu dji keiju i um café. I cê, George?",
+     "en": "For me, a cheese bread and a coffee. And you, George?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Me vê um café com leite também. Hoje eu tô de folga da academia, então vou comer bastante!",
+     "heard": "Mi vê um café cun leitchi tambein. Oji eu tô dji fólga da academia, entãu vô comê bastantchi!",
+     "en": "Can I get a white coffee too. Today I'm off from the gym, so I'm going to eat loads!"
+    },
+    {
+     "speaker": "Seu Zé",
+     "pt": "Boa! Mais alguma coisa?",
+     "heard": "Boa! Mais auguma coisa?",
+     "en": "Nice! Anything else?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Não, mais nada, obrigado. Quanto fica?",
+     "heard": "Nãu, mais nada, obrigadu. Kuantu fika?",
+     "en": "No, nothing else, thanks. How much is it?"
+    },
+    {
+     "speaker": "Seu Zé",
+     "pt": "Dá vinte e oito reais. Crédito ou débito?",
+     "heard": "Dá vintchi i oitu rêais. Crédjitu ou débitu?",
+     "en": "That's twenty-eight reais. Credit or debit?"
+    },
+    {
+     "speaker": "George",
+     "pt": "No crédito, por favor.",
+     "heard": "Nu crédjitu, pur favô.",
+     "en": "On credit, please."
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Quero bolo de batata-doce.",
+     "heard": "Kéru bolu dji batata-doci.",
+     "en": "I'd like sweet potato cake.",
+     "note": "batata-doce = sweet potato; never 'batata sweet'"
+    },
+    {
+     "pt": "Não, mais nada, obrigado.",
+     "heard": "Nãu, mais nada, obrigadu.",
+     "en": "No, nothing else, thanks.",
+     "note": "lit: no, more nothing, thanks"
+    },
+    {
+     "pt": "No crédito, por favor.",
+     "heard": "Nu crédjitu, pur favô.",
+     "en": "On credit, please.",
+     "note": "lit: on-the credit; no débito = on debit"
+    },
+    {
+     "pt": "Hoje eu tô de folga da academia.",
+     "heard": "Oji eu tô dji fólga da academia.",
+     "en": "Today I'm off from the gym.",
+     "note": "lit: today I-am of day-off of-the gym"
+    },
+    {
+     "pt": "Pode repetir? Mais devagar, por favor.",
+     "heard": "Pódji repetí? Mais devagá, pur favô.",
+     "en": "Can you say that again? More slowly, please.",
+     "note": "devagar = slowly; use it any time"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Seu Zé",
+     "q": "Bom dia! O que vai ser hoje?",
+     "q_en": "Morning! What'll it be today?",
+     "model": "Bom dia! Me vê um pão na chapa e um café com leite, por favor.",
+     "model_en": "Morning! Can I get a toasted buttered roll and a white coffee, please."
+    },
+    {
+     "speaker": "Seu Zé",
+     "q": "Quer um pão de queijo? Tá saindo agora!",
+     "q_en": "Want a cheese bread? It's coming out now!",
+     "model": "Obrigado, mas eu não como queijo. Tem bolo de batata-doce?",
+     "model_en": "Thanks, but I don't eat cheese. Do you have sweet potato cake?"
+    },
+    {
+     "speaker": "Seu Zé",
+     "q": "Mais alguma coisa? Dá vinte e oito reais. Crédito ou débito?",
+     "q_en": "Anything else? That's twenty-eight reais. Credit or debit?",
+     "model": "Não, mais nada, obrigado. No crédito, por favor.",
+     "model_en": "No, nothing else, thanks. On credit, please."
+    },
+    {
+     "speaker": "Seu Zé",
+     "q": "Cê tá de férias aqui? Tá gostando do bairro?",
+     "q_en": "Are you on holiday here? Are you liking the neighbourhood?",
+     "model": "Tô, sim! Vou ficar três semanas. Tô gostando muito da padaria!",
+     "model_en": "Yes! I'm staying three weeks. I'm really liking the bakery!"
+    }
+   ],
+   "task": "Order your own breakfast out loud for 3 minutes: a drink and a pão na chapa, no cheese, Não, mais nada, and No crédito, por favor. Then do it again with Seu Zé talking far too fast: stop him with Pode repetir? Mais devagar, por favor. Then run the scene in Treino."
+  },
+  {
+   "ep": 24,
+   "title": "No restaurante",
+   "intro": "Saturday night: George and Gabi eat out. The waiter is fast, and the wrong drink arrives. Your goal: ask for a table, say what you don't eat, ask what he recommends, and fix the wrong drink politely.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Sábado à noite. O George e a Gabi chegam num restaurante em Pinheiros.",
+     "heard": "Sábadu à noitchi. U George i a Gabi chégam num restaurantchi ein Pinhêirus.",
+     "en": "Saturday night. George and Gabi arrive at a restaurant in Pinheiros."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Boa noite! Mesa pra quantas pessoas?",
+     "heard": "Boa noitchi! Meza pra kuantas pessôas?",
+     "en": "Good evening! Table for how many?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Uma mesa pra dois, por favor.",
+     "heard": "Uma meza pra dois, pur favô.",
+     "en": "A table for two, please."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Pode sentar ali. Hoje tem moqueca de peixe, picanha e frango grelhado, tá tudo uma delícia, viu? E pra beber, o que vocês vão querer?",
+     "heard": "Pódji sentá alí. Oji tein mokéca dji pêixi, picanha i frangu grelhadu, tá tudu uma delícia, viu? I pra bebê, u ki vocês vãu querê?",
+     "en": "You can sit over there. Today we've got fish moqueca, picanha and grilled chicken, it's all delicious, you know? And what would you like to drink?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Desculpa, o que significa \"grelhado\"?",
+     "heard": "Djiscupa, u ki significa \"grelhadu\"?",
+     "en": "Sorry, what does \"grelhado\" mean?"
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "É o frango na chapa, bem simples, sem molho.",
+     "heard": "É u frangu na chapa, bein simplis, sein môlhu.",
+     "en": "It's chicken cooked on the griddle, very simple, no sauce."
+    },
+    {
+     "speaker": "George",
+     "pt": "Eu não como peixe, nem ovo, nem queijo. O que cê recomenda?",
+     "heard": "Eu num cômu pêixi, nein ôvu, nein keiju. U ki cê recomenda?",
+     "en": "I don't eat fish, eggs or cheese. What do you recommend?"
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Então vai de picanha! Vem com arroz, feijão e batata frita.",
+     "heard": "Entãu vai dji picanha! Vein cun arrôs, feijãu i batata frita.",
+     "en": "Then go for the picanha! It comes with rice, beans and chips."
+    },
+    {
+     "speaker": "George",
+     "pt": "Perfeito! Hoje comi só um iogurte, então tô com muita fome. Quero a picanha e um suco de laranja.",
+     "heard": "Perfeitu! Oji comi só um iogurtchi, entãu tô cun muita fômi. Kéru a picanha i um sucu dji laranja.",
+     "en": "Perfect! I only had a yoghurt today, so I'm really hungry. I'd like the picanha and an orange juice."
+    },
+    {
+     "speaker": "Gabi",
+     "pt": "Pra mim, a moqueca e uma água. Valeu!",
+     "heard": "Pra mim, a mokéca i uma água. Valeu!",
+     "en": "For me, the moqueca and a water. Thanks!"
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Aqui tá! Bom apetite!",
+     "heard": "Akí tá! Bom apetchitchi!",
+     "en": "Here you are! Enjoy your meal!"
+    },
+    {
+     "speaker": "George",
+     "pt": "Desculpa, eu pedi suco de laranja, mas veio água.",
+     "heard": "Djiscupa, eu pedji sucu dji laranja, mas véiu água.",
+     "en": "Sorry, I ordered orange juice, but I got water."
+    },
+    {
+     "speaker": "Garçom",
+     "pt": "Foi mal! Já troco pra você.",
+     "heard": "Foi mau! Já trocu pra você.",
+     "en": "My bad! I'll swap it for you now."
+    },
+    {
+     "speaker": "George",
+     "pt": "Tá uma delícia! A conta, por favor.",
+     "heard": "Tá uma delícia! A conta, pur favô.",
+     "en": "It's delicious! The bill, please."
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "O que significa \"grelhado\"?",
+     "heard": "U ki significa \"grelhadu\"?",
+     "en": "What does \"grelhado\" mean?",
+     "note": "lit: what means grelhado? Works for any new word"
+    },
+    {
+     "pt": "Eu pedi suco de laranja, mas veio água.",
+     "heard": "Eu pedji sucu dji laranja, mas véiu água.",
+     "en": "I ordered orange juice, but I got water.",
+     "note": "lit: I asked juice, but came water"
+    },
+    {
+     "pt": "Hoje comi só um iogurte.",
+     "heard": "Oji comi só um iogurtchi.",
+     "en": "I only had a yoghurt today.",
+     "note": "comi = I ate (finished), not 'como'"
+    },
+    {
+     "pt": "Vem com arroz e feijão?",
+     "heard": "Vein cun arrôs i feijãu?",
+     "en": "Does it come with rice and beans?",
+     "note": "lit: comes with rice and beans?"
+    },
+    {
+     "pt": "Uma mesa pra dois, por favor.",
+     "heard": "Uma meza pra dois, pur favô.",
+     "en": "A table for two, please.",
+     "note": "pra dois = for two; pra três = for three"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Garçom",
+     "q": "Boa noite! Mesa pra quantas pessoas?",
+     "q_en": "Good evening! Table for how many?",
+     "model": "Boa noite! Uma mesa pra dois, por favor.",
+     "model_en": "Good evening! A table for two, please."
+    },
+    {
+     "speaker": "Garçom",
+     "q": "Hoje tem moqueca de peixe, picanha e frango grelhado. O que vocês vão querer?",
+     "q_en": "Today we've got fish moqueca, picanha and grilled chicken. What would you like?",
+     "model": "Eu não como peixe, nem ovo, nem queijo. O que cê recomenda?",
+     "model_en": "I don't eat fish, eggs or cheese. What do you recommend?"
+    },
+    {
+     "speaker": "Garçom",
+     "q": "Tá tudo bom com a comida? Cê gostou?",
+     "q_en": "Is the food all right? Do you like it?",
+     "model": "Tá uma delícia! Hoje comi só um iogurte, então tava com muita fome.",
+     "model_en": "It's delicious! I only had a yoghurt today, so I was really hungry."
+    },
+    {
+     "speaker": "Garçom",
+     "q": "Aqui tá a sua água. Tá tudo certo?",
+     "q_en": "Here's your water. Is everything OK?",
+     "model": "Desculpa, eu pedi suco de laranja, mas veio água. Pode trocar, por favor?",
+     "model_en": "Sorry, I ordered orange juice, but I got water. Can you swap it, please?"
+    }
+   ],
+   "task": "Run the restaurant out loud for 3 minutes: ask for a table for two, say what you don't eat, ask what he recommends, ask what a new word means with O que significa...?, then send the wrong drink back politely. Do it twice; the second time answer every question in two sentences. Then run the scene in Treino."
+  },
+  {
+   "ep": 25,
+   "title": "Os amigos da Gabi",
+   "intro": "Sunday night in Vila Madalena: Gabi introduces George to her friends, and Bia starts teasing him about Tottenham. Your goal: say what you think of São Paulo, say what you do, and handle the football teasing with a smile.",
+   "lines": [
+    {
+     "speaker": "Narrador",
+     "pt": "Domingo à noite, num bar na Vila Madalena. A Gabi apresenta o George pros amigos dela.",
+     "heard": "Dumingu à noitchi, num bar na Vila Madaléna. A Gabi apresenta u George prus amigus déla.",
+     "en": "Sunday night, in a bar in Vila Madalena. Gabi introduces George to her friends."
+    },
+    {
+     "speaker": "Bia",
+     "pt": "Então cê que é o famoso George! Prazer, eu sou a Bia. Tá gostando de São Paulo?",
+     "heard": "Entãu cê ki é u famozu George! Prazê, eu sô a Bia. Tá gostano dji Sãu Paulu?",
+     "en": "So you're the famous George! Nice to meet you, I'm Bia. Are you liking São Paulo?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Prazer, Bia! Tô gostando muito! Acho que São Paulo é mó legal.",
+     "heard": "Prazê, Bia! Tô gostano muintu! Acho ki Sãu Paulu é mó legau.",
+     "en": "Nice to meet you, Bia! I'm really liking it! I think São Paulo is really cool."
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "E aí, George! Cê trabalha com o quê lá em Londres?",
+     "heard": "I aí, George! Cê trabalha cun u quê lá ein Londris?",
+     "en": "Hey, George! What do you do for work over in London?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Trabalho com câmbio. Na quarta eu trabalhei o dia inteiro, e na quinta eu vim pra cá.",
+     "heard": "Trabalhu cun câmbiu. Na kuarta eu trabalhei u djia intêiru, i na kinta eu vin pra cá.",
+     "en": "I work in FX. On Wednesday I worked all day, and on Thursday I came here."
+    },
+    {
+     "speaker": "Bia",
+     "pt": "Nossa, cê deve tá morto! Como cê tá agora?",
+     "heard": "Nóssa, cê dévi tá mortu! Comu cê tá agóra?",
+     "en": "Wow, you must be dead on your feet! How are you now?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Tava muito cansado, mas agora tá melhor!",
+     "heard": "Tava muintu cansadu, mas agóra tá melhó!",
+     "en": "I was really tired, but now it's better!"
+    },
+    {
+     "speaker": "Bia",
+     "pt": "Que bom! Meu, o Tottenham tá um sofrimento, né? Cê sofre todo fim de semana! Mas me fala, quem é o pior jogador do time?",
+     "heard": "Ki bom! Meu, u Tottenham tá um sofrimentu, né? Cê sófri tôdu fim dji semana! Mas mi fala, kein é u pió jogadô du tchimi?",
+     "en": "Great! Mate, Tottenham are a nightmare, aren't they? You suffer every weekend! But tell me, who's the worst player in the team?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Desculpa! Como se diz \"worst\" em português?",
+     "heard": "Djiscupa! Comu si djiz \"worst\" ein portuguêis?",
+     "en": "Sorry! How do you say \"worst\" in Portuguese?"
+    },
+    {
+     "speaker": "Bia",
+     "pt": "Pior! É o contrário de melhor. O pior jogador do Spurs.",
+     "heard": "Pió! É u contrárju dji melhó. U pió jogadô du Spurs.",
+     "en": "Pior! It's the opposite of melhor. The worst player at Spurs."
+    },
+    {
+     "speaker": "George",
+     "pt": "Ah, entendi! O Spurs perde muito, mas eu sou fiel. Pra mim, o pior jogador é o Richarlison.",
+     "heard": "Ah, entendí! U Spurs pérdji muintu, mas eu sô fiéu. Pra mim, u pió jogadô é u Richarlison.",
+     "en": "Ah, got it! Spurs lose a lot, but I'm loyal. For me, the worst player is Richarlison."
+    },
+    {
+     "speaker": "Estranho",
+     "pt": "Boa! E essa força toda? Cê treina?",
+     "heard": "Boa! I éssa fôrsa tôda? Cê treina?",
+     "en": "Nice one! And all that strength? Do you train?"
+    },
+    {
+     "speaker": "George",
+     "pt": "Vou pra academia todo dia, e treino cardio dia sim, dia não.",
+     "heard": "Vô pra academia tôdu djia, i treinu cárdju djia sim, djia nãu.",
+     "en": "I go to the gym every day, and I do cardio every other day."
+    },
+    {
+     "speaker": "Bia",
+     "pt": "Da hora! Tá aprovado, George. Bem-vindo ao grupo!",
+     "heard": "Da hóra! Tá aprovadu, George. Bein-vindu au grupu!",
+     "en": "Brilliant! You're approved, George. Welcome to the group!"
+    }
+   ],
+   "chunks": [
+    {
+     "pt": "Acho que São Paulo é mó legal.",
+     "heard": "Acho ki Sãu Paulu é mó legau.",
+     "en": "I think São Paulo is really cool.",
+     "note": "lit: I-think that São Paulo is mega cool"
+    },
+    {
+     "pt": "Como se diz \"worst\" em português?",
+     "heard": "Comu si djiz \"worst\" ein portuguêis?",
+     "en": "How do you say \"worst\" in Portuguese?",
+     "note": "Como se diz...? = how do you say...? Swap in any word"
+    },
+    {
+     "pt": "O Spurs perde muito, mas eu sou fiel.",
+     "heard": "U Spurs pérdji muintu, mas eu sô fiéu.",
+     "en": "Spurs lose a lot, but I'm loyal.",
+     "note": "perde = present: loses, as a habit (not 'perdi')"
+    },
+    {
+     "pt": "Na quarta eu trabalhei o dia inteiro.",
+     "heard": "Na kuarta eu trabalhei u djia intêiru.",
+     "en": "On Wednesday I worked all day.",
+     "note": "lit: on-the Wednesday I worked the day whole"
+    },
+    {
+     "pt": "Tava cansado, mas agora tá melhor.",
+     "heard": "Tava cansadu, mas agóra tá melhó.",
+     "en": "I was tired, but now it's better.",
+     "note": "melhor already means better; never 'mais melhor'"
+    }
+   ],
+   "speak": [
+    {
+     "speaker": "Bia",
+     "q": "Tá gostando de São Paulo? Por quê?",
+     "q_en": "Are you liking São Paulo? Why?",
+     "model": "Tô gostando muito! Acho que São Paulo é mó legal.",
+     "model_en": "I'm really liking it! I think São Paulo is really cool."
+    },
+    {
+     "speaker": "Estranho",
+     "q": "Cê trabalha com o quê? E tá de férias?",
+     "q_en": "What do you do for work? And are you on holiday?",
+     "model": "Trabalho com câmbio, em Londres. Tô de férias por três semanas.",
+     "model_en": "I work in FX, in London. I'm on holiday for three weeks."
+    },
+    {
+     "speaker": "Bia",
+     "q": "Cê torce pra qual time? Tottenham, né? Mas ele perde muito!",
+     "q_en": "Which team do you support? Tottenham, right? But they lose a lot!",
+     "model": "Torço pro Tottenham. O Spurs perde muito, mas eu sou fiel!",
+     "model_en": "I support Tottenham. Spurs lose a lot, but I'm loyal!"
+    },
+    {
+     "speaker": "Estranho",
+     "q": "E como foi a viagem? Cê tá cansado?",
+     "q_en": "And how was the trip? Are you tired?",
+     "model": "Tava muito cansado, mas agora tá melhor. Dormi bastante!",
+     "model_en": "I was really tired, but now it's better. I slept loads!"
+    }
+   ],
+   "task": "Play the bar out loud for 3 minutes: say what you think of São Paulo with acho que, say what you do, defend Spurs with humour, and use Como se diz...? once. Then leave a 6-sentence voice note for Rafa about the night, in the past tense. Then run the scene in Treino."
+  }
+ ],
+ "drills": [
+  {
+   "en": "Sweet potato",
+   "pt": "batata-doce"
+  },
+  {
+   "en": "Spurs lose a lot.",
+   "pt": "O Spurs perde muito."
+  },
+  {
+   "en": "Today I'm off from the gym.",
+   "pt": "Hoje eu tô de folga da academia."
+  },
+  {
+   "en": "I worked all day.",
+   "pt": "Trabalhei o dia inteiro."
+  },
+  {
+   "en": "But now it's better.",
+   "pt": "mas agora tá melhor"
+  },
+  {
+   "en": "I needed to tidy the house, but I didn't because I'm lazy.",
+   "pt": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso."
+  },
+  {
+   "en": "But the worst player is Richarlison.",
+   "pt": "Mas o pior jogador é o Richarlison."
+  },
+  {
+   "en": "I do cardio every other day.",
+   "pt": "Treino cardio dia sim, dia não."
+  },
+  {
+   "en": "I'd like sweet potato cake.",
+   "pt": "Quero bolo de batata-doce."
+  },
+  {
+   "en": "No, nothing else, thanks.",
+   "pt": "Não, mais nada, obrigado."
+  },
+  {
+   "en": "On credit, please.",
+   "pt": "No crédito, por favor."
+  },
+  {
+   "en": "Can you say that again? More slowly, please.",
+   "pt": "Pode repetir? Mais devagar, por favor."
+  },
+  {
+   "en": "What does \"grelhado\" mean?",
+   "pt": "O que significa \"grelhado\"?"
+  },
+  {
+   "en": "I ordered orange juice, but I got water.",
+   "pt": "Eu pedi suco de laranja, mas veio água."
+  },
+  {
+   "en": "I only had a yoghurt today.",
+   "pt": "Hoje comi só um iogurte."
+  },
+  {
+   "en": "Does it come with rice and beans?",
+   "pt": "Vem com arroz e feijão?"
+  },
+  {
+   "en": "I think São Paulo is really cool.",
+   "pt": "Acho que São Paulo é mó legal."
+  },
+  {
+   "en": "How do you say \"worst\" in Portuguese?",
+   "pt": "Como se diz \"worst\" em português?"
+  },
+  {
+   "en": "A table for two, please.",
+   "pt": "Uma mesa pra dois, por favor."
+  },
+  {
+   "en": "What do you recommend?",
+   "pt": "O que cê recomenda?"
+  },
+  {
+   "en": "The bill, please.",
+   "pt": "A conta, por favor."
+  },
+  {
+   "en": "Can I get a white coffee, please.",
+   "pt": "Me vê um café com leite, por favor."
+  },
+  {
+   "en": "How much is it?",
+   "pt": "Quanto fica?"
+  },
+  {
+   "en": "I don't eat fish, eggs or cheese.",
+   "pt": "Eu não como peixe, nem ovo, nem queijo."
+  },
+  {
+   "en": "I work in FX.",
+   "pt": "Trabalho com câmbio."
+  },
+  {
+   "en": "It's delicious!",
+   "pt": "Tá uma delícia!"
+  },
+  {
+   "en": "After São Paulo, I'm going to Rio.",
+   "pt": "Depois de São Paulo, vou pro Rio."
+  },
+  {
+   "en": "I studied for a month and a half before coming.",
+   "pt": "Estudei por um mês e meio antes de vir."
+  },
+  {
+   "en": "Gabi lives with her mum.",
+   "pt": "A Gabi mora com a mãe dela."
+  }
+ ],
+ "talk": [
+  {
+   "en": "Breakfast: what you eat at home, and what you'd order at the padaria",
+   "pt": "George, o que cê come de manhã lá em Londres? E aqui na padaria, o que cê gosta de pedir?"
+  },
+  {
+   "en": "Restaurants: what you eat, what you don't eat, and your favourite meal",
+   "pt": "Me conta: o que cê gosta de comer e o que cê não come? Qual é o seu prato favorito?"
+  },
+  {
+   "en": "Friends and sport: football, F1, and how you train",
+   "pt": "E os seus amigos lá em Londres? Cês gostam de futebol? Conta como é o seu treino!"
+  }
+ ]
+}
