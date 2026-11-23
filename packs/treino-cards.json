@@ -16,6 +16,12 @@
    "en": "I'm really excited to be here."
   },
   {
+   "id": "m0287c84b",
+   "k": "mistake",
+   "pt": "Me vê um brigadeiro, por favor.",
+   "en": ""
+  },
+  {
    "id": "m03",
    "k": "mistake",
    "pt": "Trabalho com câmbio.",
@@ -140,6 +146,12 @@
    "en": "I'm going to live with my family."
   },
   {
+   "id": "m160066c1",
+   "k": "mistake",
+   "pt": "Não como peixe, nem queijo, nem ovo.",
+   "en": ""
+  },
+  {
    "id": "m17",
    "k": "mistake",
    "pt": "Quero ir pra Colômbia.",
@@ -152,6 +164,12 @@
    "k": "mistake",
    "pt": "Vou economizar dinheiro porque quero viajar pelo mundo todo.",
    "en": "I'm going to save money because I want to travel all over the world."
+  },
+  {
+   "id": "m187556ca",
+   "k": "mistake",
+   "pt": "Mesa pra dois, por favor.",
+   "en": ""
   },
   {
    "id": "m188d3571",
@@ -248,12 +266,6 @@
    "en": "I studied Portuguese, went to the gym, talked to my girlfriend and rested"
   },
   {
-   "id": "m494467ea",
-   "k": "mistake",
-   "pt": "Tô com saudade da Gabi, só falta um pouco pra eu ir te ver.",
-   "en": "I miss Gabi, it's only a little while until I go to see her."
-  },
-  {
    "id": "m52a631b4",
    "k": "mistake",
    "pt": "Hoje foi um dia normal.",
@@ -330,6 +342,12 @@
    "k": "mistake",
    "pt": "Eu precisava arrumar a casa, mas não arrumei porque sou preguiçoso.",
    "en": "I needed to tidy the house, but I didn't because I'm lazy."
+  },
+  {
+   "id": "m8c21100e",
+   "k": "mistake",
+   "pt": "Não gosto de peixe, nem de queijo, nem de ovo.",
+   "en": ""
   },
   {
    "id": "m8eb078c9",
