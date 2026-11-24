@@ -2,48 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Segunda-feira, bom dia!",
-      "en": "Hey, sufferer! Monday, good morning!"
+      "pt": "E aí, sofredor! Terça-feira, bom dia!",
+      "en": "Hey, sufferer! Tuesday, good morning!"
      },
      {
-      "pt": "No sábado teve corrida de F1 em Las Vegas, cê viu?",
-      "en": "On Saturday there was an F1 race in Las Vegas, did you see it?"
+      "pt": "Hoje comi só um iogurte, então tô com muita fome!",
+      "en": "I only had a yoghurt today, so I'm really hungry!"
      },
      {
-      "pt": "O Verstappen ganhou, e o Norris ficou em segundo.",
-      "en": "Verstappen won, and Norris came second."
+      "pt": "Hoje à noite eu e a Ana vamos jantar num restaurante em Pinheiros.",
+      "en": "Tonight Ana and I are going to have dinner at a restaurant in Pinheiros."
      },
      {
-      "pt": "O Piastri largou lá atrás e terminou em terceiro!",
-      "en": "Piastri started way back and finished third!"
-     },
-     {
-      "pt": "Os dois da Ferrari bateram um no outro de novo, que loucura!",
-      "en": "The two Ferrari drivers hit each other again, how crazy!"
-     },
-     {
-      "pt": "Hoje eu vou na padaria do Seu Zé tomar um café.",
-      "en": "Today I'm going to Seu Zé's bakery for a coffee."
+      "pt": "Eu vou pedir a picanha, que vem com arroz e feijão.",
+      "en": "I'm going to order the picanha, which comes with rice and beans."
      }
     ],
     "q": {
-     "pt": "E você, qual é o seu bolo preferido na padaria?",
-     "en": "And you, what's your favourite cake at the bakery?"
+     "pt": "E na hora de pagar, cê paga no débito ou no crédito?",
+     "en": "And when it's time to pay, do you pay by debit or credit?"
     },
-    "sources": [
-     {
-      "title": "Max Verstappen wins F1 Las Vegas Grand Prix for third time in four years (Al Jazeera, 22 Nov 2026)",
-      "url": "https://www.aljazeera.com/sports/2026/11/22/max-verstappen-las-vegas-grand-prix-f1-norris-piastri-russell-antonelli"
-     }
-    ]
+    "sources": []
    },
    "diario": {
-    "pt": "No episódio, o George pede café e pão na chapa na padaria do Seu Zé. E cê, como foi o seu dia? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu comi… / Hoje eu trabalhei…\"",
-    "en": "In the episode, George orders coffee and a toasted roll at Seu Zé's bakery. And you, how was your day? Write three sentences in the past tense: \"Today I went… / Today I ate… / Today I worked…\""
+    "pt": "No episódio, o George e a Gabi jantam num restaurante em Pinheiros e o George pede a picanha. E cê, o que cê comeu hoje? Escreve três frases no passado: \"Hoje eu comi… / Hoje eu fui… / Hoje eu falei…\"",
+    "en": "In the episode, George and Gabi have dinner at a restaurant in Pinheiros and George orders the picanha. And you, what did you eat today? Write three sentences in the past tense: \"Today I ate… / Today I went… / Today I spoke…\""
    }
   }
  ]
