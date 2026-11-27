@@ -2,35 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Quinta-feira, bom dia!",
-      "en": "Hey, sufferer! Thursday, good morning!"
+      "pt": "E aí, sofredor! Sexta-feira, bom dia!",
+      "en": "Hey, sufferer! Friday, good morning!"
      },
      {
-      "pt": "Ontem eu fui pro shopping comprar uma camiseta, tava mó calor.",
-      "en": "Yesterday I went to the shopping centre to buy a T-shirt, it was really hot."
+      "pt": "Ontem o sol tava forte e eu tava com dor de cabeça.",
+      "en": "Yesterday the sun was strong and I had a headache."
      },
      {
-      "pt": "Ficou pequena, aí o vendedor trouxe uma G pra mim.",
-      "en": "It was too small, so the assistant brought me a large."
+      "pt": "Fui pra farmácia e o moço falou: um comprimido de cada vez, com água.",
+      "en": "I went to the pharmacy and the guy said: one tablet at a time, with water."
      },
      {
-      "pt": "Se leva duas, sai mais barato, então levei as duas e paguei no Pix!",
-      "en": "If you take two it works out cheaper, so I took both and paid with Pix!"
+      "pt": "Eu queimo fácil, então comprei protetor solar, fator cinquenta!",
+      "en": "I burn easily, so I bought sunscreen, factor fifty!"
      }
     ],
     "q": {
-     "pt": "E cê, quando compra roupa, paga no crédito ou no débito?",
-     "en": "And you, when you buy clothes, do you pay by credit or debit?"
+     "pt": "E cê, vai treinar hoje ou tá de folga?",
+     "en": "And you, are you going to train today or are you having a day off?"
     },
     "sources": []
    },
    "diario": {
-    "pt": "No episódio, o George compra roupa num shopping lotado. E o seu dia hoje? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu comi… / Hoje eu falei…\"",
-    "en": "In the episode, George buys clothes in a packed shopping centre. And your day today? Write three sentences in the past tense: \"Today I went… / Today I ate… / Today I spoke…\""
+    "pt": "No episódio, o George tá com dor de cabeça e vai pra farmácia. E o seu dia hoje? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu trabalhei… / Hoje eu comi…\"",
+    "en": "In the episode, George has a headache and goes to the pharmacy. And your day today? Write three sentences in the past tense: \"Today I went… / Today I worked… / Today I ate…\""
    }
   }
  ]
