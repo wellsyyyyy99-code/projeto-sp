@@ -2,35 +2,35 @@
  "about": "Rafa's note and the Diário prompt for the Treino app",
  "days": [
   {
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "rafa": {
     "lines": [
      {
-      "pt": "E aí, sofredor! Sexta-feira, bom dia!",
-      "en": "Hey, sufferer! Friday, good morning!"
+      "pt": "E aí, sofredor! Sábado, bom dia!",
+      "en": "Hey, sufferer! Saturday, good morning!"
      },
      {
-      "pt": "Ontem o sol tava forte e eu tava com dor de cabeça.",
-      "en": "Yesterday the sun was strong and I had a headache."
+      "pt": "Ontem eu peguei o metrô lotado pra ir na Vila Madalena.",
+      "en": "Yesterday I took the packed metro to Vila Madalena."
      },
      {
-      "pt": "Fui pra farmácia e o moço falou: um comprimido de cada vez, com água.",
-      "en": "I went to the pharmacy and the guy said: one tablet at a time, with water."
+      "pt": "Peguei a linha verde, e a Vila Madalena é a última estação, não tem como errar.",
+      "en": "I took the green line, and Vila Madalena is the last station, you can't go wrong."
      },
      {
-      "pt": "Eu queimo fácil, então comprei protetor solar, fator cinquenta!",
-      "en": "I burn easily, so I bought sunscreen, factor fifty!"
+      "pt": "Na volta, eu quero pegar um ônibus que passa na Paulista.",
+      "en": "On the way back, I want to take a bus that goes along Paulista."
      }
     ],
     "q": {
-     "pt": "E cê, vai treinar hoje ou tá de folga?",
-     "en": "And you, are you going to train today or are you having a day off?"
+     "pt": "E o Tottenham, sofredor? Pra cê, quem é o pior jogador do time?",
+     "en": "And Tottenham, sufferer? In your opinion, who's the worst player in the team?"
     },
     "sources": []
    },
    "diario": {
-    "pt": "No episódio, o George tá com dor de cabeça e vai pra farmácia. E o seu dia hoje? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu trabalhei… / Hoje eu comi…\"",
-    "en": "In the episode, George has a headache and goes to the pharmacy. And your day today? Write three sentences in the past tense: \"Today I went… / Today I worked… / Today I ate…\""
+    "pt": "No episódio, o George pega o metrô pra Vila Madalena. E o seu dia hoje? Escreve três frases no passado: \"Hoje eu fui… / Hoje eu peguei… / Hoje eu comi…\"",
+    "en": "In the episode, George takes the metro to Vila Madalena. And your day today? Write three sentences in the past tense: \"Today I went… / Today I took… / Today I ate…\""
    }
   }
  ]
